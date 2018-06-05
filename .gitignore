@@ -2,3 +2,5 @@
 .idea
 application/logs/
 !application/logs/.keepme
+application/data/cache
+!application/data/cache/.keepme
