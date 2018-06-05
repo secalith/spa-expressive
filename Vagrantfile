@@ -34,13 +34,13 @@ echo "xdebug.var_display_max_data='-1'" >> /etc/php/7.2/mods-available/xdebug.in
 #########################
 
 echo "<VirtualHost *:80>
-	DocumentRoot \"/var/www/public\"
+	DocumentRoot \"/var/www/application/public\"
 	AllowEncodedSlashes On
 
-	ServerName "local.vm";
-	ServerAlias "www.local.vm";
+	ServerName "cv.local.vm";
+	ServerAlias "www.cv.local.vm";
 
-	<Directory \"/var/www/public\">
+	<Directory \"/var/www/application/public\">
 		Options +Indexes +FollowSymLinks
 		DirectoryIndex index.php
 		Order allow,deny
@@ -61,6 +61,8 @@ service apache2 restart
 #   Other   #
 #############
 
+apt-get install -y composer
+
 cd ~
 
 ##
@@ -78,7 +80,7 @@ Vagrant.configure("2") do |config|
     config.vm.network :public_network, ip: "192.168.0.84"
     config.vm.synced_folder '.', '/var/www', id:"application-root",owner:"vagrant",group:"www-data",mount_options:["dmode=775,fmode=664"]
     config.vm.provision 'shell', inline: @script
-    config.vm.hostname = 'local.vm'
+    config.vm.hostname = 'cv.local.vm'
 
     config.vm.provider "virtualbox" do |vb|
         vb.customize ["modifyvm", :id, "--memory", "1024"]
