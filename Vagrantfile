@@ -1,6 +1,12 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+require 'getoptlong'
+
+opts = GetoptLong.new(
+  [ '--custom-option', GetoptLong::OPTIONAL_ARGUMENT ]
+)
+
 VAGRANTFILE_API_VERSION = '2'
 
 @script = <<SCRIPT
@@ -34,13 +40,13 @@ echo "xdebug.var_display_max_data='-1'" >> /etc/php/7.2/mods-available/xdebug.in
 #########################
 
 echo "<VirtualHost *:80>
-	DocumentRoot \"/var/www/application/public\"
+	DocumentRoot \"/var/www/public\"
 	AllowEncodedSlashes On
 
 	ServerName "cv.local.vm";
 	ServerAlias "www.cv.local.vm";
 
-	<Directory \"/var/www/application/public\">
+	<Directory \"/var/www/public\">
 		Options +Indexes +FollowSymLinks
 		DirectoryIndex index.php
 		Order allow,deny
@@ -56,6 +62,11 @@ echo "<VirtualHost *:80>
 service apache2 restart
 
 ##
+
+cd /var/www
+touch ./data/database/content-development.sqlite3
+php ./vendor/bin/phinx migrate
+php ./vendor/bin/phinx seed:run
 
 #############
 #   Other   #
@@ -78,7 +89,8 @@ Vagrant.configure("2") do |config|
     config.vm.network "forwarded_port", guest: 80, host: 8084
     config.vm.network "forwarded_port", guest: 3306, host: 3361
     config.vm.network :public_network, ip: "192.168.0.84"
-    config.vm.synced_folder '.', '/var/www', id:"application-root",owner:"vagrant",group:"www-data",mount_options:["dmode=775,fmode=664"]
+    config.vm.synced_folder '.', '/vagrant', id:"vagrant-root"
+    config.vm.synced_folder './application', '/var/www', id:"application-root",owner:"vagrant",group:"www-data",mount_options:["dmode=775,fmode=664"]
     config.vm.provision 'shell', inline: @script
     config.vm.hostname = 'cv.local.vm'
 
