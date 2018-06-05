@@ -72,13 +72,14 @@ cd ~
 
 ##
 
-echo "** Visit http://localhost:8008 or http://cv.local.vm in your browser for to view the application **"
+echo "** Visit http://localhost:8088 or http://local.vm in your browser for to view the application **"
 SCRIPT
 
 Vagrant.configure("2") do |config|
     config.vm.box = "secalith/bionic64"
+    config.vm.box_version = "1.0.1"
     config.vm.box_check_update = true
-    config.vm.network "forwarded_port", guest: 80, host: 8008
+    config.vm.network "forwarded_port", guest: 80, host: 8088
     config.vm.network :public_network, ip: "192.168.0.204"
     config.vm.synced_folder '.', '/var/www', id:"application-root",owner:"vagrant",group:"www-data",mount_options:["dmode=775,fmode=664"]
     config.vm.provision 'shell', inline: @script
