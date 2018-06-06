@@ -19,21 +19,30 @@ class PageModel
     public $updated;
 
     /**
+     * PageModel constructor.
+     * @param array $data
+     */
+    public function __construct($data = [])
+    {
+        $this->exchangeArray($data);
+    }
+
+    /**
      * @param array $data
      */
     public function exchangeArray($data = [])
     {
-        $this->uid     = (!empty($data['uid'])) ? $data['uid'] : null;
-        $this->route_uid = (!empty($data['route_uid'])) ? $data['route_uid'] : null;
-        $this->template_uid = (!empty($data['template_uid'])) ? $data['template_uid'] : null;
-        $this->name = (!empty($data['name'])) ? $data['name'] : null;
-        $this->route_url = (!empty($data['route_url'])) ? $data['route_url']:null;
-        $this->page_cache = (!empty($data['page_cache'])) ? $data['page_cache']:null;
+        $this->uid = ( array_key_exists('uid',$data)) ? $data['uid'] : null;
+        $this->route_uid = ( array_key_exists('route_uid',$data)) ? $data['route_uid'] : null;
+        $this->template_uid = ( array_key_exists('template_uid',$data)) ? $data['template_uid'] : null;
+        $this->name = ( array_key_exists('name',$data)) ? $data['name'] : null;
+        $this->route_url = ( array_key_exists('route_url',$data)) ? $data['route_url'] : null;
+        $this->page_cache = ( array_key_exists('page_cache',$data)) ? $data['page_cache'] : null;
 
-        $this->status = (!empty($data['status'])) ? $data['status']:null;
+        $this->status = ( array_key_exists('status',$data)) ? $data['status'] : null;
 
-        $this->created = (!empty($data['created'])) ? $data['created']:null;
-        $this->updated = (!empty($data['updated'])) ? $data['updated']:null;
+        $this->created = ( array_key_exists('created',$data)) ? $data['created'] : null;
+        $this->updated = ( array_key_exists('updated',$data)) ? $data['updated'] : null;
     }
 
     /**
@@ -43,35 +52,17 @@ class PageModel
     {
         $data = [];
 
-        if ($this->uid !== null) {
-            $data['uid'] = $this->uid;
-        }
-        if ($this->route_uid !== null) {
-            $data['route_uid'] = $this->route_uid;
-        }
-        if ($this->template_uid !== null) {
-            $data['template_uid'] = $this->template_uid;
-        }
-        if ($this->name !== null) {
-            $data['name'] = $this->name;
-        }
-        if ($this->route_url !== null) {
-            $data['route_url'] = $this->route_url;
-        }
-        if ($this->page_cache !== null) {
-            $data['page_cache'] = $this->page_cache;
-        }
+        $data['uid'] = $this->uid;
+        $data['route_uid'] = $this->route_uid;
+        $data['template_uid'] = $this->template_uid;
+        $data['name'] = $this->name;
+        $data['route_url'] = $this->route_url;
+        $data['page_cache'] = $this->page_cache;
 
-        if ($this->status !== null) {
-            $data['status'] = $this->status;
-        }
+        $data['status'] = $this->status;
 
-        if ($this->created !== null) {
-            $data['created'] = $this->created;
-        }
-        if ($this->updated !== null) {
-            $data['updated'] = $this->updated;
-        }
+        $data['created'] = $this->created;
+        $data['updated'] = $this->updated;
 
         return $data;
     }

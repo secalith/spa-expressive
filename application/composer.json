@@ -70,7 +70,8 @@
             "Common\\": "src/Common/src/",
             "Page\\": "src/Page/src/",
             "PageTemplate\\": "src/PageTemplate/src/",
-            "PageView\\": "src/PageView/src/"
+            "PageView\\": "src/PageView/src/",
+            "PageRoute\\": "src/PageRoute/src/"
         }
     },
     "autoload-dev": {

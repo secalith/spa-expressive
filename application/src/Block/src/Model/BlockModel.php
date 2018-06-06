@@ -25,27 +25,36 @@ class BlockModel
     public $updated;
 
     /**
+     * BlockModel constructor.
+     * @param array $data
+     */
+    public function __construct($data = [])
+    {
+        $this->exchangeArray($data);
+    }
+
+    /**
      * @param array $data
      */
     public function exchangeArray($data = [])
     {
-        $this->uid = ( ! empty($data['uid'])) ? $data['uid'] : null;
-        $this->parent_uid = ( ! empty($data['parent_uid'])) ? $data['parent_uid'] : null;
-        $this->area_uid = ( ! empty($data['area_uid'])) ? $data['area_uid'] : null;
-        $this->template_uid = ( ! empty($data['template_uid'])) ? $data['template_uid'] : null;
-        $this->type = ( ! empty($data['type'])) ? $data['type'] : null;
-        $this->name = ( ! empty($data['name'])) ? $data['name'] : null;
-        $this->content = ( ! empty($data['content'])) ? $data['content'] : null;
+        $this->uid = ( array_key_exists('uid',$data)) ? $data['uid'] : null;
+        $this->parent_uid = ( array_key_exists('parent_uid',$data)) ? $data['parent_uid'] : null;
+        $this->area_uid = ( array_key_exists('area_uid',$data)) ? $data['area_uid'] : null;
+        $this->template_uid = ( array_key_exists('template_uid',$data)) ? $data['template_uid'] : null;
+        $this->type = ( array_key_exists('type',$data)) ? $data['type'] : null;
+        $this->name = ( array_key_exists('name',$data)) ? $data['name'] : null;
+        $this->content = ( array_key_exists('content',$data)) ? $data['content'] : null;
 
-        $this->attributes = ( ! empty($data['attributes'])) ? $data['attributes'] : null;
-        $this->parameters = ( ! empty($data['parameters'])) ? $data['parameters'] : null;
-        $this->options = ( ! empty($data['options'])) ? $data['options'] : null;
+        $this->attributes = ( array_key_exists('attributes',$data)) ? $data['attributes'] : null;
+        $this->parameters = ( array_key_exists('parameters',$data)) ? $data['parameters'] : null;
+        $this->options = ( array_key_exists('options',$data)) ? $data['options'] : null;
 
-        $this->status = ( ! empty($data['status'])) ? $data['status'] : null;
-        $this->order = ( ! empty($data['order'])) ? $data['order'] : null;
+        $this->status = ( array_key_exists('status',$data)) ? $data['status'] : null;
+        $this->order = ( array_key_exists('order',$data)) ? $data['order'] : null;
 
-        $this->created = ( ! empty($data['created'])) ? $data['created'] : null;
-        $this->updated = ( ! empty($data['updated'])) ? $data['updated'] : null;
+        $this->created = ( array_key_exists('created',$data)) ? $data['created'] : null;
+        $this->updated = ( array_key_exists('updated',$data)) ? $data['updated'] : null;
     }
 
     /**
@@ -55,51 +64,24 @@ class BlockModel
     {
         $data = [];
 
-        if ($this->uid !== null) {
-            $data['uid'] = $this->uid;
-        }
-        if ($this->parent_uid !== null) {
-            $data['parent_uid'] = $this->parent_uid;
-        }
-        if ($this->area_uid !== null) {
-            $data['area_uid'] = $this->area_uid;
-        }
-        if ($this->template_uid !== null) {
-            $data['template_uid'] = $this->template_uid;
-        }
-        if ($this->type !== null) {
-            $data['type'] = $this->type;
-        }
-        if ($this->name !== null) {
-            $data['name'] = $this->name;
-        }
-        if ($this->content !== null) {
-            $data['content'] = $this->content;
-        }
+        $data['uid'] = $this->uid;
+        $data['parent_uid'] = $this->parent_uid;
+        $data['area_uid'] = $this->area_uid;
+        $data['template_uid'] = $this->template_uid;
+        $data['type'] = $this->type;
+        $data['name'] = $this->name;
+        $data['content'] = $this->content;
 
-        if ($this->attributes !== null) {
-            $data['attributes'] = $this->attributes;
-        }
-        if ($this->parameters !== null) {
-            $data['parameters'] = $this->parameters;
-        }
-        if ($this->options !== null) {
-            $data['options'] = $this->options;
-        }
+        $data['attributes'] = $this->attributes;
+        $data['parameters'] = $this->parameters;
+        $data['options'] = $this->options;
 
-        if ($this->status !== null) {
-            $data['status'] = $this->status;
-        }
-        if ($this->order !== null) {
-            $data['order'] = $this->order;
-        }
+        $data['status'] = $this->status;
+        $data['order'] = $this->order;
 
-        if ($this->created !== null) {
-            $data['created'] = $this->created;
-        }
-        if ($this->updated !== null) {
-            $data['updated'] = $this->updated;
-        }
+        $data['created'] = $this->created;
+        $data['updated'] = $this->updated;
+
 
         return $data;
     }

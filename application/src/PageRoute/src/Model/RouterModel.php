@@ -7,19 +7,78 @@ namespace PageRoute\Model;
 class RouterModel
 {
     public $uid;
-    public $route_uid;
     public $parent_uid;
-    public $route;
-    public $pagecache;
+    public $route_uid;
+    public $route_url;
     public $scenario;
-    public $action;
     public $controller;
-    public $submodule;
-    public $module;
-    public $name;
-    public $child_routes;
-    public $constraints;
-    public $methods;
+
+    public $attributes;
+
+    public $status;
+
+    public $created;
+    public $updated;
+
+
+    /**
+     * RouterModel constructor.
+     * @param array $data
+     */
+    public function __construct($data = [])
+    {
+        $this->exchangeArray($data);
+    }
+
+    /**
+     * @param array $data
+     */
+    public function exchangeArray($data = [])
+    {
+        $this->uid = ( array_key_exists('uid',$data)) ? $data['uid'] : null;
+        $this->parent_uid = ( array_key_exists('parent_uid',$data)) ? $data['parent_uid'] : null;
+        $this->route_uid = ( array_key_exists('route_uid',$data)) ? $data['route_uid'] : null;
+        $this->route_url = ( array_key_exists('route_url',$data)) ? $data['route_url'] : null;
+        $this->scenario = ( array_key_exists('scenario',$data)) ? $data['scenario'] : null;
+        $this->controller = ( array_key_exists('controller',$data)) ? $data['controller'] : null;
+
+        $this->attributes = ( array_key_exists('attributes',$data)) ? $data['attributes'] : null;
+
+        $this->status = ( array_key_exists('status',$data)) ? $data['status'] : null;
+
+        $this->created = ( array_key_exists('created',$data)) ? $data['created'] : null;
+        $this->updated = ( array_key_exists('updated',$data)) ? $data['updated'] : null;
+    }
+
+    public function toArray()
+    {
+        $data = [];
+
+        $data['uid'] = $this->uid;
+        $data['parent_uid'] = $this->parent_uid;
+        $data['route_uid'] = $this->route_uid;
+        $data['route_url'] = $this->route_url;
+        $data['scenario'] = $this->scenario;
+        $data['controller'] = $this->controller;
+
+        $data['attributes'] = $this->attributes;
+
+        $data['status'] = $this->status;
+
+        $data['created'] = $this->created;
+        $data['updated'] = $this->updated;
+
+
+        return $data;
+    }
+
+    /**
+     * @return array
+     */
+    public function getArrayCopy()
+    {
+        return $this->toArray();
+    }
 
     public function getUid()
     {
@@ -140,21 +199,5 @@ class RouterModel
         return $this;
     }
 
-    public function exchangeArray($data)
-    {
-        $this->uid = (!empty($data['uid'])) ? $data['uid'] : null;
-        $this->route_uid = (!empty($data['route_uid'])) ? $data['route_uid'] : null;
-        $this->parent_uid = (!empty($data['parent_uid'])) ? $data['parent_uid'] : null;
-        $this->route = (!empty($data['route'])) ? $data['route'] : null;
-        $this->pagecache = (!empty($data['pagecache'])) ? $data['pagecache'] : null;
-        $this->scenario = (!empty($data['scenario'])) ? $data['scenario'] : null;
-        $this->action = (!empty($data['action'])) ? $data['action'] : null;
-        $this->controller = (!empty($data['controller'])) ? $data['controller'] : null;
-        $this->submodule = (!empty($data['submodule'])) ? $data['submodule'] : null;
-        $this->module = (!empty($data['module'])) ? $data['module'] : null;
-        $this->name = (!empty($data['name'])) ? $data['name'] : null;
-        $this->child_routes = (!empty($data['child_routes'])) ? $data['child_routes'] : null;
-        $this->constraints = (!empty(json_decode($data['constraints']))) ? json_decode($data['constraints']) : null;
-        $this->methods = (!empty(json_decode($data['methods']))) ? json_decode($data['methods']) : null;
-    }
+
 }

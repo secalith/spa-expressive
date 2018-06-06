@@ -14,15 +14,27 @@ class RouteModel
     public $created;
     public $updated;
 
+    /**
+     * RouteModel constructor.
+     * @param array $data
+     */
+    public function __construct($data = [])
+    {
+        $this->exchangeArray($data);
+    }
+
+    /**
+     * @param array $data
+     */
     public function exchangeArray($data = [])
     {
-        $this->uid = (!empty($data['uid'])) ? $data['uid'] : null;
-        $this->route_name = (!empty($data['route_name'])) ? $data['route_name'] : null;
+        $this->uid = ( array_key_exists('uid',$data)) ? $data['uid'] : null;
+        $this->route_name = ( array_key_exists('route_name',$data)) ? $data['route_name'] : null;
 
-        $this->status = ( ! empty($data['status'])) ? $data['status'] : null;
+        $this->status = ( array_key_exists('status',$data)) ? $data['status'] : null;
 
-        $this->created = ( ! empty($data['created'])) ? $data['created'] : null;
-        $this->updated = ( ! empty($data['updated'])) ? $data['updated'] : null;
+        $this->created = ( array_key_exists('created',$data)) ? $data['created'] : null;
+        $this->updated = ( array_key_exists('updated',$data)) ? $data['updated'] : null;
     }
 
     /**
@@ -32,23 +44,14 @@ class RouteModel
     {
         $data = [];
 
-        if ($this->uid !== null) {
-            $data['uid'] = $this->uid;
-        }
-        if ($this->route_name !== null) {
-            $data['route_name'] = $this->route_name;
-        }
+        $data['uid'] = $this->uid;
+        $data['route_name'] = $this->route_name;
 
-        if ($this->status !== null) {
-            $data['status'] = $this->status;
-        }
+        $data['status'] = $this->status;
 
-        if ($this->created !== null) {
-            $data['created'] = $this->created;
-        }
-        if ($this->updated !== null) {
-            $data['updated'] = $this->updated;
-        }
+        $data['created'] = $this->created;
+        $data['updated'] = $this->updated;
+
 
         return $data;
     }
