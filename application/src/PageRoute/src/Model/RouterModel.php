@@ -73,76 +73,75 @@ class RouterModel
     }
 
     /**
-     * @return array
+     * @return mixed
      */
-    public function getArrayCopy()
-    {
-        return $this->toArray();
-    }
-
     public function getUid()
     {
         return $this->uid;
     }
 
-    public function getRouteUid()
+    /**
+     * @param mixed $uid
+     * @return RouterModel
+     */
+    public function setUid($uid)
     {
-        return $this->route_uid;
+        $this->uid = $uid;
+        return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getParentUid()
     {
         return $this->parent_uid;
     }
 
-    public function getRoute()
+    /**
+     * @param mixed $parent_uid
+     * @return RouterModel
+     */
+    public function setParentUid($parent_uid)
     {
-        return $this->route;
-    }
-
-    public function getPageCache()
-    {
-        return $this->pagecache;
-    }
-
-    public function getScenarioName()
-    {
-        return $this->scenario;
-    }
-
-    public function getAction()
-    {
-        return $this->action;
-    }
-
-    public function getController()
-    {
-        return $this->controller;
-    }
-
-    public function getSubmodule()
-    {
-        return $this->submodule;
-    }
-
-    public function getModule()
-    {
-        return $this->module;
-    }
-
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    public function setChildRoutes($routes)
-    {
-        $this->child_routes = $routes;
+        $this->parent_uid = $parent_uid;
         return $this;
     }
-    public function getChildRoutes()
+
+    /**
+     * @return mixed
+     */
+    public function getRouteUid()
     {
-        return $this->child_routes;
+        return $this->route_uid;
+    }
+
+    /**
+     * @param mixed $route_uid
+     * @return RouterModel
+     */
+    public function setRouteUid($route_uid)
+    {
+        $this->route_uid = $route_uid;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRouteUrl()
+    {
+        return $this->route_url;
+    }
+
+    /**
+     * @param mixed $route_url
+     * @return RouterModel
+     */
+    public function setRouteUrl($route_url)
+    {
+        $this->route_url = $route_url;
+        return $this;
     }
 
     /**
@@ -155,7 +154,7 @@ class RouterModel
 
     /**
      * @param mixed $scenario
-     * @return RouteRoutesModel
+     * @return RouterModel
      */
     public function setScenario($scenario)
     {
@@ -166,38 +165,90 @@ class RouterModel
     /**
      * @return mixed
      */
-    public function getConstraints()
+    public function getController()
     {
-        return $this->constraints;
+        return $this->controller;
     }
 
     /**
-     * @param mixed $constrains
-     * @return RouteRoutesModel
+     * @param mixed $controller
+     * @return RouterModel
      */
-    public function setConstraints($constraints)
+    public function setController($controller)
     {
-        $this->constraints = $constraints;
+        $this->controller = $controller;
         return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getMethods()
+    public function getAttributes()
     {
-        return $this->methods;
+        return $this->attributes;
     }
 
     /**
-     * @param mixed $methods
-     * @return RouteRoutesModel
+     * @param mixed $attributes
+     * @return RouterModel
      */
-    public function setMethods($methods)
+    public function setAttributes($attributes)
     {
-        $this->methods = $methods;
+        $this->attributes = $attributes;
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
 
+    /**
+     * @param mixed $status
+     * @return RouterModel
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param mixed $created
+     * @return RouterModel
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
+    /**
+     * @param mixed $updated
+     * @return RouterModel
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+        return $this;
+    }
 }
