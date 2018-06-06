@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Block;
 
-class ConfigProvider extends CommonConfigProvider
+class ConfigProvider
 {
 
     public function __invoke()

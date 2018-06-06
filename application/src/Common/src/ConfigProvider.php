@@ -84,18 +84,13 @@ class ConfigProvider
             ],
             'factories' => [
                 CurrentUrlMiddleware::class => CurrentUrlMiddlewareFactory::class,
-                StaticPageHandler::class => StaticPageHandlerFactory::class,
                 CurrentRouteNameMiddleware::class => CurrentRouteNameMiddlewareFactory::class,
                 CurrentRouteNameHelper::class => CurrentRouteNameHelperFactory::class,
                 StaticPageHandlerCacheMiddleware::class => StaticPageHandlerCacheMiddlewareFactory::class,
             ],
             'abstract_factories' => [
-                \Common\Handler\Factory\ListHandlerAbstractFactory::class,
-                \Common\Handler\Factory\CreateHandlerAbstractFactory::class,
-                \Common\Handler\Factory\ReadHandlerAbstractFactory::class,
                 Service\GatewayAbstractFactory::class,
                 Service\TableServiceAbstractFactory::class,
-                \Zend\Cache\Service\StorageCacheAbstractServiceFactory::class,
             ],
             'delegators' => [],
         ];

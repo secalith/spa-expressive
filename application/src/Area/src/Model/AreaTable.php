@@ -34,16 +34,15 @@ class AreaTable
         $resultSet = $this->tableGateway->select();
 
         $resultSet->buffer();
-        $resultSet->next();
 
         return $resultSet;
     }
 
     /**
      * @param string $uid
-     * @return \Area\Model\AreaModel
+     * @return array|\ArrayObject|null
      */
-    public function getItem(string $uid) : AreaModel
+    public function getItem(string $uid)
     {
         $rowset = $this->tableGateway->select(['uid' => $uid]);
 

@@ -44,7 +44,7 @@ class ConfigProvider
                         "object" => \Area\Model\AreaModel::class,
                     ],
                     'hydrator' => [
-                        "object" => ObjectProperty::class,
+                        "object" => \Zend\Hydrator\ObjectProperty::class,
                     ],
                 ],
             ], // gateway

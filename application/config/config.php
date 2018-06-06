@@ -13,6 +13,7 @@ $cacheConfig = [
 ];
 
 $aggregator = new ConfigAggregator([
+    \Zend\Hydrator\ConfigProvider::class,
     \Zend\Filter\ConfigProvider::class,
     \PageRoute\ConfigProvider::class,
     \Zend\Paginator\ConfigProvider::class,

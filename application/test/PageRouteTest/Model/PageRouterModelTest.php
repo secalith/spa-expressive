@@ -118,4 +118,39 @@ class PageRouterModelTest extends TestCase
             $this->assertTrue(method_exists($model,$setterName));
         }
     }
+
+    public function testSettersReturnsSameClassName()
+    {
+        $model = new RouterModel();
+
+        $underscoreToCamelCaseFilter = new UnderscoreToCamelCase();
+
+        foreach($this->getProvidedData() as $name => $value) {
+            $setterName =  sprintf(
+                "set%s",
+                $underscoreToCamelCaseFilter->filter($name)
+            );
+            // check if getter method exists
+            $this->assertEquals(RouterModel::class,get_class($model->{$setterName}('data')));
+        }
+    }
+
+    public function testDataExchangeSettersEqualsGetters()
+    {
+        $underscoreToCamelCaseFilter = new UnderscoreToCamelCase();
+
+        foreach($this->getProvidedData() as $name => $value) {
+            $model = new RouterModel();
+            $setterName =  sprintf(
+                "set%s",
+                $underscoreToCamelCaseFilter->filter($name)
+            );
+            $getterName =  sprintf(
+                "get%s",
+                $underscoreToCamelCaseFilter->filter($name)
+            );
+
+            $this->assertEquals($value,$model->{$setterName}($value)->{$getterName}());
+        }
+    }
 }

@@ -123,4 +123,40 @@ class BlockModelTest extends TestCase
             $this->assertTrue(method_exists($model,$setterName));
         }
     }
+
+    public function testSettersReturnsSameClassName()
+    {
+        $model = new BlockModel();
+
+        $underscoreToCamelCaseFilter = new UnderscoreToCamelCase();
+
+        foreach($this->getProvidedData() as $name => $value) {
+            $setterName =  sprintf(
+                "set%s",
+                $underscoreToCamelCaseFilter->filter($name)
+            );
+            // check if getter method exists
+            $this->assertEquals(BlockModel::class,get_class($model->{$setterName}('data')));
+        }
+    }
+
+
+    public function testDataExchangeSettersEqualsGetters()
+    {
+        $underscoreToCamelCaseFilter = new UnderscoreToCamelCase();
+
+        foreach($this->getProvidedData() as $name => $value) {
+            $model = new BlockModel();
+            $setterName =  sprintf(
+                "set%s",
+                $underscoreToCamelCaseFilter->filter($name)
+            );
+            $getterName =  sprintf(
+                "get%s",
+                $underscoreToCamelCaseFilter->filter($name)
+            );
+
+            $this->assertEquals($value,$model->{$setterName}($value)->{$getterName}());
+        }
+    }
 }
