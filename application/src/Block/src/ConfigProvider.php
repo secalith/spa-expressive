@@ -1,13 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Block;
 
-use Common\ConfigProvider as CommonConfigProvider;
-/**
- * The configuration provider for the App module
- *
- * @see https://docs.zendframework.com/zend-component-installer/
- */
 class ConfigProvider extends CommonConfigProvider
 {
 
@@ -15,10 +11,9 @@ class ConfigProvider extends CommonConfigProvider
     {
         return [
             'dependencies' => $this->getDependencies(),
-            'templates'    => $this->getTemplates(),
             'view_helpers' => [
                 'invokables'=> [
-                    'displayBlock' => View\Helper\BlockHelper::class,
+//                    'displayBlock' => \Block\View\Helper\BlockHelper::class,
                 ],
             ],
             'application' => [
@@ -62,10 +57,7 @@ class ConfigProvider extends CommonConfigProvider
     public function getDependencies()
     {
         return [
-            'factories'  => [
-                "Block\\Table" => \Block\Service\Factory\BlockTableServiceFactory::class,
-                "Block\\Gateway" => \Block\Service\Factory\BlockTableGatewayFactory::class,
-            ],
+            'factories'  => [],
         ];
     }
 

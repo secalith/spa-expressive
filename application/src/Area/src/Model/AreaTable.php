@@ -1,19 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Area\Model;
 
+use Common\Model\GerenateUUIDTrait;
 use Area\Model\AreaModel;
 use Zend\Db\TableGateway\TableGateway;
 
-class Table
+class AreaTable
 {
+    use GerenateUUIDTrait;
+
     /**
      * @var TableGateway
      */
     protected $tableGateway;
 
     /**
-     * ProductTable constructor.
+     * AreaTable constructor.
      * @param TableGateway $tableGateway
      */
     public function __construct(TableGateway $tableGateway)
@@ -21,6 +26,9 @@ class Table
         $this->tableGateway = $tableGateway;
     }
 
+    /**
+     * @return \Zend\Db\ResultSet\ResultSet
+     */
     public function fetchAll()
     {
         $resultSet = $this->tableGateway->select();
@@ -31,14 +39,22 @@ class Table
         return $resultSet;
     }
 
-    public function getItem($uid) : AreaModel
+    /**
+     * @param string $uid
+     * @return \Area\Model\AreaModel
+     */
+    public function getItem(string $uid) : AreaModel
     {
-        $rowset = $this->tableGateway->select(['area_uid' => $uid]);
+        $rowset = $this->tableGateway->select(['uid' => $uid]);
 
         return $rowset->current();
     }
 
-    public function getItemCount($uid = null)
+    /**
+     * @param string|null $uid
+     * @return array|\ArrayObject|int|null
+     */
+    public function getItemCount(string $uid = null)
     {
         if ($uid===null) {
             return 0;
@@ -47,13 +63,18 @@ class Table
         if (is_array($uid)) {
             $rowset = $this->tableGateway->select($uid);
         } else {
-            $rowset = $this->tableGateway->select(['area_uid' => $uid]);
+            $rowset = $this->tableGateway->select(['uid' => $uid]);
         }
 
         return $rowset->current();
     }
 
-    public function fetchBy($value, $name = "area_uid")
+    /**
+     * @param $value
+     * @param string $name
+     * @return array|\ArrayObject|null
+     */
+    public function fetchBy($value, $name = "uid")
     {
         $rowset = $this->tableGateway->select([$name => $value]);
 

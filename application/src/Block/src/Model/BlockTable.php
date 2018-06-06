@@ -1,110 +1,84 @@
 <?php
-/**
- * @copyright Copyright (c) 2005-2016 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
+
+declare(strict_types=1);
+
 namespace Block\Model;
 
-use Common\Model\CommonTableGateway;
+use Common\Model\GerenateUUIDTrait;
+use Block\Model\BlockModel;
 use Zend\Db\TableGateway\TableGateway;
 
 class BlockTable
 {
-    protected $cache_namespace = "block_model_table";
+    use GerenateUUIDTrait;
 
+    /**
+     * @var TableGateway
+     */
+    protected $tableGateway;
+
+    /**
+     * BlockTable constructor.
+     * @param TableGateway $tableGateway
+     */
     public function __construct(TableGateway $tableGateway)
     {
         $this->tableGateway = $tableGateway;
     }
 
+    /**
+     * @return \Zend\Db\ResultSet\ResultSet
+     */
     public function fetchAll()
     {
         $resultSet = $this->tableGateway->select();
+
+        $resultSet->buffer();
+        $resultSet->next();
+
         return $resultSet;
     }
-    public function fetchAllBy($value, $name = "uid")
+
+    /**
+     * @param string $uid
+     * @return \Block\Model\BlockModel
+     * @throws \Exception
+     */
+    public function getItem(string $uid) : BlockModel
     {
-        if(null!==$this->cache) {
-            $cacheNamespace = sprintf("%s_%s_%s",$this->cache_namespace,$value,$name);
-            if($this->cache->getItem($cacheNamespace)) {
-                $result = $this->cache->getItem($cacheNamespace);
-            } else {
-                $result = null;
-                $resultSet = $this->tableGateway->select([$name=>$value]);
-                foreach ($resultSet as $item) {
-                    if(method_exists($item,"getName")) {
-                        $result[$item->getName()] = $item;
-                    } else {
-                        $result[$item->getUid()] = $item;
-                    }
-                }
-                $this->cache->removeItem($cacheNamespace);
-                $this->cache->setItem($cacheNamespace, $result);
-            }
+        $rowset = $this->tableGateway->select(['uid' => $uid]);
+
+        return $rowset->current();
+    }
+
+    /**
+     * @param string|null $uid
+     * @return array|\ArrayObject|int|null
+     */
+    public function getItemCount(string $uid = null)
+    {
+        if ($uid===null) {
+            return 0;
+        }
+
+        if (is_array($uid)) {
+            $rowset = $this->tableGateway->select($uid);
         } else {
-            $result = null;
-            if(is_array($value)){
-                $resultSet = $this->tableGateway->select($value);
-            } else {
-                $resultSet = $this->tableGateway->select([$name=>$value]);
-            }
-
-            if($resultSet->count() > 0) {
-                foreach ($resultSet as $item) {
-                    if(method_exists($item,"getName")) {
-                        $result[$item->getUid()] = $item;
-                    } else {
-                        $result[] = $item;
-                    }
-                }
-            }
+            $rowset = $this->tableGateway->select(['uid' => $uid]);
         }
-//        var_dump($result);
-        return $result;
+
+        return $rowset->current();
     }
 
-    public function getItem($uid)
-    {
-        $rowset = $this->tableGateway->select(array('uid' => $uid));
-        $row = $rowset->current();
-        if (!$row) {
-            throw new \Exception("Could not find row $uid");
-        }
-        return $row;
-    }
-
+    /**
+     * @param $value
+     * @param string $name
+     * @return array|\ArrayObject|null
+     */
     public function fetchBy($value, $name = "uid")
     {
-        $rowset = $this->tableGateway->select(array($name => $value));
-        $row = $rowset->current();
-        if (!$row) {
-            throw new \Exception("Could not find row $value");
-        }
-        return $row;
-    }
+        $rowset = $this->tableGateway->select([$name => $value]);
 
-    public function saveItem($item)
-    {
-        $data = array(
-            'uid' => $item->uid,
-            'template' => $item->template,
-            'type' => $item->type,
-        );
-
-        $uid = $item->uid;
-        if ($uid == 0) {
-            $this->tableGateway->insert($data);
-        } else {
-            if ($this->getItem($uid)) {
-                $this->tableGateway->update($data, array('uid' => $uid));
-            } else {
-                throw new \Exception('Item\'s uid does not exist');
-            }
-        }
-    }
-
-    public function deleteItem($uid)
-    {
-        $this->tableGateway->delete(array('uid' => $uid));
+        return $rowset->current();
     }
 }

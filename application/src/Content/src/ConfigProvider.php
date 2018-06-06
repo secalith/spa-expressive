@@ -1,21 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Content;
 
-use Common\ConfigProvider as CommonConfigProvider;
-/**
- * The configuration provider for the App module
- *
- * @see https://docs.zendframework.com/zend-component-installer/
- */
-class ConfigProvider extends CommonConfigProvider
+
+class ConfigProvider
 {
 
     public function __invoke()
     {
         return [
             'dependencies' => $this->getDependencies(),
-            'templates'    => $this->getTemplates(),
             'view_helpers' => [
                 'invokables'=> [
                     'displayContent' => View\Helper\ContentHelper::class,

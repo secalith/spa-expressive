@@ -2,23 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Content\Model;
+namespace PageTemplate\Model;
 
-use Common\Model\GerenateUUIDTrait;
-use Content\Model\ContentModel;
+use PageTemplate\Model\PageTemplateModel;
 use Zend\Db\TableGateway\TableGateway;
 
-class ContentTable
+class PageTemplateTable
 {
-    use GerenateUUIDTrait;
-
     /**
      * @var TableGateway
      */
     protected $tableGateway;
 
     /**
-     * ContentTable constructor.
+     * TemplateTable constructor.
      * @param TableGateway $tableGateway
      */
     public function __construct(TableGateway $tableGateway)
@@ -27,11 +24,23 @@ class ContentTable
     }
 
     /**
-     * @param string $uid
-     * @return \Content\Model\ContentModel
-     * @throws \Exception
+     * @return \Zend\Db\ResultSet\ResultSet
      */
-    public function getItem(string $uid) : ContentModel
+    public function fetchAll()
+    {
+        $resultSet = $this->tableGateway->select();
+
+        $resultSet->buffer();
+        $resultSet->next();
+
+        return $resultSet;
+    }
+
+    /**
+     * @param string $uid
+     * @return \PageTemplate\Model\PageTemplateModel
+     */
+    public function getItem(string $uid) : PageTemplateModel
     {
         $rowset = $this->tableGateway->select(['uid' => $uid]);
 
