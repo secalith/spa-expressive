@@ -1,0 +1,18 @@
+<?php // Filename: ./module/CiAuth/view/ci-auth/auth/logout.phtml ?>
+<div class="container ci-container-main ci-logout ci-template-logout">
+    <div class="row">
+        <!-- Main: -->
+        <div class="col-xs-12 col-sm-8 ci-container-main-content-wrapper">
+            <h1><?php echo $this->translate('You have succesfully logged out'); ?></h1>
+            <div class="clearfix" style="margin:5px 0px;"></div>
+
+            <div class="clearfix" style="margin:15px 0px;"></div>
+
+            <div class="alert alert-info">
+                <p><?php echo sprintf($this->translate('You should be redirected to the main page in about 5 seconds. if it will not happes %sclick here%s'),sprintf('<a href="%s">',$this->url('authentication/login')),'</a>');?></p>
+            </div>
+
+        </div>
+    </div> <!--  /.row -->
+    <div class="clearfix"></div>
+</div>

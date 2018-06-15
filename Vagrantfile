@@ -4,8 +4,15 @@
 require 'getoptlong'
 
 opts = GetoptLong.new(
-  [ '--custom-option', GetoptLong::OPTIONAL_ARGUMENT ]
+  [ '--with-xdebug','-x', GetoptLong::OPTIONAL_ARGUMENT ]
 )
+
+options = {}
+options[:os_guest] = ARGV[0].partition('=').last || "secalith/bionic64"
+
+puts options[:os_guest]
+
+ARGV.delete_at(0)
 
 VAGRANTFILE_API_VERSION = '2'
 
@@ -72,8 +79,6 @@ php ./vendor/bin/phinx seed:run
 #   Other   #
 #############
 
-apt-get install -y composer
-
 cd ~
 
 ##
@@ -84,7 +89,6 @@ SCRIPT
 
 Vagrant.configure("2") do |config|
     config.vm.box = "secalith/bionic64"
-    config.vm.box_version = "1.0.2"
     config.vm.box_check_update = true
     config.vm.network "forwarded_port", guest: 80, host: 8084
     config.vm.network "forwarded_port", guest: 3306, host: 3361

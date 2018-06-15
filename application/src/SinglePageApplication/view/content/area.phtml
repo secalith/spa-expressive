@@ -1,0 +1,67 @@
+<?php if(null!==$area): ?>
+    <?php
+        $area_html_tag = $area->getParameter("html_tag");
+        $area_html_tag_class = implode(" ",$area->getAttribute("class"));
+    ?>
+    <<?=$area_html_tag;?> <?=$area->getItemAttributesString();?> data-area-identifier="<?=$area->getUid();?>">
+    <?php
+    $blocks = $area->getBlock();
+    if(null!==$blocks):
+        foreach($blocks as $block):?>
+            <?php
+                $block_html_tag = $block->getParameter("html_tag");
+                $block_html_tag_class = implode(" ",$block->getAttribute("class"));
+            ?>
+            <<?=$block_html_tag;?> <?=$block->getItemAttributesString();?> data-block-identifier="<?=$block->getUid();?>">
+            <?php
+                // display inner wrapper if requested
+                $block_inner_wrapper = (1===$block->getOption("inner_wrapper")
+                    &&$block->getParameter("inner_wrapper"))
+                    ?$block->getParameter("inner_wrapper")
+                    :null;
+            ?>
+
+            <?php
+            if(null!==$block_inner_wrapper):
+            ?>
+            <<?=$block_inner_wrapper['html_tag'];?> <?=$block->getAttributesString($block_inner_wrapper['attributes']);?>>
+
+            <?php
+                    endif;
+            ?>
+                <?php if(null!==$block->getContent()):?>
+
+                    <?php foreach($block->getContent() as $content): ?>
+                        <?php
+                        $content_html_tag = $content->getParameter("html_tag");
+                        if(null!==$content_html_tag):
+                        $content_html_tag_class = (null!==$content->getAttribute("class"))
+                            ?implode(" ",$content->getAttribute("class"))
+                            :null;
+                        ?>
+                        <?php if("image"===$content->getType()):?>
+                            <img <?=$content->getItemAttributesString();?> />
+                        <?php else:?>
+                            <<?=$content_html_tag;?> <?=$content->getItemAttributesString();?> data-content-identifier="<?=$content->getUid();?>">
+                                <?=$content->getContent();?>
+                            </<?=$content_html_tag;?>>
+                        <?php endif;?>
+                        <?php endif;?>
+                    <?php endforeach;?>
+                <?php endif;?>
+
+                <?php
+            if(null!==$block_inner_wrapper):
+            ?>
+            </<?=$block_inner_wrapper['html_tag'];?>>
+
+            <?php
+                    endif;
+            ?>
+
+            </<?=$block_html_tag;?>>
+        <?php endforeach;?>
+    <?php endif; ?>
+
+    </<?=$area_html_tag;?>>
+<?php endif; ?>

@@ -9,7 +9,8 @@ class TemplateSeeder extends AbstractSeed
     {
         $data = [
             [
-                'uid'    => 'route-001',
+                'uid'    => 'template-001',
+                'route_uid'    => 'route-001',
                 'type'    => 'filesystem',
                 'location'    => 'page-view',
                 'name'    => 'page-standard-spa',

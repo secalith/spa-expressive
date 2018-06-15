@@ -1,0 +1,12 @@
+<?php
+
+return [
+    'ovh-sms' => [
+        'restablesms' => [
+            'name' => 'restablesms',
+            'application_key' => 'nBHYuTK0tthNhcGz',
+            'application_secret' => 'xhPkIIhBV1yH6UDrT17FCAFNVVLrdCWy',
+            'consumer_key' => 'H2eR55stBAT08YYC6nURaohHmONmMfcE',
+        ],
+    ],
+];

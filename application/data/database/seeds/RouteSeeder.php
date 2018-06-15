@@ -10,7 +10,7 @@ class RouteSeeder extends AbstractSeed
         $data = [
             [
                 'uid'    => 'route-001',
-                'route_name'    => 'Custom Route #1',
+                'route_name'    => 'spa.homepage',
                 'status'    => 1,
                 'created'    => date('Y-m-d H:i:s'),
             ],

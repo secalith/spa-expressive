@@ -11,53 +11,53 @@ class ConfigProvider
     {
         return [
             'dependencies' => $this->getDependencies(),
+            'app' => $this->getApplicationConfig(),
             'view_helpers' => [
                 'invokables'=> [
-//                    'displayBlock' => \Block\View\Helper\BlockHelper::class,
+                    'displayBlock' => \Block\View\Helper\BlockHelper::class,
+                    'displayBlockCarousel' => \Block\View\Helper\BlockHelper::class,
                 ],
             ],
-            'application' => [
-                'module' => [
-                    'route' => [
-                        'block' => [
-                            'database' => [
-                                'db' => [
-                                    'table' => 'block',
-                                ],
-                            ],
-                            'gateway' => [
-                                "adapter" => "Application\Db\LocalAdapter",
-//                                "adapter" => "Application\Db\DatabaseAdapter",
-                                'service' => [
-                                    "name" => "Block\\Gateway",
-                                ],
-                                'hydrator' => [
-                                    "class" => \Common\Hydrator\CommonTableEntityHydrator::class,
-                                    "map" => [
-                                        "uid" => "uid",
-                                        "area" => "area",
-                                        "type" => "type",
-                                        "template" => "template",
-                                        "content" => "content",
-                                        "attributes" => "attributes",
-                                        "parameters" => "parameters",
-                                        "options" => "options",
-                                        "name" => "name",
-                                        "order" => "order",
-                                    ],
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-            ], // application
         ];
     }
 
     public function getDependencies()
     {
         return [
-            'factories'  => [],
+            'factories'  => [
+                \Block\Service\BlockService::class => \Block\Service\Factory\BlockServiceFactory::class,
+            ],
+        ];
+    }
+
+    public function getApplicationConfig()
+    {
+        return [
+            'table_service' => [
+                'Block\TableService' => [
+                    'gateway' => [
+                        'name' => 'Block\TableGateway',
+                    ],
+                ],
+            ],
+            'gateway' => [
+                'Block\TableGateway' => [
+                    'name' => 'Block\TableGateway',
+                    'table' => [
+                        'name' => 'block',
+                        'object' => \Block\Model\BlockTable::class,
+                    ],
+                    'adapter' => [
+                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                    ],
+                    'model' => [
+                        "object" => \Block\Model\BlockModel::class,
+                    ],
+                    'hydrator' => [
+                        "object" => \Zend\Hydrator\ObjectProperty::class,
+                    ],
+                ],
+            ], // gateway
         ];
     }
 

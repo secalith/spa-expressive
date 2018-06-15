@@ -12,6 +12,7 @@ class ConfigProvider
         return [
             'dependencies' => $this->getDependencies(),
             'templates'    => $this->getTemplates(),
+            'app' => $this->getApplicationConfig(),
         ];
     }
 
@@ -28,10 +29,49 @@ class ConfigProvider
     {
         return [
             'factories'  => [
-                "Page\\Table" => \Page\Service\Factory\PageTableServiceFactory::class,
-                "Page\\Gateway" => \Page\Service\Factory\PageTableGatewayFactory::class,
-                "Page\\Service" => \Page\Service\Factory\PageServiceFactory::class,
-                \Page\Action\PageAction::class => Action\PageFactory::class,
+                \Page\Handler\PageHandler::class => \Page\Handler\PageHandlerFactory::class,
+                \Page\Service\PageService::class => \Page\Service\Factory\PageServiceFactory::class,
+            ],
+            'delegators' => [
+                \Page\Handler\PageHandler::class => [
+                    \PageView\Handler\Delegator\PageViewDelegatorFactory::class,
+                ],
+            ],
+        ];
+    }
+
+    public function getApplicationConfig()
+    {
+        return [
+            'table_service' => [
+                'Page\TableService' => [
+                    'gateway' => [
+                        'name' => 'Page\TableGateway',
+                    ],
+                ],
+            ],
+            'gateway' => [
+                'Page\TableGateway' => [
+                    'name' => 'Page\TableGateway',
+                    'table' => [
+                        'name' => 'page',
+                        'object' => \Page\Model\PageTable::class,
+                    ],
+                    'adapter' => [
+                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                    ],
+                    'model' => [
+                        "object" => \Page\Model\PageModel::class,
+                    ],
+                    'hydrator' => [
+                        "object" => \Zend\Hydrator\ObjectProperty::class,
+                    ],
+                ],
+            ], // gateway
+            'page_view' => [
+                'Page\Handler\PageHandler' => [
+
+                ],
             ],
         ];
     }

@@ -6,6 +6,7 @@ namespace PageRoute\Model;
 
 use PageRoute\Model\RouterModel;
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Sql\Select;
 
 class RouterTable
 {
@@ -13,6 +14,8 @@ class RouterTable
      * @var TableGateway
      */
     protected $tableGateway;
+
+    const TABLE_NAME = 'router' ;
 
     /**
      * RouterTable constructor.
@@ -31,7 +34,6 @@ class RouterTable
         $resultSet = $this->tableGateway->select();
 
         $resultSet->buffer();
-        $resultSet->next();
 
         return $resultSet;
     }
@@ -73,8 +75,46 @@ class RouterTable
      */
     public function fetchBy($value, $name = "uid")
     {
-        $rowset = $this->tableGateway->select([$name => $value]);
+        if(is_array($value)) {
+            $rowset = $this->tableGateway->select($value);
+        } else {
+            $rowset = $this->tableGateway->select([$name => $value]);
+        }
 
         return $rowset->current();
+    }
+
+    /**
+     * @param $value
+     * @param string $name
+     * @return array|\ArrayObject|null
+     */
+    public function fetchItemBy($value, $name = "uid")
+    {
+        if(is_array($value)) {
+            $rowset = $this->tableGateway->select();
+//            $rowset->columns('uid');
+
+            $rowset = $this->tableGateway->select(function(Select $select) use($value) {
+                $select->columns([
+                    'uid'=>'uid',
+                    'parent_uid'=>'parent_uid',
+                    'application_uid'=>'application_uid',
+                    'route_uid'=>'route_uid',
+                    'route_url'=>'route_url',
+                    'scenario'=>'scenario',
+                    'controller'=>'controller',
+                    'attributes'=>'attributes',
+                    'status'=>'status'
+                ]);
+                $concatJoin = sprintf("route.uid = %s.route_uid",self::TABLE_NAME);
+                $select->join('route', $concatJoin,['route_name'],'left');
+                $select->where($value);
+            });
+        } else {
+            $rowset = $this->tableGateway->select([$name => $value]);
+        }
+
+        return $rowset->buffer();
     }
 }

@@ -1,0 +1,276 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ZendSkeletonApplication\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-07 19:33+0100\n"
+"PO-Revision-Date: 2016-03-07 19:34+0100\n"
+"Last-Translator: \n"
+"Language-Team: ZF Contributors <zf-devteam@zend.com>\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: translate\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../config/module.config.php:178 ../config/module.config.php:185
+#: ../config/module.config.php:192
+#, fuzzy
+msgid "Username"
+msgstr "Nombre"
+
+#: ../config/module.config.php:179 ../config/module.config.php:186
+#: ../config/module.config.php:195 ../config/module.config.php:196
+msgid "Password"
+msgstr "Contraseña"
+
+#: ../config/module.config.php:193
+msgid "Request ID"
+msgstr "ID de solicitud"
+
+#: ../config/module.config.php:194
+msgid "PIN"
+msgstr ""
+
+#~ msgid "Welcome to %sZend Framework 2%s"
+#~ msgstr "Bienvenido al %sZend Framework 2%s"
+
+#~ msgid ""
+#~ "Congratulations! You have successfully installed the %sZF2 Skeleton "
+#~ "Application%s. You are currently running Zend Framework version %s. This "
+#~ "skeleton can serve as a simple starting point for you to begin building "
+#~ "your application on ZF2."
+#~ msgstr ""
+#~ "¡Felicitaciones! Haz instalado correctamente el %sla aplicación esqueleto "
+#~ "del ZF2%s. Estás corriendo la versión %s del Zend Framework. Este "
+#~ "esqueleto te servirá como un punto de inicio sencillo para empezar a "
+#~ "construir tu aplicación con el ZF2."
+
+#~ msgid "Fork Zend Framework 2 on GitHub"
+#~ msgstr "Hacer un Fork del Zend Framework 2 en GitHub"
+
+#~ msgid "Follow Development"
+#~ msgstr "Seguir el Desarrollo"
+
+#~ msgid ""
+#~ "Zend Framework 2 is under active development. If you are interested in "
+#~ "following the development of ZF2, there is a special ZF2 portal on the "
+#~ "official Zend Framework website which provides links to the ZF2 %swiki%s, "
+#~ "%sdev blog%s, %sissue tracker%s, and much more. This is a great resource "
+#~ "for staying up to date with the latest developments!"
+#~ msgstr ""
+#~ "El Zend Framework 2 está en pleno desarrollo. Si estás interesado en "
+#~ "seguir el desarrollo del ZF2, existe un portal especial para el ZF2 en el "
+#~ "sitio web oficial del Zend Framework el cual provee enlaces %sa la Wiki"
+#~ "%s, %sal Blog de desarrollo%s, %sal issue tracker%s y mucho más. Este es "
+#~ "un gran recurso para mantenerte al día con los últimos avances en el "
+#~ "desarrollo!"
+
+#~ msgid "ZF2 Development Portal"
+#~ msgstr "Portal de Desarrollo del ZF2"
+
+#~ msgid "Discover Modules"
+#~ msgstr "Descubre Módulos"
+
+#~ msgid ""
+#~ "The community is working on developing a community site to serve as a "
+#~ "repository and gallery for ZF2 modules. The project is available %son "
+#~ "GitHub%s. The site is currently live and currently contains a list of "
+#~ "some of the modules already available for ZF2."
+#~ msgstr ""
+#~ "La comunidad está trabajando en el desarrollo de una web comunitaria que "
+#~ "servirá de repositorio y galería de los módulos del ZF2. El proyecto está "
+#~ "disponible %sen GitHub%s. El sitio web está en línea y actualmente posee "
+#~ "una lista de algunos módulos que ya están disponibles para el ZF2."
+
+#~ msgid "Explore ZF2 Modules"
+#~ msgstr "Explora los módulos del ZF2"
+
+#~ msgid "Help &amp; Support"
+#~ msgstr "Ayuda &amp; Soporte"
+
+#~ msgid ""
+#~ "If you need any help or support while developing with ZF2, you may reach "
+#~ "us via IRC: %s#zftalk on Freenode%s. We'd love to hear any questions or "
+#~ "feedback you may have regarding the beta releases. Alternatively, you may "
+#~ "subscribe and post questions to the %smailing lists%s."
+#~ msgstr ""
+#~ "Si necesitas alguna ayuda o soporte mientras estás desarrollando con el "
+#~ "ZF2, puedes encontrarnos via IRC: %s#zftalk en Freenode%s. Nos encantaría "
+#~ "leer tus preguntas o cualquier feedback que puedas tener en relación a "
+#~ "los lanzamientos de las versiones beta. También puedes subscribirte y "
+#~ "enviar preguntas %sa la lista de correos%s"
+
+#~ msgid "Ping us on IRC"
+#~ msgstr "Escríbenos en el IRC"
+
+#~ msgid "Skeleton Application"
+#~ msgstr "Aplicación Esqueleto"
+
+#~ msgid "All rights reserved."
+#~ msgstr "Todos los derechos reservados"
+
+#~ msgid "A 404 error occurred"
+#~ msgstr "Ha ocurrido un error 404"
+
+#~ msgid "The requested controller was unable to dispatch the request."
+#~ msgstr "El controlador solicitado no pudo ejecutar la petición."
+
+#~ msgid ""
+#~ "The requested controller could not be mapped to an existing controller "
+#~ "class."
+#~ msgstr ""
+#~ "El controlador solicitado no se pudo mapear con una clase de controlador "
+#~ "existente."
+
+#~ msgid "The requested controller was not dispatchable."
+#~ msgstr "El controlador solicitado no es ejecutable."
+
+#~ msgid "The requested URL could not be matched by routing."
+#~ msgstr "El ruteador no ha encontrado la ruta para la URL solicitada."
+
+#~ msgid "We cannot determine at this time why a 404 was generated."
+#~ msgstr "No pudimos determinar por qué un error 404 ha sido generado."
+
+#~ msgid "Controller"
+#~ msgstr "Controller"
+
+#~ msgid "resolves to %s"
+#~ msgstr "se resuelve a %s"
+
+#~ msgid "Additional information"
+#~ msgstr "Información adicional"
+
+#~ msgid "File"
+#~ msgstr "Archivo"
+
+#~ msgid "Message"
+#~ msgstr "Mensaje"
+
+#~ msgid "Stack trace"
+#~ msgstr "Seguimiento de la pila (stack trace)"
+
+#~ msgid "Previous exceptions"
+#~ msgstr "Excepciones anteriores"
+
+#~ msgid "No Exception available"
+#~ msgstr "No hay ninguna Excepción disponible."
+
+#~ msgid "An error occurred"
+#~ msgstr "Ha ocurrido un error"
+
+#~ msgid "First Name"
+#~ msgstr "Nombre"
+
+#~ msgid "Last Name"
+#~ msgstr "Apellido"
+
+#~ msgid "Organisation"
+#~ msgstr "Organización"
+
+#~ msgid "Email"
+#~ msgstr "Dirección de correo electrónico"
+
+#~ msgid "Country"
+#~ msgstr "País"
+
+#~ msgid "Import"
+#~ msgstr "Importación"
+
+#~ msgid "Export"
+#~ msgstr "Exportación"
+
+#~ msgid "New Member"
+#~ msgstr "Añadir Miembro"
+
+#~ msgid "Lastname"
+#~ msgstr "Apellido"
+
+#~ msgid "Status"
+#~ msgstr "Estado"
+
+#~ msgid "Proxy"
+#~ msgstr "Apoderado"
+
+#~ msgid "Delete"
+#~ msgstr "Borrar"
+
+#~ msgid "Details"
+#~ msgstr "Detalles"
+
+#~ msgid "Edit"
+#~ msgstr "Editar"
+
+#, fuzzy
+#~ msgid "Basic Information"
+#~ msgstr "Información adicional"
+
+#~ msgid "People"
+#~ msgstr "Gente"
+
+#~ msgid "Members"
+#~ msgstr "Miembros"
+
+#~ msgid "Add Member"
+#~ msgstr "Añadir Miembro"
+
+#~ msgid "Languages Spoken"
+#~ msgstr "Idiomas Hablados"
+
+#~ msgid "Notes"
+#~ msgstr "Notas"
+
+#~ msgid "Send Notification Email"
+#~ msgstr "Enviar notificación por correo electrónico"
+
+#~ msgid "Year of Qualification"
+#~ msgstr "Año de graduación"
+
+#~ msgid ""
+#~ "We would like to contact you when the latest developments are published "
+#~ "by ecancer which cover your areas of interest. You can choose to receive "
+#~ "these email updates daily, weekly, monthly or not at all."
+#~ msgstr ""
+#~ "Nos gustaría poder contactar con usted cuando alguna de las últimas "
+#~ "publicaciones de ecancer cubra sus areas de interés. Puede elegir entre "
+#~ "recibir estas alertas diariamente, semanalmente, mensualmente o nunca."
+
+#~ msgid "Email frequency"
+#~ msgstr "Email Frecuencia"
+
+#~ msgid ""
+#~ "Receive everything (or personalise what you receive using the options "
+#~ "below)"
+#~ msgstr ""
+#~ "Recibir todo (o personalizar lo que desea recibir marcando las opciones "
+#~ "correspondientes)"
+
+#~ msgid ""
+#~ "Are you happy to be contacted about peer-reviewing the content published "
+#~ "by ecancer?"
+#~ msgstr ""
+#~ "¿Le gustaría ser contactado por eCancer para revisar algunos de los "
+#~ "contenidos publicados?"
+
+#~ msgid "I would like to subscribe to the ecancer Newsletter"
+#~ msgstr "Me gustaría suscribirme a las notificaciones de ecancer"
+
+#~ msgid ""
+#~ "We will not pass your details on to any third parties. Occasionally we "
+#~ "would like to carry out research in the cancer community. Would you be "
+#~ "happy to help?"
+#~ msgstr ""
+#~ "No compartiremos sus detalles personales con terceras personas. "
+#~ "Ocasionalmente conduciremos investigaciones en la comunidad médica. ¿Le "
+#~ "gustaría ayudar?"
+
+#~ msgid "404 Page Not Found"
+#~ msgstr "404 Pagina No Encontrada"
+
+#~ msgid "Home"
+#~ msgstr "Inicio"
+
+#~ msgid "Exception"
+#~ msgstr "Excepción"

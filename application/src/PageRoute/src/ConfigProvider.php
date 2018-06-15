@@ -11,57 +11,65 @@ class ConfigProvider
     {
         return [
             'dependencies' => $this->getDependencies(),
-            'application' => [
-                'module' => [
-                    'route' => [
-                        'route' => [
-                            'database' => [
-                                'db' => [
-                                    'table' => 'route',
-                                ],
-                            ],
-                            'gateway' => [
-                                "adapter" => "Application\Db\LocalAdapter",
-//                                "adapter" => "Application\Db\DatabaseAdapter",
-                                'service' => ["name"=>"Route\\Gateway",],
-                                'hydrator' => [
-                                    "class" => \Common\Hydrator\CommonTableEntityHydrator::class,
-                                    "map" => [
-                                        "routeName" => "route_name",
-                                        "uid" => "uid",
-                                    ],
-                                ],
-                            ],
-
-                        ],
-                        'route_routes' => [
-                            'database' => [
-                                'db' => [
-                                    'table' => 'route_routes',
-                                ],
-                            ],
-                            'gateway' => [
-                                "adapter" => "Application\Db\LocalAdapter",
-//                                "adapter" => "Application\Db\DatabaseAdapter",
-                                'service' => ["name"=>"Route\\Routes\\Gateway",],
-                                'hydrator' => [
-                                    "class" => \Common\Hydrator\CommonTableEntityHydrator::class,
-                                    "map" => [
-                                        "routeName" => "route_name",
-                                        "uid" => "uid",
-                                    ],
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-            ], // application
+            'app' => $this->getApplicationConfig(),
         ];
     }
 
     public function getDependencies()
     {
         return [];
+    }
+
+    public function getApplicationConfig()
+    {
+        return [
+            'table_service' => [
+                'PageRoute\Router\TableService' => [
+                    'gateway' => [
+                        'name' => 'PageRoute\Router\TableGateway',
+                    ],
+                ],
+                'PageRoute\RouterEntry\TableService' => [
+                    'gateway' => [
+                        'name' => 'PageRoute\RouterEntry\TableGateway',
+                    ],
+                ],
+            ],
+            'gateway' => [
+                'PageRoute\Router\TableGateway' => [
+                    'name' => 'PageRoute\Router\TableGateway',
+                    'table' => [
+                        'name' => 'router',
+                        'object' => \PageRoute\Model\RouterTable::class,
+                    ],
+                    'adapter' => [
+                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                    ],
+                    'model' => [
+                        "object" => \PageRoute\Model\RouterModel::class,
+                    ],
+                    'hydrator' => [
+                        "object" => \Zend\Hydrator\ObjectProperty::class,
+                    ],
+                ],
+                'PageRoute\RouterEntry\TableGateway' => [
+                    'name' => 'PageRoute\RouterEntry\TableGateway',
+                    'table' => [
+                        'name' => 'router',
+                        'object' => \PageRoute\Model\RouterTable::class,
+                    ],
+                    'adapter' => [
+                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                    ],
+                    'model' => [
+                        "object" => \PageRoute\Model\RouterEntryModel::class,
+                    ],
+                    'hydrator' => [
+                        "object" => \Zend\Hydrator\ObjectProperty::class,
+                    ],
+                ],
+            ], // gateway
+        ];
     }
 
 }

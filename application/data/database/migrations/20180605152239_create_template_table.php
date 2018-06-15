@@ -14,6 +14,7 @@ class CreateTemplateTable extends AbstractMigration
     {
         $table = $this->table('template', ['id' => false, 'primary_key' => ['uid']]);
         $table->addColumn('uid', 'string', ['limit' => 64])
+            ->addColumn('route_uid',  'string', ['limit' => 64])
             ->addColumn('type',  'string', ['limit' => 64])
             ->addColumn('location',  'string', ['limit' => 64])
             ->addColumn('name', 'string')

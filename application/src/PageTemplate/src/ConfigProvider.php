@@ -12,38 +12,21 @@ class ConfigProvider
         return [
             'dependencies' => $this->getDependencies(),
             'templates'    => $this->getTemplates(),
-            'application' => [
-                'module' => [
-                    'route' => [
-                        'template' => [
-                            'database' => [
-                                'db' => [
-                                    'table' => 'template',
-                                ],
-                            ],
-                            'gateway' => [
-//                                "adapter" => "Application\Db\DatabaseAdapter",
-                                "adapter" => "Application\Db\LocalAdapter",
-                                'service' => ["name"=>"PageTemplate\\Gateway",],
-                                'hydrator' => [
-                                    "class" => \Common\Hydrator\CommonTableEntityHydrator::class,
-                                    "map" => [
-                                        "routeName" => "route_name",
-                                        "uid" => "uid",
-                                    ],
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-            ], // application
+            'app' => $this->getApplicationConfig(),
         ];
     }
 
     public function getDependencies()
     {
         return [
-            'factories'  => [],
+            'factories'  => [
+                \PageTemplate\Service\TemplateService::class => \PageTemplate\Service\Factory\TemplateServiceFactory::class,
+            ],
+            'delegator'  => [
+                \Page\Handler\PageHandler::class => [
+                    \PageTemplate\Handler\Delegator\PageTemplateDelegator::class,
+                ],
+            ],
         ];
     }
 
@@ -58,6 +41,37 @@ class ConfigProvider
             'paths' => [
                 'page-template'    => [__DIR__ . '/../templates/page-template'],
             ],
+        ];
+    }
+
+    public function getApplicationConfig()
+    {
+        return [
+            'table_service' => [
+                'PageTemplate\TableService' => [
+                    'gateway' => [
+                        'name' => 'PageTemplate\TableGateway',
+                    ],
+                ],
+            ],
+            'gateway' => [
+                'PageTemplate\TableGateway' => [
+                    'name' => 'PageTemplate\TableGateway',
+                    'table' => [
+                        'name' => 'template',
+                        'object' => \PageTemplate\Model\PageTemplateTable::class,
+                    ],
+                    'adapter' => [
+                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                    ],
+                    'model' => [
+                        "object" => \PageTemplate\Model\PageTemplateModel::class,
+                    ],
+                    'hydrator' => [
+                        "object" => \Zend\Hydrator\ObjectProperty::class,
+                    ],
+                ],
+            ], // gateway
         ];
     }
 }

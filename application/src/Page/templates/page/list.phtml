@@ -1,0 +1,44 @@
+<h2>Pages List</h2>
+
+<a href="<?=$this->url('user.create')?>">Create User</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="col"></th>
+            <th class="col">Name</th>
+            <th class="col">Route</th>
+            <th class="col">Template</th>
+            <th class="col">Cache</th>
+            <th class="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php if($pageData):?>
+        <?php foreach($pageData as $item):?>
+            <tr scope="row">
+                <td>
+                    <?=$item->getUid();?>
+                </td>
+                <td>
+                    <?=$item->getName();?>
+                </td>
+                <td>
+                    <?=$item->getRoute();?>
+                </td>
+                <td>
+                    <?=$item->getTemplate();?>
+                </td>
+                <td>
+                    <?=$item->getPageCache();?>
+                </td>
+                <td>
+                    <a href="<?=$this->url('user.read',['uid'=>$item->getUid()]);?>" class="btn btn-default">Details</a>
+                </td>
+            </tr>
+        <?php endforeach;?>
+    <?php else:?>
+    <?php var_dump($pageData);?>
+    <?php endif;?>
+    </tbody>
+
+</table>

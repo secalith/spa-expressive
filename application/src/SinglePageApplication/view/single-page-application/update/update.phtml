@@ -1,0 +1,7 @@
+<?php
+$forms['updateform']->setAttribute('action', $this->url('content_update',array(),true));
+$forms['updateform']->prepare();
+?>
+<?=$this->form()->openTag($forms['updateform']);?>
+<?=$this->formCollection($forms['updateform']);?>
+<?=$this->form()->closeTag();?>

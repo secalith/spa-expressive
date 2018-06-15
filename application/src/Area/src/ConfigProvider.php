@@ -12,12 +12,26 @@ class ConfigProvider
         return [
             'dependencies' => $this->getDependencies(),
             'app' => $this->getApplicationConfig(),
+            'view_helpers' => [
+                'invokables'=> [
+                    'displayArea' => \Area\View\Helper\AreaHelper::class,
+                ],
+            ],
         ];
     }
 
     public function getDependencies()
     {
-        return [];
+        return [
+            'factories' => [
+                \Area\Service\AreaService::class => \Area\Service\Factory\AreaServiceFactory::class,
+            ],
+            'delegators' => [
+                \Page\Handler\PageHandler::class => [
+//                    \Common\Application\Factory\PipelineAndRoutesDelegator::class,
+                ],
+            ],
+        ];
     }
 
     public function getApplicationConfig()

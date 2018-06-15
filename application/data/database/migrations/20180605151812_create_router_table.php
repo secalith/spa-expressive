@@ -15,6 +15,7 @@ class CreateRouterTable extends AbstractMigration
         $table = $this->table('router', ['id' => false, 'primary_key' => ['uid']]);
         $table->addColumn('uid', 'string', ['limit' => 64])
             ->addColumn('parent_uid',  'string', ['limit' => 64,'default' => 0])
+            ->addColumn('application_uid',  'string', ['limit' => 64,'default' => 0])
             ->addColumn('route_uid',  'string', ['limit' => 64])
             ->addColumn('route_url', 'string')
             ->addColumn('scenario',  'string', ['limit' => 32])

@@ -45,11 +45,14 @@ class ConfigProvider
                     'isFormSet' => IsFormSet::class,
                     'getFormAttached' => GetFormAttached::class,
                     'flashMessage' => FlashMessage::class,
+                    'closeTag' => View\Helper\CloseTagHelper::class,
                 ],
                 'factories' => [
                     'currentRoute' => CurrentUrlHelperFactory::class,
                     'displayLinkGroup' => DisplayLinkGroupHelperFactory::class,
+                    'openTag' => View\Helper\OpenTagHelperFactory::class,
                 ],
+
             ],
             'session_config' => [
                 'cookie_lifetime' => 60*60*10,
@@ -92,7 +95,11 @@ class ConfigProvider
                 Service\GatewayAbstractFactory::class,
                 Service\TableServiceAbstractFactory::class,
             ],
-            'delegators' => [],
+            'delegators' => [
+                \Zend\Expressive\Application::class => [
+                    \Common\Application\Factory\PipelineAndRoutesDelegator::class,
+                ],
+            ],
         ];
     }
 

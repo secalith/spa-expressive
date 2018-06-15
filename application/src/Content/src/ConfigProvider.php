@@ -12,42 +12,22 @@ class ConfigProvider
     {
         return [
             'dependencies' => $this->getDependencies(),
+            'templates'    => $this->getTemplates(),
+            'app' => $this->getApplicationConfig(),
             'view_helpers' => [
                 'invokables'=> [
-                    'displayContent' => View\Helper\ContentHelper::class,
+                    'displayContent' => \Content\View\Helper\ContentHelper::class,
                 ],
             ],
-            'application' => [
-                'module' => [
-                    'route' => [
-                        'content' => [
-                            'database' => [
-                                'db' => [
-                                    'table' => 'content',
-                                ],
-                            ],
-                            'gateway' => [
-                                "adapter" => "Application\Db\LocalAdapter",
-//                                "adapter" => "Application\Db\DatabaseAdapter",
-                                'service' => ["name"=>"Content\\Gateway"],
-                                'hydrator' => [
-                                    "class" => \Common\Hydrator\CommonTableEntityHydrator::class,
-                                    "map" => [
-                                        "uid" => "uid",
-                                        "block" => "block",
-                                        "order" => "order",
-                                        "content" => "content",
-                                        "attributes" => "attributes",
-                                        "parameters" => "parameters",
-                                        "template" => "template",
-                                        "type" => "type",
-                                    ],
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-            ], // application
+        ];
+    }
+
+    public function getTemplates()
+    {
+        return [
+            'paths' => [
+                'content' => [__DIR__ . '/../templates/content'],
+            ],
         ];
     }
 
@@ -55,11 +35,39 @@ class ConfigProvider
     {
         return [
             'factories'  => [
-                "Content\\Table" => \Content\Service\Factory\ContentTableServiceFactory::class,
-                "Content\\Gateway" => \Content\Service\Factory\ContentTableGatewayFactory::class,
-                Action\ReadAction::class => Action\ReadFactory::class,
-                Action\WriteAction::class => Action\WriteFactory::class,
+                \Content\Service\ContentService::class => \Content\Service\Factory\ContentServiceFactory::class,
             ],
+        ];
+    }
+
+    public function getApplicationConfig()
+    {
+        return [
+            'table_service' => [
+                'Content\TableService' => [
+                    'gateway' => [
+                        'name' => 'Content\TableGateway',
+                    ],
+                ],
+            ],
+            'gateway' => [
+                'Content\TableGateway' => [
+                    'name' => 'Content\TableGateway',
+                    'table' => [
+                        'name' => 'content',
+                        'object' => \Content\Model\ContentTable::class,
+                    ],
+                    'adapter' => [
+                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                    ],
+                    'model' => [
+                        "object" => \Content\Model\ContentModel::class,
+                    ],
+                    'hydrator' => [
+                        "object" => \Zend\Hydrator\ObjectProperty::class,
+                    ],
+                ],
+            ], // gateway
         ];
     }
 

@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="content-header" data-area-identifier="area-content_header">
+        <?=$this->partial('content/area', array(
+            'area' => $area['content_header'],
+        ));?>
+    </div><!-- /.content-header -->
+    <div class="row">
+        <div class="col-sm-3 content-sidebar sidebar-left" data-area-identifier="area-content_sidebar">
+            <?=$this->partial('content/area', array(
+                'area' => $area['content_sidebar'],
+            ));?>
+        </div><!-- /.content-sidebar -->
+        <div class="col-sm-8 col-sm-offset-1 content-main" data-area-identifier="area-content_main">
+            <?=$this->partial('content/area', array(
+                'area' => $area['content_main'],
+            ));?>
+        </div><!-- /.content-main -->
+    </div><!-- /.row -->
+</div><!-- /.container -->
+<footer class="content-footer footer-main" data-area-identifier="area-footer_main">
+    <?=$this->partial('content/area', array(
+        'area' => $area['footer_main'],
+    ));?>
+</footer><!-- /.content-footer -->

@@ -8,6 +8,7 @@ class RouterModel
 {
     public $uid;
     public $parent_uid;
+    public $application_uid;
     public $route_uid;
     public $route_url;
     public $scenario;
@@ -37,6 +38,7 @@ class RouterModel
     {
         $this->uid = ( array_key_exists('uid',$data)) ? $data['uid'] : null;
         $this->parent_uid = ( array_key_exists('parent_uid',$data)) ? $data['parent_uid'] : null;
+        $this->application_uid = ( array_key_exists('application_uid',$data)) ? $data['application_uid'] : null;
         $this->route_uid = ( array_key_exists('route_uid',$data)) ? $data['route_uid'] : null;
         $this->route_url = ( array_key_exists('route_url',$data)) ? $data['route_url'] : null;
         $this->scenario = ( array_key_exists('scenario',$data)) ? $data['scenario'] : null;
@@ -56,6 +58,7 @@ class RouterModel
 
         $data['uid'] = $this->uid;
         $data['parent_uid'] = $this->parent_uid;
+        $data['application_uid'] = $this->application_uid;
         $data['route_uid'] = $this->route_uid;
         $data['route_url'] = $this->route_url;
         $data['scenario'] = $this->scenario;
@@ -105,6 +108,24 @@ class RouterModel
     public function setParentUid($parent_uid)
     {
         $this->parent_uid = $parent_uid;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getApplicationUid()
+    {
+        return $this->application_uid;
+    }
+
+    /**
+     * @param mixed $application_uid
+     * @return RouterModel
+     */
+    public function setApplicationUid($application_uid)
+    {
+        $this->application_uid = $application_uid;
         return $this;
     }
 

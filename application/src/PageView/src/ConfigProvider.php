@@ -11,18 +11,26 @@ class ConfigProvider
     {
         return [
             'dependencies' => $this->getDependencies(),
+            'templates'    => $this->getTemplates(),
         ];
     }
 
     public function getDependencies()
     {
         return [
-            'delegators' => [
-                \Page\Action\PageAction::class => [
-                    \PageView\Controller\Delegator\PageViewDelegatorFactory::class,
-                ],
+            'factories'  => [
+                \PageView\Service\PageViewService::class => \PageView\Service\Factory\PageViewServiceFactory::class,
             ],
         ];
     }
+    public function getTemplates()
+    {
+        return [
+            'paths' => [
+                'page-view' => [__DIR__ . '/../templates/page-view'],
+            ],
+        ];
+    }
+
 
 }

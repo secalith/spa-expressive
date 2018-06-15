@@ -81,4 +81,15 @@ class BlockTable
 
         return $rowset->current();
     }
+
+    public function fetchAllBy($value, $name = "uid")
+    {
+        if(is_array($value)) {
+            $rowset = $this->tableGateway->select($value);
+        } else {
+            $rowset = $this->tableGateway->select([$name => $value]);
+        }
+
+        return $rowset->buffer();
+    }
 }

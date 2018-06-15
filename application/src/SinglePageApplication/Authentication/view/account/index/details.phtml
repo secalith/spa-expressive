@@ -1,0 +1,89 @@
+<?php
+
+$entityTitle = sprintf('Details %s %s',$submodule,$this->getArrayPathFromString($routeView['entity_title'],$dataItem));
+?>
+<?php
+if($this->flashMessenger()->hasMessages()):
+    ?>
+    <div class="alert alert-info flash-messenger">
+        <?php echo $this->flashMessenger()->render(); ?>
+    </div>
+    <?php
+endif;
+?>
+<hr />
+
+<div class="row">
+    <div class="col-xs-2">
+        <?php print($this->goback());?>
+    </div>
+    <div class="col-xs-2 col-md-1 col-xs-offset-8">
+        <a href="#<?php echo $this->url(sprintf("%s/edit",$submodule),array('uid'=>$dataItem['basic']['uid']))?>" class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#passwordModal" >
+            <i class="glyphicon glyphicon-plus-sign"></i>
+            <span><?php echo $this->translate('Reset Password');?></span>
+        </a>
+    </div>
+    <div class="col-xs-2 col-md-1">
+        <a href="<?php echo $this->url(sprintf("%s/edit",$submodule),array('uid'=>$dataItem['basic']['uid']))?>" class="btn btn-default btn-xs pull-right" >
+            <i class="glyphicon glyphicon-plus-sign"></i>
+            <span><?php echo $this->translate(sprintf('Edit %s', ucfirst($keyword)));?></span>
+        </a>
+    </div>
+</div>
+<?php if(isset($dataItem) && ! empty($dataItem)):?>
+
+
+    <hr />
+    <h3><?php echo $entityTitle;?></h3>
+    <div class="col-sm-12">
+        <?php foreach($routeView['view'] as $columnPath=>$columnName): ?>
+            <div class="form-group">
+                <label for="txtFname" class="control-label col-xs-3 col-xs-offset-1">
+                    <?php echo $this->translate($columnName);?>
+                </label>
+                <div class="col-xs-6">
+                    <?php print($this->getArrayPathFromString($columnPath,$dataItem));?>
+                </div>
+                <div class="col-sm-2 text-right"><strong><?php //echo $fieldsetElement->getOption('priority');?></strong></div>
+            </div> <!-- /.form-group -->
+            <div class="clearfix"></div>
+        <?php endforeach;?>
+
+        <hr />
+    </div> <!-- /. -->
+<?php endif;?>
+<!-- Modal -->
+<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <?php // $form[sprintf('%s_%s_reset_password',$module,$submodule)]['form']->setAttribute('action', $this->url(sprintf('%s_%s_reset_password',$module,$submodule),array('uid'=>$this->getArrayPathFromString($routeView['uid'],$dataItem))));?>
+    <?php echo $this->form()->openTag($form[sprintf('%s_%s_reset_password',$module,$submodule)]['form']); ?>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="<?php echo $this->translate('Close')?>"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"><?php echo sprintf('Password Reset Request for %s',$this->getArrayPathFromString($routeView['entity_title'],$dataItem));?></h4>
+            </div>
+            <div class="modal-body">
+
+                <?php echo $this->partial('_form_reset_password.phtml', array(
+                    'form' => $form[sprintf('%s_%s_reset_password',$module,$submodule)]['form'],
+                    'module' => $module,
+                    'submodule' => $submodule,
+                    'keyword' => $keyword,
+                    'formType' => 'reset_password',
+                    'formView' => $formView,
+                    'uid'=>$this->getArrayPathFromString($routeView['uid'],$dataItem),
+                ));?>
+
+                <div class="clearfix"></div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $this->translate('Close')?></button>
+                <?php $element = $this->getObjectPathFromString('submit',$form[sprintf('%s_%s_reset_password',$module,$submodule)]['form']); ?>
+                <?php echo $this->formElement($element); ?>
+            </div>
+        </div>
+    </div>
+    <?php echo $this->form()->closeTag($form[sprintf('%s_%s_reset_password',$module,$submodule)]['form']); ?>
+</div>
+

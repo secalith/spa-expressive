@@ -10,9 +10,10 @@ class PageSeeder extends AbstractSeed
         $data = [
             [
                 'uid'    => 'page-001',
+                'application_uid'    => 'secalith-limited',
                 'route_uid'    => 'route-001',
                 'template_uid'    => 'template-001',
-                'name'    => 'spa.home',
+                'name'    => 'spa.homepage',
                 'route_url'    => '/homepage',
                 'page_cache'    => 0,
                 'status'    => 1,

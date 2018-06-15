@@ -39,8 +39,10 @@
     },
     "require": {
         "php": "^7.1",
+        "mockery/mockery": "^1.1",
         "roave/security-advisories": "dev-master",
         "robmorgan/phinx": "^0.9.2",
+        "zendframework/zend-authentication": "^2.6",
         "zendframework/zend-component-installer": "^2.1.1",
         "zendframework/zend-config-aggregator": "^1.0",
         "zendframework/zend-db": "^2.9",
@@ -73,7 +75,10 @@
             "Page\\": "src/Page/src/",
             "PageTemplate\\": "src/PageTemplate/src/",
             "PageView\\": "src/PageView/src/",
-            "PageRoute\\": "src/PageRoute/src/"
+            "PageRoute\\": "src/PageRoute/src/",
+            "Instance\\": "src/Instance/src/",
+            "Jobs\\": "src/Jobs/src/",
+            "Auth\\": "src/Auth/src/"
         }
     },
     "autoload-dev": {

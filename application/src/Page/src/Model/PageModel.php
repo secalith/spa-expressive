@@ -7,6 +7,7 @@ namespace Page\Model;
 class PageModel
 {
     public $uid;
+    public $application_uid;
     public $route_uid;
     public $template_uid;
     public $name;
@@ -33,6 +34,7 @@ class PageModel
     public function exchangeArray($data = [])
     {
         $this->uid = ( array_key_exists('uid',$data)) ? $data['uid'] : null;
+        $this->application_uid = ( array_key_exists('application_uid',$data)) ? $data['application_uid'] : null;
         $this->route_uid = ( array_key_exists('route_uid',$data)) ? $data['route_uid'] : null;
         $this->template_uid = ( array_key_exists('template_uid',$data)) ? $data['template_uid'] : null;
         $this->name = ( array_key_exists('name',$data)) ? $data['name'] : null;
@@ -53,6 +55,7 @@ class PageModel
         $data = [];
 
         $data['uid'] = $this->uid;
+        $data['application_uid'] = $this->application_uid;
         $data['route_uid'] = $this->route_uid;
         $data['template_uid'] = $this->template_uid;
         $data['name'] = $this->name;
@@ -90,6 +93,24 @@ class PageModel
     public function setUid($uid)
     {
         $this->uid = $uid;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getApplicationUid()
+    {
+        return $this->application_uid;
+    }
+
+    /**
+     * @param mixed $application_uid
+     * @return PageModel
+     */
+    public function setApplicationUid($application_uid)
+    {
+        $this->application_uid = $application_uid;
         return $this;
     }
 

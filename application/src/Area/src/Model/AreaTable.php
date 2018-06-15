@@ -75,9 +75,23 @@ class AreaTable
      */
     public function fetchBy($value, $name = "uid")
     {
-        $rowset = $this->tableGateway->select([$name => $value]);
+        if(is_array($value)) {
+            $rowset = $this->tableGateway->select($value);
+        } else {
+            $rowset = $this->tableGateway->select([$name => $value]);
+        }
 
         return $rowset->current();
+    }
+    public function fetchAllBy($value, $name = "uid")
+    {
+        if(is_array($value)) {
+            $rowset = $this->tableGateway->select($value);
+        } else {
+            $rowset = $this->tableGateway->select([$name => $value]);
+        }
+
+        return $rowset->buffer();
     }
 
 }

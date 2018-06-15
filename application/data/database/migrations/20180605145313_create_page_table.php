@@ -14,6 +14,7 @@ class CreatePageTable extends AbstractMigration
     {
         $table = $this->table('page', ['id' => false, 'primary_key' => ['uid']]);
         $table->addColumn('uid', 'string', ['limit' => 64])
+            ->addColumn('application_uid',  'string', ['limit' => 64])
             ->addColumn('route_uid',  'string', ['limit' => 64])
             ->addColumn('template_uid', 'string', ['limit' => 64])
             ->addColumn('name', 'string', ['limit' => 255])
