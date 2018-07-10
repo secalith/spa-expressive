@@ -1,0 +1,66 @@
+<?php if(isset($messages)&&array_key_exists('error',$messages)):?>
+    <?=$this->flashMessage($messages['error'],'error');?>
+<?php endif;?>
+<?php if(isset($messages)&&array_key_exists('info',$messages)):?>
+    <?=$this->flashMessage($messages['info'],'info');?>
+<?php endif;?>
+<?php if(isset($messages)&&array_key_exists('success',$messages)):?>
+    <?=$this->flashMessage($messages['success'],'success');?>
+<?php endif;?>
+<?php
+$forms['form_login']->prepare();
+?>
+    <div class="row">
+        <div class="col-4 offset-4 pb-3 border-bottom">
+            <?=$this->form()->openTag($forms['form_login']);?>
+                <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+                <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+                <label for="inputEmail" class="sr-only">Email address</label>
+                <?=$this->formInput($forms['form_login']->get('form_login')->get('fieldset_credentials')->get('email'));?>
+                <?=$this->formElementErrors($forms['form_login']->get('form_login')->get('fieldset_credentials')->get('email'));?>
+                <label for="inputPassword" class="sr-only">Password</label>
+                <?=$this->formInput($forms['form_login']->get('form_login')->get('fieldset_credentials')->get('password'));?>
+                <?=$this->formElementErrors($forms['form_login']->get('form_login')->get('fieldset_credentials')->get('password'));?>
+                <div class="checkbox mt-2">
+                    <?=$this->formCheckbox($forms['form_login']->get('form_login')->get('fieldset_rememberme')->get('remember_me'));?>
+                    <?=$this->formLabel($forms['form_login']->get('form_login')->get('fieldset_rememberme')->get('remember_me'));?>
+                </div>
+            <?=$this->formElement($forms['form_login']->get('security'));?>
+            <?=$this->formElementErrors($forms['form_login']->get('security'));?>
+            <?=$this->formSubmit($forms['form_login']->get('send'));?>
+            <?=$this->form()->closeTag();?>
+        </div>
+        <div class="col-2 offset-4 mt-1">
+            <a href="<?=$this->url('spa.auth.request');?>">Forgotten password</a>
+        </div>
+        <div class="col-2 text-right mt-1">
+            <a href="<?=$this->url('spa.auth.reset');?>">I have the code</a>
+        </div>
+    </div>
+<fb:login-button
+        scope="public_profile,email"
+        onlogin="checkLoginState();">
+</fb:login-button>
+asdasd
+
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '269022213660382',
+            cookie     : true,
+            xfbml      : true,
+            version    : '3'
+        });
+
+        FB.AppEvents.logPageView();
+
+    };
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>

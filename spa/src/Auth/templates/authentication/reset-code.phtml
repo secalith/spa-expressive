@@ -1,0 +1,35 @@
+<?php if(isset($messages)&&array_key_exists('error',$messages)):?>
+    <?=$this->flashMessage($messages['error'],'error');?>
+<?php endif;?>
+<?php if(isset($messages)&&array_key_exists('info',$messages)):?>
+    <?=$this->flashMessage($messages['info'],'info');?>
+<?php endif;?>
+<?php if(isset($messages)&&array_key_exists('success',$messages)):?>
+    <?=$this->flashMessage($messages['success'],'success');?>
+<?php endif;?>
+<?php
+$forms['form_reset_code']->prepare();
+?>
+    <div class="row">
+        <div class="col-4 offset-4 pb-3 border-bottom">
+            <?=$this->form()->openTag($forms['form_reset_code']);?>
+                <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+                <h1 class="h3 mb-3 font-weight-normal">Password Change Token</h1>
+                <label for="inputEmail" class="sr-only">Email address</label>
+                <?=$this->formInput($forms['form_reset_code']->get('form_reset_code')->get('fieldset_credentials')->get('email'));?>
+                <?=$this->formElementErrors($forms['form_reset_code']->get('form_reset_code')->get('fieldset_credentials')->get('email'));?>
+                <?=$this->formInput($forms['form_reset_code']->get('form_reset_code')->get('fieldset_code')->get('code'));?>
+                <?=$this->formElementErrors($forms['form_reset_code']->get('form_reset_code')->get('fieldset_code')->get('code'));?>
+                <?=$this->formElement($forms['form_reset_code']->get('security'));?>
+                <?=$this->formElementErrors($forms['form_reset_code']->get('security'));?>
+                <?=$this->formSubmit($forms['form_reset_code']->get('send'));?>
+            <?=$this->form()->closeTag();?>
+        </div>
+        <div class="col-2 offset-4 mt-1">
+            <a href="<?=$this->url('spa.auth.login');?>">Login</a>
+        </div>
+        <div class="col-2 text-right mt-1">
+            <a href="<?=$this->url('spa.auth.request');?>">Forgotten password</a>
+        </div>
+    </div>
+

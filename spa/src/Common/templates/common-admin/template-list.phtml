@@ -1,0 +1,77 @@
+<!--<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">-->
+<!--    ?=sprintf(-->
+<!--            '<%1$s>%2$s%3$s</%1$s>',-->
+<!--            $data_template_model['heading']['html_tag'],-->
+<!--            $data_template_model['heading']['text'],-->
+<!--        (array_key_exists('buttons',$data_template_model['heading']))?$this->displayLinkGroup($data_template_model['heading']['buttons']):null-->
+<!--    );?-->
+<!--    <div class="btn-toolbar mb-2 mb-md-0">-->
+<!--        <div class="btn-group mr-2">-->
+<!--            <button class="btn btn-sm btn-outline-secondary">Share</button>-->
+<!--            <button class="btn btn-sm btn-outline-secondary">Export</button>-->
+<!--        </div>-->
+<!--        <button class="btn btn-sm btn-outline-secondary dropdown-toggle">-->
+<!--            <span data-feather="calendar"></span>-->
+<!--            This week-->
+<!--        </button>-->
+<!--    </div>-->
+<!--</div>-->
+
+<?=$this->partial("common-admin-partial::partial-header",['heading'=>$data_template_model['heading']]);?>
+
+<?php if(isset($messages)&&array_key_exists('error',$messages)):?>
+    <?=$this->flashMessage($messages['error'],'error');?>
+<?php endif;?>
+<?php if(isset($messages)&&array_key_exists('info',$messages)):?>
+    <?=$this->flashMessage($messages['info'],'info');?>
+<?php endif;?>
+
+<div class="table-responsive">
+    <table class="table table-hover table-sm" style="table-layout: fixed;">
+        <thead class="thead-light">
+        <tr>
+            <?php foreach($data_template_model['table'] as $table):?>
+            <?php foreach($table['headers'] as $tableHeaderText):?>
+                <th><?=$this->escapeHtml($tableHeaderText);?></th>
+            <?php endforeach;?>
+            <?php endforeach;?>
+        </tr>
+        </thead>
+        <tbody>
+        <?php if($paginator->count()===0): ?>
+            <tr>
+                <td COLSPAN="10"><i>No data items.</i></td>
+            </tr>
+        <?php else:?>
+            <?php foreach($paginator as $item): ?>
+                <tr>
+                    <?php if(array_key_exists('table_row',$view_template_model)):?>
+                        <?=$this->partial(
+                                $view_template_model['table_row'],
+                                [
+                                    'item'=>$item,
+                                    'forms'=>(isset($forms))?$forms:null,
+                                    'data_template_model'=>(isset($data_template_model))?$data_template_model:null,
+                                ]
+                            );
+                        ?>
+                    <?php else: ?>
+                        <?php foreach($data_template_model['table']['main']['rows'] as $tableRow):?>
+                            <?php if(array_key_exists('column',$tableRow)):?>
+                                <td><?=$this->escapeHtml($item->{$tableRow['column']});?></td>
+                            <?php elseif(array_key_exists('buttons',$tableRow)):?>
+                                <td><?=$this->displayLinkGroup($tableRow['buttons'],$item);?></td>
+                            <?php endif;?>
+                        <?php endforeach;?>
+                    <?php endif;?>
+                </tr>
+            <?php endforeach; ?>
+        <?php endif;?>
+        </tbody>
+    </table>
+</div>
+<?php
+echo $this->paginationControl($paginator,
+    'Sliding',
+    'common::pagination-control', array('route' => $data_template_model['route_name']));
+?>

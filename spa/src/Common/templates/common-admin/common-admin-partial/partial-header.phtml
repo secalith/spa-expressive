@@ -1,0 +1,15 @@
+<?php foreach($heading as $header): ?>
+    <div class="d-flex justifry-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <?php if(array_key_exists('html_tag',$header) && array_key_exists('text',$header)): ?>
+            <?=sprintf(
+                '<%1$s>%2$s%3$s</%1$s>',
+                $header['html_tag'],
+                $header['text'],
+                (array_key_exists('buttons',$header))?$this->displayLinkGroup($header['buttons']):null
+            );?>
+        <?php elseif(array_key_exists('buttons',$header)):?>
+            <?=$this->displayLinkGroup($header['buttons']);?>
+        <?php endif; ?>
+
+    </div>
+<?php endforeach; ?>

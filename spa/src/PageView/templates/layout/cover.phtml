@@ -1,0 +1,56 @@
+<?php
+$this->headLink()
+    ->prependStylesheet('https://use.fontawesome.com/releases/v5.0.6/css/all.css')
+    ->prependStylesheet('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css')
+    ->appendStylesheet('/assets/css/cover.css');
+$this->inlineScript()
+    ->prependFile('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js')
+    ->prependFile('https://code.jquery.com/jquery-3.3.1.min.js');
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="shortcut icon" href="https://framework.zend.com/ico/favicon.ico" />
+    <?=$this->headTitle('zend-expressive')->setSeparator(' - ')->setAutoEscape(false)?>
+    <?=$this->headMeta()?>
+    <?=$this->headLink()?>
+    <style>
+        body { padding-top: 70px; }
+        .app { min-height: 100vh; }
+        .app-footer { padding-bottom: 1em; }
+        .zf-green, h2 a { color: #68b604; }
+    </style>
+</head>
+    <body class="text-left">
+
+        <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+            <header class="masthead mb-auto">
+                <div class="inner">
+                    <h3 class="masthead-brand">Cover</h3>
+                    <nav class="nav nav-masthead justify-content-center">
+                        <a class="nav-link active" href="<?=$this->url('spa.auth')?>">Create Petition</a>
+                        <a class="nav-link" href="<?=$this->url('spa.auth')?>">SPA Auth</a>
+                    </nav>
+                </div>
+            </header>
+
+            <main role="main" class="inner cover">
+                <h1 class="cover-heading">Cover your page.</h1>
+                <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
+                <p class="lead">
+                    <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
+                </p>
+                <?=$this->content?>
+            </main>
+
+            <footer class="mastfoot mt-auto">
+                <div class="inner">
+                    <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>
