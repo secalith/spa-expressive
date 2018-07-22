@@ -5,44 +5,47 @@ declare(strict_types=1);
 namespace Common\Delegator;
 
 use Common\Delegator\ApplicationFormRouteAwareInterface;
-use Form\Handler\Delegator\FormAwareInterface;
 use Common\Handler\DataAwareInterface;
 use Psr\Container\ContainerInterface;
+use Common\Service\RouteConfigService;
 use Zend\Expressive\Helper\UrlHelper;
+use ArrayDigger\Service\ArrayDigger;
 
 class ApplicationFormRouteAwareDelegator
 {
     public function __invoke(ContainerInterface $container, string $name, callable $callback)
     {
-        $config = $container->get('config');
-        $currentRouteName = $container->get(\Common\Helper\CurrentRouteNameHelper::class)->getMatchedRouteName();
         $requestedCallback = $callback();
 
-       $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
+        $config = $container->get(RouteConfigService::class);
+        $routeConfig = $config->getRouteConfig($name);
 
-        if( $requestedCallback instanceof ApplicationFormRouteAwareInterface
-            && array_key_exists('app',$config)
-            && array_key_exists('handler',$config['app'])
-            && array_key_exists($name,$config['app']['handler'])
-            && array_key_exists('route',$config['app']['handler'][$name])
-            && array_key_exists($currentRouteName,$config['app']['handler'][$name]['route'])
-            && array_key_exists($requestMethod,$config['app']['handler'][$name]['route'][$currentRouteName])
-            && array_key_exists('forms',$config['app']['handler'][$name]['route'][$currentRouteName][$requestMethod])
-        ) {
-            $formsAppConfig = $config['app']['handler'][$name]['route'][$currentRouteName][$requestMethod]['forms'];
-            if( ! empty($formsAppConfig)) {
-                foreach($formsAppConfig as $formAppConfig) {
-                    if( array_key_exists('object',$formAppConfig)) {
+        if( $requestedCallback instanceof ApplicationFormRouteAwareInterface )
+        {
+            if( ! empty($routeConfig['forms']))
+            {
+                var_dump($routeConfig['forms']);
+                foreach($routeConfig['forms'] as $formAppConfig)
+                {
+                    if( ! is_array($formAppConfig)) {
+                        var_dump($formAppConfig);
+                    }
+                    if( array_key_exists('object',$formAppConfig))
+                    {
                         /* @var \Zend\Form\Form $form */
                         $form = new $formAppConfig['object']();
                     } elseif(array_key_exists('form_factory',$formAppConfig)) {
-                        if($container->has($formAppConfig['form_factory'])) {
+                        if($container->has($formAppConfig['form_factory']))
+                        {
                             $form = $container->get($formAppConfig['form_factory']);
                         }
                     }
+
                     $formIndexName = (array_key_exists('name',$formAppConfig))
                         ? $formAppConfig['name']
-                        : $form->getName();
+                        : $form->getName()
+                        ;
+
                     // check if the action is defined
                     if($formAppConfig['action']) {
                         if(array_key_exists('route',$formAppConfig['action'])) {

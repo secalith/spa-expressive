@@ -5,10 +5,10 @@
                 '<%1$s>%2$s%3$s</%1$s>',
                 $header['html_tag'],
                 $header['text'],
-                (array_key_exists('buttons',$header))?$this->displayLinkGroup($header['buttons']):null
+                (array_key_exists('buttons',$header))?$this->displayLinkGroup($header['buttons'],$data):null
             );?>
         <?php elseif(array_key_exists('buttons',$header)):?>
-            <?=$this->displayLinkGroup($header['buttons']);?>
+            <?=$this->displayLinkGroup($header['buttons'],$data);?>
         <?php endif; ?>
 
     </div>

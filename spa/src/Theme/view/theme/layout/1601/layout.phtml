@@ -1,0 +1,93 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+    <head>
+<?php
+    $children = $this->viewModel()->getCurrent()->getChildren();
+    $child = $children[0];
+
+    $title = (null!==$child->getVariable('settings')["title"])
+        ?$child->getVariable('settings')["title"]->getValue()
+        :null;
+    $description = (null!==$child->getVariable('settings')["description"])
+        ?$child->getVariable('settings')["description"]->getValue()
+        :null;
+    $keywords = (null!==$child->getVariable('settings')["keywords"])
+        ?$child->getVariable('settings')["keywords"]->getValue()
+        :null;
+?>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="<?=$description;?>">
+        <meta name="keywords" content="<?=$keywords;?>">
+        <meta name="author" content="">
+        <link rel="icon" href="assets/img/favicon.ico">
+
+        <meta charset="utf-8">
+        <?php echo $this->headTitle($title)->setSeparator(' - ')->setAutoEscape(false);?>
+        <!-- Head Links: -->
+        <?php echo $this->headLink()
+                        ->appendStylesheet($this->basePath('assets/css/site.min.css'))
+        ;
+        ?>
+        <!-- Head Scripts: -->
+        <?php echo $this->headScript()
+            ->prependFile($this->basePath('assets/js/SinglePageApplication.site.min.js'))
+            ->prependFile($this->basePath('assets/js/SinglePageApplication.jquery.min.js'))
+            ->prependFile($this->basePath('assets/js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
+            ->prependFile($this->basePath('assets/js/html5shiv.min.js'),   'text/javascript', array('conditional' => 'lt IE 9',))
+        ; ?>
+        
+        <script type="text/javascript">
+            WebFontConfig = {
+                google: { families: ['Lato','Slabo','Roboto']
+                }
+            };
+            (function() {
+                var wf = document.createElement('script');
+                wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+                    '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+                wf.type = 'text/javascript';
+                wf.async = 'true';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(wf, s);
+            })(document);
+
+        </script>
+    </head>
+    <body>
+        <nav class="navbar navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="row">
+                    <?php
+                        $children = $this->viewModel()->getCurrent()->getChildren();
+                        $child = $children[0];
+                        $area = $child->getVariable('area');
+                    ?>
+                    <?php echo $this->partial('content/area', array(
+                        'area' => $area['header_001'],
+                    )); ?>
+                </div>
+            </div>
+        </nav>
+        <?php echo $this->content; ?>
+        <!-- Begin FOOTER: -->
+        <?php echo $this->partial('content/area', array(
+            'area' => $area['footer_001'],
+        )); ?>
+        <?php echo $this->inlineScript() ?>
+        <script type="text/javascript">
+            $(window).scroll(function() {
+                if ($(document).scrollTop() > 0) {
+                    $('.navbar').addClass('scroll');
+                    $('main').addClass('scroll');
+                } else {
+                    $('.navbar').removeClass('scroll');
+                    $('main').removeClass('scroll');
+                }
+            });
+        </script>
+        <div class="no-display"></div>
+    </body>
+</html>

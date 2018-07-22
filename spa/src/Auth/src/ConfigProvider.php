@@ -157,6 +157,7 @@ class ConfigProvider
                     ],
                 ],
             ], // gateway
+
         ];
     }
 }

@@ -1,0 +1,64 @@
+/*!
+ * Bootstrap v3.3.6 (http://getbootstrap.com)
+ * Copyright 2011-2015 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
+
+nav {
+  &.navbar {
+    .menu-item {
+      color:#efefef;
+      background-color:@color-bg-dark;
+    }
+    .menu-item-inverse {
+      background-color: @color-bg-accent;
+    }
+  }
+  &#navbar {
+    background-color:@color-bg-dark;
+  }
+}
+
+#navbar.menu-main > ul {
+  width:100%;
+}
+
+#navbar.menu-main {
+  background-color:@color-bg-dark;
+  li {
+    a {
+      color: @color-font-dark;
+      background-color:@color-bg-dark;
+    }
+  }
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: @screen-sm-min) {
+  .navbar-item-search {
+    .navbar-form {
+      margin:4px -15px;
+    }
+    .form-control {
+      width:100px;
+    }
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: @screen-md-min) {
+  #navbar.menu-main {
+    a {
+      padding:7px 25px;
+    }
+  }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: @screen-lg-min) {
+  #navbar.menu-main {
+    a {
+      padding:7px 40px;
+    }
+  }
+}

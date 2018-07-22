@@ -17,7 +17,7 @@
 <!--    </div>-->
 <!--</div>-->
 
-<?=$this->partial("common-admin-partial::partial-header",['heading'=>$data_template_model['heading']]);?>
+<?=$this->partial("common-admin-partial::partial-header",['heading'=>$data_template_model['heading'],'data'=>null]);?>
 
 <?php if(isset($messages)&&array_key_exists('error',$messages)):?>
     <?=$this->flashMessage($messages['error'],'error');?>
@@ -26,27 +26,26 @@
     <?=$this->flashMessage($messages['info'],'info');?>
 <?php endif;?>
 
-<div class="table-responsive">
-    <table class="table table-hover table-sm" style="table-layout: fixed;">
-        <thead class="thead-light">
-        <tr>
-            <?php foreach($data_template_model['table'] as $table):?>
-            <?php foreach($table['headers'] as $tableHeaderText):?>
-                <th><?=$this->escapeHtml($tableHeaderText);?></th>
-            <?php endforeach;?>
-            <?php endforeach;?>
-        </tr>
-        </thead>
-        <tbody>
-        <?php if($paginator->count()===0): ?>
+<?php foreach($data_template_model['main']['table'] as $table):?>
+    <div class="table-responsive">
+        <table class="table table-hover table-sm" style="table-layout: fixed;">
+            <thead class="thead-light">
             <tr>
-                <td COLSPAN="10"><i>No data items.</i></td>
+                <?php foreach($table['headers'] as $tableHeaderText):?>
+                    <th><?=$this->escapeHtml($tableHeaderText);?></th>
+                <?php endforeach;?>
             </tr>
-        <?php else:?>
-            <?php foreach($paginator as $item): ?>
+            </thead>
+            <tbody>
+            <?php if($paginator->count()===0): ?>
                 <tr>
-                    <?php if(array_key_exists('table_row',$view_template_model)):?>
-                        <?=$this->partial(
+                    <td COLSPAN="10"><i>No data items.</i></td>
+                </tr>
+            <?php else:?>
+                <?php foreach($paginator as $item): ?>
+                    <tr>
+                        <?php if(array_key_exists('table_row',$view_template_model)):?>
+                            <?=$this->partial(
                                 $view_template_model['table_row'],
                                 [
                                     'item'=>$item,
@@ -54,22 +53,24 @@
                                     'data_template_model'=>(isset($data_template_model))?$data_template_model:null,
                                 ]
                             );
-                        ?>
-                    <?php else: ?>
-                        <?php foreach($data_template_model['table']['main']['rows'] as $tableRow):?>
-                            <?php if(array_key_exists('column',$tableRow)):?>
-                                <td><?=$this->escapeHtml($item->{$tableRow['column']});?></td>
-                            <?php elseif(array_key_exists('buttons',$tableRow)):?>
-                                <td><?=$this->displayLinkGroup($tableRow['buttons'],$item);?></td>
-                            <?php endif;?>
-                        <?php endforeach;?>
-                    <?php endif;?>
-                </tr>
-            <?php endforeach; ?>
-        <?php endif;?>
-        </tbody>
-    </table>
-</div>
+                            ?>
+                        <?php else: ?>
+                                <?php foreach($table['rows'] as $tableRow):?>
+                                    <?php if(array_key_exists('column',$tableRow)):?>
+                                        <td><?=$this->escapeHtml($item->{$tableRow['column']});?></td>
+                                    <?php elseif(array_key_exists('buttons',$tableRow)):?>
+                                        <td><?=$this->displayLinkGroup($tableRow['buttons'],$item);?></td>
+                                    <?php endif;?>
+                                <?php endforeach;?>
+                        <?php endif;?>
+                    </tr>
+                <?php endforeach;?>
+            <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+<?php endforeach;?>
+
 <?php
 echo $this->paginationControl($paginator,
     'Sliding',

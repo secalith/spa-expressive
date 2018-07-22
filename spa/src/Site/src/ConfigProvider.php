@@ -12,6 +12,19 @@ class ConfigProvider
             'dependencies' => $this->getDependencies(),
             'templates'    => $this->getTemplates(),
             'app' => $this->getApplicationConfig(),
+            'rbac' => [
+                'permissions'	=>	[
+                    'contributor'	=>	[
+                        'admin.site.create',
+                    ],
+                    'editor'	=>	[
+                        'admin.site.create',
+                    ],
+                    'administrator'	=>	[
+                        'admin.site.create',
+                    ],
+                ],
+            ],
         ];
     }
 

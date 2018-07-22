@@ -58,6 +58,8 @@ class ListHandler implements RequestHandlerInterface, PaginatorAwareInterface, D
         ;
         $this->addData($this->getPaginator(),'paginator');
 
+        $this->template->addDefaultParam(Template\TemplateRendererInterface::TEMPLATE_ALL,'bodyClass','app-action-list');
+
         return new HtmlResponse($this->template->render($this->getData('template'), $this->getData()));
     }
 }

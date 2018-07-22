@@ -338,7 +338,7 @@ Vagrant.configure("2") do |config|
         spa.vm.hostname = 'spa.local.vm'
         spa.vm.provider :virtualbox do |v|
           v.customize ["modifyvm", :id, "--memory", 1024]
-          v.customize ["modifyvm", :id, "--name", "SPA :: SPA"]
+          v.customize ["modifyvm", :id, "--name", "SPA :: Expressive"]
         end
     end
 

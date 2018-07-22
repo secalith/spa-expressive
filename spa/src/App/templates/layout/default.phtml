@@ -1,10 +1,26 @@
 <?php
 $this->headLink()
     ->prependStylesheet('https://use.fontawesome.com/releases/v5.0.6/css/all.css')
-    ->prependStylesheet('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
+    ->prependStylesheet('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css')
+    ->appendStylesheet('/assets/css/theme-default.css');
 $this->inlineScript()
     ->prependFile('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js')
     ->prependFile('https://code.jquery.com/jquery-3.3.1.min.js');
+
+if($this->hasIdentity()):
+
+    $this->inlineScript()
+        ->appendFile('/assets/js/spa-editor.js')
+        ->appendFile('/assets/js/secalith-zf-core.js')
+        ->appendFile('/assets/js/secalith-zf-form.js')
+        ->appendFile('/assets/js/spa-form.js')
+        ->appendFile('/assets/js/spa-init.js')
+    ;
+    $this->headLink()
+        ->appendStylesheet('/assets/css/spa-editor.css')
+        ->appendStylesheet('/assets/css/spa-admin.css');
+endif;
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -23,7 +39,7 @@ $this->inlineScript()
         .zf-green, h2 a { color: #68b604; }
     </style>
 </head>
-<body class="app">
+<body class="app app-theme-default <?=(isset($bodyClass))?$bodyClass:null;?>">
     <header class="app-header">
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top" role="navigation">
             <div class="container">
@@ -98,8 +114,19 @@ $this->inlineScript()
     </header>
 
     <div class="app-content">
-        <main class="container">
-            <?=$this->content?>
+        <main class="container-fluid">
+            <div class="row">
+                <div class="col-12 m-auto col-lg-10 px-4" role="main">
+                    <?=($this->content);?>
+                </div>
+                <nav class="col-md-2 d-none -d-md-block bg-light sidebar">
+                    <?php
+
+                    echo $this->partial('role-editor::block-menu');
+
+                    ?>
+                </nav>
+            </div>
         </main>
     </div>
 
@@ -107,7 +134,7 @@ $this->inlineScript()
         <div class="container">
             <hr />
             <p>
-                &copy; 2005 - <?=date('Y')?> by Zend Technologies Ltd. All rights reserved.
+                &copy; 2017 - <?=date('Y')?> by Secalith Ltd. All rights reserved.
             </p>
         </div>
     </footer>

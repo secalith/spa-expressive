@@ -37,11 +37,18 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     # READ USER #
     $app->get('/admin/user/details/{uid}[/]', [
         Auth\Handler\AuthHandler::class,
-        'Common\Handler\List',
+//        Common\Handler\ResourceHandler::class,
+        'Common\Handler\Read',
     ], 'spa.user.read');
+    # UPDATE USER #
+    $app->get('/admin/user/edit/{uid}[/]', [
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\Update',
+    ], 'spa.user.update');
     # DELETE USER #
     $app->get('/admin/user/delete/{uid}[/]', [
         Auth\Handler\AuthHandler::class,
+//        Common\Middleware\CurrentHandlerNameMiddleware::class,
         'Common\Handler\Delete',
     ], 'spa.user.delete');
 //    $app->get('/admin/user/delete/{uid}[/]', [
@@ -56,6 +63,7 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     ], 'admin.site.list');
     $app->get('/admin/site/create[/[{page:\d+}]]', [
         Auth\Handler\AuthHandler::class,
+        Permission\Handler\AuthorizationHandler::class,
         'Common\Handler\List',
     ], 'admin.site.create');
     $app->get('/admin/site/details[/[{page:\d+}]]', [

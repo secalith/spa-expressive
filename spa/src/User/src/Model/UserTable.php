@@ -61,7 +61,7 @@ class UserTable// extends CommonTable
         return $result;
     }
 
-    public function getItem($uid)
+    public function getItemByUid($uid)
     {
         $rowset = $this->tableGateway->select(array('uid' => $uid));
         $row = $rowset->current();

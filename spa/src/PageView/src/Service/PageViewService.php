@@ -35,33 +35,34 @@ class PageViewService
 
     public function getRootBlocksByArea(AreaModel $areaModel)
     {
-        $rr = new \PageView\View\Model\ViewModel();
+        $pageView = new \PageView\View\Model\ViewModel();
 
+        // get the root blocks
         $rootBlocksByArea = $this->serviceBlock->getAllBy(['area_uid'=>$areaModel->getUid(),'parent_uid'=>'0','status'=>'1']);
 
-
         if($rootBlocksByArea) {
-            foreach($rootBlocksByArea as $bblock) {
-                $rr->setBlock($bblock);
+            foreach($rootBlocksByArea as $rootBlock) {
+                $pageView->setBlock($rootBlock);
 
-                $rootContentByBlock = $this->serviceContent->getAllBy(['block_uid'=>$areaModel->getUid(),'parent_uid'=>'0','status'=>'1']);
+                $rootContentByBlock = $this->serviceContent->getAllBy(['block_uid'=>$rootBlock->getUid(),'parent_uid'=>'0','status'=>'1']);
 
                 if($rootContentByBlock) {
                     foreach($rootContentByBlock as $rootContent) {
-                        $rr->getBlock($bblock)->setContent($rootContent);
+
+                        $pageView->getBlock($rootBlock)->setContent($rootContent);
                     }
                 }
 
-                $t = $this->serviceBlock->getAllBy(['parent_uid'=>$bblock->getUid(),'status'=>'1']);
+                $t = $this->serviceBlock->getAllBy(['parent_uid'=>$rootBlock->getUid(),'status'=>'1']);
                 if($t) {
                     foreach($t as $r) {
-                        $rr->getBlock($bblock)->setBlock($this->getBlocksByBlock($r));
+                        $pageView->getBlock($rootBlock)->setBlock($this->getBlocksByBlock($r));
                     }
                 }
             }
         }
 
-        return $rr;
+        return $pageView;
     }
 
     public function getBlocksByBlock(BlockModel $blockModel)

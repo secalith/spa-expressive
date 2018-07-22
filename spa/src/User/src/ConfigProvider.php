@@ -111,6 +111,310 @@ class ConfigProvider
                 ],
             ], // gateway
             'handler' => [
+                "Common\Handler\Read"=> [
+                    'route' => [
+                        'spa.user.read' => [
+                            'get' => [
+                                'method' => 'GET',
+                                'scenario' => 'details',
+                                'view_template_model' => [
+                                    'layout' => 'layout::default',
+                                    'template' => 'common-admin::template-read',
+                                    'body_class' => 'app-action-read',
+                                ],
+                                'page_resource' => [
+                                    [
+                                        'name' => 'main',
+                                        'fieldset_user' => [
+                                            'fieldset_name' => 'fieldset_user',
+                                            'type' => 'fieldset',
+                                            'partial' => 'common-admin::template-read-item',
+                                            'service' => [
+                                                [
+                                                    'service_name'=>'User\TableService',
+                                                    'object' => \User\Model\UserModel::class,
+                                                    'method' => 'getItemByUid',
+                                                    'arguments' => [
+                                                        [
+                                                            'type' => 'service',
+                                                            'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
+                                                            'method' => 'getMatchedParam',
+                                                            'arg_name' => 'uid',
+                                                        ],
+                                                    ],
+                                                ],
+
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                                'data_template_model' => [
+                                    'route_name' => 'spa.user.read',
+                                    'heading' => [
+                                        [
+                                            'html_tag' => 'h1',
+                                            'text' => 'User Details',
+                                            'buttons' => [
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => 'Update User',
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-5',
+                                                        'href' => [
+                                                            'type' => 'plugin',
+                                                            'name' => 'url',
+                                                            'arguments' => [
+                                                                'spa.user.update',
+                                                                [
+                                                                    'uid' => [
+                                                                        'source' => 'data-resource',
+                                                                        'property_path' => 'fieldset_user.data.uid',
+                                                                        'property_path_delimiter' => '.',
+                                                                    ],
+                                                                ],
+                                                            ],
+                                                        ],
+                                                    ],
+                                                ],
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => 'Create User',
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-secondary ml-5',
+                                                        'href' => 'helper::url:spa.user.create'
+                                                    ],
+                                                ],
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => 'List Users',
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-secondary ml-1',
+                                                        'href' => 'helper::url:spa.user.list'
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                    'main' => [
+                                        'list' => [
+                                            [
+                                                'name' => 'data_user',
+                                                'type' => 'form',
+                                                'action' => [
+                                                    'route' => 'spa.user.read',
+                                                ],
+                                                'object' => \User\Form\UserReadForm::class,
+                                                'read' => [
+                                                    'fieldset_user' => [
+                                                        'fieldset_name' => 'fieldset_user',
+                                                        'type' => 'fieldset',
+                                                        'partial' => 'common-admin::template-read-item',
+                                                        'service' => [
+                                                            [
+                                                                'service_name'=>'User\TableService',
+                                                                'object' => \User\Model\UserModel::class,
+                                                                'method' => 'getItemByUid',
+                                                                'arguments' => [
+                                                                    [
+                                                                        'type' => 'service',
+                                                                        'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
+                                                                        'method' => 'getMatchedParam',
+                                                                        'arg_name' => 'uid',
+                                                                    ],
+                                                                ],
+                                                            ],
+
+                                                        ],
+                                                    ],
+                                                    'fieldset_user_profile' => [
+                                                        'fieldset_name' => 'fieldset_user_profile',
+                                                        'type' => 'fieldset',
+                                                        'partial' => 'common-admin::template-read-item',
+                                                        'service' => [
+                                                            [
+                                                                'service_name'=>'User\Profile\TableService',
+                                                                'object' => \User\Model\UserProfileModel::class,
+                                                                'method' => 'getItemByUid',
+                                                                'arguments' => [
+                                                                    [
+                                                                        'type' => 'service',
+                                                                        'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
+                                                                        'method' => 'getMatchedParam',
+                                                                        'arg_name' => 'uid',
+                                                                    ],
+                                                                ],
+                                                            ],
+
+                                                        ],
+                                                    ],
+//                                                    'collection_contact' => [
+//                                                        'fieldset_name' => 'collection_contact',
+//                                                        'service' => [
+//                                                            [
+//                                                                'service_name'=>'RestableAdmin\Contact\TableService',
+//                                                                'method' => 'getItemByClientUid',
+//                                                                'arguments' => [
+//                                                                    [
+//                                                                        'type' => 'service',
+//                                                                        'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
+//                                                                        'method' => 'getMatchedParam',
+//                                                                        'arg_name' => 'client_uid',
+//                                                                    ],
+//                                                                ],
+//                                                            ],
+//
+//                                                        ],
+//                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+                'Common\Handler\Update'=> [
+                    'route' => [
+                        'spa.user.update' => [
+                            'get' => [
+                                'method' => 'GET',
+                                'scenario' => 'update',
+                                'view_template_model' => [
+                                    'layout' => 'layout::default',
+                                    'template' => 'common-admin::template-update',
+//                                    'table_row' => 'restable-admin-client::table-row',
+                                ],
+                                'data_template_model' => [
+                                    'route_name' => 'spa.user.update',
+                                    'heading' => [
+                                        [
+                                            'html_tag' => 'h1',
+                                            'text' => 'User Update',
+                                            'buttons' => [
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => 'Details',
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-5',
+                                                        'href' => [
+                                                            'type' => 'plugin',
+                                                            'name' => 'url',
+                                                            'arguments' => [
+                                                                'spa.user.read',
+                                                                [
+                                                                    'uid' => [
+                                                                        'source' => 'data-resource',
+                                                                        'property_path' => 'fieldset_user.data.uid',
+                                                                        'property_path_delimiter' => '.',
+                                                                    ],
+                                                                ],
+                                                            ],
+                                                        ],
+                                                    ],
+                                                ],
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => 'List Users',
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-secondary ml-5',
+                                                        'href' => 'helper::url:spa.user.list'
+                                                    ],
+                                                ],
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => 'Create User',
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-secondary ml-1',
+                                                        'href' => 'helper::url:spa.user.create'
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                    'main' => [
+                                        'list' => [
+                                            [
+                                                'name' => 'data_user',
+                                                'type' => 'form',
+                                                'action' => [
+                                                    'route' => 'spa.user.read',
+                                                ],
+                                                'object' => \User\Form\UserReadForm::class,
+                                                'read' => [
+                                                    'fieldset_user' => [
+                                                        'fieldset_name' => 'fieldset_user',
+                                                        'type' => 'fieldset',
+                                                        'partial' => 'common-admin::template-read-item',
+                                                        'source' => [
+                                                            'service' => [
+                                                                [
+                                                                    'service_name'=>'User\TableService',
+                                                                    'object' => \User\Model\UserModel::class,
+                                                                    'method' => 'getItemByUid',
+                                                                    'arguments' => [
+                                                                        [
+                                                                            'type' => 'service',
+                                                                            'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
+                                                                            'method' => 'getMatchedParam',
+                                                                            'arg_name' => 'uid',
+                                                                        ],
+                                                                    ],
+                                                                ],
+
+                                                            ],
+                                                        ],
+                                                    ],
+                                                    'fieldset_user_profile' => [
+                                                        'fieldset_name' => 'fieldset_user_profile',
+                                                        'type' => 'fieldset',
+                                                        'partial' => 'common-admin::template-read-item',
+                                                        'source' => [
+                                                            'service' => [
+                                                                [
+                                                                    'service_name'=>'User\Profile\TableService',
+                                                                    'object' => \User\Model\UserProfileModel::class,
+                                                                    'method' => 'getItemByUid',
+                                                                    'arguments' => [
+                                                                        [
+                                                                            'type' => 'service',
+                                                                            'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
+                                                                            'method' => 'getMatchedParam',
+                                                                            'arg_name' => 'uid',
+                                                                        ],
+                                                                    ],
+                                                                ],
+
+                                                            ],
+                                                        ],
+                                                    ],
+//                                                    'collection_contact' => [
+//                                                        'fieldset_name' => 'collection_contact',
+//                                                        'service' => [
+//                                                            [
+//                                                                'service_name'=>'RestableAdmin\Contact\TableService',
+//                                                                'method' => 'getItemByClientUid',
+//                                                                'arguments' => [
+//                                                                    [
+//                                                                        'type' => 'service',
+//                                                                        'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
+//                                                                        'method' => 'getMatchedParam',
+//                                                                        'arg_name' => 'client_uid',
+//                                                                    ],
+//                                                                ],
+//                                                            ],
+//
+//                                                        ],
+//                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
                 'Common\Handler\List'=> [
                     'route' => [
                         'spa.user.list' => [
@@ -153,63 +457,101 @@ class ConfigProvider
                                                     'text' => 'Create User',
                                                     'attributes' => [
                                                         'class' => 'btn btn-sm btn-info ml-5',
-                                                        'href' => 'helper::url:spa.user.create'
+                                                        'href' => [
+                                                            'type' => 'plugin',
+                                                            'name' => 'url',
+                                                            'arguments' => [
+                                                                'spa.user.create',
+                                                            ],
+                                                        ],
                                                     ],
                                                 ],
                                             ],
                                         ],
                                     ],
-                                    'table' => [
-                                        'main' => [
-                                            'name' => 'main',
-                                            'headers'=> [
-                                                'name_first'=>'Name',
-                                                'name_last'=>'Surname',
-                                                'email'=>'Email',
-                                                'status'=>'Status',
-                                                'pwd_updated'=>'Password Updated',
-                                                'created'=>'Created',
-                                                100=>'Details',
-                                            ],
-                                            'rows' => [
-                                                ['column'=>'name_first'],
-                                                ['column'=>'name_last'],
-                                                ['column'=>'email'],
-                                                ['column'=>'status'],
-                                                ['column'=>'pwd_updated'],
-                                                ['column'=>'created'],
-                                                ['buttons' => [
-                                                    [
-                                                        'html_tag' => 'a',
-                                                        'text' => 'Details',
-                                                        'attributes' => [
-                                                            'class' => 'btn btn-sm btn-info ml-5',
-                                                            'href' => [
-                                                                'type' => 'plugin',
-                                                                'name' => 'url',
-                                                                'arguments' => [
-                                                                    'spa.user.read',
-                                                                    ['uid'=>"data::item=>uid"]
+                                    'main' => [
+                                        'table' => [
+                                            [
+                                                'name' => 'main',
+                                                'headers'=> [
+                                                    'name_first'=>'Name',
+                                                    'name_last'=>'Surname',
+                                                    'email'=>'Email',
+                                                    'status'=>'Status',
+                                                    'pwd_updated'=>'Password Updated',
+                                                    'created'=>'Created',
+                                                    100=>'Details',
+                                                ],
+                                                'rows' => [
+                                                    ['column'=>'name_first'],
+                                                    ['column'=>'name_last'],
+                                                    ['column'=>'email'],
+                                                    ['column'=>'status'],
+                                                    ['column'=>'pwd_updated'],
+                                                    ['column'=>'created'],
+                                                    ['buttons' => [
+                                                        [
+                                                            'html_tag' => 'a',
+                                                            'text' => 'Details',
+                                                            'attributes' => [
+                                                                'class' => 'btn btn-sm btn-info ml-5',
+                                                                'href' => [
+                                                                    'type' => 'plugin',
+                                                                    'name' => 'url',
+                                                                    'arguments' => [
+                                                                        'spa.user.read',
+                                                                        [
+                                                                            'uid'=> [
+                                                                                'source' => 'row-item',
+                                                                                'property' => 'uid',
+                                                                            ],
+                                                                        ]
+                                                                    ],
                                                                 ],
                                                             ],
                                                         ],
-                                                    ],
-                                                    [
-                                                        'html_tag' => 'a',
-                                                        'text' => 'Delete',
-                                                        'attributes' => [
-                                                            'class' => 'btn btn-sm btn-warning ml-5',
-                                                            'href' => [
-                                                                'type' => 'plugin',
-                                                                'name' => 'url',
-                                                                'arguments' => [
-                                                                    'spa.user.delete',
-                                                                    ['uid'=>"data::item=>uid"]
+                                                        [
+                                                            'html_tag' => 'a',
+                                                            'text' => 'Update',
+                                                            'attributes' => [
+                                                                'class' => 'btn btn-sm btn-default ml-5',
+                                                                'href' => [
+                                                                    'type' => 'plugin',
+                                                                    'name' => 'url',
+                                                                    'arguments' => [
+                                                                        'spa.user.update',
+                                                                        [
+                                                                            'uid'=> [
+                                                                                'source' => 'row-item',
+                                                                                'property' => 'uid',
+                                                                            ],
+                                                                        ]
+                                                                    ],
                                                                 ],
                                                             ],
                                                         ],
-                                                    ],
-                                                ],],
+                                                        [
+                                                            'html_tag' => 'a',
+                                                            'text' => 'Delete',
+                                                            'attributes' => [
+                                                                'class' => 'btn btn-sm btn-warning ml-5',
+                                                                'href' => [
+                                                                    'type' => 'plugin',
+                                                                    'name' => 'url',
+                                                                    'arguments' => [
+                                                                        'spa.user.delete',
+                                                                        [
+                                                                            'uid'=> [
+                                                                                'source' => 'row-item',
+                                                                                'property' => 'uid',
+                                                                            ],
+                                                                        ]
+                                                                    ],
+                                                                ],
+                                                            ],
+                                                        ],
+                                                    ],],
+                                                ],
                                             ],
                                         ],
                                     ],
@@ -217,6 +559,7 @@ class ConfigProvider
                                 'view_template_model' => [
                                     'layout' => 'layout::default',
                                     'template' => 'common-admin::template-list',
+                                    'body_class' => 'app-action-list',
 //                                    'table_row' => 'restable-admin-client::table-row',
                                 ],
                             ],
@@ -382,101 +725,193 @@ class ConfigProvider
                     'route' => [
                         'spa.user.delete' => [
                             'get' => [
-//                                'method' => 'GET',
-//                                'scenario' => 'create',
-//                                'data_template_model' => [
-//                                    'route_name' => 'spa.user.delete',
-//                                    'heading' => [
-//                                        [
-//                                            'html_tag' => 'h1',
-//                                            'text' => 'Delete User',
-//                                            'buttons' => [
-//                                                [
-//                                                    'html_tag' => 'a',
-//                                                    'text' => 'List Users',
-//                                                    'attributes' => [
-//                                                        'class' => 'btn btn-sm btn-info ml-5',
-//                                                        'href' => 'helper::url:spa.user.list'
-//                                                    ],
-//                                                ],
-//                                            ],
-//                                        ],
-//                                    ],
-//                                ],
-//                                'view_template_model' => [
-//                                    'layout' => 'layout::default',
-//                                    'template' => 'common-admin::template-create',
-//                                    'forms' => [
-//                                        'form_create' => 'common-admin::template-create',
-//                                    ],
-//                                ],
-//                                'forms' => [
-//                                    [
-//                                        'action' => [
-//                                            'route' => 'spa.user.delete.post',
-//                                        ],
-//                                        'name' => 'form_create',
-//                                        'object' => \User\Form\UserDeleteForm::class,
-//                                        'template' => 'common-admin::template-delete',
-//                                    ]
-//                                ],
+                                'method' => 'GET',
+                                'scenario' => 'delete',
+                                'data_template_model' => [
+                                    'route_name' => 'spa.user.delete',
+                                    'heading' => [
+                                        [
+                                            'html_tag' => 'h1',
+                                            'text' => 'Delete User',
+                                            'buttons' => [
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => 'List Users',
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-5',
+                                                        'href' => [
+                                                            'type' => 'plugin',
+                                                            'name' => 'url',
+                                                            'arguments' => [
+                                                                'spa.user.list',
+                                                            ],
+                                                        ],
+                                                    ],
+                                                ],
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => 'User Details',
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-5',
+                                                        'href' => [
+                                                            'type' => 'plugin',
+                                                            'name' => 'url',
+                                                            'arguments' => [
+                                                                'spa.user.update',
+                                                                [
+                                                                    'uid' => [
+                                                                        'source' => 'data-resource',
+                                                                        'property_path' => 'user.data.uid',
+                                                                        'property_path_delimiter' => '.',
+                                                                    ],
+                                                                ],
+                                                            ],
+                                                        ],
+                                                    ],
+                                                ],
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => 'Update User',
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-5',
+                                                        'href' => [
+                                                            'type' => 'plugin',
+                                                            'name' => 'url',
+                                                            'arguments' => [
+                                                                'spa.user.update',
+                                                                [
+                                                                    'uid' => [
+                                                                        'source' => 'data-resource',
+                                                                        'property_path' => 'user.data.uid',
+                                                                        'property_path_delimiter' => '.',
+                                                                    ],
+                                                                ],
+                                                            ],
+                                                        ],
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ], // heading
+                                    'main' => [
+                                        'forms' => [
+                                            'form_delete' => [
+                                                'name'=>'form_delete',
+                                                'data_map' => [
+                                                    'application_id' => 'spa',
+                                                    [
+                                                        'field_path'=>'form_delete.fieldset_user.uid',
+                                                        'field_path_delimiter' => '.',
+                                                        'type' => 'data-resource',
+                                                        'source_path'=>'user.data.uid',
+                                                        'source_path_delimiter'=>'.',
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                        'view' => [
+                                            [
+                                                'type' => 'question',
+                                                'question' => _("Are you sure to remove user %s"),
+                                                'rewrite' => [
+                                                    'fieldset_user.email'
+                                                ],
+                                            ],
+                                            [
+                                                'type' => 'answer',
+                                                'form' => 'form_delete',
+                                                'form_element_path' => 'form_delete.fieldset_user.confirmation',
+                                                'form_element_path_delimiter' => '.',
+                                            ],
+                                            [
+                                                'type' => 'form-element',
+                                                'form' => 'form_delete',
+                                                'form_element_path' => 'form_delete.fieldset_user.uid',
+                                                'form_element_path_delimiter' => '.',
+                                            ],
+                                            [
+                                                'type' => 'form-element',
+                                                'form' => 'form_delete',
+                                                'form_element_path' => 'form_delete.fieldset_user.uid',
+                                                'form_element_path_delimiter' => '.',
+                                            ],
+                                            [
+                                                'type' => 'form-element',
+                                                'form' => 'form_delete',
+                                                'form_element_path' => 'application_id',
+                                            ],
+                                            [
+                                                'type' => 'form-element',
+                                                'form' => 'form_delete',
+                                                'form_element_path' => 'csrf',
+                                            ],
+                                            [
+                                                'type' => 'form-element',
+                                                'form' => 'form_delete',
+                                                'form_element_path' => 'submit',
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                                'view_template_model' => [
+                                    'layout' => 'layout::default',
+                                    'template' => 'common-admin::template-delete',
+                                    'forms' => [
+                                        'form_create' => 'common-admin::template-delete',
+                                    ],
+                                ],
+                                'forms' => [
+                                    [
+                                        'action' => [
+                                            'route' => 'spa.user.delete',
+                                        ],
+                                        'name' => 'form_delete',
+                                        'object' => \User\Form\UserDeleteForm::class,
+                                        'template' => 'common-admin::template-delete',
+                                    ]
+                                ],
+                                'data' => array(
+                                    'selectors' => array(
+                                        'user.uid' => array(
+                                            'map_service' => 'route',
+                                            'name' => 'uid',
+                                        ),
+                                    ),
+                                ), // data
+                                'page_resource' => [
+                                    [
+                                        'name' => 'main',
+                                        'spec' => [
+                                            'name' => 'user',
+                                            'type' => 'fieldset',
+                                            'service' => [
+                                                [
+                                                    // Obtain the data from DB
+                                                    'type' => 'database',
+                                                    'service_name'=>'User\TableService',
+                                                    // Bind data to Model
+                                                    'object' => \User\Model\UserModel::class,
+                                                    'method' => 'getItemByUid',
+                                                    'arguments' => [
+                                                        [
+                                                            // Get the UID value from the URL
+                                                            'type' => 'service',
+                                                            // Which Service should be used to obtain the data
+                                                            'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
+                                                            // Method to obtain the value
+                                                            'method' => 'getMatchedParam',
+                                                            // property name
+                                                            'arg_name' => 'uid',
+                                                        ],
+                                                    ],
+                                                ],
+
+                                            ],
+                                        ],
+                                    ],
+                                ],
                             ],
-                        ], // spa.user.create
-//                        'spa.user.delete.post' => [
-//                            'post' => [
-//                                'method' => 'POST',
-//                                'scenario' => 'process',
-//                                'data_template_model' => [
-//                                    'route_name' => 'spa.user.delete',
-//                                    'heading' => [
-//                                        [
-//                                            'html_tag' => 'h1',
-//                                            'text' => 'Delete Client',
-//                                            'buttons' => [
-//                                                [
-//                                                    'html_tag' => 'a',
-//                                                    'text' => 'List Clients',
-//                                                    'attributes' => [
-//                                                        'class' => 'btn btn-sm btn-info ml-5',
-//                                                        'href' => 'helper::url:spa.user.list'
-//                                                    ],
-//                                                ],
-//                                            ],
-//                                        ],
-//                                    ],
-//                                ],
-//                                'view_template_model' => [
-//                                    'layout' => 'layout::default',
-//                                    'template' => 'common-admin::template-delete',
-//                                    'forms' => [
-//                                        'form_create' => 'restable-admin-client::form-delete',
-//                                    ],
-//                                ],
-//                                'forms' => [
-//                                    [
-//                                        'name' => 'form_delete',
-//                                        'action' => [
-//                                            'route' => 'spa.user.delete.post',
-//                                        ],
-//                                        'object' => \User\Form\UserDeleteForm::class,
-//                                        'save' => [
-//                                            'fieldset_user' => [
-//                                                'priority' => 100,
-//                                                'fieldset_name' => 'fieldset_user',
-//                                                'service' => [
-//                                                    [
-//                                                        'name'=>'User\TableService',
-//                                                        'object' => \User\Model\UserModel::class,
-//                                                        'method' => 'deleteItem'
-//                                                    ],
-//
-//                                                ],
-//                                            ],
-//                                        ],
-//                                    ],
-//                                ],
-//                            ],
-//                        ], // restable.admin.client.create.post
+                        ], // spa.user.delete
                     ],
                 ], // Common\Handler\Delete
             ], // handler

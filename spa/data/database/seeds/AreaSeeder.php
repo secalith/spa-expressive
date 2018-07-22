@@ -47,8 +47,8 @@ class AreaSeeder extends AbstractSeed
             [
                 'uid'    => 'area-004',
                 'template_uid'    => 'template-002',
-                'machine_name'    => 'global_footer',
-                'scope'    => 'global',
+                'machine_name'    => 'content_main',
+                'scope'    => 'page',
                 'attributes'    => '{}',
                 'parameters'    => '{"html_tag":"div"}',
                 'options'    => '{}',

@@ -233,7 +233,7 @@ class CreateHandler implements RequestHandlerInterface,
                     $messages['error'][] = 'Form seems to be invalid.';
                     $messages['error'][] = 'Data has NOT been saved.';
 
-//                    var_dump($formItem->getMessages());
+                    var_dump($formItem->getMessages());
 
                 }
                 $iForms++;
@@ -256,6 +256,8 @@ class CreateHandler implements RequestHandlerInterface,
 //        var_dump($results);
 
         $this->addData($messages,'messages');
+
+        $this->template->addDefaultParam(Template\TemplateRendererInterface::TEMPLATE_ALL,'bodyClass','app-action-create');
 
         return new HtmlResponse($this->template->render($this->getData('template'), $this->getData()));
     }

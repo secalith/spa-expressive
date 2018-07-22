@@ -7,6 +7,7 @@ namespace Common\Handler\Factory;
 use Common\Handler\DataAwareInterface;
 use Common\Handler\CreateHandler;
 use Common\Helper\CurrentRouteNameHelper;
+use Common\Service\RouteConfigService;
 use Interop\Container\ContainerInterface;
 use Zend\Expressive\Helper\UrlHelper;
 use Zend\Expressive\Router\RouterInterface;
@@ -31,6 +32,8 @@ class CreateHandlerAbstractFactory implements AbstractFactoryInterface
     )
     {
         if (fnmatch("*\Create", $requestedName) && ! class_exists($requestedName)) {
+            $config = $serviceLocator->get(RouteConfigService::class);
+            $routeConfig = $config->getRouteConfig($requestedName);
             $config = $serviceLocator->get('config');
             if(array_key_exists('app',$config)
                 && array_key_exists('handler',$config['app'])

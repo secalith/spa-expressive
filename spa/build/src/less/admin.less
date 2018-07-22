@@ -1,0 +1,114 @@
+@import "../../theme/default/admin-menu.less";
+@import "../less/jquery-ui.less";
+
+body {
+  &.administrator {
+    &.show-area {
+      [data-area-identifier] {
+        .frontbox-dev-area-attr-wrapper {
+          position: fixed;
+          top:0px;
+          right:0px;
+          color:#ffffff;
+          background-color:#9400D3;
+          padding:2px 5px;
+          color:#ffffff;
+          font-size:13px;
+        }
+        border:1px dotted #9400D3;
+        position:relative;
+      }
+    }
+    &.show-block {
+      [data-block-identifier] {
+        .frontbox-dev-block-attr-wrapper {
+          position: absolute;
+          top:0px;
+          right:0px;
+          color:#ffffff;
+          background-color:#3f9f3f;
+          padding:2px 5px;
+          color:#ffffff;
+          font-size:13px;
+        }
+        border:1px dotted #3f9f3f;
+        position:relative;
+      }
+    }
+    &.show-content {
+      [data-content-identifier] {
+        .frontbox-dev-content-attr-wrapper {
+          position: absolute;
+          top:0px;
+          right:0px;
+          color:#ffffff;
+          background-color:#990000;
+          padding:2px 5px;
+          color:#ffffff;
+          font-size:13px;
+        }
+        border:1px dotted #990000;
+        position:relative!important;
+      }
+    }
+  }
+  #frontbox-admin-menu-wrapper {
+
+  }
+}
+
+.border-area {
+  border:2px solid mediumvioletred;
+}
+.ui-state-hover {
+  border-width:4px;
+}
+
+/* Editor */
+#menu-editor-blocks-side {
+  .wrapper {
+    div {
+      text-align:center;
+      padding-top:10px;
+      padding-bottom:10px;
+    }
+  }
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1000000;
+  width: 300px;
+  background-color: #212121;
+  height: 100%;
+  color: #fefefe;
+  padding:15px;
+  padding-top:10px;
+  display:none;
+  width:0px;
+}
+
+#frontbox-admin-menu-wrapper{
+  a.active {
+    color: #fefefe;
+    background-color: #212121;
+  }
+
+}
+
+#message {
+  position:fixed;
+  top:50px;
+  right:50px;
+  z-index:10000000;
+}
+.modal.fade.in {
+  display:block;
+}
+.modal-dialog
+{
+  background-color:#fefefe;
+}
+
+.block-placeholder {
+  border:4px dashed pink;
+}

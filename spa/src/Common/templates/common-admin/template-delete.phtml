@@ -1,0 +1,14 @@
+<?=$this->partial("common-admin-partial::partial-header",['heading'=>$data_template_model['heading'],'data'=>$resource]);?>
+
+<?php if(isset($messages)&&array_key_exists('error',$messages)):?>
+    <?=$this->flashMessage($messages['error'],'error');?>
+<?php endif;?>
+<?php if(isset($messages)&&array_key_exists('info',$messages)):?>
+    <?=$this->flashMessage($messages['info'],'info');?>
+<?php endif;?>
+<?php if(isset($messages)&&array_key_exists('success',$messages)):?>
+    <?=$this->flashMessage($messages['success'],'success');?>
+<?php endif;?>
+<?php var_dump($resource); ?>
+<?=$this->getFormAttached($forms,null,'form_delete');?>
+

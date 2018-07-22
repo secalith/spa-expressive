@@ -5,11 +5,15 @@ declare(strict_types=1);
 namespace Common;
 
 use Common\Helper\CurrentRouteNameHelper;
+use Common\Helper\CurrentHandlerNameHelper;
 use Common\Helper\Factory\CurrentRouteNameHelperFactory;
+use Common\Helper\Factory\CurrentHandlerNameHelperFactory;
 use Common\View\Helper\Factory\DisplayLinkGroupHelperFactory;
 use Common\Middleware\CurrentRouteNameMiddleware;
+use Common\Middleware\CurrentHandlerNameMiddleware;
 use Common\Middleware\CurrentUrlMiddleware;
 use Common\Middleware\Factory\CurrentRouteNameMiddlewareFactory;
+use Common\Middleware\Factory\CurrentHandlerNameMiddlewareFactory;
 use Common\Middleware\Factory\CurrentUrlMiddlewareFactory;
 use Common\Middleware\Factory\HandlerCacheMiddlewareFactory;
 use Common\Middleware\Factory\StaticPageHandlerCacheMiddlewareFactory;
@@ -40,6 +44,8 @@ class ConfigProvider
                     'getFormAttached' => GetFormAttached::class,
                     'flashMessage' => FlashMessage::class,
                     'closeTag' => View\Helper\CloseTagHelper::class,
+                    'translate' => \Zend\I18n\View\Helper\Translate::class
+
                 ],
                 'factories' => [
                     'currentRoute' => CurrentUrlHelperFactory::class,
@@ -66,6 +72,16 @@ class ConfigProvider
                 'path' => 'data/cache/',
                 'lifetime' => 3600
             ],
+            'translator' => [
+                'locale' => 'id',
+                'translation_file_patterns' => [
+                    [
+                        'type' => 'phparray',
+                        'base_dir' => 'data/translate',
+                        'pattern' => '%s/*.php'
+                    ],
+                ],
+            ],
         ];
     }
 
@@ -80,18 +96,26 @@ class ConfigProvider
 
             ],
             'factories' => [
+//                \Common\Handler\ResourceHandler::class => \Common\Handler\Factory\ResourceHandlerFactory::class,
                 CurrentUrlMiddleware::class => CurrentUrlMiddlewareFactory::class,
+
+                CurrentHandlerNameMiddleware::class => CurrentHandlerNameMiddlewareFactory::class,
+                CurrentHandlerNameHelper::class => CurrentHandlerNameHelperFactory::class,
+
                 CurrentRouteNameMiddleware::class => CurrentRouteNameMiddlewareFactory::class,
                 CurrentRouteNameHelper::class => CurrentRouteNameHelperFactory::class,
+
                 StaticPageHandlerCacheMiddleware::class => StaticPageHandlerCacheMiddlewareFactory::class,
+                \Common\Service\RouteConfigService::class => \Common\Service\Factory\RouteConfigServiceFactory::class,
+                \Common\Service\PaginatorQueryService::class => \Common\Service\Factory\PaginatorQueryServiceFactory::class,
             ],
             'abstract_factories' => [
                 Service\GatewayAbstractFactory::class,
                 Service\TableServiceAbstractFactory::class,
                 \Common\Handler\Factory\CreateHandlerAbstractFactory::class,
-//                \Common\Handler\Factory\ReadHandlerAbstractFactory::class,
-//                \Common\Handler\Factory\UpdateHandlerAbstractFactory::class,
-//                \Common\Handler\Factory\DeleteHandlerAbstractFactory::class,
+                \Common\Handler\Factory\ReadHandlerAbstractFactory::class,
+                \Common\Handler\Factory\UpdateHandlerAbstractFactory::class,
+                \Common\Handler\Factory\DeleteHandlerAbstractFactory::class,
                 \Common\Handler\Factory\ListHandlerAbstractFactory::class,
             ],
             'delegators' => [
@@ -100,24 +124,25 @@ class ConfigProvider
                 ],
                 'Common\Handler\Create' => [
                     \Common\Handler\Delegator\ApplicationConfigAwareDelegator::class,
-                    \Common\Handler\Delegator\ApplicationFormAwareDelegator::class,
+                    \Common\Delegator\ApplicationFormRouteAwareDelegator::class,
                     \Common\Handler\Delegator\ApplicationFieldsetSaveServiceAwareDelegator::class,
                 ],
-//                'Common\Handler\Read' => [
-//                    \Common\Handler\Delegator\ApplicationConfigAwareDelegator::class,
-//                    \Common\Handler\Delegator\ApplicationFormAwareDelegator::class,
-//                    \Common\Handler\Delegator\ApplicationFieldsetSaveServiceAwareDelegator::class,
-//                ],
-//                'Common\Handler\Update' => [
-//                    \Common\Handler\Delegator\ApplicationConfigAwareDelegator::class,
-//                    \Common\Handler\Delegator\ApplicationFormAwareDelegator::class,
-//                    \Common\Handler\Delegator\ApplicationFieldsetSaveServiceAwareDelegator::class,
-//                ],
-//                'Common\Handler\Delete' => [
-//                    \Common\Handler\Delegator\ApplicationConfigAwareDelegator::class,
-//                    \Common\Handler\Delegator\ApplicationFormAwareDelegator::class,
-//                    \Common\Handler\Delegator\ApplicationFieldsetSaveServiceAwareDelegator::class,
-//                ],
+                'Common\Handler\Read' => [
+                    \Common\Handler\Delegator\ApplicationConfigAwareDelegator::class,
+                    \Common\Delegator\ApplicationFormRouteAwareDelegator::class,
+                    \Common\Handler\Delegator\ApplicationFieldsetSaveServiceAwareDelegator::class,
+                ],
+                'Common\Handler\Update' => [
+                    \Common\Handler\Delegator\ApplicationConfigAwareDelegator::class,
+                    \Common\Delegator\ApplicationFormRouteAwareDelegator::class,
+                    \Common\Handler\Delegator\ApplicationFieldsetSaveServiceAwareDelegator::class,
+                ],
+                'Common\Handler\Delete' => [
+                    \Common\Handler\Delegator\ApplicationConfigAwareDelegator::class,
+                    \Common\Delegator\RouteResourceAwareDelegator::class,
+                    \Common\Delegator\ApplicationFormRouteAwareDelegator::class,
+                    \Common\Handler\Delegator\ApplicationFieldsetSaveServiceAwareDelegator::class,
+                ],
             ],
         ];
     }

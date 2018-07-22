@@ -1,0 +1,61 @@
+<div class="container">
+    <?php
+    if($messages):
+        ?>
+    <div id="message">
+        <div class="alert alert-info" role="alert">
+            <?php print_r($messages['success'][0]);?>
+        </div>
+    </div>
+<?php
+
+
+    endif;
+    ?>
+    <h1>Create Page</h1>
+    <div>
+        <h3>Page</h3>
+        <?php
+        $this->form['test']->prepare();
+
+        echo $this->form()->openTag($this->form['test']);
+
+        if($this->form['test']->getMessages()):
+//            echo '<pre>';
+//            print_r($this->form['test']->getMessages());
+//            echo '</pre>';
+        endif;
+
+        if($flash_messages->getMessages()):
+            echo '<pre>';
+            print_r($flash_messages->getMessages());
+            echo '</pre>';
+        endif;
+
+
+
+        echo $this->formRow($this->form['test']->get('page')->get('basic')->get('name'));
+        echo '<br />';
+        echo $this->formRow($this->form['test']->get('page')->get('basic')->get('template'));
+        echo '<br />';
+        echo $this->formRow($this->form['test']->get('page')->get('basic')->get('page_cache'));
+?>
+        <h3>Route</h3>
+<?php
+        echo $this->formRow($this->form['test']->get('page')->get('route_routes')->get('route'));
+?>
+        <i>Route Url must start with `/`</i>
+        <h3>SEO</h3>
+        <?php
+        echo $this->formRow($this->form['test']->get('page')->get('seo')->get('title'));
+        echo '<br />';
+        echo $this->formRow($this->form['test']->get('page')->get('seo')->get('keywords'));
+        echo '<br />';
+        echo $this->formRow($this->form['test']->get('page')->get('seo')->get('description'));
+        echo '<br />';
+        echo $this->formRow($this->form['test']->get('submit'));
+        echo $this->form()->closeTag();
+
+        ?>
+    </div>
+</div>

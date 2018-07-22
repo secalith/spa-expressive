@@ -18,6 +18,7 @@ class CredentialsFieldset extends Fieldset implements InputFilterProviderInterfa
 
         $this->setHydrator(new ClassMethods(true));
         $this->setObject(new UserCredentialsModel());
+        $this->setAttribute('class','element_credentials_settings_manual-collection');
 
         $this->addElements();
     }

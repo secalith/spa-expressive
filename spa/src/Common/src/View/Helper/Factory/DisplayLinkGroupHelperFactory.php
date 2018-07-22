@@ -2,6 +2,7 @@
 
 namespace Common\View\Helper\Factory;
 
+use ArrayDigger\Service\ArrayDigger;
 use Common\View\Helper\CurrentUrlHelper;
 use Common\View\Helper\DisplayLinkGroupHelper;
 use Psr\Container\ContainerInterface;
@@ -13,7 +14,8 @@ class DisplayLinkGroupHelperFactory
     {
         $currentUrlHelper = $container->get(CurrentUrlHelper::class);
         $urlHelper = $container->get(UrlHelper::class);
+        $arrayDigger = $container->get(ArrayDigger::class);
 
-        return new DisplayLinkGroupHelper($urlHelper,$currentUrlHelper);
+        return new DisplayLinkGroupHelper($urlHelper,$currentUrlHelper,$arrayDigger);
     }
 }

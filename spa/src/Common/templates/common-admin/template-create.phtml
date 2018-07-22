@@ -1,4 +1,4 @@
-<?=$this->partial("common-admin-partial::partial-header",['heading'=>$data_template_model['heading']]);?>
+<?=$this->partial("common-admin-partial::partial-header",['heading'=>$data_template_model['heading'],'data'=>null]);?>
 
 <?php if(isset($messages)&&array_key_exists('error',$messages)):?>
     <?=$this->flashMessage($messages['error'],'error');?>

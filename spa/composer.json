@@ -91,7 +91,10 @@
             "User\\": "src/User/src/",
             "Import\\": "src/Import/src/",
             "Permission\\": "src/Permission/src/",
-            "Site\\": "src/Site/src/"
+            "ArticleExternal\\": "src/ArticleExternal/src/",
+            "Site\\": "src/Site/src/",
+            "ArrayDigger\\": "src/ArrayDigger/src/",
+            "RoleEditor\\": "src/RoleEditor/src/"
         }
     },
     "autoload-dev": {
@@ -99,6 +102,8 @@
             "AppTest\\": "test/AppTest/"
         }
     },
+    "prefer-stable": true,
+    "minimum-stability": "dev",
     "scripts": {
         "post-create-project-cmd": [
             "@development-enable"

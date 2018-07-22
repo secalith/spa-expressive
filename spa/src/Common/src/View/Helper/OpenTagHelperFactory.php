@@ -19,9 +19,13 @@ class OpenTagHelperFactory extends AbstractHelper implements FactoryInterface
 
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $routeName = $container->get(\Common\Helper\CurrentRouteNameHelper::class)->getMatchedRouteName();
-
         $displayMode = 'display';
+
+        $authService = $container->get(\Zend\Authentication\AuthenticationService::class);
+
+        if($authService->getIdentity()) {
+            $displayMode = "edit";
+        }
 
         return new OpenTagHelper($displayMode);
     }

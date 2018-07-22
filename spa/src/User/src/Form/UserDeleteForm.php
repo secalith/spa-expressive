@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace User\Form;
 
-use \User\Model\CreateUserModel;
+use \User\Model\DeleteUserModel;
 use Zend\Form\Form as Form;
 use Zend\Hydrator\ClassMethods;
 use Zend\InputFilter\InputFilter;
 
 class UserDeleteForm extends Form
 {
-    public function __construct($name = 'form_create', $options = array())
+    public function __construct($name = 'form_delete', $options = array())
     {
         parent::__construct($name,$options);
 
         $this
             ->setAttribute('method', 'post')
-            ->setObject(new CreateUserModel())
+            ->setObject(new DeleteUserModel())
             ->setHydrator(new ClassMethods(true))
             ->setInputFilter($this->addInputFilter())
         ;
@@ -37,8 +37,8 @@ class UserDeleteForm extends Form
         ], ['priority'=>10]);
 
         $this->add(array(
-            'name' => 'form_create',
-            'type' => \User\Form\Fieldset\WriteFieldset::class,
+            'name' => 'form_delete',
+            'type' => \User\Form\Fieldset\RemoveFieldset::class,
             'options' => array(
                 'use_as_base_fieldset' => true
             )
@@ -53,7 +53,7 @@ class UserDeleteForm extends Form
             'name' => 'submit',
             'attributes' => [
                 'type' => 'submit',
-                'value' => 'Submit',
+                'value' => 'Remove',
                 'class' => 'btn btn-success ',
             ],
         ], ['priority'=>-100]);

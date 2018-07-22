@@ -92,6 +92,20 @@ class ContentSeeder extends AbstractSeed
                 'order'    => 1,
                 'created'    => date('Y-m-d H:i:s'),
             ],
+            [
+                'uid'    => 'content-100',
+                'parent_uid'    => '0',
+                'block_uid'    => 'block-100',
+                'template_uid'    => 'template-002',
+                'type'    => 'content',
+                'content'    => 'Hello World!',
+                'attributes'    => '{"class":{"0":"lead font-weight-normal"}}',
+                'parameters'    => '{"html_tag":"h1"}',
+                'options'    => '{}',
+                'status'    => 1,
+                'order'    => 1,
+                'created'    => date('Y-m-d H:i:s'),
+            ],
         ];
 
         $table = $this->table('content');

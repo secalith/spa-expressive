@@ -49,28 +49,39 @@ class WriteFieldset extends Fieldset implements InputFilterProviderInterface
             )
         ));
         $this->add(array(
+            'name' => 'fieldset_credentials_settings',
+            'type' => \User\Form\Fieldset\CredentialsSettingsFieldset::class,
+            'options' => array(
+                'use_as_base_fieldset' => false
+            )
+        ));
+        $this->add(array(
+            'name' => 'fieldset_credentials_settings_other',
+            'type' => \User\Form\Fieldset\CredentialsOtherFieldset::class,
+            'options' => array(
+                'use_as_base_fieldset' => false
+            )
+        ));
+        $this->add(array(
             'name' => 'fieldset_credentials',
             'type' => \User\Form\Fieldset\CredentialsFieldset::class,
             'options' => array(
                 'use_as_base_fieldset' => false
             )
         ));
-
-
 //        $this->add(array(
-//            'name' => 'fieldset_status',
-//            'type' => \RestableAdmin\Client\Form\Fieldset\StatusFieldset::class,
+//            'name' => 'fieldset_create_notification',
+//            'type' => \User\Form\Fieldset\NotificationCreateFieldset::class,
+//            'options' => array(
+//                'use_as_base_fieldset' => false
+//            )
 //        ));
 
     }
 
     public function getInputFilterSpecification()
     {
-        return array(
-//            'client_name' => array(
-//                'required' => true,
-//            ),
-        );
+        return array();
     }
 
 }
