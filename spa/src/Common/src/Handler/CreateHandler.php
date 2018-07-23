@@ -68,7 +68,7 @@ class CreateHandler implements RequestHandlerInterface,
 
             // get all pre-loaded forms
             foreach($this->getForms() as $formIdentifier=>$formItem) {
-
+var_dump($postData);
                 // bind data from POST
                 $formItem->setData($postData);
 
@@ -95,14 +95,12 @@ class CreateHandler implements RequestHandlerInterface,
                             if($formIdentifier===$formConfigModel->getName()) {
                                 if($formConfigModel->getSave()) {
 
-                                    foreach($formConfigModel->getSave() as $configIndexName => $fieldsetConfig) {
-
-
-
+                                    foreach($formConfigModel->getSave('data') as $configIndexName => $fieldsetConfig) {
+//var_dumP($fieldsetConfig);
                                         if(array_key_exists('service',$fieldsetConfig)) {
 
                                             foreach($fieldsetConfig['service'] as $serviceConfig) {
-
+//var_dumP($this->getFieldsetServiceAll());
                                                 if($this->hasFieldsetService($fieldsetConfig['fieldset_name'])) {
 
                                                     $field_change = null;
@@ -186,6 +184,7 @@ class CreateHandler implements RequestHandlerInterface,
 //var_dump($serviceConfig);
 
 //                                                    var_dump($field_change);
+                                                    var_dump($formData);
 
 
                                                     if(property_exists($formData,$fieldsetConfig['fieldset_name'])) {
@@ -212,6 +211,8 @@ class CreateHandler implements RequestHandlerInterface,
                                                     }
 
 
+                                                } else {
+                                                    echo 'dupa';
                                                 }
                                             }
                                         }

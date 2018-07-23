@@ -125,8 +125,11 @@ class CreateHandlerFormConfigModel
     /**
      * @return mixed
      */
-    public function getSave()
+    public function getSave($index=null)
     {
+        if( null !== $index && is_array($this->save) && array_key_exists($index,$this->save)) {
+            return $this->save[$index];
+        }
         return $this->save;
     }
 

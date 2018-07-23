@@ -19,7 +19,7 @@ class PageServiceFactory
         $tableArea = $container->get("Area\\TableService");
         $tableBlock = $container->get("Block\\TableService");
         $tableContent = $container->get("Content\\TableService");
-        $hostname = php_uname('n');
+        $hostname = ($_SERVER['HTTP_HOST'])?$_SERVER['HTTP_HOST']:php_uname('n');
         /* @var \Instance\Model\InstanceModel $instance */
         $instance = $container->get("Instance\\TableService")->fetchBy(['hostname'=>$hostname]);
 

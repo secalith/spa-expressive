@@ -13,6 +13,7 @@ class PageModel
     public $name;
     public $route_url;
     public $page_cache;
+    public $page_layout;
 
     public $status;
 
@@ -40,6 +41,7 @@ class PageModel
         $this->name = ( array_key_exists('name',$data)) ? $data['name'] : null;
         $this->route_url = ( array_key_exists('route_url',$data)) ? $data['route_url'] : null;
         $this->page_cache = ( array_key_exists('page_cache',$data)) ? $data['page_cache'] : null;
+        $this->page_layout = ( array_key_exists('page_layout',$data)) ? $data['page_layout'] : null;
 
         $this->status = ( array_key_exists('status',$data)) ? $data['status'] : null;
 
@@ -61,6 +63,7 @@ class PageModel
         $data['name'] = $this->name;
         $data['route_url'] = $this->route_url;
         $data['page_cache'] = $this->page_cache;
+        $data['page_layout'] = $this->page_layout;
 
         $data['status'] = $this->status;
 
@@ -219,6 +222,24 @@ class PageModel
     public function setStatus($status)
     {
         $this->status = $status;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPageLayout()
+    {
+        return $this->page_layout;
+    }
+
+    /**
+     * @param mixed $page_layout
+     * @return PageModel
+     */
+    public function setPageLayout($page_layout)
+    {
+        $this->page_layout = $page_layout;
         return $this;
     }
 

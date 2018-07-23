@@ -1,0 +1,196 @@
+<?php
+$this->headLink()
+    ->prependStylesheet('https://use.fontawesome.com/releases/v5.0.6/css/all.css')
+    ->prependStylesheet('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css')
+    ->appendStylesheet('/assets/css/theme-default.css')
+    ->appendStylesheet('/assets/css/spa-petitions.css')
+;
+$this->inlineScript()
+    ->prependFile('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js')
+    ->prependFile('https://code.jquery.com/jquery-3.3.1.min.js');
+
+if($this->hasIdentity()):
+
+    $this->inlineScript()
+        ->appendFile('/assets/js/spa-editor.js')
+        ->appendFile('/assets/js/secalith-zf-core.js')
+        ->appendFile('/assets/js/secalith-zf-form.js')
+        ->appendFile('/assets/js/spa-form.js')
+        ->appendFile('/assets/js/spa-init.js')
+    ;
+    $this->headLink()
+        ->appendStylesheet('/assets/css/spa-editor.css')
+        ->appendStylesheet('/assets/css/spa-admin.css')
+    ;
+endif;
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="shortcut icon" href="https://framework.zend.com/ico/favicon.ico" />
+    <?=$this->headTitle('Petycja 11/13')->setSeparator(' - ')->setAutoEscape(false)?>
+    <?=$this->headMeta()?>
+    <?=$this->headLink()?>
+    <style>
+        body { padding-top: 70px; }
+        .app { min-height: 100vh; }
+        .app-footer { padding-bottom: 1em; }
+    </style>
+</head>
+<body class="app app-theme-default <?=(isset($bodyClass))?$bodyClass:null;?>">
+    <header class="app-header">
+        <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="#navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <!-- Brand -->
+                    <a class="navbar-brand" href="<?=$this->url()?>">
+                        <img src="/assets/img/1113.png" alt="Zend Expressive" height="28" />
+                    </a>
+                </div>
+                <!-- Links -->
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto ml-5">
+                        <li class="nav-item active">
+                            <a href="<?=$this->url('home')?>" class="nav-link">
+                                Petycje
+                            </a>
+                        </li>
+                        <?php if( ! $this->hasIdentity()):?>
+
+                        <?php else: ?>
+                            <li class="nav-item">
+                                <a href="<?=$this->url('spa.user.list')?>" class="nav-link">
+                                    Uzytkownicy
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?=$this->url('spa.user.list')?>" class="nav-link">
+                                    Protesty
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?=$this->url('spa.spa-petition.list')?>" class="nav-link">
+                                    Petycje
+                                </a>
+                            </li>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?=$this->url('spa.spa-petition.list')?>" class="nav-link">
+                                    Wydarzenia
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?=$this->url('spa.auth.logout')?>" class="nav-link btn btn-secondary btn-sm">Wyloguj</a>
+                            </li>
+                        <?php endif;?>
+                    </ul>
+                </div>
+                <ul class="navbar-nav float-right">
+                    <li class="nav-item">
+                        <a href="<?=$this->url('spa.auth.logout')?>" class="btn btn-secondary btn-sm">Zaloguj</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="app-content container">
+
+
+        <main class="_container-fluid">
+            <div class="row justify-content-between h-100 mx-auto">
+                <div id="petition-main" class="col-12 col-md-8 mx-0 my-0 rounded pt-3 px-4">
+                    <h1 class="mb-0 display-4 font-weight-normal">Petycja Lipiec</h1>
+                    <hr class="pb-1">
+                    <p class="lead font-weight-normal">
+
+                    <p>Szanowna Pani Poseł / Szanowny Panie Pośle</p>
+
+                    <p>wzywamy do odrzucenia projektu dyrektywy Parlamentu Europejskiego i Rady o prawach autorskich na jednolitym rynku cyfrowym (on Digital Single Market), a przynajmniej usunięcia artykułów 11. i 13., które pod pretekstem ochrony praw autorskich godzą w wolność wypowiedzi  na łamach Internetu.</p>
+
+                    <p>Jako użytkownicy Internetu jesteśmy w najwyższym stopniu zaniepokojeni wizją jego cenzurowania. Poniżej zamieszczamy opis zagrożeń, jakie niesie ze sobą wprowadzenie tych zapisów.</p>
+
+                    <p>
+                        Art. 13 przewiduje, że właściciele serwisów społecznościowych będą musieli uzyskiwać od właścicieli praw autorskich licencje na treści zamieszczane przez ich użytkowników oraz wdrożyć "odpowiednie środki" w celu zapobiegania dostępności w tych serwisach treści nielicencjonowanych.
+                        W praktyce oznaczać to będzie, że serwisy takie będą musiały wdrożyć kosztowne automatyczne filtry do sprawdzania wszystkich  treści zamieszczanych przez użytkownika. Co za tym idzie:
+                        <ul>
+                            <li>Dostępne dla użytkowników w Unii Europejskiej pozostaną jedynie te serwisy, które będzie stać na wdrożenie owych "odpowiednich środków", w praktyce mogą to być jedynie największe portale, takie jak Facebook, Twitter czy Youtube;</li>
+                            <li>Ponieważ sprawdzanie takie technicznie jest skomplikowane, a automatyczne filtry nie są doskonałe, blokowane i usuwane będą też treści nienaruszające praw autorskich (np. przeróbki parodystyczne dozwolone w wielu państwach UE);</li>
+                            <li>Z uwagi na powyższe korzystanie z portali społecznościowych może stanie się utrudnione i nieatrakcyjne;</li>
+                            <li>Artykuł właściwie wprowadza cenzurę prewencyjną - to twórca serwisu musi wystrzegać się  nieodpowiednich treści pod groźbą konsekwencji prawnych;</li>
+                            <li>Pojawi się groźba wykorzystania tych filtrów do przymusowego cenzurowania treści z powodów innych niż prawo autorskie (np. politycznych czy światopoglądowych) - nie będzie już alternatywy w postaci niezależnych serwisów niestosujących takich filtrów.</li>
+                        </ul>
+
+
+                        </p>
+                    <p>
+                        Art. 11 przewiduje, że publikowanie nawet krótkich fragmentów tekstów prasowych - takich jak "zajawki" przy linkach lub tytuły - zostanie objęte wymogiem uzyskania zgody od dostawcy publikacji prasowej, w praktyce zwykle za opłatą. Może to doprowadzić do:
+                        <ul>
+                            <li>Ograniczenia dostępności na terenie Unii Europejskiej do agregatorów linków, takich jak np. Google News (po wprowadzeniu podobnego prawa w Hiszpanii Google wycofał tę usługę dla użytkowników z tego kraju);</li>
+                            <li>Upadku mniejszych serwisów agregujących linki, których nie będzie stać na opłaty;</li>
+                            <li>Likwidacji "zajawek" przy linkach na takich portalach jak Facebook i w konsekwencji zmniejszenia ich atrakcyjności;</li>
+                            <li>Upadku mniejszych portali informacyjnych, które zdobywają czytelników dzięki odnośnikom w portalach społecznościowych i agregatorach linków.</li>
+                        </ul>
+                    </p>
+                    <p>
+                        Ogólnym efektem wprowadzenia w życie obu wyżej wymienionych artykułów będzie ograniczenie obywatelom Unii Europejskiej dostępu do informacji oraz możliwości dzielenia się nią.
+                        Uważamy, że prawo do wolności wypowiedzi oraz otrzymywania i przekazywania informacji bez ingerencji władz publicznych, zawarte w Karcie Praw Podstawowych Unii Europejskiej, jest ważniejsze niż zaostrzenie przepisów dotyczących praw autorskich (wraz z wprowadzeniem prewencji). Wobec powyższych zagrożeń sprzeciwiamy się takim posunięciom hamującym rozwój społeczeństwa informacyjnego w UE.
+                        W całej Europie pilnie śledzimy działania eurodeputowanych podczas pracy w komisjach i na forum Parlamentu Europejskiego, oczekując uwzględnienia głosu tych, których reprezentujecie.
+                    </p>
+                </div>
+                <div class="col-12 col-md-3 offset-md-1 mx-0 my-0 pr-0">
+                    <div class="card-deck">
+
+                        <div class="card box-shadow zoom">
+                            <div class="card-header">
+                                <h4 class="my-0 font-weight-normal text-center">Popierasz nas?!</h4>
+                            </div>
+                            <div class="card-body">
+
+                                <p>Wypelnij formularz:</p>
+
+                                <form action="" method="POST" name="form_request_demo_restable" id="form_request_demo_restable">
+                                    <div class="py-2 px-0">
+                                        <input name="name_first" class="form-control" placeholder="Imie" value="" type="text">
+                                    </div>
+
+                                    <div class="py-2 px-0">
+                                        <input name="name_last" class="form-control" placeholder="Nazwisko" value="" type="text">
+                                    </div>
+                                    <div class="py-2 px-0">
+                                        <input name="contact_email" class="form-control" placeholder="Adres Email" value="" type="email">
+                                    </div>
+                                    <div class="pt-2 px-0">
+                                        <a href="/strony/polityka-prywatnosci" target="_blank">Polityka prywatnosci <i class="fas fa-external-link-alt"></i></a>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="card-footer text-muted">
+                                <a href="/restable/pages/request-demo" class="btn btn-lg btn-block btn-success">Popieram!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="app-footer">
+        <div class="container">
+            <hr />
+            <p>
+                &copy; 2017 - <?=date('Y')?> by Secalith Ltd. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <?=$this->inlineScript()?>
+</body>
+</html>

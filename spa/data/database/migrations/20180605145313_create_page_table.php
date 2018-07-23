@@ -21,6 +21,7 @@ class CreatePageTable extends AbstractMigration
             ->addColumn('name', 'string', ['limit' => 255])
             ->addColumn('route_url', 'string')
             ->addColumn('page_cache', 'integer', ['limit' => 1,'default' => 0])
+            ->addColumn('page_layout', 'string', ['limit' => 64,'default' => 'default'])
             ->addColumn('status', 'integer', ['limit' => 8,'default' => 0])
             ->addColumn('created', 'datetime')
             ->addColumn('updated', 'datetime', ['null' => true])

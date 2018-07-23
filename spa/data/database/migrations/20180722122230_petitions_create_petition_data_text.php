@@ -1,0 +1,27 @@
+<?php
+
+
+use Phinx\Migration\AbstractMigration;
+
+class PetitionsCreatePetitionDataText extends AbstractMigration
+{
+    public function up()
+    {
+        $this->dropTable('petition_data_text');
+    }
+
+    public function change()
+    {
+        $table = $this->table('petition_data_text', ['id' => false, 'primary_key' => ['uid']]);
+        $table->addColumn('uid', 'string', ['limit' => 64])
+            ->addColumn('petition_uid', 'string', ['limit' => 64], ['null' => true])
+            ->addColumn('text',  'string')
+            ->addColumn('language', 'string')
+            ->addColumn('status', 'integer', ['limit' => 8,'default' => 0])
+            ->addColumn('revision', 'integer', ['limit' => 8,'default' => 0])
+            ->addColumn('version', 'integer', ['limit' => 8,'default' => 0])
+            ->addColumn('created', 'datetime')
+            ->addColumn('updated', 'datetime', ['null' => true])
+            ->save();
+    }
+}

@@ -294,6 +294,21 @@ class BlockSeeder extends AbstractSeed
                 'order'    => 1,
                 'created'    => date('Y-m-d H:i:s'),
             ],
+            [
+                'uid'    => 'block-200',
+                'parent_uid'    => '0',
+                'area_uid'    => 'area-005',
+                'template_uid'    => 'template-003',
+                'type'    => 'content',
+                'name'    => 'block_200',
+                'content'    => '[::content:content-200::]',
+                'attributes'    => '{}',
+                'parameters'    => '{"html_tag":"div"}',
+                'options'    => '{}',
+                'status'    => 1,
+                'order'    => 1,
+                'created'    => date('Y-m-d H:i:s'),
+            ],
         ];
 
         $table = $this->table('block');

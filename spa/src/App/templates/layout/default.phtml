@@ -29,19 +29,18 @@ endif;
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link rel="shortcut icon" href="https://framework.zend.com/ico/favicon.ico" />
-    <?=$this->headTitle('zend-expressive')->setSeparator(' - ')->setAutoEscape(false)?>
+    <?=$this->headTitle('11/13')->setSeparator(' - ')->setAutoEscape(false)?>
     <?=$this->headMeta()?>
     <?=$this->headLink()?>
     <style>
         body { padding-top: 70px; }
         .app { min-height: 100vh; }
         .app-footer { padding-bottom: 1em; }
-        .zf-green, h2 a { color: #68b604; }
     </style>
 </head>
 <body class="app app-theme-default <?=(isset($bodyClass))?$bodyClass:null;?>">
     <header class="app-header">
-        <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top" role="navigation">
+        <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="#navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,63 +48,44 @@ endif;
                     </button>
                     <!-- Brand -->
                     <a class="navbar-brand" href="<?=$this->url()?>">
-                        <img src="https://framework.zend.com/images/logos/zf-logo-mark.png" alt="Zend Expressive" height="28" />
+                        <img src="/assets/img/1113.png" alt="Zend Expressive" height="28" />
                     </a>
                 </div>
                 <!-- Links -->
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a href="https://docs.zendframework.com/zend-expressive" target="_blank" class="nav-link">
-                                <i class="fa fa-book"></i> Docs
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="https://github.com/zendframework/zend-expressive" target="_blank" class="nav-link">
-                                <i class="fa fa-wrench"></i> Contribute
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?=$this->url('api.ping')?>" class="nav-link">
-                                Ping Test
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="<?=$this->url('home')?>" class="nav-link">
-                                SPA Homepage
+                                Strona Domowa
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="<?=$this->url('spa.auth')?>" class="nav-link">
-                                SPA Auth
-                            </a>
-                        </li>
-                        <?php if($this->hasIdentity()):?>
-                        <li class="nav-item">
-                            <a href="<?=$this->url('spa.import.page')?>" class="nav-link">
-                                Import
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?=$this->url('spa.auth.logout')?>" class="nav-link">
-                                Logout
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?=$this->url('spa.user.list')?>" class="nav-link">
-                                Users
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?=$this->url('spa.page.list')?>" class="nav-link">
-                                Pages
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?=$this->url('admin.site.list')?>" class="nav-link">
-                                Sites
-                            </a>
-                        </li>
+                        <?php if( ! $this->hasIdentity()):?>
+                            <li class="nav-item">
+                                <a href="<?=$this->url('spa.auth')?>" class="nav-link">
+                                    SPA Auth
+                                </a>
+                            </li>
+                        <?php else: ?>
+                            <li class="nav-item">
+                                <a href="<?=$this->url('spa.user.list')?>" class="nav-link">
+                                    Uzytkownicy
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?=$this->url('spa.user.list')?>" class="nav-link">
+                                    Protesty
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?=$this->url('spa.spa-petition.list')?>" class="nav-link">
+                                    Petycje
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?=$this->url('spa.auth.logout')?>" class="nav-link">
+                                    Wyloguj
+                                </a>
+                            </li>
                         <?php endif;?>
                     </ul>
                 </div>

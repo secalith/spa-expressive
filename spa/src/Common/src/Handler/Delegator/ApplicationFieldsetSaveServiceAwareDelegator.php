@@ -56,7 +56,7 @@ class ApplicationFieldsetSaveServiceAwareDelegator
 
                     // check if the save index is defined in the route config
                     if(array_key_exists('save',$formAppConfig)) {
-                        foreach($formAppConfig['save'] as $fieldsetConfig) {
+                        foreach($formAppConfig['save']['data'] as $fieldsetConfig) {
                             if(array_key_exists('service',$fieldsetConfig)) {
                                 // Load each service from $container
                                 foreach($fieldsetConfig['service'] as $serviceConfig) {

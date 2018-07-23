@@ -20,6 +20,18 @@ class RouteSeeder extends AbstractSeed
                 'status'    => 1,
                 'created'    => date('Y-m-d H:i:s'),
             ],
+            [
+                'uid'    => 'route-003',
+                'route_name'    => 'home',
+                'status'    => 1,
+                'created'    => date('Y-m-d H:i:s'),
+            ],
+            [
+                'uid'    => 'route-004',
+                'route_name'    => 'home',
+                'status'    => 1,
+                'created'    => date('Y-m-d H:i:s'),
+            ],
         ];
 
         $table = $this->table('route');

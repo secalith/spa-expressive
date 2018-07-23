@@ -39,12 +39,14 @@ class PageHandler implements RequestHandlerInterface, PageViewAwareInterface
         $data = [];
 
         $data['pageView'] = $this->getPageView();
-
+//var_dump($data['pageView']->getVariable('page')->getPageLayout());
         $templateName = sprintf(
             "%s::%s",
             $data['pageView']->getVariable('template')->getLocation(),
             $data['pageView']->getVariable('template')->getName()
         );
+
+        $data['pageView']->setVariable('layout',$data['pageView']->getVariable('page')->getPageLayout());
 
         $this->template->addDefaultParam(Template\TemplateRendererInterface::TEMPLATE_ALL,'pageView',$data['pageView']);
 

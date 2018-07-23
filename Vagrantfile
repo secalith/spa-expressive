@@ -142,9 +142,9 @@ echo "192.168.0.85  www.auth.local.vm auth.local.vm" >> /etc/hosts
 echo "192.168.0.86  www.envoyer.local.vm envoyer.local.vm" >> /etc/hosts
 
 cd /var/www/application
-touch ./data/database/content-development.sqlite3
-php ./vendor/bin/phinx migrate
-php ./vendor/bin/phinx seed:run
+# touch ./data/database/content-development.sqlite3
+# php ./vendor/bin/phinx migrate
+# php ./vendor/bin/phinx seed:run
 
 #############
 #   Other   #

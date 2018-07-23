@@ -86,4 +86,19 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     $app->get('/admin/page/details/{uid}', [
         'Common\Handler\List',
     ], 'spa.page.read');
+
+    # SPA PETITIONS
+    $app->get('/admin/petition/list[/[{page:\d+}]]', [
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\List',
+    ], 'spa.spa-petition.list');
+    # CREATE SPA-PETITION #
+    $app->get('/admin/petition/create[/]', [
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\Create',
+    ], 'spa.spa-petition.create');
+    $app->post('/admin/petition/create[/]', [
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\Create',
+    ], 'spa.spa-petition.create.post');
 };

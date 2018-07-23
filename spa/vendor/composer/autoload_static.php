@@ -88,6 +88,7 @@ class ComposerStaticInit63fc5ba7f7dce96e74cb6b7af2323d23
             'Symfony\\Component\\Filesystem\\' => 29,
             'Symfony\\Component\\Console\\' => 26,
             'Symfony\\Component\\Config\\' => 25,
+            'SpaPetition\\' => 12,
             'Site\\' => 5,
         ),
         'R' => 
@@ -107,6 +108,7 @@ class ComposerStaticInit63fc5ba7f7dce96e74cb6b7af2323d23
             'PageView\\' => 9,
             'PageTemplate\\' => 13,
             'PageRoute\\' => 10,
+            'PageLayout\\' => 11,
             'PackageVersions\\' => 16,
         ),
         'J' => 
@@ -333,6 +335,10 @@ class ComposerStaticInit63fc5ba7f7dce96e74cb6b7af2323d23
         array (
             0 => __DIR__ . '/..' . '/symfony/config',
         ),
+        'SpaPetition\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/SpaPetition/src',
+        ),
         'Site\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/Site/src',
@@ -385,6 +391,10 @@ class ComposerStaticInit63fc5ba7f7dce96e74cb6b7af2323d23
         'PageRoute\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/PageRoute/src',
+        ),
+        'PageLayout\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/PageLayout/src',
         ),
         'PackageVersions\\' => 
         array (

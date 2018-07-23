@@ -48,7 +48,7 @@ class PipelineAndRoutesDelegator
         // Prototypying
         // obtain licence number?
         #TODO: use middleware for it
-        $hostname = php_uname('n');
+        $hostname = ($_SERVER['HTTP_HOST'])?$_SERVER['HTTP_HOST']:php_uname('n');
         /* @var \Instance\Model\InstanceModel $instance */
         $instance = $container->get("Instance\\TableService")->fetchBy(['hostname'=>$hostname]);
         if( $instance !== false ) {
@@ -73,6 +73,8 @@ class PipelineAndRoutesDelegator
                 }
             }
 
+        } else {
+            echo 'instance not found.';
         }
 
 

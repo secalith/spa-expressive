@@ -94,7 +94,9 @@
             "ArticleExternal\\": "src/ArticleExternal/src/",
             "Site\\": "src/Site/src/",
             "ArrayDigger\\": "src/ArrayDigger/src/",
-            "RoleEditor\\": "src/RoleEditor/src/"
+            "RoleEditor\\": "src/RoleEditor/src/",
+            "SpaPetition\\": "src/SpaPetition/src/",
+            "PageLayout\\": "src/PageLayout/src/"
         }
     },
     "autoload-dev": {

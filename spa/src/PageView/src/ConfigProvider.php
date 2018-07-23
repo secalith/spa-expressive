@@ -28,6 +28,7 @@ class ConfigProvider
         return [
             'paths' => [
                 'page-view' => [__DIR__ . '/../templates/page-view'],
+                'page-layout' => [__DIR__ . '/../templates/layout'],
             ],
         ];
     }

@@ -44,7 +44,7 @@ class PageTemplateDelegator
         $callback
     ) {
         $targetInstance = $callback();
-var_dump($targetInstance->getPage());
+//var_dump($targetInstance->getPage());
         if (null!==$targetInstance->getPage()) {
             // get page by route's UID
             $item = $serviceLocator->get("PageTemplate\\Table")->fetchBy(
