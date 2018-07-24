@@ -81,4 +81,36 @@ class PageTable
 
         return $rowset->current();
     }
+
+    public function saveItem(PageModel $item)
+    {
+        if( null === $item->getUid() || empty($item->getUid())) {
+            $item->setUid($this->generateUUID());
+        }
+
+        $dateTime = new \DateTime('now');
+
+        $data = array(
+            'uid' => $item->getUid(),
+            'application_uid' => $item->getApplicationUid(),
+            'route_uid' => $item->getRouteUid(),
+            'template_uid' => $item->getTemplateUid(),
+            'name' => $item->getName(),
+            'route_url' => $item->getRouteUrl(),
+            'page_cache' => $item->getPageCache(),
+            'page_layout' => $item->getPageLayout(),
+            'site_uid' => $item->getSiteUid(),
+            'status' => 1,
+            'created' => $dateTime->format('Y-m-d H:i:s'),
+        );
+
+        $rowsAffected = $this->tableGateway->insert($data);
+
+
+        return [
+            'affected' => $rowsAffected,
+            'data' => $data,
+        ];
+
+    }
 }

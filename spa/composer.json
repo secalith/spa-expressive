@@ -96,7 +96,8 @@
             "ArrayDigger\\": "src/ArrayDigger/src/",
             "RoleEditor\\": "src/RoleEditor/src/",
             "SpaPetition\\": "src/SpaPetition/src/",
-            "PageLayout\\": "src/PageLayout/src/"
+            "PageLayout\\": "src/PageLayout/src/",
+            "PageResource\\": "src/PageResource/src/"
         }
     },
     "autoload-dev": {

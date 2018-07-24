@@ -14,6 +14,8 @@ class PageModel
     public $route_url;
     public $page_cache;
     public $page_layout;
+    public $site_name;
+    public $site_uid;
 
     public $status;
 
@@ -42,6 +44,8 @@ class PageModel
         $this->route_url = ( array_key_exists('route_url',$data)) ? $data['route_url'] : null;
         $this->page_cache = ( array_key_exists('page_cache',$data)) ? $data['page_cache'] : null;
         $this->page_layout = ( array_key_exists('page_layout',$data)) ? $data['page_layout'] : null;
+        $this->site_name = ( array_key_exists('site_name',$data)) ? $data['site_name'] : null;
+        $this->site_uid = ( array_key_exists('site_uid',$data)) ? $data['site_uid'] : null;
 
         $this->status = ( array_key_exists('status',$data)) ? $data['status'] : null;
 
@@ -64,6 +68,8 @@ class PageModel
         $data['route_url'] = $this->route_url;
         $data['page_cache'] = $this->page_cache;
         $data['page_layout'] = $this->page_layout;
+        $data['site_name'] = $this->site_name;
+        $data['site_uid'] = $this->site_uid;
 
         $data['status'] = $this->status;
 
@@ -276,6 +282,42 @@ class PageModel
     public function setUpdated($updated)
     {
         $this->updated = $updated;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSiteName()
+    {
+        return $this->site_name;
+    }
+
+    /**
+     * @param mixed $site_name
+     * @return PageModel
+     */
+    public function setSiteName($site_name)
+    {
+        $this->site_name = $site_name;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSiteUid()
+    {
+        return $this->site_uid;
+    }
+
+    /**
+     * @param mixed $site_uid
+     * @return PageModel
+     */
+    public function setSiteUid($site_uid)
+    {
+        $this->site_uid = $site_uid;
         return $this;
     }
 

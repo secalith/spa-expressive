@@ -44,6 +44,7 @@ class ApplicationFieldsetSaveServiceAwareDelegator
                     if( array_key_exists('object',$formAppConfig)) {
                         /* @var \Zend\Form\Form $form */
                         $form = new $formAppConfig['object']();
+                        $form->setData($_POST);
                     } elseif(array_key_exists('form_factory',$formAppConfig)) {
                         if($container->has($formAppConfig['form_factory'])) {
                             $form = $container->get($formAppConfig['form_factory']);
@@ -54,19 +55,48 @@ class ApplicationFieldsetSaveServiceAwareDelegator
                         ? $formAppConfig['name']
                         : $form->getName();
 
+                    if(array_key_exists('pre_save',$formAppConfig))
+                    {
+                        foreach($formAppConfig['pre_save']['data'] as $fieldsetConfig)
+                        {
+                            foreach($fieldsetConfig['change_value'] as $changeValue)
+                            {
+                                $form->get($fieldsetConfig['form_name'])
+                                    ->get($fieldsetConfig['fieldset_name'])
+                                    ->get($changeValue['field_name'])
+                                ->setValue(time());
+
+
+                            }
+                        }
+
+                    }
                     // check if the save index is defined in the route config
                     if(array_key_exists('save',$formAppConfig)) {
                         foreach($formAppConfig['save']['data'] as $fieldsetConfig) {
                             if(array_key_exists('service',$fieldsetConfig)) {
-                                // Load each service from $container
-                                foreach($fieldsetConfig['service'] as $serviceConfig) {
-                                    if($container->has($serviceConfig['name'])) {
-                                        $requestedCallback->setFieldsetService($container->get($serviceConfig['name']),$fieldsetConfig['fieldset_name']);
+                                if( ! array_key_exists('is_collection',$fieldsetConfig)
+                                && array_key_exists('fieldset_name',$fieldsetConfig)) {
+                                    // Load each service from $container
+                                    foreach($fieldsetConfig['service'] as $serviceConfig) {
+                                        if($container->has($serviceConfig['name'])) {
+                                            $requestedCallback->setFieldsetService($container->get($serviceConfig['name']),$fieldsetConfig['fieldset_name']);
+                                        }
+                                    }
+                                } elseif(array_key_exists('fieldset_name',$fieldsetConfig)) {
+                                    foreach($fieldsetConfig['service'] as $serviceConfig) {
+                                        if($container->has($serviceConfig['name'])) {
+                                            $requestedCallback->setFieldsetService($container->get($serviceConfig['name']),$fieldsetConfig['fieldset_name']);
+                                        } else {
+                                            var_dump($serviceConfig);
+                                        }
                                     }
                                 }
+
                             }
                         }
                     }
+
                     $requestedCallback->setForm($form,$formIndexName);
                 }
             }

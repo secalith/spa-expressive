@@ -12,6 +12,8 @@ use Common\Handler\DataAwareInterface;
 use Common\Handler\DataAwareTrait;
 use Common\Handler\ApplicationFieldsetSaveServiceAwareInterface;
 use Common\Handler\ApplicationFieldsetSaveServiceAwareTrait;
+use Common\Delegator\RouteResourceAwareInterface;
+use Common\Delegator\RouteResourceAwareTrait;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -24,12 +26,14 @@ class CreateHandler implements RequestHandlerInterface,
     DataAwareInterface,
     ApplicationConfigAwareInterface,
     ApplicationFormAwareInterface,
-    ApplicationFieldsetSaveServiceAwareInterface
+    ApplicationFieldsetSaveServiceAwareInterface,
+    RouteResourceAwareInterface
 {
     use ApplicationConfigAwareTrait;
     use ApplicationFieldsetSaveServiceAwareTrait;
     use ApplicationFormAwareTrait;
     use DataAwareTrait;
+    use RouteResourceAwareTrait;
 
     private $containerName;
 
@@ -39,16 +43,20 @@ class CreateHandler implements RequestHandlerInterface,
 
     private $urlHelper;
 
+    private $routeConfig;
+
     public function __construct(
         Router\RouterInterface $router,
         Template\TemplateRendererInterface $template = null,
         string $containerName,
-        UrlHelper $urlHelper = null
+        UrlHelper $urlHelper = null,
+        array $routeConfig = []
     ) {
         $this->router        = $router;
         $this->template      = $template;
         $this->containerName = $containerName;
         $this->urlHelper = $urlHelper;
+        $this->routeConfig = $routeConfig;
     }
 
     public function handle(ServerRequestInterface $request) : ResponseInterface
@@ -68,18 +76,65 @@ class CreateHandler implements RequestHandlerInterface,
 
             // get all pre-loaded forms
             foreach($this->getForms() as $formIdentifier=>$formItem) {
-var_dump($postData);
+//var_dump($postData);
+
+                // search for pre_validate
+                if( array_key_exists('forms',$this->routeConfig) )
+                {
+                    foreach($this->routeConfig['forms'] as $routeConfigForm)
+                    {
+                        if($routeConfigForm['name']===$formItem->getName())
+                        {
+                            if(array_key_exists('pre_validate',$routeConfigForm))
+                            {
+                                if(array_key_exists('data',$routeConfigForm['pre_validate']))
+                                {
+                                    foreach($routeConfigForm['pre_validate']['data'] as $preValidateFieldset)
+                                    {
+                                        if(array_key_exists('change_value',$preValidateFieldset))
+                                        {
+                                            foreach($preValidateFieldset['change_value'] as $changePreValidateFieldset)
+                                            {
+
+                                                $sourceType = $changePreValidateFieldset['source']['type'];
+
+                                                $newValue = $postData[$formItem->getName()][$changePreValidateFieldset['source']['source_name']][$changePreValidateFieldset['source']['source_field_name']];
+                                                $postData[$formItem->getName()][$preValidateFieldset['fieldset_name']][$changePreValidateFieldset['field_name']] = $newValue;
+
+                                            }
+                                        }
+
+//                                        var_dump($preValidateFieldset);
+                                    }
+                                }
+                            }
+
+                            break;
+                        }
+                    }
+                }
+//
+//                var_dump($postData);
+
+
                 // bind data from POST
                 $formItem->setData($postData);
 
+
+
+
+
+
                 if($formItem->isValid()) {
+
+                    var_dump($formItem->getData());
+                    die();
 
                     $messages['info'][] = 'Form is Valid.';
 
                     $formData = $formItem->getData();
-//var_dump($formData);
 
-
+//                    var_dump($formData);
 
                     if(array_key_exists('forms',$handlerConfig)) {
 
@@ -93,6 +148,7 @@ var_dump($postData);
                             $formConfigModel = new \Common\Model\CreateHandlerFormConfigModel($formConfig);
 
                             if($formIdentifier===$formConfigModel->getName()) {
+
                                 if($formConfigModel->getSave()) {
 
                                     foreach($formConfigModel->getSave('data') as $configIndexName => $fieldsetConfig) {
@@ -101,7 +157,9 @@ var_dump($postData);
 
                                             foreach($fieldsetConfig['service'] as $serviceConfig) {
 //var_dumP($this->getFieldsetServiceAll());
-                                                if($this->hasFieldsetService($fieldsetConfig['fieldset_name'])) {
+                                                if( array_key_exists('fieldset_name',$fieldsetConfig)
+                                                    && $this->hasFieldsetService($fieldsetConfig['fieldset_name'])
+                                                ) {
 
                                                     $field_change = null;
 
@@ -109,8 +167,9 @@ var_dump($postData);
 
                                                         foreach($fieldsetConfig['entity_change'] as $entity_change ) {
 
-
+//var_dump($entity_change);
                                                             if(array_key_exists('source',$entity_change)
+                                                                && is_array($results)
                                                                 && array_key_exists($entity_change['source']['source_name'],$results)) {
                                                                 $changeResourcesResults = $results[$entity_change['source']['source_name']];
                                                             }
@@ -184,10 +243,12 @@ var_dump($postData);
 //var_dump($serviceConfig);
 
 //                                                    var_dump($field_change);
-                                                    var_dump($formData);
+//                                                    var_dump($formData);
 
 
-                                                    if(property_exists($formData,$fieldsetConfig['fieldset_name'])) {
+                                                    if( ( ! array_key_exists('is_collection',$fieldsetConfig) || $fieldsetConfig['is_collection'] === true)
+                                                        && property_exists($formData,$fieldsetConfig['fieldset_name'])
+                                                    ) {
 
                                                         $fieldsetItem = $formData->{$fieldsetConfig['fieldset_name']};
 
@@ -206,8 +267,13 @@ var_dump($postData);
 
                                                         $results[$fieldsetConfig['fieldset_name']] = $resultModel;
 
-                                                    } else {
-//                                                        echo 9999;
+                                                    } elseif( array_key_exists('is_collection',$fieldsetConfig) && $fieldsetConfig['is_collection'] === true ) {
+                                                        if(property_exists($formData,$fieldsetConfig['fieldset_name'])) {
+                                                            echo 8;
+                                                        }
+                                                        var_dump($fieldsetConfig);
+                                                        var_dump($formData);
+                                                        echo 9999;
                                                     }
 
 
@@ -234,7 +300,7 @@ var_dump($postData);
                     $messages['error'][] = 'Form seems to be invalid.';
                     $messages['error'][] = 'Data has NOT been saved.';
 
-                    var_dump($formItem->getMessages());
+//                    var_dump($formItem->getMessages());
 
                 }
                 $iForms++;

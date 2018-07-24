@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Common;
 
+use Common\Controller\Delegator\Delegator;
 use Common\Helper\CurrentRouteNameHelper;
 use Common\Helper\CurrentHandlerNameHelper;
 use Common\Helper\Factory\CurrentRouteNameHelperFactory;
@@ -108,6 +109,8 @@ class ConfigProvider
                 StaticPageHandlerCacheMiddleware::class => StaticPageHandlerCacheMiddlewareFactory::class,
                 \Common\Service\RouteConfigService::class => \Common\Service\Factory\RouteConfigServiceFactory::class,
                 \Common\Service\PaginatorQueryService::class => \Common\Service\Factory\PaginatorQueryServiceFactory::class,
+
+                Service\RouteResourceService::class => Service\Factory\RouteResourceServiceFactory::class,
             ],
             'abstract_factories' => [
                 Service\GatewayAbstractFactory::class,
@@ -124,6 +127,7 @@ class ConfigProvider
                 ],
                 'Common\Handler\Create' => [
                     \Common\Handler\Delegator\ApplicationConfigAwareDelegator::class,
+                    \Common\Delegator\RouteResourceAwareDelegator::class,
                     \Common\Delegator\ApplicationFormRouteAwareDelegator::class,
                     \Common\Handler\Delegator\ApplicationFieldsetSaveServiceAwareDelegator::class,
                 ],

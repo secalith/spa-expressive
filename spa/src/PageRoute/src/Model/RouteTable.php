@@ -81,4 +81,30 @@ class RouteTable
 
         return $rowset->current();
     }
+
+    public function saveItem(RouteModel $item)
+    {
+        if( null === $item->getUid() || empty($item->getUid())) {
+            $item->setUid($this->generateUUID());
+        }
+
+        $dateTime = new \DateTime('now');
+
+        $data = array(
+            'uid' => $item->getUid(),
+            'route_name' => $item->getRouteName(),
+            'status' => $item->getStatus(),
+            'created' => $dateTime->format('Y-m-d H:i:s'),
+        );
+
+        $rowsAffected = $this->tableGateway->insert($data);
+
+
+        return [
+            'affected' => $rowsAffected,
+            'data' => $data,
+        ];
+
+
+    }
 }

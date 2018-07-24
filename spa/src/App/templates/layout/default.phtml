@@ -60,7 +60,7 @@ endif;
                             </a>
                         </li>
                         <?php if( ! $this->hasIdentity()):?>
-                            <li class="nav-item">
+                            <li class="nav-item float-right">
                                 <a href="<?=$this->url('spa.auth')?>" class="nav-link">
                                     SPA Auth
                                 </a>
@@ -82,9 +82,24 @@ endif;
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?=$this->url('spa.auth.logout')?>" class="nav-link">
-                                    Wyloguj
-                                </a>
+                                <a href="<?=$this->url('admin.site.list')?>" class="nav-link"><?=$this->translate('Witryny');?></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?=$this->url('admin.page.list')?>" class="nav-link"><?=$this->translate('Strony');?></a>
+                            </li>
+                        <?php endif;?>
+                        <li class="nav-item">
+                            <a href="<?=$this->url('test.form')?>" class="nav-link"><?=$this->translate('Form');?></a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav navbar-right">
+                        <?php if( ! $this->hasIdentity()):?>
+                            <li class="nav-item">
+                                <a href="<?=$this->url('spa.auth')?>" class="nav-link btn btn-sm btn-secondary text-light">Zaloguj</a>
+                            </li>
+                        <?php else: ?>
+                            <li class="nav-item">
+                                <a href="<?=$this->url('spa.auth.logout')?>" class="nav-link btn btn-sm btn-secondary text-light"><?=$this->translate("Wyloguj");?></a>
                             </li>
                         <?php endif;?>
                     </ul>

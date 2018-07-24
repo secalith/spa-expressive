@@ -7,6 +7,7 @@ namespace PageTemplate\Model;
 class PageTemplateModel
 {
     public $uid;
+    public $route_uid;
     public $name;
     public $type;
     public $location;
@@ -32,6 +33,7 @@ class PageTemplateModel
     public function exchangeArray($data = [])
     {
         $this->uid = ( array_key_exists('uid',$data)) ? $data['uid'] : null;
+        $this->route_uid = ( array_key_exists('route_uid',$data)) ? $data['route_uid'] : null;
         $this->name = ( array_key_exists('name',$data)) ? $data['name'] : null;
         $this->type = ( array_key_exists('type',$data)) ? $data['type'] : null;
         $this->location = ( array_key_exists('location',$data)) ? $data['location'] : null;
@@ -51,6 +53,7 @@ class PageTemplateModel
         $data = [];
 
         $data['uid'] = $this->uid;
+        $data['route_uid'] = $this->route_uid;
         $data['name'] = $this->name;
         $data['type'] = $this->type;
         $data['location'] = $this->location;
@@ -78,6 +81,24 @@ class PageTemplateModel
     public function getUid()
     {
         return $this->uid;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRouteUid()
+    {
+        return $this->route_uid;
+    }
+
+    /**
+     * @param mixed $route_uid
+     * @return PageTemplateModel
+     */
+    public function setRouteUid($route_uid)
+    {
+        $this->route_uid = $route_uid;
+        return $this;
     }
 
     /**

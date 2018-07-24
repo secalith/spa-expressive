@@ -122,38 +122,40 @@ class ConfigProvider
                                             ],
                                         ],
                                     ],
-                                    'table' => [
-                                        'main' => [
-                                            'name' => 'main',
-                                            'headers'=> [
-                                                'site_name'=>'Name',
-                                                'status'=>'Status',
-                                                'type'=>'Type',
-                                                'created'=>'Created',
-                                                100=>'Details',
-                                            ],
-                                            'rows' => [
-                                                ['column'=>'site_name'],
-                                                ['column'=>'status'],
-                                                ['column'=>'type'],
-                                                ['column'=>'created'],
-                                                ['buttons' => [
-                                                    [
-                                                        'html_tag' => 'a',
-                                                        'text' => 'Details',
-                                                        'attributes' => [
-                                                            'class' => 'btn btn-sm btn-info ml-5',
-                                                            'href' => [
-                                                                'type' => 'plugin',
-                                                                'name' => 'url',
-                                                                'arguments' => [
-                                                                    'admin.site.read',
-                                                                    ['uid'=>"data::item=>uid"]
+                                    'main' => [
+                                        'table' => [
+                                            [
+                                                'name' => 'main',
+                                                'headers'=> [
+                                                    'site_name'=>'Name',
+                                                    'status'=>'Status',
+                                                    'type'=>'Type',
+                                                    'created'=>'Created',
+                                                    100=>'Details',
+                                                ],
+                                                'rows' => [
+                                                    ['column'=>'site_name'],
+                                                    ['column'=>'status'],
+                                                    ['column'=>'type'],
+                                                    ['column'=>'created'],
+                                                    ['buttons' => [
+                                                        [
+                                                            'html_tag' => 'a',
+                                                            'text' => 'Details',
+                                                            'attributes' => [
+                                                                'class' => 'btn btn-sm btn-info ml-5',
+                                                                'href' => [
+                                                                    'type' => 'plugin',
+                                                                    'name' => 'url',
+                                                                    'arguments' => [
+                                                                        'admin.site.read',
+                                                                        ['uid'=>"data::item=>uid"]
+                                                                    ],
                                                                 ],
                                                             ],
                                                         ],
-                                                    ],
-                                                ],],
+                                                    ],],
+                                                ],
                                             ],
                                         ],
                                     ],
@@ -161,10 +163,10 @@ class ConfigProvider
                                 'view_template_model' => [
                                     'layout' => 'layout::default',
                                     'template' => 'common-admin::template-list',
-//                                    'table_row' => 'restable-admin-client::table-row',
+                                    'body_class' => 'app-action-list',
                                 ],
                             ],
-                        ], // spa.user.list
+                        ], // spa.site.list
                     ], // route
                 ], // Common\Handler\List
             ], // handler

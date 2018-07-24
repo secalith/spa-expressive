@@ -11,7 +11,7 @@ class PetitionSeeder extends AbstractSeed
             [
                 'uid'    => 'petition-001',
                 'application_uid'    => 'app-001',
-                'site_uid'    => 'site-001',
+                'site_uid'    => 'site-003',
                 'Name'    => 'Petycja Lipiec 2018 #1',
                 'data_uid'    => 'petition-data-001',
                 'default_language'    => 'pl_pl',

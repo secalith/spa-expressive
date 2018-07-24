@@ -34,6 +34,7 @@ class ConfigProvider
             ],
             'delegators' => [
                 \Page\Handler\PageHandler::class => [
+                    \Common\Delegator\RouteResourceAwareDelegator::class,
                     \PageView\Handler\Delegator\PageViewDelegatorFactory::class,
                 ],
             ],
@@ -47,6 +48,11 @@ class ConfigProvider
                 'Page\TableService' => [
                     'gateway' => [
                         'name' => 'Page\TableGateway',
+                    ],
+                ],
+                'Page\Create\TableService' => [
+                    'gateway' => [
+                        'name' => 'Page\Create\TableGateway',
                     ],
                 ],
             ],
@@ -67,11 +73,297 @@ class ConfigProvider
                         "object" => \Zend\Hydrator\ObjectProperty::class,
                     ],
                 ],
+                'Page\Create\TableGateway' => [
+                    'name' => 'Page\Create\TableGateway',
+                    'table' => [
+                        'name' => 'page',
+                        'object' => \Page\Model\PageTable::class,
+                    ],
+                    'adapter' => [
+                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                    ],
+                    'model' => [
+                        "object" => \Page\Model\PageCreateModel::class,
+                    ],
+                    'hydrator' => [
+                        "object" => \Zend\Hydrator\ObjectProperty::class,
+                    ],
+                ],
             ], // gateway
             'handler' => [
+                'Common\Handler\Create' => [
+                    'route' => [
+                        'admin.page.create' => [
+                            'get' => [
+                                'method' => 'GET',
+                                'scenario' => 'create',
+                                'data_template_model' => [
+                                    'route_name' => 'admin.page.create',
+                                    'heading' => [
+                                        [
+                                            'html_tag' => 'h1',
+                                            'text' => _("Create"),
+                                            'buttons' => [
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => _("List"),
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-5',
+                                                        'href' => 'helper::url:admin.page.list'
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ], // heading
+                                    'main' => [
+
+                                        #TODO
+
+
+                                        'view' => [
+                                            [
+                                                'type' => 'form-element',
+                                                'form' => 'form_create',
+                                                'form_element_path' => 'form_create.fieldset_page.uid',
+                                                'form_element_path_delimiter' => '.',
+                                            ],
+                                        ],
+
+
+                                    ],
+                                ],
+                                'view_template_model' => [
+                                    'layout' => 'layout::default',
+                                    'template' => 'common-admin::template-create',
+                                    'forms' => [
+                                        'form_create' => 'common-admin::template-create',
+                                    ],
+                                ],
+                                'forms' => [
+                                    [
+                                        'action' => [
+                                            'route' => 'admin.page.create.post',
+                                        ],
+                                        'name' => 'form_create',
+                                        'object' => \Page\Form\PageWriteForm::class,
+                                        'template' => 'common-admin::template-create',
+                                    ]
+                                ],
+                            ],
+                        ], // admin.page.create
+                        'admin.page.create.post' => [
+                            'post' => [
+                                'method' => 'POST',
+                                'scenario' => 'process',
+                                'data_template_model' => [
+                                    'route_name' => 'admin.page.create.post',
+                                    'heading' => [
+                                        [
+                                            'html_tag' => 'h1',
+                                            'text' => _("Create"),
+                                            'buttons' => [
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => 'List Page',
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-5',
+                                                        'href' => 'helper::url:admin.page.list'
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                                'view_template_model' => [
+                                    'layout' => 'layout::default',
+                                    'template' => 'common-admin::template-create',
+                                    'forms' => [
+                                        'form_create' => 'restable-admin-client::form-create',
+                                    ],
+                                ],
+                                'forms' => [
+                                    [
+                                        'name' => 'form_create',
+                                        'action' => [
+                                            'route' => 'admin.page.create.post',
+                                        ],
+                                        'object' => \Page\Form\PageWriteForm::class,
+                                        'pre_validate' => [
+                                            'data' => [
+                                                'fieldset_page' => [
+                                                    'form_name' => 'form_create',
+                                                    'fieldset_name' => 'fieldset_page',
+                                                    'change_value' => [
+                                                        [
+                                                            'field_name' => 'template_uid',
+                                                            'source' => [
+                                                                'type' => 'post-request',
+                                                                'source_name' => 'fieldset_template',
+                                                                'source_field_name' => 'uid',
+                                                            ],
+                                                        ],
+                                                        [
+                                                            'field_name' => 'route_uid',
+                                                            'source' => [
+                                                                'type' => 'post-request',
+                                                                'source_name' => 'fieldset_route',
+                                                                'source_field_name' => 'uid',
+                                                            ],
+                                                        ]
+                                                    ],
+                                                ], // fieldset_page
+                                                'fieldset_route' => [
+                                                    'form_name' => 'form_create',
+                                                    'fieldset_name' => 'fieldset_route',
+                                                    'change_value' => [
+                                                        [
+                                                            'field_name' => 'route_name',
+                                                            'source' => [
+                                                                'type' => 'post-request',
+                                                                'source_name' => 'fieldset_page',
+                                                                'source_field_name' => 'name',
+                                                            ],
+                                                        ],
+                                                    ],
+                                                ], // fieldset_route
+                                                'fieldset_router' => [
+                                                    'form_name' => 'form_create',
+                                                    'fieldset_name' => 'fieldset_router',
+                                                    'change_value' => [
+                                                        [
+                                                            'field_name' => 'application_uid',
+                                                            'source' => [
+                                                                'type' => 'post-request',
+                                                                'source_name' => 'fieldset_page',
+                                                                'source_field_name' => 'application_uid',
+                                                            ],
+                                                        ],
+                                                        [
+                                                            'field_name' => 'route_uid',
+                                                            'source' => [
+                                                                'type' => 'post-request',
+                                                                'source_name' => 'fieldset_route',
+                                                                'source_field_name' => 'uid',
+                                                            ],
+                                                        ],
+                                                        [
+                                                            'field_name' => 'site_uid',
+                                                            'source' => [
+                                                                'type' => 'post-request',
+                                                                'source_name' => 'fieldset_page',
+                                                                'source_field_name' => 'site_uid',
+                                                            ],
+                                                        ],
+                                                        [
+                                                            'field_name' => 'route_url',
+                                                            'source' => [
+                                                                'type' => 'post-request',
+                                                                'source_name' => 'fieldset_page',
+                                                                'source_field_name' => 'route_url',
+                                                            ],
+                                                        ],
+                                                    ],
+                                                ], // fieldset_router
+                                                'fieldset_template' => [
+                                                    'form_name' => 'form_create',
+                                                    'fieldset_name' => 'fieldset_template',
+                                                    'change_value' => [
+                                                        [
+                                                            'field_name' => 'route_uid',
+                                                            'source' => [
+                                                                'type' => 'post-request',
+                                                                'source_name' => 'fieldset_route',
+                                                                'source_field_name' => 'uid',
+                                                            ],
+                                                        ],
+                                                    ],
+                                                ], // fieldset_template
+//                                                'collection_area' => [
+//                                                    'is_collection' => true,
+//                                                    'form_name' => 'form_create',
+//                                                    'fieldset_name' => 'collection_area',
+//                                                    'change_value' => [
+//                                                        [
+//                                                            'field_name' => 'template_uid',
+//                                                            'source' => [
+//                                                                'type' => 'post-request',
+//                                                                'source_name' => 'fieldset_template',
+//                                                                'source_field_name' => 'uid',
+//                                                            ],
+//                                                        ],
+//                                                    ],
+//                                                ], // collection_area
+                                            ],
+                                        ],
+                                        'save' => [
+                                            'data' => [
+                                                'fieldset_page' => [
+                                                    'fieldset_name' => 'fieldset_page',
+                                                    'service' => [
+                                                        [
+                                                            'name'=>'Page\TableService',
+                                                            'object' => \Page\Model\PageModel::class,
+                                                            'method' => 'saveItem'
+                                                        ],
+
+                                                    ],
+                                                ], // fieldset_page
+                                                'fieldset_route' => [
+                                                    'fieldset_name' => 'fieldset_route',
+                                                    'service' => [
+                                                        [
+                                                            'name'=>'PageRoute\Router\TableService',
+                                                            'object' => \PageRoute\Model\RouteModel::class,
+                                                            'method' => 'saveItem'
+                                                        ],
+
+                                                    ],
+                                                ], // fieldset_route
+                                                'fieldset_router' => [
+                                                    'fieldset_name' => 'fieldset_router',
+                                                    'service' => [
+                                                        [
+                                                            'name'=>'PageRoute\RouterEntry\TableService',
+                                                            'object' => \PageRoute\Model\RouterEntryModel::class,
+                                                            'method' => 'saveItem'
+                                                        ],
+
+                                                    ],
+                                                ], // fieldset_router
+                                                'fieldset_template' => [
+                                                    'fieldset_name' => 'fieldset_template',
+                                                    'service' => [
+                                                        [
+                                                            'name'=>'PageTemplate\TableService',
+                                                            'object' => \PageTemplate\Model\PageTemplateModel::class,
+                                                            'method' => 'saveItem'
+                                                        ],
+
+                                                    ],
+                                                ], // fieldset_template
+//                                                'collection_area' => [
+//                                                    'is_collection' => true,
+//                                                    'fieldset_name' => 'collection_area',
+//                                                    'service' => [
+//                                                        [
+//                                                            'name'=>'Area\TableService',
+//                                                            'object' => \Area\Model\AreaModel::class,
+//                                                            'method' => 'saveItem'
+//                                                        ],
+//
+//                                                    ],
+//                                                ], // collection_area
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ], // admin.page.create.post
+                    ],
+                ], // Common\Handler\Create
                 'Common\Handler\List'=> [
                     'route' => [
-                        'spa.page.list' => [
+                        'admin.page.list' => [
                             'get' => [
                                 'method' => 'GET',
                                 'scenario' => 'list',
@@ -83,58 +375,75 @@ class ConfigProvider
                                     'gateway' => 'Page\TableGateway',
                                     'db_select' => [
                                         'columns' => ['uid','name','route_url','status','created',],
+                                        'join' => [
+                                            [
+                                                'on' => 'site',
+                                                'where' => 'site.uid = page.site_uid',
+                                                'columns' => ['site_name','site_status'=>'status'],
+                                                'union' => 'left',
+                                            ],
+                                        ],
                                     ],
                                 ],
                                 'data_template_model' => [
-                                    'route_name' => 'spa.user.list',
+                                    'route_name' => 'admin.page.list',
                                     'heading' => [
                                         [
                                             'html_tag' => 'h1',
-                                            'text' => 'Pages',
+                                            'text' => _("Strony"),
                                             'buttons' => [
                                                 [
                                                     'html_tag' => 'a',
-                                                    'text' => 'Create Page',
+                                                    'text' => _("Utworz Strone"),
                                                     'attributes' => [
                                                         'class' => 'btn btn-sm btn-info ml-5',
-                                                        'href' => 'helper::url:spa.page.create'
+                                                        'href' => 'helper::url:admin.page.create'
                                                     ],
                                                 ],
                                             ],
                                         ],
                                     ],
-                                    'table' => [
-                                        'main' => [
-                                            'name' => 'main',
-                                            'headers'=> [
-                                                'name'=>'Page Name',
-                                                'route_url'=>'Route Url',
-                                                'status'=>'Status',
-                                                'created'=>'Created',
-                                                100=>'Details',
-                                            ],
-                                            'rows' => [
-                                                ['column'=>'name'],
-                                                ['column'=>'route_url'],
-                                                ['column'=>'status'],
-                                                ['column'=>'created'],
-                                                ['buttons' => [
-                                                    [
-                                                        'html_tag' => 'a',
-                                                        'text' => 'Details',
-                                                        'attributes' => [
-                                                            'class' => 'btn btn-sm btn-info ml-5',
-                                                            'href' => [
-                                                                'type' => 'plugin',
-                                                                'name' => 'url',
-                                                                'arguments' => [
-                                                                    'spa.user.read',
-                                                                    ['uid'=>"data::item=>uid"]
+                                    'main' => [
+                                        'table' => [
+                                            [
+                                                'name' => 'main',
+                                                'headers'=> [
+                                                    'name'=>_("Nazwa"),
+                                                    'site_name'=>_("Witryna"),
+                                                    'route_url'=>_("Url"),
+                                                    'status'=>'Status',
+                                                    'created'=>'Created',
+                                                    100=>'Details',
+                                                ],
+                                                'rows' => [
+                                                    ['column'=>'name'],
+                                                    ['column'=>'site_name'],
+                                                    ['column'=>'route_url'],
+                                                    ['column'=>'status'],
+                                                    ['column'=>'created'],
+                                                    ['buttons' => [
+                                                        [
+                                                            'html_tag' => 'a',
+                                                            'text' => _("Szczegoly"),
+                                                            'attributes' => [
+                                                                'class' => 'btn btn-sm btn-info ml-5',
+                                                                'href' => [
+                                                                    'type' => 'plugin',
+                                                                    'name' => 'url',
+                                                                    'arguments' => [
+                                                                        'admin.page.read',
+                                                                        [
+                                                                            'uid'=> [
+                                                                                'source' => 'row-item',
+                                                                                'property' => 'uid',
+                                                                            ],
+                                                                        ]
+                                                                    ],
                                                                 ],
                                                             ],
                                                         ],
-                                                    ],
-                                                ],],
+                                                    ],],
+                                                ],
                                             ],
                                         ],
                                     ],
@@ -144,7 +453,7 @@ class ConfigProvider
                                     'template' => 'common-admin::template-list',
                                 ],
                             ], // get
-                        ], // spa.page.list
+                        ], // admin.page.list
                     ], // route
                 ], // Common\Handler\List
             ], // handler

@@ -13,7 +13,7 @@ class InstanceSeeder extends AbstractSeed
                 'application_uid'    => 'app-001',
                 'site_uid'    => 'site-001',
                 'client_uid'    => 'secalith-limited-client',
-                'hostname'    => 'spa.local.vm',
+                'hostname'    => 'manager.local.vm',
                 'status'    => 1,
                 'created'    => date('Y-m-d H:i:s'),
             ],
@@ -38,7 +38,7 @@ class InstanceSeeder extends AbstractSeed
             [
                 'uid'    => 'instance-004',
                 'application_uid'    => 'app-001',
-                'site_uid'    => 'site-003',
+                'site_uid'    => 'site-004',
                 'client_uid'    => 'ponad-podzialami-client',
                 'hostname'    => 'petycja.art13.eu',
                 'status'    => 1,

@@ -21,17 +21,28 @@ class RouteResourceAwareDelegator
         $config = $container->get(RouteConfigService::class);
         $routeConfig = $config->getRouteConfig($name);
 
-        if( array_key_exists('page_resource',$routeConfig))
+        $currentRouteName = $container->get(\Common\Helper\CurrentRouteNameHelper::class)->getMatchedRouteName();
+
+        $hostname = ($_SERVER['HTTP_HOST'])?$_SERVER['HTTP_HOST']:php_uname('n');
+        /* @var \Instance\Model\InstanceModel $instance */
+        $instance = $container->get("Instance\\TableService")->fetchBy(['hostname'=>$hostname]);
+
+        if( ! empty($routeConfig) && array_key_exists('page_resource',$routeConfig))
         {
             #TODO: move to service
 
+            // load Resources from Config
             foreach($routeConfig['page_resource'] as $specResource) {
                 if( array_key_exists('spec',$specResource)
-                    && array_key_exists('service',$specResource['spec']))
+                    && array_key_exists('service',$specResource['spec'])
+                    && $specResource['spec']['type'] == 'page-resource'
+                )
                 {
+                    echo $specResource['spec']['type'];
                     foreach($specResource['spec']['service'] as $specService) {
 
                         $requestedService = $container->get($specService['service_name']);
+                        echo $requestedResourceType = $container->get($specService['type']);
 
                         if(method_exists($requestedService,$specService['method']))
                         {
@@ -44,23 +55,37 @@ class RouteResourceAwareDelegator
                                         if($container->has($specServiceArg['service_name']))
                                         {
                                             $argService = $container->get($specServiceArg['service_name']);
-                                            $argVal[] = $argService->{$specServiceArg['method']}($specServiceArg['arg_name']);
+                                            var_dumP($argService->{$specServiceArg['method']}());
+
+                                            if(array_key_exists('arg_name',$specServiceArg)) {
+                                                $argVal[] = $argService->{$specServiceArg['method']}($specServiceArg['arg_name']);
+                                            } else {
+                                                $argVal[] = $argService->{$specServiceArg['method']}();
+                                            }
+                                        } else {
+                                            echo sprintf('the requested service does not exists. %s :: %s',get_class($specServiceArg['service_name']),$specService['method']);
+
                                         }
+                                    } else {
+                                        echo sprintf('the requested service type does not exists. %s :: %s',get_class($requestedService),$specServiceArg['type']);
                                     }
                                 }
                             }
 
                             $resources[$specResource['spec']['name']]['data'] = $requestedService->{$specService['method']}($argVal[0]);
                             $resources[$specResource['spec']['name']]['spec'] = $specService;
-
+var_dump($resources);
+                        } else {
+                            echo sprintf('the requested method does not exists. %s :: %s',get_class($requestedService),$specService['method']);
                         }
 
                     }
                 }
             }
+            $requestedCallback->addRouteResource($resources,'resource');
         }
 
-        $requestedCallback->addRouteResource($resources,'resource');
+
 
         return $requestedCallback;
 

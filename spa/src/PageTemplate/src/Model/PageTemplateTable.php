@@ -77,4 +77,34 @@ class PageTemplateTable
 
         return $rowset->current();
     }
+
+    public function saveItem(PageTemplateModel $item)
+    {
+        if( null === $item->getUid() || empty($item->getUid())) {
+            $item->setUid($this->generateUUID());
+        }
+
+        $dateTime = new \DateTime('now');
+
+        $data = array(
+            'uid' => $item->getUid(),
+            'name' => $item->getName(),
+            'route_uid' => $item->getRouteUid(),
+            'type' => $item->getType(),
+            'location' => $item->getLocation(),
+            'label' => $item->getLabel(),
+            'status' => $item->getStatus(),
+            'created' => $dateTime->format('Y-m-d H:i:s'),
+        );
+
+        $rowsAffected = $this->tableGateway->insert($data);
+
+
+        return [
+            'affected' => $rowsAffected,
+            'data' => $data,
+        ];
+
+
+    }
 }

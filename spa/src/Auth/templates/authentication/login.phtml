@@ -21,7 +21,7 @@ $forms['form_login']->prepare();
                 <label for="inputPassword" class="sr-only">Password</label>
                 <?=$this->formInput($forms['form_login']->get('form_login')->get('fieldset_credentials')->get('password'));?>
                 <?=$this->formElementErrors($forms['form_login']->get('form_login')->get('fieldset_credentials')->get('password'));?>
-                <div class="checkbox mt-2">
+                <div class="checkbox mt-2 d-none">
                     <?=$this->formCheckbox($forms['form_login']->get('form_login')->get('fieldset_rememberme')->get('remember_me'));?>
                     <?=$this->formLabel($forms['form_login']->get('form_login')->get('fieldset_rememberme')->get('remember_me'));?>
                 </div>
@@ -37,30 +37,3 @@ $forms['form_login']->prepare();
             <a href="<?=$this->url('spa.auth.reset');?>">I have the code</a>
         </div>
     </div>
-<fb:login-button
-        scope="public_profile,email"
-        onlogin="checkLoginState();">
-</fb:login-button>
-asdasd
-
-<script>
-    window.fbAsyncInit = function() {
-        FB.init({
-            appId      : '269022213660382',
-            cookie     : true,
-            xfbml      : true,
-            version    : '3'
-        });
-
-        FB.AppEvents.logPageView();
-
-    };
-
-    (function(d, s, id){
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement(s); js.id = id;
-        js.src = "https://connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-</script>

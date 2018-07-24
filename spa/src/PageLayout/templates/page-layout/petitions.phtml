@@ -42,6 +42,14 @@ endif;
     </style>
 </head>
 <body class="app app-theme-default <?=(isset($bodyClass))?$bodyClass:null;?>">
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v3.0&appId=276020159798486&autoLogAppEvents=1';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
     <header class="app-header">
         <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top" role="navigation">
             <div class="container">
@@ -51,7 +59,8 @@ endif;
                     </button>
                     <!-- Brand -->
                     <a class="navbar-brand" href="<?=$this->url()?>">
-                        <img src="/assets/img/1113.png" alt="Zend Expressive" height="28" />
+                        <img src="/assets/img/1113.png" alt="art13.eu" height="28" />
+                        <img src="/assets/img/protestuje.png" alt="" height="28" />
                     </a>
                 </div>
                 <!-- Links -->
@@ -94,7 +103,10 @@ endif;
                 </div>
                 <ul class="navbar-nav float-right">
                     <li class="nav-item">
-                        <a href="<?=$this->url('spa.auth.logout')?>" class="btn btn-secondary btn-sm">Zaloguj</a>
+                        <a class="btn btn-sm btn-info mr-1" href="https://facebook.com/Stopacta2.Poland">Znajdź nas na Facebooku</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-sm btn-success" href="https://www.facebook.com/groups/stopacta2/events/">Dołącz do nas</a>
                     </li>
                 </ul>
             </div>
@@ -105,11 +117,16 @@ endif;
 
 
         <main class="_container-fluid">
-            <div class="row justify-content-between h-100 mx-auto">
+            <div class="row justify-content-between h-100 mx-auto mt-3">
                 <div id="petition-main" class="col-12 col-md-8 mx-0 my-0 rounded pt-3 px-4">
                     <h1 class="mb-0 display-4 font-weight-normal">Petycja Lipiec</h1>
                     <hr class="pb-1">
-                    <p class="lead font-weight-normal">
+
+                    <div class="post-section-date float-right">21-07-2018</div>
+
+                    <div class="fb-share-button d-inline-block" data-href="https://petycja.art13.eu" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fpetycja.art13.eu%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Udostępnij</a></div>
+
+                    <hr class="pb-1 d-block">
 
                     <p>Szanowna Pani Poseł / Szanowny Panie Pośle</p>
 
@@ -153,10 +170,9 @@ endif;
                                 <h4 class="my-0 font-weight-normal text-center">Popierasz nas?!</h4>
                             </div>
                             <div class="card-body">
-
                                 <p>Wypelnij formularz:</p>
 
-                                <form action="" method="POST" name="form_request_demo_restable" id="form_request_demo_restable">
+                                <form action="<?=$this->url('spa.petition.support.post');?>" method="POST" name="form_request_demo_restable" id="form_request_demo_restable">
                                     <div class="py-2 px-0">
                                         <input name="name_first" class="form-control" placeholder="Imie" value="" type="text">
                                     </div>
@@ -167,10 +183,19 @@ endif;
                                     <div class="py-2 px-0">
                                         <input name="contact_email" class="form-control" placeholder="Adres Email" value="" type="email">
                                     </div>
-                                    <div class="pt-2 px-0">
-                                        <a href="/strony/polityka-prywatnosci" target="_blank">Polityka prywatnosci <i class="fas fa-external-link-alt"></i></a>
-                                    </div>
                                 </form>
+
+<!--                                <hr />-->
+
+<!--                                <p>Zaloguj sie:</p>-->
+
+<!--                                <div class="fb-login-button justify-content-center" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>-->
+
+                                <hr />
+
+                                <div class="pt-2 px-0">
+                                    <a href="/strony/polityka-prywatnosci" target="_blank">Polityka prywatnosci <i class="fas fa-external-link-alt"></i></a>
+                                </div>
                             </div>
                             <div class="card-footer text-muted">
                                 <a href="/restable/pages/request-demo" class="btn btn-lg btn-block btn-success">Popieram!</a>

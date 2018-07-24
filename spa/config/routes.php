@@ -8,6 +8,9 @@ use Zend\Expressive\MiddlewareFactory;
 
 return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container) : void {
 //    $app->get('/', App\Handler\HomePageHandler::class, 'home');
+
+    $app->any('/test/form', App\Handler\FormHandler::class, 'test.form');
+
     $app->get('/api/ping', App\Handler\PingHandler::class, 'api.ping');
     $app->any('/login', Auth\Handler\LoginHandler::class, 'spa.auth.login');
     $app->any('/logout', Auth\Handler\LogoutHandler::class, 'spa.auth.logout');
@@ -73,19 +76,23 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
 
     # PAGE #
     $app->get('/admin/page/list[/[{page:\d+}]]', [
+        Auth\Handler\AuthHandler::class,
         'Common\Handler\List',
-    ], 'spa.page.list');
+    ], 'admin.page.list');
     # CREATE PAGE #
     $app->get('/admin/page/create[/]', [
-        'Common\Handler\List',
-    ], 'spa.page.create');
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\Create',
+    ], 'admin.page.create');
     $app->post('/admin/page/create[/]', [
-        'Common\Handler\List',
-    ], 'spa.page.create.post');
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\Create',
+    ], 'admin.page.create.post');
     # READ PAGE #
     $app->get('/admin/page/details/{uid}', [
+        Auth\Handler\AuthHandler::class,
         'Common\Handler\List',
-    ], 'spa.page.read');
+    ], 'admin.page.read');
 
     # SPA PETITIONS
     $app->get('/admin/petition/list[/[{page:\d+}]]', [
@@ -101,4 +108,13 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
         Auth\Handler\AuthHandler::class,
         'Common\Handler\Create',
     ], 'spa.spa-petition.create.post');
+
+
+
+//    $app->get('/popieram[/]', [
+//        'Common\Handler\Create',
+//    ], 'spa.petition.ssupport');
+    $app->post('/popieram[/]', [
+        SpaPetition\Handler\SignatureHandler::class,
+    ], 'spa.petition.support.post');
 };

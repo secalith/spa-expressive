@@ -36,6 +36,22 @@ class ConfigProvider
                 ],
             ],
             'gateway' => [
+                'PageRoute\Router\TableGateway' => [
+                    'name' => 'PageRoute\Router\TableGateway',
+                    'table' => [
+                        'name' => 'route',
+                        'object' => \PageRoute\Model\RouteTable::class,
+                    ],
+                    'adapter' => [
+                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                    ],
+                    'model' => [
+                        "object" => \PageRoute\Model\RouteModel::class,
+                    ],
+                    'hydrator' => [
+                        "object" => \Zend\Hydrator\ObjectProperty::class,
+                    ],
+                ],
                 'PageRoute\RouterEntry\TableGateway' => [
                     'name' => 'PageRoute\RouterEntry\TableGateway',
                     'table' => [

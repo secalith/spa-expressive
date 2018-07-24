@@ -9,6 +9,7 @@ class RouterEntryModel
     public $uid;
     public $parent_uid;
     public $application_uid;
+    public $site_uid;
     public $route_uid;
     public $route_name;
     public $route_url;
@@ -40,6 +41,7 @@ class RouterEntryModel
         $this->uid = ( array_key_exists('uid',$data)) ? $data['uid'] : null;
         $this->parent_uid = ( array_key_exists('parent_uid',$data)) ? $data['parent_uid'] : null;
         $this->application_uid = ( array_key_exists('application_uid',$data)) ? $data['application_uid'] : null;
+        $this->site_uid = ( array_key_exists('site_uid',$data)) ? $data['site_uid'] : null;
         $this->route_uid = ( array_key_exists('route_uid',$data)) ? $data['route_uid'] : null;
         $this->route_name = ( array_key_exists('route_name',$data)) ? $data['route_name'] : null;
         $this->route_url = ( array_key_exists('route_url',$data)) ? $data['route_url'] : null;
@@ -61,6 +63,7 @@ class RouterEntryModel
         $data['uid'] = $this->uid;
         $data['parent_uid'] = $this->parent_uid;
         $data['application_uid'] = $this->application_uid;
+        $data['site_uid'] = $this->site_uid;
         $data['route_uid'] = $this->route_uid;
         $data['route_name'] = $this->route_name;
         $data['route_url'] = $this->route_url;
@@ -129,6 +132,24 @@ class RouterEntryModel
     public function setApplicationUid($application_uid)
     {
         $this->application_uid = $application_uid;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSiteUid()
+    {
+        return $this->site_uid;
+    }
+
+    /**
+     * @param mixed $site_uid
+     * @return RouterEntryModel
+     */
+    public function setSiteUid($site_uid)
+    {
+        $this->site_uid = $site_uid;
         return $this;
     }
 

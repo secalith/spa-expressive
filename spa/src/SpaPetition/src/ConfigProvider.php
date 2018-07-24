@@ -24,6 +24,7 @@ class ConfigProvider
             'invokables' => [
             ],
             'factories'  => [
+                Handler\SignatureHandler::class => Handler\SignatureHandlerFactory::class,
             ],
         ];
     }
@@ -47,6 +48,11 @@ class ConfigProvider
                 'SpaPetition\TableService' => [
                     'gateway' => [
                         'name' => 'SpaPetition\TableGateway',
+                    ],
+                ],
+                'SpaPetition\Signature\TableService' => [
+                    'gateway' => [
+                        'name' => 'SpaPetition\Singature\TableGateway',
                     ],
                 ],
                 'SpaPetition\Data\TableService' => [
@@ -87,9 +93,25 @@ class ConfigProvider
                         "object" => \Zend\Hydrator\ObjectProperty::class,
                     ],
                 ],
+                'SpaPetition\Signature\TableGateway' => [
+                    'name' => 'SpaPetition\Signature\TableGateway',
+                    'table' => [
+                        'name' => 'signature',
+                        'object' => \SpaPetition\Model\SignatureTable::class,
+                    ],
+                    'adapter' => [
+                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                    ],
+                    'model' => [
+                        "object" => \SpaPetition\Model\SignatureModel::class,
+                    ],
+                    'hydrator' => [
+                        "object" => \Zend\Hydrator\ObjectProperty::class,
+                    ],
+                ],
             ], // gateway
             'handler' => [
-                'Common\Handler\Create' => [
+                'SpaPetition\Handler\SignatureHandler' => [
                     'route' => [
                         'spa.spa-petition.create' => [
                             'get' => [
@@ -147,6 +169,109 @@ class ConfigProvider
                                                 [
                                                     'html_tag' => 'a',
                                                     'text' => 'Lista Petycji',
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-5',
+                                                        'href' => 'helper::url:spa.spa-petition.list'
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                                'view_template_model' => [
+                                    'layout' => 'layout::default',
+                                    'template' => 'common-admin::template-create',
+                                    'forms' => [
+                                        'form_create' => 'restable-admin-client::form-create',
+                                    ],
+                                ],
+                                'forms' => [
+                                    [
+                                        'name' => 'form_create',
+                                        'action' => [
+                                            'route' => 'spa.spa-petition.create.post',
+                                        ],
+                                        'object' => Form\WriteForm::class,
+                                        'save' => [
+                                            'data' => [
+                                                'fieldset_petition' => [
+                                                    'type' => 'fieldset',
+                                                    'priority' => 110,
+                                                    'fieldset_name' => 'fieldset_petition',
+                                                    'service' => [
+                                                        [
+                                                            'name'=>'SpaPetition\TableService',
+                                                            'object' => Model\PetitionBaseModel::class,
+                                                            'method' => 'saveItem'
+                                                        ],
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ], // restable.admin.client.create.post
+                    ],
+                ],
+                'Common\Handler\Create' => [
+                    'route' => [
+                        'admin.petition.create' => [
+                            'get' => [
+                                'method' => 'GET',
+                                'scenario' => 'create',
+                                'data_template_model' => [
+                                    'route_name' => 'admin.petition.create',
+                                    'heading' => [
+                                        [
+                                            'html_tag' => 'h1',
+                                            'text' => _("Create"),
+                                            'buttons' => [
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => _("List"),
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-5',
+                                                        'href' => 'helper::url:admin.petition.list'
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                                'view_template_model' => [
+                                    'layout' => 'layout::default',
+                                    'template' => 'common-admin::template-create',
+                                    'forms' => [
+                                        'form_create' => 'common-admin::template-create',
+                                    ],
+                                ],
+                                'forms' => [
+                                    [
+                                        'action' => [
+                                            'route' => 'admin.petition.create.post',
+                                        ],
+                                        'name' => 'form_create',
+                                        'object' => Form\WriteForm::class,
+                                        'template' => 'common-admin::template-create',
+                                    ]
+                                ],
+                            ],
+                        ], // spa.spa-petition.create
+                        'spa.spa-petition.create.post' => [
+                            'post' => [
+                                'method' => 'POST',
+                                'scenario' => 'process',
+                                'data_template_model' => [
+                                    'route_name' => 'spa.spa-petition.create.post',
+                                    'heading' => [
+                                        [
+                                            'html_tag' => 'h1',
+                                            'text' => _("Create"),
+                                            'buttons' => [
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => 'List',
                                                     'attributes' => [
                                                         'class' => 'btn btn-sm btn-info ml-5',
                                                         'href' => 'helper::url:spa.spa-petition.list'

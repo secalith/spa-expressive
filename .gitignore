@@ -1,6 +1,8 @@
 .vagrant
 .idea
-application/logs/
-!application/logs/.keepme
-application/data/cache
-!application/data/cache/.keepme
+spa/logs/
+!spa/logs/.keepme
+apa/data/cache
+!spa/data/cache/.keepme
+spa/data/database/*.sqlite3
+spa/vendor

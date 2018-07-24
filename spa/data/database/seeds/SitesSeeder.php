@@ -10,7 +10,7 @@ class SitesSeeder extends AbstractSeed
         $data = [
             [
                 'uid'    => 'site-001',
-                'site_name'    => 'spa.local.vm',
+                'site_name'    => 'manager.local.vm',
                 'application_uid'    => 'app-001',
                 'status'    => 1,
                 'created'    => date('Y-m-d H:i:s'),
