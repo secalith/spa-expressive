@@ -59,19 +59,6 @@ class RouterSeeder extends AbstractSeed
                 'status'    => 1,
                 'created'    => date('Y-m-d H:i:s'),
             ],
-            [
-                'uid'    => 'router-005',
-                'parent_uid'    => '0',
-                'application_uid'    => 'app-001',
-                'route_uid'    => 'route-005',
-                'site_uid'    => 'site-003',
-                'route_url'    => '/popieram[/]',
-                'scenario'    => 'display',
-                'controller'    => 'Common\Handler\Create',
-                'attributes'    => '{}',
-                'status'    => 1,
-                'created'    => date('Y-m-d H:i:s'),
-            ],
         ];
 
         $table = $this->table('router');

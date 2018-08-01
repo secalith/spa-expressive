@@ -32,12 +32,6 @@ class RouteSeeder extends AbstractSeed
                 'status'    => 1,
                 'created'    => date('Y-m-d H:i:s'),
             ],
-            [
-                'uid'    => 'route-005',
-                'route_name'    => 'petition.popieram',
-                'status'    => 1,
-                'created'    => date('Y-m-d H:i:s'),
-            ],
         ];
 
         $table = $this->table('route');
