@@ -1,24 +1,21 @@
 <div class="row px-1 px-sm-5 mb-0">
     <div class="col-12  d-none d-md-inline-block block-desktop">
-        <h2 class="mb-2 displajy-4"><?=$details->getCity();?></h2>
+        <h2 class="mb-2 displajy-4"><?=$details->getCityGlobal();?></h2>
     </div>
     <div class="col-12  d-none d-md-inline-block block-desktop">
         <h2 class="mb-2 display-4"><?=$details->getName();?></h2>
-        <h3 class="mt-2">26 sierpnia start o godzinie 19:00</h3>
-        <a class="btn btn-success mt-4" href="https://www.facebook.com/events/2035752230086477/" target="_blank">
-            Zobacz wydarzenie na Facebooku
-        </a>
+        <h3 class="mt-2"><?=$details->getDateStart();?></h3>
+        <a class="btn btn-success mt-4" href="<?=$details->getEventLinkExternal();?>" target="_blank"><?=$this->translate("Zobacz wydarzenie na Facebooku");?></a>
+        <a class="btn btn-info mt-4" href="<?=$details->getEventMapExternal();?>" target="_blank"><?=$this->translate("Znajdz na mapie");?></a>
     </div>
     <div class="col-12 d-inline-block d-md-none">
-        <h2 class="mb-2 display-4">Marsz w obronie internetu - #StopACTA2 SaveYourInternet</h2>
+        <h2 class="mb-2 display-4"><?=$details->getCityGlobal();?></h2>
     </div>
     <div class="col-12 d-inline-block d-md-none">
-        <h2 style="font-weight:600" class="mb-2 display-4">Warszawa</h2>
-        <h3 class="mt-2">26 sierpnia start o godzinie 19:00</h3>
-        <span id="time_counter-wawa3" data-countdown="2018/08/26 19:00" class="xdsoft"><div class="xdsoft_flipcountdown xdsoft_size_sm"><div class="xdsoft_digit" style="background-position: 0px -631px;"></div><div class="xdsoft_digit" style="background-position: 0px -1261px;"></div><div class="xdsoft_digit xdsoft_space" style=""></div><div class="xdsoft_digit" style="background-position: 0px -421px;"></div><div class="xdsoft_digit" style="background-position: 0px -1681px;"></div><div class="xdsoft_digit xdsoft_space" style=""></div><div class="xdsoft_digit" style="background-position: 0px -1261px;"></div><div class="xdsoft_digit" style="background-position: 0px -1261px;"></div><div class="xdsoft_digit xdsoft_space" style=""></div><div class="xdsoft_digit" style="background-position: 0px -631px;"></div><div class="xdsoft_digit" style="background-position: 0px -1051px;"></div><div class="xdsoft_clearex"></div></div></span>
-        <a class="btn btn-success mt-4" href="https://www.facebook.com/events/2035752230086477/" target="_blank">
-            Zobacz wydarzenie na Facebooku
-        </a>
+        <h2 style="font-weight:600" class="mb-2 display-4"><?=$details->getCityGlobal();?></h2>
+        <h3 class="mt-2"><?=$details->getDateStart();?></h3>
+        <a class="btn btn-success mt-4" href="<?=$details->getEventLinkExternal();?>" target="_blank"><?=$this->translate("Zobacz wydarzenie na Facebooku");?></a>
+        <a class="btn btn-info mt-4" href="<?=$details->getEventMapExternal();?>" target="_blank"><?=$this->translate("Znajdz na mapie");?></a>
     </div>
 </div>
 <hr />
