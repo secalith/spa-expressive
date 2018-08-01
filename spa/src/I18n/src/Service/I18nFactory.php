@@ -16,9 +16,19 @@ class I18nFactory
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
 
+        $config = $container->get('config');
+
         $translator = $container->get(\Zend\I18n\Translator\TranslatorInterface::class);
 
         $currentLanguage = $this->getUserLanguage();
+
+        $defaultLanguage = $config['app']['service']['i18n']['config']['parameters']['default'];
+
+        $availableLanguages = $config['app']['service']['i18n']['config']['options']['languages'];
+
+        if( ! in_array($defaultLanguage,$availableLanguages)) {
+            $currentLanguage = $defaultLanguage;
+        }
 
         return new I18n($translator,$currentLanguage);
     }

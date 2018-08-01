@@ -72,14 +72,24 @@ class ConfigProvider
     public function getApplicationConfig()
     {
         return [
-            'config_service' => [
+            'service' => [
                 'i18n' => [
-                    'default' => 'en_en',
-                    'list' => [
-                        'en_en' > 'English',
-                        'fr_fr' > 'French',
-                        'pl_pl' > 'Polish',
+                    'config' => [
+                        'parameters' => [
+                            'default' => 'en_en',
+                        ],
+                        'options' => [
+                            'languages' => [
+                                'en_en' => _('English'),
+                                'eo_eo' => _('Esperanto'),
+//                                'fr_fr' => _('French'),
+                                'sv_sv' => _('Swedish'),
+                                'pl_pl' => _('Polish'),
+                            ],
+                        ],
                     ],
+
+
                 ],
             ],
         ];
