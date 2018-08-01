@@ -1,13 +1,13 @@
 <?php
 return [
-    'Sign In' => 'Logowanie',
-    'Sign Up' => 'Rejestracja',
-    'Continue' => 'Kontynuuj',
+    'Sign In' => 'Sign In',
+    'Sign Up' => 'Sign Up',
+    'Sign Out' => 'Sign Out',
+    'Continue' => 'Continue',
 
-    'Homepage' => 'Strona Domowa',
-    'Events' => 'Wydarzenia',
+    'Homepage' => 'Homepage',
+    'Events' => 'Events',
     'See on Facebook' => 'See on Facebook',
     'Find on Map' => 'Find on Map',
-
 
 ];
