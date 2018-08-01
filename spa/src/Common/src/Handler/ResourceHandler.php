@@ -39,7 +39,6 @@ class ResourceHandler implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler) : Response
     {
-        var_dump($handler);die();
         if	(!	$this->auth->hasIdentity())	{
             return new RedirectResponse('/login');
         }

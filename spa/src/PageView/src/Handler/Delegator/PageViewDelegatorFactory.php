@@ -62,7 +62,7 @@ class PageViewDelegatorFactory
                                 }
 
                             } // endforeach $templateAreas
-//var_dump($areaView);
+
                             $pageView->setVariable('area',$areaView);
 
                         }

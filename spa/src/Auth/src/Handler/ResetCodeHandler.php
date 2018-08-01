@@ -51,7 +51,7 @@ class ResetCodeHandler implements RequestHandlerInterface, PageViewAwareInterfac
             if ($loginForm->isValid()) {
                 // Form is valid
                 $formData = $loginForm->getData();
-var_dump($formData);
+
                 $result = $this->authManager->login(
                     $formData->getFormLogin()->getFieldsetCredentials()->getEmail(),
                     $formData->getFormLogin()->getFieldsetCredentials()->getPassword(),

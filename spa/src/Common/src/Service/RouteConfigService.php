@@ -31,9 +31,7 @@ class RouteConfigService
         if( null !== $config) {
             return $config;
         }
-//        var_dump($this->handlersConfig);
-//        var_dump($configPath);
-//        var_dump($config);
+
         return null;
     }
 }

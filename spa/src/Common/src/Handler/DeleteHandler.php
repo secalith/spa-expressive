@@ -81,9 +81,6 @@ class DeleteHandler implements RequestHandlerInterface,
                     $messages['info'][] = 'Form is Valid.';
 
                     $formData = $formItem->getData();
-//var_dump($formData);
-
-
 
                     if(array_key_exists('forms',$handlerConfig)) {
 
@@ -144,8 +141,6 @@ class DeleteHandler implements RequestHandlerInterface,
                                                                         'value' => $newValue,
                                                                     ];
 
-//                                                                    var_dump($field_change);
-
                                                                 }
                                                             } elseif($entity_change['source']['type'] === 'result-incoming') {
 //                                                                // swap with value from incoming data (f.e. different element from different fieldset)
@@ -187,23 +182,17 @@ class DeleteHandler implements RequestHandlerInterface,
                                                     }
 
                                                     $fieldsetService = $this->getFieldsetService($fieldsetConfig['fieldset_name']);
-//var_dump($serviceConfig);
-
-//                                                    var_dump($field_change);
-
 
                                                     if(property_exists($formData,$fieldsetConfig['fieldset_name'])) {
 
                                                         $fieldsetItem = $formData->{$fieldsetConfig['fieldset_name']};
 
                                                         if($field_change!==null && array_key_exists($fieldsetConfig['fieldset_name'],$field_change)) {
-//var_dumP($field_change);
                                                             foreach($field_change[$fieldsetConfig['fieldset_name']] as $changeFieldItem) {
                                                                 $fieldsetItem->{$changeFieldItem['name']} = $changeFieldItem['value'];
                                                             }
                                                         }
 //
-//                                                        var_dumP($fieldsetItem);
                                                         $results_tmp = $fieldsetService->{$serviceConfig['method']}($fieldsetItem);
 
                                                         $resultModel = new $serviceConfig['object']($results_tmp['data']);
@@ -229,25 +218,15 @@ class DeleteHandler implements RequestHandlerInterface,
 
                         }
 
-//                        echo 'count form_config: ' . $iFormConfig . '<br />';
-//var_dump($results);
                     }
 
                 } else {
                     $messages['error'][] = 'Form seems to be invalid.';
                     $messages['error'][] = 'Data has NOT been saved.';
-
-//                    var_dump($formItem->getMessages());
-
                 }
                 $iForms++;
             }
 
-
-//            echo 'count forms: ' . $iForms . '<br />';
-
-
-//var_dump($rowsAffected);
             if($rowsAffected!=null) {
                 $messages['success'][] = 'Item has been updated.';
                 $messages['success'][] = var_export($rowsAffected,true);
@@ -257,13 +236,11 @@ class DeleteHandler implements RequestHandlerInterface,
             }
         }
 
-//        var_dump($results);
-
         $this->addData($messages,'messages');
         $this->addData($this->getRouteResource('resource'),'resource');
 
         $this->template->addDefaultParam(Template\TemplateRendererInterface::TEMPLATE_ALL,'bodyClass','app-action-delete');
-//var_dump($this->getRouteResource('resource'));die();
+
         return new HtmlResponse($this->template->render($this->getData('template'), $this->getData()));
     }
 }

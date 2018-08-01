@@ -28,9 +28,6 @@ class DataSelectorDelegatorFactory extends CommonDelegator implements DelegatorF
 
 //        $routeSelectors = $commonDataSelectorService->getSelectorsConfig();
 
-//        var_dump($routeSelectors);
-
-
         $routeName = $commonRouteService->getRouteName();
 
         $moduleName = $commonRouteService->getModuleName();

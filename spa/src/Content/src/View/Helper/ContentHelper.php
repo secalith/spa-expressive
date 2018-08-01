@@ -28,20 +28,17 @@ class ContentHelper extends AbstractHelper
                             $item->getData()->setAttribute($attrName,$a);
                         } else {
                             // the helpers` declaration has some variables to pass
-//                            var_dump($helperName);
-//                            var_dump($helperData);
                         }
                     }
 //                    $routeNameForm = $this->get_string_between($attrName,$helper.':','::]');
 //
-//                    var_dump($helperData);
 //                    $t = $container->get(UrlHelper::class);
 //                    $item->getData()->setAttribute($attrName,$attrValue);
 //                    $item->setAttribute('action',$t->generate($routeNameForm));
                 }
 
             }
-//            var_dump($item->getAttributes());
+
         }
 
         $output .= $this->getView()->plugin('openTag')($item);
@@ -52,7 +49,7 @@ class ContentHelper extends AbstractHelper
                 $pos = strpos($item->getData()->getContent(),$contentPlaceholder);
                 if($pos !== false) {
                     $renderedContent = $this->getView()->plugin('displayContent')($childData);
-//                    var_dump($item->getData()->getContent());
+
                     $c = str_replace($contentPlaceholder,$renderedContent,$item->getData()->getContent());
                     $item->getData()->setContent($c);
                 }

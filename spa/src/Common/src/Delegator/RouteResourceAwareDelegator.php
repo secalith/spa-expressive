@@ -55,7 +55,6 @@ class RouteResourceAwareDelegator
                                         if($container->has($specServiceArg['service_name']))
                                         {
                                             $argService = $container->get($specServiceArg['service_name']);
-                                            var_dumP($argService->{$specServiceArg['method']}());
 
                                             if(array_key_exists('arg_name',$specServiceArg)) {
                                                 $argVal[] = $argService->{$specServiceArg['method']}($specServiceArg['arg_name']);
@@ -74,7 +73,7 @@ class RouteResourceAwareDelegator
 
                             $resources[$specResource['spec']['name']]['data'] = $requestedService->{$specService['method']}($argVal[0]);
                             $resources[$specResource['spec']['name']]['spec'] = $specService;
-var_dump($resources);
+
                         } else {
                             echo sprintf('the requested method does not exists. %s :: %s',get_class($requestedService),$specService['method']);
                         }
@@ -85,22 +84,17 @@ var_dump($resources);
             $requestedCallback->addRouteResource($resources,'resource');
         }
 
-
-
         return $requestedCallback;
-
-        var_dump($routeConfig['page_resource']);
-        die();
 
         if( $requestedCallback instanceof ApplicationFormRouteAwareInterface )
         {
             if( ! empty($routeConfig['forms']))
             {
-                var_dump($routeConfig['forms']);
+
                 foreach($routeConfig['forms'] as $formAppConfig)
                 {
                     if( ! is_array($formAppConfig)) {
-                        var_dump($formAppConfig);
+
                     }
                     if( array_key_exists('object',$formAppConfig))
                     {

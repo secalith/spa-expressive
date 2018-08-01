@@ -81,8 +81,6 @@ class DisplayLinkGroupHelper extends AbstractHelper
                                                 }
                                                 break;
                                         }
-                                    } else {
-//                                        var_dump($argArguments);die();
                                     }
                                 }
                             }

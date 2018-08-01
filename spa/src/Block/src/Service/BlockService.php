@@ -83,8 +83,6 @@ class BlockService
             }
         }
 
-//        var_dump($childChildBlocks);
-//
         return $childBlocks;
 
     }

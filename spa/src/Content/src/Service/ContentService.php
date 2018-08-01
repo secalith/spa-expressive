@@ -83,8 +83,6 @@ class ContentService
             }
         }
 
-        var_dump($childChildBlocks);
-//
         return $childBlocks;
 
     }

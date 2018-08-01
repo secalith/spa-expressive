@@ -25,7 +25,6 @@ class CurrentHandlerNameMiddleware  implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler) : Response
     {
-        var_dump($handler);die();
         $this->currentHandlerNameHelper->setHandlerName($handler);
 
         return $handler->handle($request);

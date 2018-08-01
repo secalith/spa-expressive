@@ -27,7 +27,7 @@ class MapHydrator
 
     public function extract($object)
     {
-        var_dump($object);
+
     }
 
     public function hydrate(array $data, $object)

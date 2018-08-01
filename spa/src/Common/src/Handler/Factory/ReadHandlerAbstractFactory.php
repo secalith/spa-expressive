@@ -120,13 +120,14 @@ class ReadHandlerAbstractFactory implements AbstractFactoryInterface
             if( $mainContentDeclaration['type'] === 'form' && $resources !== null ) {
                 // load form
                 $form = new $mainContentDeclaration['object']();
-//                                        var_dump($resources);
+
                 $formData =[];
                 $form->setData($resources);
+
                 foreach($resources as $resource) {
                     $formData[$form->getName()][$resource['service_config']['fieldset_name']] = $resource['data']->toArray();
                 }
-//                                        var_dump($formData);
+
                 if($form->get('form_read')->get($resource['service_config']['fieldset_name'])) {
                     $form->setData($formData);
                 }

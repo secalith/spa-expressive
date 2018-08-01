@@ -53,7 +53,7 @@ class ApplicationFieldsetSaveServiceAwareDelegator
                             echo 'dupa';
                         }
                     }
-//var_dump($_POST);
+
                     $formIndexName = (array_key_exists('name',$formAppConfig))
                         ? $formAppConfig['name']
                         : $form->getName();
@@ -95,8 +95,6 @@ class ApplicationFieldsetSaveServiceAwareDelegator
                                     foreach($fieldsetConfig['service'] as $serviceConfig) {
                                         if($container->has($serviceConfig['name'])) {
                                             $requestedCallback->setFieldsetService($container->get($serviceConfig['name']),$fieldsetConfig['fieldset_name']);
-                                        } else {
-                                            var_dump($serviceConfig);
                                         }
                                     }
                                 }

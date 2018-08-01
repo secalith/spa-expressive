@@ -76,7 +76,6 @@ class SignatureHandler implements RequestHandlerInterface
 
             } else {
                 $messages = $data['forms']['form_request_demo']->getMessages();
-//                var_dump($messages);
             }
         }
 

@@ -49,7 +49,6 @@ class PetitionTable
 
     public function saveItem($item)
     {
-        var_dumP($item);die();
         if( null === $item->getUid() || empty($item->getUid())) {
             $item->setUid($this->generateUUID());
         }

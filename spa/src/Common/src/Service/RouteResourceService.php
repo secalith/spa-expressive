@@ -22,9 +22,6 @@ class RouteResourceService
     public function getItemBySiteRoute($routeName)
     {
 
-        var_dump($this->routeName);
-        var_dump($routeName);
-        var_dump($this->instance);
     }
 
     public function getRouteConfig($handlerName,$routeName=null,$requestMethod=null)
@@ -39,9 +36,7 @@ class RouteResourceService
         if( null !== $config) {
             return $config;
         }
-//        var_dump($this->handlersConfig);
-//        var_dump($configPath);
-//        var_dump($config);
+
         return null;
     }
 }

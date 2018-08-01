@@ -130,7 +130,6 @@ class CommonController extends CommonIndexController
         $config = \Zend\Stdlib\ArrayUtils::merge($config, $paramsFromRoute);
         if(!empty($paramsFromQuery)) {
             // foreach ($paramsFromQuery as $paramFromQuery) {
-            // var_dump($paramsFromRoute);
             $config = \Zend\Stdlib\ArrayUtils::merge($config, $paramsFromQuery);
             //}
         }

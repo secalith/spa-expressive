@@ -23,7 +23,7 @@ class PageViewDelegatorFactory
             $requestedCallback = $callback();
 
             $routeName = $container->get(\Common\Helper\CurrentRouteNameHelper::class)->getMatchedRouteName();
-            var_dump($routeName);
+
             $pageView = new \Zend\View\Model\ViewModel();
 
             if (false!=$container->has("Page\\TableService"))
@@ -54,9 +54,6 @@ class PageViewDelegatorFactory
                                 // get all blocks for the current area (with content)
 
                                 $areaBlocks = $container->get(\PageView\Service\PageViewService::class)->getAllByArea($area);
-
-
-                                var_dump($areaBlocks);
 
                                 return;
 

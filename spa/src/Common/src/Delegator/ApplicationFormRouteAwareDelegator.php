@@ -24,11 +24,10 @@ class ApplicationFormRouteAwareDelegator
         {
             if( ! empty($routeConfig['forms']))
             {
-                var_dump($routeConfig['forms']);
                 foreach($routeConfig['forms'] as $formAppConfig)
                 {
                     if( ! is_array($formAppConfig)) {
-                        var_dump($formAppConfig);
+
                     }
                     if( array_key_exists('object',$formAppConfig))
                     {

@@ -133,7 +133,6 @@ class CreateHandler implements RequestHandlerInterface,
 
                                         }
 
-//                                        var_dump($preValidateFieldset);
                                     }
                                 }
                             }
@@ -145,17 +144,12 @@ class CreateHandler implements RequestHandlerInterface,
 
                 // bind data from POST
                 $formItem->setData($postData);
-//var_dumP($postData);
-                if($formItem->isValid()) {
 
-//                    var_dump($formItem->getData());
-//                    die();
+                if($formItem->isValid()) {
 
                     $messages['info'][] = 'Form is Valid.';
 
                     $formData = $formItem->getData();
-
-//                    var_dump($formData);
 
                     if(array_key_exists('forms',$handlerConfig)) {
 
@@ -173,11 +167,10 @@ class CreateHandler implements RequestHandlerInterface,
                                 if($formConfigModel->getSave()) {
 
                                     foreach($formConfigModel->getSave('data') as $configIndexName => $fieldsetConfig) {
-//var_dumP($fieldsetConfig);
+
                                         if(array_key_exists('service',$fieldsetConfig)) {
 
                                             foreach($fieldsetConfig['service'] as $serviceConfig) {
-//var_dumP($this->getFieldsetServiceAll());
 
                                                 if( array_key_exists('fieldset_name',$fieldsetConfig)
                                                     && $this->hasFieldsetService($fieldsetConfig['fieldset_name'])
@@ -189,7 +182,6 @@ class CreateHandler implements RequestHandlerInterface,
 
                                                         foreach($fieldsetConfig['entity_change'] as $entity_change ) {
 
-//var_dump($entity_change);
                                                             if(array_key_exists('source',$entity_change)
                                                                 && is_array($results)
                                                                 && array_key_exists($entity_change['source']['source_name'],$results)) {
@@ -218,8 +210,6 @@ class CreateHandler implements RequestHandlerInterface,
                                                                         'name' => $entity_change['field_name'],
                                                                         'value' => $newValue,
                                                                     ];
-
-//                                                                    var_dump($field_change);
 
                                                                 }
                                                             } elseif($entity_change['source']['type'] === 'result-incoming') {
@@ -269,13 +259,11 @@ class CreateHandler implements RequestHandlerInterface,
                                                         $fieldsetItem = $formData->{$fieldsetConfig['fieldset_name']};
 
                                                         if($field_change!==null && array_key_exists($fieldsetConfig['fieldset_name'],$field_change)) {
-//var_dumP($field_change);
                                                             foreach($field_change[$fieldsetConfig['fieldset_name']] as $changeFieldItem) {
                                                                 $fieldsetItem->{$changeFieldItem['name']} = $changeFieldItem['value'];
                                                             }
                                                         }
-//
-//                                                        var_dumP($fieldsetItem);
+
                                                         $results_tmp = $fieldsetService->{$serviceConfig['method']}($fieldsetItem);
 
                                                         $resultModel = new $serviceConfig['object']($results_tmp['data']);
@@ -287,14 +275,12 @@ class CreateHandler implements RequestHandlerInterface,
                                                         if(property_exists($formData,$fieldsetConfig['fieldset_name'])) {
 //                                                            echo 8;
                                                         }
-//                                                        var_dump($fieldsetConfig);
-//                                                        var_dump($formData);
-//                                                        echo 9999;
                                                     }
 
 
                                                 } else {
-//                                                    var_dump(sprintf('Fieldset %s is not registered. check for `hasFieldsetService()`',$fieldsetConfig['fieldset_name']));
+                                                    var_dump(sprintf('Fieldset %s is not registered. check for `hasFieldsetService()`',$fieldsetConfig['fieldset_name']));
+                                                    die();
                                                 }
                                             }
                                         }
@@ -308,25 +294,16 @@ class CreateHandler implements RequestHandlerInterface,
 
                         }
 
-//                        echo 'count form_config: ' . $iFormConfig . '<br />';
-//var_dump($results);
                     }
 
                 } else {
                     $messages['error'][] = 'Form seems to be invalid.';
                     $messages['error'][] = 'Data has NOT been saved.';
 
-//                    var_dump($formItem->getMessages());
-//die();
                 }
                 $iForms++;
             }
 
-
-//            echo 'count forms: ' . $iForms . '<br />';
-
-
-//var_dump($rowsAffected);
             if($rowsAffected!=null) {
                 $messages['success'][] = 'Item has been updated.';
                 $messages['success'][] = var_export($rowsAffected,true);
@@ -336,13 +313,8 @@ class CreateHandler implements RequestHandlerInterface,
             }
         }
 
-//        var_dump($results);
-
         $this->addData($messages,'messages');
 
-
-
-//        var_dump($this->getData('data_template_model')); echo $this->getData('template');
         return new HtmlResponse($this->template->render($this->getData('template'), $this->getData()));
     }
 }

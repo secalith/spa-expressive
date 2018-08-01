@@ -89,9 +89,6 @@ class DeleteHandlerAbstractFactory implements AbstractFactoryInterface
 
             $routeName = $serviceLocator->get(CurrentRouteNameHelper::class)->getMatchedRouteName();
 
-//            var_dumP($dataView);
-//            var_dumP($routeConfig);
-
             $targetClass = new DeleteHandler(
                 $router,
                 $template,

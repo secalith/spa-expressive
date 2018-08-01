@@ -112,23 +112,15 @@ class PageStatusModel implements CommonModelInterface
 
         return [$status=>$statusAll[$status]];
 
-var_dump(self::STOCK_STATUS_PATHS[$status]);
-var_dump($status);
-var_dump(self::STOCK_STATUS_PATHS[self::STOCK_STATUS_PATHS[$status]]);
-var_dump($stockPaths);
         $status = ( ! is_numeric($status)&&in_array($status,$stockPaths))
             ?(int) key($stockPaths)
             :(int) $status;
-//        var_dumP($stockPaths[$status]);
-//        var_dumP(in_array($status,$stockPaths));
 //        if( ! in_array($status,$stockPaths)) {
-//            var_dump($status);
-//            var_dump($stockPaths);die();
 //            return false;
 //        }
 
         $statusAll = self::getStatusAll(false);
-//var_dump($statusAll);
+
         $status = ($status===self::STOCK_STATUS_DEFAULT)?$stockPaths[self::STOCK_STATUS_DEFAULT]:$status;
 
         return [$status=>$statusAll[$status]];

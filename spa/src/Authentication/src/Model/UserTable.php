@@ -149,17 +149,14 @@ class UserTable// extends CommonTable
                 if (null!==$this->cache) {
                     // cache is enabled but NOT present
                     if (null===$result) {
-//                        echo 'Cache Save '. $this->cache_namespacee .'<br />';var_dump($result);
                         $this->cache->removeItem($this->cache_namespacee);
                         $this->cache->setItem($this->cache_namespacee, '');
                     } else {
-//                        echo 'Cache Save '. $this->cache_namespacee .'<br />';var_dump($result);
                         $this->cache->removeItem($this->cache_namespacee);
                         $this->cache->setItem($this->cache_namespacee, $result);
                     }
                 }
             } else {
-//                echo 'Cache SaveE '. $this->cache_namespacee .'<br />';
                 $this->cache->removeItem($this->cache_namespacee);
                 $this->cache->setItem($this->cache_namespacee, '');
             }

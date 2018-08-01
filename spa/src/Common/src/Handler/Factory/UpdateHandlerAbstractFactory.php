@@ -120,7 +120,7 @@ class UpdateHandlerAbstractFactory implements AbstractFactoryInterface
                 if( $mainContentDeclaration['type'] === 'form' && $resources !== null ) {
                     // load form
                     $form = new $mainContentDeclaration['object']();
-//                                        var_dump($resources);
+
                     $formData =[];
                     $form->setData($resources);
                     foreach($resources as $resource) {

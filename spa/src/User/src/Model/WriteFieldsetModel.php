@@ -21,7 +21,6 @@ class WriteFieldsetModel
 
     public function exchangeArray($data)
     {
-//        var_dump($data);
         $this->fieldset_user_profile     = (!empty($data['fieldset_user_profile'])) ? $data['fieldset_user_profile'] : null;
         $this->fieldset_user     = (!empty($data['fieldset_user'])) ? $data['fieldset_user'] : null;
         $this->fieldset_email_alias = (!empty($data['fieldset_email_alias'])) ? $data['fieldset_email_alias'] : null;

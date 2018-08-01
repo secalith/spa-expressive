@@ -29,16 +29,6 @@ class DatabaseRouteListenerFactory implements FactoryInterface
 
         foreach ($routes as $route) {
             $routesDB[$route->getName()] = $route;
-            /*
-            $children = $serviceLocator->get("RouteRoutes\\Table")
-                ->fetchBy($route->getUid(), 'parent_uid');
-            var_dump($children);
-            if (null!==$children) {
-                foreach ($children as $childRoute) {
-                    $routesDB[$childRoute->getName()] = $childRoute;
-                }
-            }
-            */
         }
 
         $instance->setRoutes($routesDB);

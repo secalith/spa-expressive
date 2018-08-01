@@ -9,6 +9,5 @@
 <?php if(isset($messages)&&array_key_exists('success',$messages)):?>
     <?=$this->flashMessage($messages['success'],'success');?>
 <?php endif;?>
-<?php var_dump($resource); ?>
 <?=$this->getFormAttached($forms,null,'form_delete');?>
 

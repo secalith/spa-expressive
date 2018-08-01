@@ -60,11 +60,6 @@ class FormHandler implements RequestHandlerInterface
 
             $data['form']->isValid();
 
-var_dump($data['form']->isValid());
-
-            var_dump($data['form']->getData());
-            var_dump($postData);
-
         }
 
         return new HtmlResponse($this->template->render('app::form-test', $data));
