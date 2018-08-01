@@ -51,7 +51,7 @@ endif;
                     </button>
                     <!-- Brand -->
                     <a class="navbar-brand" href="<?=$this->url('home')?>">
-                        <img src="/assets/img/1113.png" alt="Zend Expressive" height="28" />
+                        <img src="/assets/img/1113.png" alt="art13.eu" height="28" />
                     </a>
                 </div>
                 <!-- Links -->
@@ -61,14 +61,10 @@ endif;
                             <a href="<?=$this->url('home')?>" class="nav-link"><?=$this->translate("Homepage");?></a>
                         </li>
                         <?php if( ! $this->hasIdentity()):?>
-                            <li class="nav-item float-right">
-                                <a href="<?=$this->url('spa.auth')?>" class="nav-link"><?=$this->translate('Events');?></a>
-                            </li>
+
                         <?php else: ?>
                             <li class="nav-item">
-                                <a href="<?=$this->url('spa.user.list')?>" class="nav-link">
-                                    Protesty
-                                </a>
+                                <a href="<?=$this->url('manager.event.list')?>" class="nav-link"><?=$this->translate("Events");?></a>
                             </li>
                         <?php endif;?>
                     </ul>
@@ -96,6 +92,7 @@ endif;
             <div class="row">
                 <div class="col-12 m-auto" role="main">
                     <?=($this->content);?>
+                    <?=$_SERVER['HTTP_ACCEPT_LANGUAGE'];?>
                 </div>
             </div>
         </main>

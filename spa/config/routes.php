@@ -26,6 +26,14 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
 
 
 
+    ## SPA-PETITION-SIGNATURE
+
+    $app->post('/popieram[/]', [
+        SpaPetition\Handler\SignatureHandler::class,
+    ], 'spa.petition.support.post');
+
+
+
     ## MANAGER-SPA-SITE
 
     $app->get('/admin/site/list[/[{page:\d+}]]', [
@@ -59,14 +67,6 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
         Auth\Handler\AuthHandler::class,
         'Common\Handler\List',
     ], 'spa.spa-petition.list');
-
-
-
-    ## SPA-PETITION-SIGNATURE
-
-    $app->post('/popieram[/]', [
-        SpaPetition\Handler\SignatureHandler::class,
-    ], 'spa.petition.support.post');
 
 
 

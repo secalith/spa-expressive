@@ -75,23 +75,10 @@ endif;
                             </li>
                         <?php else: ?>
                             <li class="nav-item">
-                                <a href="<?=$this->url('spa.user.list')?>" class="nav-link">
-                                    Uzytkownicy
-                                </a>
-                            </li>
-                            <li class="nav-item">
                                 <a href="<?=$this->url('manager.event.list')?>" class="nav-link"><?=$this->translate("Events");?></a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?=$this->url('spa.spa-petition.list')?>" class="nav-link">
-                                    Petycje
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?=$this->url('admin.site.list')?>" class="nav-link"><?=$this->translate('Witryny');?></a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?=$this->url('admin.page.list')?>" class="nav-link"><?=$this->translate('Strony');?></a>
+                                <a href="<?=$this->url('spa.spa-petition.list')?>" class="nav-link"><?=$this->translate("Petycje");?></a>
                             </li>
                         <?php endif;?>
                     </ul>
