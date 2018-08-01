@@ -122,5 +122,28 @@ endif;
     </footer>
 
     <?=$this->inlineScript()?>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121422820-1"></script>
+    <script>
+
+        var counters = $('[id^=time_counter-]');
+        for(var i=0;i<counters.length;i++) {
+            var date = counters.eq(i).attr('data-countdown');
+            counters.eq(i).flipcountdown({
+                beforeDateTime: date,
+                showHour:true,
+                showMinute:false,
+                showSecond:false,
+                size: 'sm'
+            });
+        }
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-121422820-1');
+    </script>
+
 </body>
 </html>
