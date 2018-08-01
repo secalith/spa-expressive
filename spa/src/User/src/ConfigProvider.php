@@ -809,6 +809,10 @@ class ConfigProvider
                             'post' => [
                                 'method' => 'POST',
                                 'scenario' => 'process',
+                                'http_redirect' => [
+                                    'success' => '/login',
+                                    'error' => null,
+                                ],
                                 'data_template_model' => [
                                     'route_name' => 'manager.register.post',
                                     'heading' => [

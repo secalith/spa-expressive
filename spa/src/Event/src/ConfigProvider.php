@@ -392,14 +392,14 @@ class ConfigProvider
                                                         'href' => 'helper::url:manager.event.create'
                                                     ],
                                                 ],
-                                                [
-                                                    'html_tag' => 'a',
-                                                    'text' => _("Create Group"),
-                                                    'attributes' => [
-                                                        'class' => 'btn btn-sm btn-info ml-5',
-                                                        'href' => 'helper::url:manager.event-group.create'
-                                                    ],
-                                                ],
+//                                                [
+//                                                    'html_tag' => 'a',
+//                                                    'text' => _("Create Group"),
+//                                                    'attributes' => [
+//                                                        'class' => 'btn btn-sm btn-info ml-5',
+//                                                        'href' => 'helper::url:manager.event-group.create'
+//                                                    ],
+//                                                ],
                                                 [
                                                     'html_tag' => 'a',
                                                     'text' => _("List Groups"),
@@ -422,7 +422,7 @@ class ConfigProvider
                                                     'group_name'=>_("Group"),
                                                     'status'=>'Status',
                                                     'created'=>'Created',
-                                                    100=>'Details',
+//                                                    100=>'Details',
                                                 ],
                                                 'rows' => [
                                                     ['column'=>'name'],
@@ -431,28 +431,28 @@ class ConfigProvider
                                                     ['column'=>'group_name'],
                                                     ['column'=>'status'],
                                                     ['column'=>'created'],
-                                                    ['buttons' => [
-                                                        [
-                                                            'html_tag' => 'a',
-                                                            'text' => _("Details"),
-                                                            'attributes' => [
-                                                                'class' => 'btn btn-sm btn-info ml-5',
-                                                                'href' => [
-                                                                    'type' => 'plugin',
-                                                                    'name' => 'url',
-                                                                    'arguments' => [
-                                                                        'manager.event.read',
-                                                                        [
-                                                                            'uid'=> [
-                                                                                'source' => 'row-item',
-                                                                                'property' => 'uid',
-                                                                            ],
-                                                                        ]
-                                                                    ],
-                                                                ],
-                                                            ],
-                                                        ],
-                                                    ],],
+//                                                    ['buttons' => [
+//                                                        [
+//                                                            'html_tag' => 'a',
+//                                                            'text' => _("Details"),
+//                                                            'attributes' => [
+//                                                                'class' => 'btn btn-sm btn-info ml-5',
+//                                                                'href' => [
+//                                                                    'type' => 'plugin',
+//                                                                    'name' => 'url',
+//                                                                    'arguments' => [
+//                                                                        'manager.event.read',
+//                                                                        [
+//                                                                            'uid'=> [
+//                                                                                'source' => 'row-item',
+//                                                                                'property' => 'uid',
+//                                                                            ],
+//                                                                        ]
+//                                                                    ],
+//                                                                ],
+//                                                            ],
+//                                                        ],
+//                                                    ],],
                                                 ],
                                             ],
                                         ],
@@ -485,14 +485,14 @@ class ConfigProvider
                                             'html_tag' => 'h1',
                                             'text' => _("Event Groups"),
                                             'buttons' => [
-                                                [
-                                                    'html_tag' => 'a',
-                                                    'text' => _("Create Group"),
-                                                    'attributes' => [
-                                                        'class' => 'btn btn-sm btn-info ml-5',
-                                                        'href' => 'helper::url:manager.event-group.create'
-                                                    ],
-                                                ],
+//                                                [
+//                                                    'html_tag' => 'a',
+//                                                    'text' => _("Create Group"),
+//                                                    'attributes' => [
+//                                                        'class' => 'btn btn-sm btn-info ml-5',
+//                                                        'href' => 'helper::url:manager.event-group.create'
+//                                                    ],
+//                                                ],
                                                 [
                                                     'html_tag' => 'a',
                                                     'text' => _("Create Event"),
@@ -520,34 +520,34 @@ class ConfigProvider
                                                     'name'=>_("Name"),
                                                     'status'=>'Status',
                                                     'created'=>'Created',
-                                                    100=>'Details',
+//                                                    100=>'Details',
                                                 ],
                                                 'rows' => [
                                                     ['column'=>'name'],
                                                     ['column'=>'status'],
                                                     ['column'=>'created'],
-                                                    ['buttons' => [
-                                                        [
-                                                            'html_tag' => 'a',
-                                                            'text' => _("Details"),
-                                                            'attributes' => [
-                                                                'class' => 'btn btn-sm btn-info ml-5',
-                                                                'href' => [
-                                                                    'type' => 'plugin',
-                                                                    'name' => 'url',
-                                                                    'arguments' => [
-                                                                        'manager.event-group.read',
-                                                                        [
-                                                                            'uid'=> [
-                                                                                'source' => 'row-item',
-                                                                                'property' => 'uid',
-                                                                            ],
-                                                                        ]
-                                                                    ],
-                                                                ],
-                                                            ],
-                                                        ],
-                                                    ],],
+//                                                    ['buttons' => [
+//                                                        [
+//                                                            'html_tag' => 'a',
+//                                                            'text' => _("Details"),
+//                                                            'attributes' => [
+//                                                                'class' => 'btn btn-sm btn-info ml-5',
+//                                                                'href' => [
+//                                                                    'type' => 'plugin',
+//                                                                    'name' => 'url',
+//                                                                    'arguments' => [
+//                                                                        'manager.event-group.read',
+//                                                                        [
+//                                                                            'uid'=> [
+//                                                                                'source' => 'row-item',
+//                                                                                'property' => 'uid',
+//                                                                            ],
+//                                                                        ]
+//                                                                    ],
+//                                                                ],
+//                                                            ],
+//                                                        ],
+//                                                    ],],
                                                 ],
                                             ],
                                         ],

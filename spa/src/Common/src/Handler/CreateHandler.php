@@ -14,6 +14,7 @@ use Common\Handler\DataAwareTrait;
 use Common\Handler\ApplicationFieldsetSaveServiceAwareInterface;
 use Common\Handler\ApplicationFieldsetSaveServiceAwareTrait;
 use Common\Delegator\RouteResourceAwareInterface;
+use	Zend\Diactoros\Response\RedirectResponse;
 use Common\Delegator\RouteResourceAwareTrait;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -304,14 +305,21 @@ class CreateHandler implements RequestHandlerInterface,
                 $iForms++;
             }
 
-            if($rowsAffected!=null) {
+            if($results!=null) {
                 $messages['success'][] = 'Item has been updated.';
-                $messages['success'][] = var_export($rowsAffected,true);
+                $messages['success'][] = var_export($results,true);
+
+                if(array_key_exists('http_redirect',$handlerConfig)) {
+                    return new RedirectResponse($handlerConfig['http_redirect']['success']);
+                }
+
             } else {
                 $messages['info'][] = 'Data unchanged.';
                 $messages['info'][] = 'Item has NOT been updated.';
             }
         }
+
+
 
         $this->addData($messages,'messages');
 
