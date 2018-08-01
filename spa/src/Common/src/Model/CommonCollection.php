@@ -8,6 +8,11 @@ class CommonCollection
 {
     private $items = array();
 
+    public function __construct($items=[])
+    {
+        $this->items = $items;
+    }
+
     public function addItem($obj, $key = null)
     {
         if ($key == null) {

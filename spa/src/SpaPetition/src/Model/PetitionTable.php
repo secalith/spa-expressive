@@ -2,7 +2,7 @@
 
 namespace SpaPetition\Model;
 
-use Common\Model\GerenateUUIDTrait;
+use Common\Model\GenerateUUIDTrait;
 use SpaPetition\Model\PetitionModel;
 use Zend\Db\Sql\Select;
 use Zend\Db\TableGateway\TableGateway;
@@ -10,7 +10,7 @@ use Zend\Db\TableGateway\TableGateway;
 class PetitionTable
 {
 
-    use GerenateUUIDTrait;
+    use GenerateUUIDTrait;
 
     protected $tableGateway;
 
@@ -83,5 +83,14 @@ class PetitionTable
             throw new \Exception("Could not find row $value");
         }
         return $row;
+    }
+
+    public function fetchAll()
+    {
+        $resultSet = $this->tableGateway->select();
+
+        $resultSet->buffer();
+
+        return $resultSet;
     }
 }

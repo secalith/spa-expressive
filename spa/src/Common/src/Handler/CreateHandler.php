@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Common\Handler;
 
+use ArrayDigger\Service\ArrayDigger;
 use Common\Handler\ApplicationConfigAwareInterface;
 use Common\Handler\ApplicationConfigAwareTrait;
 use Common\Handler\ApplicationFormAwareInterface;
@@ -45,18 +46,22 @@ class CreateHandler implements RequestHandlerInterface,
 
     private $routeConfig;
 
+    private $arrayDigger;
+
     public function __construct(
         Router\RouterInterface $router,
         Template\TemplateRendererInterface $template = null,
         string $containerName,
         UrlHelper $urlHelper = null,
-        array $routeConfig = []
+        array $routeConfig = [],
+        ArrayDigger $arrayDigger
     ) {
         $this->router        = $router;
         $this->template      = $template;
         $this->containerName = $containerName;
         $this->urlHelper = $urlHelper;
         $this->routeConfig = $routeConfig;
+        $this->arrayDigger = $arrayDigger;
     }
 
     public function handle(ServerRequestInterface $request) : ResponseInterface
@@ -75,9 +80,8 @@ class CreateHandler implements RequestHandlerInterface,
             $iForms=0;
 
             // get all pre-loaded forms
-            foreach($this->getForms() as $formIdentifier=>$formItem) {
-//var_dump($postData);
-
+            foreach($this->getForms() as $formIdentifier=>$formItem)
+            {
                 // search for pre_validate
                 if( array_key_exists('forms',$this->routeConfig) )
                 {
@@ -93,15 +97,40 @@ class CreateHandler implements RequestHandlerInterface,
                                     {
                                         if(array_key_exists('change_value',$preValidateFieldset))
                                         {
-                                            foreach($preValidateFieldset['change_value'] as $changePreValidateFieldset)
-                                            {
+                                            if( ! array_key_exists('type',$preValidateFieldset) || $preValidateFieldset['type']!=='complex') {
+                                                foreach($preValidateFieldset['change_value'] as $changePreValidateFieldset)
+                                                {
 
-                                                $sourceType = $changePreValidateFieldset['source']['type'];
+                                                    $sourceType = $changePreValidateFieldset['source']['type'];
 
-                                                $newValue = $postData[$formItem->getName()][$changePreValidateFieldset['source']['source_name']][$changePreValidateFieldset['source']['source_field_name']];
-                                                $postData[$formItem->getName()][$preValidateFieldset['fieldset_name']][$changePreValidateFieldset['field_name']] = $newValue;
+                                                    $newValue = $postData[$formItem->getName()][$changePreValidateFieldset['source']['source_name']][$changePreValidateFieldset['source']['source_field_name']];
+                                                    $postData[$formItem->getName()][$preValidateFieldset['fieldset_name']][$changePreValidateFieldset['field_name']] = $newValue;
+
+                                                }
+                                            } else {
+
+                                                $newValue = $this->arrayDigger->extractData($postData,$preValidateFieldset['selector']);
+
+                                                foreach($preValidateFieldset['change_value'] as $changePreValidateFieldset)
+                                                {
+
+
+                                                    $exploded = explode('.',$changePreValidateFieldset['field_name']);
+
+                                                    $tmp = null;
+                                                    foreach($exploded as $ex) {
+                                                        $tmp = $tmp[$ex];
+                                                    }
+
+//                                                    $postData[$formItem->getName()][$preValidateFieldset['fieldset_name']][$changePreValidateFieldset['field_name']] = $newValue;
+
+                                                }
+
+//                                                $postData[$formItem->getName()][$preValidateFieldset['fieldset_name']][$changePreValidateFieldset['field_name']] = $newValue;
+
 
                                             }
+
                                         }
 
 //                                        var_dump($preValidateFieldset);
@@ -113,22 +142,14 @@ class CreateHandler implements RequestHandlerInterface,
                         }
                     }
                 }
-//
-//                var_dump($postData);
-
 
                 // bind data from POST
                 $formItem->setData($postData);
-
-
-
-
-
-
+//var_dumP($postData);
                 if($formItem->isValid()) {
 
-                    var_dump($formItem->getData());
-                    die();
+//                    var_dump($formItem->getData());
+//                    die();
 
                     $messages['info'][] = 'Form is Valid.';
 
@@ -157,6 +178,7 @@ class CreateHandler implements RequestHandlerInterface,
 
                                             foreach($fieldsetConfig['service'] as $serviceConfig) {
 //var_dumP($this->getFieldsetServiceAll());
+
                                                 if( array_key_exists('fieldset_name',$fieldsetConfig)
                                                     && $this->hasFieldsetService($fieldsetConfig['fieldset_name'])
                                                 ) {
@@ -240,14 +262,8 @@ class CreateHandler implements RequestHandlerInterface,
                                                     }
 
                                                     $fieldsetService = $this->getFieldsetService($fieldsetConfig['fieldset_name']);
-//var_dump($serviceConfig);
 
-//                                                    var_dump($field_change);
-//                                                    var_dump($formData);
-
-
-                                                    if( ( ! array_key_exists('is_collection',$fieldsetConfig) || $fieldsetConfig['is_collection'] === true)
-                                                        && property_exists($formData,$fieldsetConfig['fieldset_name'])
+                                                    if( property_exists($formData,$fieldsetConfig['fieldset_name'])
                                                     ) {
 
                                                         $fieldsetItem = $formData->{$fieldsetConfig['fieldset_name']};
@@ -269,16 +285,16 @@ class CreateHandler implements RequestHandlerInterface,
 
                                                     } elseif( array_key_exists('is_collection',$fieldsetConfig) && $fieldsetConfig['is_collection'] === true ) {
                                                         if(property_exists($formData,$fieldsetConfig['fieldset_name'])) {
-                                                            echo 8;
+//                                                            echo 8;
                                                         }
-                                                        var_dump($fieldsetConfig);
-                                                        var_dump($formData);
-                                                        echo 9999;
+//                                                        var_dump($fieldsetConfig);
+//                                                        var_dump($formData);
+//                                                        echo 9999;
                                                     }
 
 
                                                 } else {
-                                                    echo 'dupa';
+//                                                    var_dump(sprintf('Fieldset %s is not registered. check for `hasFieldsetService()`',$fieldsetConfig['fieldset_name']));
                                                 }
                                             }
                                         }
@@ -301,7 +317,7 @@ class CreateHandler implements RequestHandlerInterface,
                     $messages['error'][] = 'Data has NOT been saved.';
 
 //                    var_dump($formItem->getMessages());
-
+//die();
                 }
                 $iForms++;
             }
@@ -324,8 +340,9 @@ class CreateHandler implements RequestHandlerInterface,
 
         $this->addData($messages,'messages');
 
-        $this->template->addDefaultParam(Template\TemplateRendererInterface::TEMPLATE_ALL,'bodyClass','app-action-create');
 
+
+//        var_dump($this->getData('data_template_model')); echo $this->getData('template');
         return new HtmlResponse($this->template->render($this->getData('template'), $this->getData()));
     }
 }

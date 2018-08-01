@@ -4,7 +4,7 @@
 
 namespace PageResource\Model;
 
-use Common\Model\GerenateUUIDTrait;
+use Common\Model\GenerateUUIDTrait;
 use Site\Model\SiteModel as SiteModel;
 use Zend\Db\Sql\Select;
 use Zend\Db\TableGateway\TableGateway;
@@ -12,7 +12,7 @@ use Zend\Db\TableGateway\TableGateway;
 class PageResourceTable
 {
 
-    use GerenateUUIDTrait;
+    use GenerateUUIDTrait;
 
     protected $tableGateway;
 

@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Content\Model;
 
-use Common\Model\GerenateUUIDTrait;
+use Common\Model\GenerateUUIDTrait;
 use Content\Model\ContentModel;
 use Zend\Db\TableGateway\TableGateway;
 
 class ContentTable
 {
-    use GerenateUUIDTrait;
+    use GenerateUUIDTrait;
 
     /**
      * @var TableGateway

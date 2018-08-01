@@ -97,7 +97,9 @@
             "RoleEditor\\": "src/RoleEditor/src/",
             "SpaPetition\\": "src/SpaPetition/src/",
             "PageLayout\\": "src/PageLayout/src/",
-            "PageResource\\": "src/PageResource/src/"
+            "Event\\": "src/Event/src/",
+            "PageResource\\": "src/PageResource/src/",
+            "I18n\\": "src/I18n/src/"
         }
     },
     "autoload-dev": {

@@ -4,13 +4,13 @@
 
 namespace User\Model;
 
-use Common\Model\GerenateUUIDTrait;
+use Common\Model\GenerateUUIDTrait;
 use User\Model\UserProfileModel;
 use Zend\Db\TableGateway\TableGateway;
 
 class UserProfileTable
 {
-    use GerenateUUIDTrait;
+    use GenerateUUIDTrait;
 
     protected $tableGateway;
 
@@ -41,6 +41,7 @@ class UserProfileTable
             'uid' => $item->getUid(),
             'name_first' => $item->getNameFirst(),
             'name_last' => $item->getNameLast(),
+            'organization' => $item->getOrganization(),
             'created' => $dateTime->format('Y-m-d\TH:i:s.u'),
         );
 

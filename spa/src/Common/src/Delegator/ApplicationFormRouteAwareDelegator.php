@@ -38,6 +38,9 @@ class ApplicationFormRouteAwareDelegator
                         if($container->has($formAppConfig['form_factory']))
                         {
                             $form = $container->get($formAppConfig['form_factory']);
+                        } else {
+                            echo 'dupa';
+                            die();
                         }
                     }
 

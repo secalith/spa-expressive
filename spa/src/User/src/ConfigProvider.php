@@ -35,7 +35,7 @@ class ConfigProvider
     {
         return [
             'paths' => [
-                'user'    => [__DIR__ . '/../templates/'],
+                'user-auth'    => [__DIR__ . '/../templates/user-auth/'],
             ],
         ];
     }
@@ -57,6 +57,11 @@ class ConfigProvider
                 'User\Profile\TableService' => [
                     'gateway' => [
                         'name' => 'User\Profile\TableGateway',
+                    ],
+                ],
+                'User\OptIn\TableService' => [
+                    'gateway' => [
+                        'name' => 'User\OptIn\TableGateway',
                     ],
                 ],
             ], // table_service
@@ -104,6 +109,22 @@ class ConfigProvider
                     ],
                     'model' => [
                         "object" => \User\Model\UserProfileModel::class,
+                    ],
+                    'hydrator' => [
+                        "object" => \Zend\Hydrator\ObjectProperty::class,
+                    ],
+                ],
+                'User\OptIn\TableGateway' => [
+                    'name' => 'User\OptIn\TableGateway',
+                    'table' => [
+                        'name' => 'user_optin',
+                        'object' => \User\Model\UserOptInTable::class,
+                    ],
+                    'adapter' => [
+                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                    ],
+                    'model' => [
+                        "object" => \User\Model\UserOptIn::class,
                     ],
                     'hydrator' => [
                         "object" => \Zend\Hydrator\ObjectProperty::class,
@@ -712,6 +733,192 @@ class ConfigProvider
                                                             'method' => 'create',
                                                         ],
                                                     ]
+                                                ],
+                                            ],
+                                            'fieldset_user_optin' => [
+                                                'priority' => 110,
+                                                'fieldset_name' => 'fieldset_user_optin',
+                                                'service' => [
+                                                    [
+                                                        'name'=>'User\OptIn\TableService',
+                                                        'object' => \User\Model\UserOptIn::class,
+                                                        'method' => 'saveItem'
+                                                    ],
+                                                ],
+                                                'entity_change' => [
+                                                    [
+                                                        'field_name' => 'uid',
+                                                        'source' => [
+                                                            'type' => 'result-insert',
+                                                            'source_name' => 'fieldset_user',
+                                                            'source_field_name' => 'uid',
+                                                        ],
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ], // restable.admin.client.create.post
+
+
+                        // manager.register
+                        'manager.register' => [
+                            'get' => [
+                                'method' => 'GET',
+                                'scenario' => 'register',
+                                'data_template_model' => [
+                                    'route_name' => 'manager.register.post',
+                                    'heading' => [
+                                        // will be parsed inside ./templates/common-manager/common-manager-partial.phtml
+                                        [
+                                            'html_tag' => 'h1',
+                                            'html_tag_class' => 'display-1',
+                                            'text' => _('Sign up to Art13.eu'),
+                                            'wrapper_class' => 'text-center pb-2 mb-3 mt-5',
+                                        ],
+                                        [
+                                            'html_tag' => 'h2',
+                                            'text' => _('Creating your account will only take a few seconds, and you\'ll get complete access to Art13.eu free - no obligations.'),
+                                            'wrapper_class' => 'text-center pb-2 mb-3 mt-4',
+                                        ],
+                                    ],
+                                ],
+                                'view_template_model' => [
+                                    'layout' => 'layout::manager',
+                                    'template' => 'user-auth::register',
+                                    'body_class' => 'action-register',
+                                    'forms' => [
+                                        'form_create' => 'user-auth::register-form',
+                                    ],
+                                ],
+                                'forms' => [
+                                    [
+                                        'action' => [
+                                            'route' => 'manager.register',
+                                        ],
+                                        'name' => 'form_create',
+                                        'object' => \User\Form\RegisterForm::class,
+                                        'template' => 'user-auth::form-register',
+                                    ]
+                                ],
+                            ],
+                        ], // spa.user.create
+                        'manager.register.post' => [
+                            'post' => [
+                                'method' => 'POST',
+                                'scenario' => 'process',
+                                'data_template_model' => [
+                                    'route_name' => 'manager.register.post',
+                                    'heading' => [
+                                        [
+                                            'html_tag' => 'h1',
+                                            'html_tag_class' => 'display-1',
+                                            'text' => _('Sign up to Art13.eu'),
+                                            'wrapper_class' => 'text-center pb-2 mb-3 mt-5',
+                                        ],
+                                    ],
+                                ],
+                                'view_template_model' => [
+                                    'layout' => 'layout::manager',
+                                    'template' => 'user-auth::register',
+                                    'body_class' => 'action-register',
+                                    'forms' => [
+                                        'form_create' => 'user-auth::register-form',
+                                    ],
+                                ],
+                                'forms' => [
+                                    [
+                                        'name' => 'form_create',
+                                        'action' => [
+                                            'route' => 'manager.register.post',
+                                        ],
+                                        'object' => \User\Form\RegisterForm::class,
+                                        'save' => [
+                                            'data' => [
+                                                'fieldset_user' => [
+                                                    'fieldset_name' => 'fieldset_user',
+                                                    'service' => [
+                                                        [
+                                                            'name'=>'User\TableService',
+                                                            'object' => \User\Model\UserModel::class,
+                                                            'method' => 'saveItem'
+                                                        ],
+
+                                                    ],
+                                                ], // fieldset_user
+                                                'fieldset_user_profile' => [
+                                                    'fieldset_name' => 'fieldset_user_profile',
+                                                    'service' => [
+                                                        [
+                                                            'name'=>'User\Profile\TableService',
+                                                            'object' => \User\Model\UserProfileModel::class,
+                                                            'method' => 'saveItem'
+                                                        ],
+                                                    ],
+                                                    'entity_change' => [
+                                                        [
+                                                            'field_name' => 'uid',
+                                                            'source' => [
+                                                                'type' => 'result-insert',
+                                                                'source_name' => 'fieldset_user',
+                                                                'source_field_name' => 'uid',
+                                                            ],
+                                                        ],
+                                                    ],
+                                                ], // fieldset_user_profile
+                                                'fieldset_credentials_password' => [
+                                                    'fieldset_name' => 'fieldset_credentials_password',
+                                                    'service' => [
+                                                        [
+                                                            'name'=>'User\Credentials\TableService',
+                                                            'object' => \User\Model\UserCredentialsModel::class,
+                                                            'method' => 'saveItem'
+                                                        ],
+                                                    ],
+                                                    'entity_change' => [
+                                                        [
+                                                            'field_name' => 'uid',
+                                                            'source' => [
+                                                                'type' => 'result-insert',
+                                                                'source_name' => 'fieldset_user',
+                                                                'source_field_name' => 'uid',
+                                                            ],
+                                                        ],
+                                                        [
+                                                            'field_name' => 'password',
+                                                            'source' => [
+                                                                'type' => 'result-transform',
+                                                                'source_name' => 'fieldset_credentials_password',
+                                                                'source_field_name' => 'password',
+                                                            ],
+                                                            'adapter' => [
+                                                                'object' => \Auth\Service\PasswordAdapter::class,
+                                                                'method' => 'create',
+                                                            ],
+                                                        ]
+                                                    ],
+                                                ], // fieldset_credentials_password
+                                                'fieldset_user_optin' => [
+                                                    'fieldset_name' => 'fieldset_user_optin',
+                                                    'service' => [
+                                                        [
+                                                            'name'=>'User\OptIn\TableService',
+                                                            'object' => \User\Model\UserOptIn::class,
+                                                            'method' => 'saveItem'
+                                                        ],
+                                                    ],
+                                                    'entity_change' => [
+                                                        [
+                                                            'field_name' => 'uid',
+                                                            'source' => [
+                                                                'type' => 'result-insert',
+                                                                'source_name' => 'fieldset_user',
+                                                                'source_field_name' => 'uid',
+                                                            ],
+                                                        ],
+                                                    ],
                                                 ],
                                             ],
                                         ],

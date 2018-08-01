@@ -15,14 +15,16 @@ class PageViewService
     protected $tableArea;
     protected $serviceBlock;
     protected $tableContent;
+    protected $current_language;
 
-    public function __construct($tablePage,$tableTemplate,$tableArea,$serviceBlock,$serviceContent)
+    public function __construct($tablePage,$tableTemplate,$tableArea,$serviceBlock,$serviceContent,$currentLanguage)
     {
         $this->tablePage = $tablePage;
         $this->tableTemplate = $tableTemplate;
         $this->tableArea = $tableArea;
         $this->serviceBlock = $serviceBlock;
         $this->serviceContent = $serviceContent;
+        $this->current_language = $currentLanguage;
     }
 
     public function getPageByRouteName($route_name)
@@ -44,7 +46,7 @@ class PageViewService
             foreach($rootBlocksByArea as $rootBlock) {
                 $pageView->setBlock($rootBlock);
 
-                $rootContentByBlock = $this->serviceContent->getAllBy(['block_uid'=>$rootBlock->getUid(),'parent_uid'=>'0','status'=>'1']);
+                $rootContentByBlock = $this->serviceContent->getAllBy(['block_uid'=>$rootBlock->getUid(),'parent_uid'=>'0','status'=>'1','language'=>$this->current_language]);
 
                 if($rootContentByBlock) {
                     foreach($rootContentByBlock as $rootContent) {
@@ -83,7 +85,7 @@ class PageViewService
             foreach($rootBlocksByBlock as $rootBlockByBlock) {
                 $rr->setBlock($this->getBlocksByBlock($rootBlockByBlock));
 
-                $rootContentByBlock = $this->serviceContent->getAllBy(['block_uid'=>$rootBlockByBlock->getUid(),'parent_uid'=>'0','status'=>'1']);
+                $rootContentByBlock = $this->serviceContent->getAllBy(['block_uid'=>$rootBlockByBlock->getUid(),'parent_uid'=>'0','status'=>'1','language'=>$this->current_language]);
 
                 if($rootContentByBlock) {
                     foreach($rootContentByBlock as $rootContent) {

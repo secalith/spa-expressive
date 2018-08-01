@@ -34,7 +34,7 @@ class UserFieldset extends Fieldset implements InputFilterProviderInterface
             'type' => 'email',
             'name' => 'email',
             'options' => array(
-                'label' => 'Primary Email'
+                'label' => _("New Password"),
             ),
             'attributes' => [
                 'class' => 'form-control d-inline-flex w-auto',

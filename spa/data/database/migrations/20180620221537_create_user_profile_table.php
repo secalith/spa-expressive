@@ -16,6 +16,7 @@ class CreateUserProfileTable extends AbstractMigration
         $table->addColumn('uid', 'string', ['limit' => 64])
             ->addColumn('name_first',  'string', ['limit' => 255])
             ->addColumn('name_last',  'string', ['limit' => 255])
+            ->addColumn('organization',  'string', ['limit' => 255])
             ->addColumn('created', 'datetime')
             ->addColumn('updated', 'datetime', ['null' => true])
             ->save();

@@ -4,7 +4,7 @@
 
 namespace User\Model;
 
-use Common\Model\GerenateUUIDTrait;
+use Common\Model\GenerateUUIDTrait;
 use User\Model\UserModel as UserModel;
 use Zend\Db\Sql\Select;
 use Zend\Db\TableGateway\TableGateway;
@@ -12,7 +12,7 @@ use Zend\Db\TableGateway\TableGateway;
 class UserTable// extends CommonTable
 {
 
-    use GerenateUUIDTrait;
+    use GenerateUUIDTrait;
 
     protected $tableGateway;
 

@@ -35,9 +35,9 @@ class LoginForm extends Form
 
         $this->add(array(
             'name' => 'send',
-            'type'  => 'Submit',
+            'type'  => 'submit',
             'attributes' => array(
-                'value' => 'Sign in ',
+                'value' => _('Continue'),
                 'class' => 'btn btn-lg btn-primary btn-block',
             ),
         ));

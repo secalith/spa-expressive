@@ -2,10 +2,18 @@
 $this->headLink()
     ->prependStylesheet('https://use.fontawesome.com/releases/v5.0.6/css/all.css')
     ->prependStylesheet('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css')
-    ->appendStylesheet('/assets/css/theme-default.css');
+    ->appendStylesheet('/assets/css/theme-default.css')
+    ->appendStylesheet('/assets/css/bootstrap-multiselect.css')
+    ->appendStylesheet('https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css')
+;
 $this->inlineScript()
+//    ->prependFile('/assets/js/popper.js')
     ->prependFile('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js')
-    ->prependFile('https://code.jquery.com/jquery-3.3.1.min.js');
+    ->prependFile('https://code.jquery.com/jquery-3.3.1.min.js')
+    ->appendFile('/assets/js/bootstrap-multiselect.js')
+    ->appendFile('/assets/js/moment-with-locales.min.js')
+    ->appendFile('https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js')
+;
 
 if($this->hasIdentity()):
 
@@ -48,7 +56,7 @@ endif;
                     </button>
                     <!-- Brand -->
                     <a class="navbar-brand" href="<?=$this->url()?>">
-                        <img src="/assets/img/1113.png" alt="Zend Expressive" height="28" />
+                        <img src="/assets/img/1113.png" alt="art13.eu" height="28" />
                     </a>
                 </div>
                 <!-- Links -->
@@ -72,9 +80,7 @@ endif;
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?=$this->url('spa.user.list')?>" class="nav-link">
-                                    Protesty
-                                </a>
+                                <a href="<?=$this->url('manager.event.list')?>" class="nav-link"><?=$this->translate("Events");?></a>
                             </li>
                             <li class="nav-item">
                                 <a href="<?=$this->url('spa.spa-petition.list')?>" class="nav-link">
@@ -94,8 +100,11 @@ endif;
                     </ul>
                     <ul class="navbar-nav navbar-right">
                         <?php if( ! $this->hasIdentity()):?>
+                            <li class="nav-item mr-2">
+                                <a href="<?=$this->url('manager.register')?>" class="nav-link btn btn-sm btn-secondary text-light"><?=$this->translate('Zarejestruj');?></a>
+                            </li>
                             <li class="nav-item">
-                                <a href="<?=$this->url('spa.auth')?>" class="nav-link btn btn-sm btn-secondary text-light">Zaloguj</a>
+                                <a href="<?=$this->url('spa.auth')?>" class="nav-link btn btn-sm btn-secondary text-light"><?=$this->translate('Zaloguj');?></a>
                             </li>
                         <?php else: ?>
                             <li class="nav-item">
@@ -125,6 +134,8 @@ endif;
         </main>
     </div>
 
+
+
     <footer class="app-footer">
         <div class="container">
             <hr />
@@ -135,5 +146,7 @@ endif;
     </footer>
 
     <?=$this->inlineScript()?>
+
+
 </body>
 </html>

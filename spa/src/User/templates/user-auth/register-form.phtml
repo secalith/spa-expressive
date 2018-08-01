@@ -1,0 +1,96 @@
+<?php
+
+$form->prepare();
+
+?>
+
+<?=$this->form()->openTag($form);?>
+
+<?=$this->formElementErrors($form->get('application_id'));?>
+<?=$this->formElementErrors($form->get('csrf'));?>
+
+<div>
+    <h3 class="display-5"><?=$this->translate("So it begins...");?></h3>
+    <span><?=$this->translate("Enter your email address below to get started!");?></span>
+    <div class="container pt-2">
+        <div class="row">
+            <div class="col-12 col-md-6 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_user')->get('email'))))?'has-errors':'';?>">
+                <?=$this->formInput($form->get('form_create')->get('fieldset_user')->get('email'));?>
+                <?=$this->formElementErrors($form->get('form_create')->get('fieldset_user')->get('email'));?>
+            </div>
+            <div class="wrapper-info-next_step col-12 col-md-6 py-2 px-0 pl-md-5">
+                <small><?=$this->translate('In this step you will be able to choose your password and a name for your account. We will not send you spam!');?></small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<div class="form-container <?=($form->getMessages())?'form-has-errors':null;?>">
+
+    <?=$this->form()->openTag($form);?>
+
+    <h3 class="display-5"><?=$this->translate("Your account details");?></h3>
+
+
+    <div class="container pt-2">
+        <div class="row">
+            <div class="col-12 col-md-6 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_credentials_password')->get('password'))))?'has-errors':'';?>">
+                <?=$this->formLabel($form->get('form_create')->get('fieldset_credentials_password')->get('password'));?>
+                <?=$this->formElementErrors($form->get('form_create')->get('fieldset_credentials_password')->get('password'));?>
+                <?=$this->formInput($form->get('form_create')->get('fieldset_credentials_password')->get('password'));?>
+            </div>
+            <div class="col-12 col-md-6 py-2 px-0 px-md-3 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_credentials_password')->get('password_confirm'))))?'has-errors':'';?>">
+                <?=$this->formLabel($form->get('form_create')->get('fieldset_credentials_password')->get('password_confirm'));?>
+                <?=$this->formElementErrors($form->get('form_create')->get('fieldset_credentials_password')->get('password_confirm'));?>
+                <?=$this->formInput($form->get('form_create')->get('fieldset_credentials_password')->get('password_confirm'));?>
+            </div>
+            <div class="col-12 col-md-6 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_user_profile')->get('name_first'))))?'has-errors':'';?>">
+                <?=$this->formLabel($form->get('form_create')->get('fieldset_user_profile')->get('name_first'));?>
+                <?=$this->formElementErrors($form->get('form_create')->get('fieldset_user_profile')->get('name_first'));?>
+                <?=$this->formInput($form->get('form_create')->get('fieldset_user_profile')->get('name_first'));?>
+            </div>
+            <div class="col-12 col-md-6 py-2 px-0 px-md-3 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_user_profile')->get('name_last'))))?'has-errors':'';?>">
+                <?=$this->formLabel($form->get('form_create')->get('fieldset_user_profile')->get('name_last'));?>
+                <?=$this->formElementErrors($form->get('form_create')->get('fieldset_user_profile')->get('name_last'));?>
+                <?=$this->formInput($form->get('form_create')->get('fieldset_user_profile')->get('name_last'));?>
+            </div>
+            <div class="col-12 py-2 px-0 pr-md-3 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_user_profile')->get('organization'))))?'has-errors':'';?>">
+                <?=$this->formLabel($form->get('form_create')->get('fieldset_user_profile')->get('organization'));?>
+                <?=$this->formElementErrors($form->get('form_create')->get('fieldset_user_profile')->get('organization'));?>
+                <?=$this->formInput($form->get('form_create')->get('fieldset_user_profile')->get('organization'));?>
+            </div>
+            <div class="col-12 form-check py-2 px-4 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_user_optin')->get('newsletter'))))?'has-errors':'';?>">
+                <?=$this->formCheckbox($form->get('form_create')->get('fieldset_user_optin')->get('newsletter'));?>
+                <span class="ml-2">
+                    <?=$this->formLabel($form->get('form_create')->get('fieldset_user_optin')->get('newsletter'));?>
+                </span>
+                <?=$this->formElementErrors($form->get('form_create')->get('fieldset_user_optin')->get('newsletter'));?>
+            </div>
+
+            <div class="col-12 form-check py-2 px-4 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_user_optin')->get('terms'))))?'has-errors':'';?>">
+                <?=$this->formCheckbox($form->get('form_create')->get('fieldset_user_optin')->get('terms'));?>
+                <span class="ml-2">
+                    <?=$this->formLabel($form->get('form_create')->get('fieldset_user_optin')->get('terms'));?>
+                </span>
+                <?=$this->formElementErrors($form->get('form_create')->get('fieldset_user_optin')->get('terms'));?>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="py-2 px-3 mb-2">
+        <?=$this->formSubmit($form->get('submit'));?>
+    </div>
+
+    <div class="hidden">
+        <?=$this->formElement($form->get('application_id'));?>
+        <?=$this->formElement($form->get('csrf'));?>
+    </div>
+
+
+</div>
+
+<?=$this->form()->closeTag();?>

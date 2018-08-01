@@ -1,0 +1,12 @@
+
+<div class="app-container app-register border-3">
+
+    <div class="app-container-header text-center">
+        <?=$this->partial("common-manager-partial::partial-header",['heading'=>$data_template_model['heading'],'data'=>null]);?>
+    </div>
+
+    <div class="app-container-content p-4 p-md-5">
+        <?=$this->getFormAttached($forms,null,'form_create',true,$view_template_model['forms']['form_create']);?>
+    </div>
+
+</div>

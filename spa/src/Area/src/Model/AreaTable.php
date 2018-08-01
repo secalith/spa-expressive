@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Area\Model;
 
-use Common\Model\GerenateUUIDTrait;
+use Common\Model\GenerateUUIDTrait;
 use Area\Model\AreaModel;
 use Zend\Db\TableGateway\TableGateway;
 
 class AreaTable
 {
-    use GerenateUUIDTrait;
+    use GenerateUUIDTrait;
 
     /**
      * @var TableGateway

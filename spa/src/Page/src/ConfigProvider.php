@@ -31,6 +31,7 @@ class ConfigProvider
             'factories'  => [
                 \Page\Handler\PageHandler::class => \Page\Handler\PageHandlerFactory::class,
                 \Page\Service\PageService::class => \Page\Service\Factory\PageServiceFactory::class,
+                \Page\Form\PageWriteForm::class => \Page\Form\Factory\FactoryPageWriteServiceFormFactory::class,
             ],
             'delegators' => [
                 \Page\Handler\PageHandler::class => [
@@ -55,6 +56,11 @@ class ConfigProvider
                         'name' => 'Page\Create\TableGateway',
                     ],
                 ],
+                'Page\Create\Area\TableService' => [
+                    'gateway' => [
+                        'name' => 'Page\Create\Area\TableGateway',
+                    ],
+                ],
             ],
             'gateway' => [
                 'Page\TableGateway' => [
@@ -75,6 +81,22 @@ class ConfigProvider
                 ],
                 'Page\Create\TableGateway' => [
                     'name' => 'Page\Create\TableGateway',
+                    'table' => [
+                        'name' => 'page',
+                        'object' => \Page\Model\PageTable::class,
+                    ],
+                    'adapter' => [
+                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                    ],
+                    'model' => [
+                        "object" => \Page\Model\PageCreateModel::class,
+                    ],
+                    'hydrator' => [
+                        "object" => \Zend\Hydrator\ObjectProperty::class,
+                    ],
+                ],
+                'Page\Create\Area\TableGateway' => [
+                    'name' => 'Page\Create\Area\TableGateway',
                     'table' => [
                         'name' => 'page',
                         'object' => \Page\Model\PageTable::class,
@@ -135,6 +157,7 @@ class ConfigProvider
                                 'view_template_model' => [
                                     'layout' => 'layout::default',
                                     'template' => 'common-admin::template-create',
+                                    'body_class' => 'action-create action-create-page',
                                     'forms' => [
                                         'form_create' => 'common-admin::template-create',
                                     ],
@@ -145,7 +168,8 @@ class ConfigProvider
                                             'route' => 'admin.page.create.post',
                                         ],
                                         'name' => 'form_create',
-                                        'object' => \Page\Form\PageWriteForm::class,
+//                                        'object' => \Page\Form\PageWriteForm::class,
+                                        'form_factory' => \Page\Form\PageWriteForm::class,
                                         'template' => 'common-admin::template-create',
                                     ]
                                 ],
@@ -161,6 +185,7 @@ class ConfigProvider
                                         [
                                             'html_tag' => 'h1',
                                             'text' => _("Create"),
+                                            'wrapper_class' => '',
                                             'buttons' => [
                                                 [
                                                     'html_tag' => 'a',
@@ -187,7 +212,8 @@ class ConfigProvider
                                         'action' => [
                                             'route' => 'admin.page.create.post',
                                         ],
-                                        'object' => \Page\Form\PageWriteForm::class,
+//                                        'object' => \Page\Form\PageWriteForm::class,
+                                        'form_factory' => \Page\Form\PageWriteForm::class,
                                         'pre_validate' => [
                                             'data' => [
                                                 'fieldset_page' => [
@@ -278,21 +304,38 @@ class ConfigProvider
                                                         ],
                                                     ],
                                                 ], // fieldset_template
-//                                                'collection_area' => [
-//                                                    'is_collection' => true,
-//                                                    'form_name' => 'form_create',
-//                                                    'fieldset_name' => 'collection_area',
-//                                                    'change_value' => [
-//                                                        [
-//                                                            'field_name' => 'template_uid',
-//                                                            'source' => [
-//                                                                'type' => 'post-request',
-//                                                                'source_name' => 'fieldset_template',
-//                                                                'source_field_name' => 'uid',
-//                                                            ],
-//                                                        ],
-//                                                    ],
-//                                                ], // collection_area
+                                                'fieldset_area' => [
+                                                    'form_name' => 'form_create',
+                                                    'fieldset_name' => 'fieldset_area',
+                                                    'type' => 'complex',
+                                                    'selector' => 'form_create.fieldset_page.page_type',
+                                                    'change_value' => [
+                                                        [
+                                                            'field_name' => 'page_type_event.uid',
+                                                            'source' => [
+                                                                'type' => 'post-request',
+                                                                'source_name' => 'fieldset_page',
+                                                                'source_field_name' => 'uid',
+                                                            ],
+                                                        ],
+                                                        [
+                                                            'field_name' => 'page_type_petition.uid',
+                                                            'source' => [
+                                                                'type' => 'post-request',
+                                                                'source_name' => 'fieldset_page',
+                                                                'source_field_name' => 'uid',
+                                                            ],
+                                                        ],
+                                                        [
+                                                            'field_name' => 'page_type_links.uid',
+                                                            'source' => [
+                                                                'type' => 'post-request',
+                                                                'source_name' => 'fieldset_page',
+                                                                'source_field_name' => 'uid',
+                                                            ],
+                                                        ],
+                                                    ],
+                                                ], // collection_area
                                             ],
                                         ],
                                         'save' => [
@@ -341,23 +384,23 @@ class ConfigProvider
 
                                                     ],
                                                 ], // fieldset_template
-//                                                'collection_area' => [
-//                                                    'is_collection' => true,
-//                                                    'fieldset_name' => 'collection_area',
-//                                                    'service' => [
-//                                                        [
-//                                                            'name'=>'Area\TableService',
-//                                                            'object' => \Area\Model\AreaModel::class,
-//                                                            'method' => 'saveItem'
-//                                                        ],
-//
-//                                                    ],
-//                                                ], // collection_area
-                                            ],
-                                        ],
+                                                'fieldset_area' => [
+                                                    'fieldset_name' => 'fieldset_area',
+                                                    'type' => 'complex',
+                                                    'service' => [
+                                                        [
+                                                            'name'=>'Page\Create\Area\TableService',
+                                                            'object' => \Area\Model\AreaModel::class,
+                                                            'method' => 'saveItem'
+                                                        ],
+
+                                                    ],
+                                                ], // collection_area
+                                            ], // data
+                                        ], // save
                                     ],
-                                ],
-                            ],
+                                ], // forms
+                            ], // post
                         ], // admin.page.create.post
                     ],
                 ], // Common\Handler\Create

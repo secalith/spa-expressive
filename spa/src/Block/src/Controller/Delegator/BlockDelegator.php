@@ -24,6 +24,7 @@ class BlockDelegator implements DelegatorFactoryInterface
     ) {
         $targetInstance = $callback();
         $parentLocator = $serviceLocator;
+
         if (null!==$targetInstance->getArea()) {
             $items=null;
             foreach ($targetInstance->getArea() as $area) {

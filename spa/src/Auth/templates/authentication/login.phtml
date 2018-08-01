@@ -10,30 +10,56 @@
 <?php
 $forms['form_login']->prepare();
 ?>
-    <div class="row">
-        <div class="col-4 offset-4 pb-3 border-bottom">
+
+
+<div class="col-12 m-auto col-lg-8 px-4" role="main">
+
+    <div class="app-container app-register border-3">
+
+        <div class="app-container-header text-center">
+            <div class="text-center pb-2 mb-3 mt-5">
+                <h1 class="display-1"><?=$this->translate("Sign in to Art13.eu");?></h1>
+            </div>
+        </div>
+        <div class="app-container-content px-4 py-1 p-md-5 py-md-1">
+
             <?=$this->form()->openTag($forms['form_login']);?>
-                <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-                <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-                <label for="inputEmail" class="sr-only">Email address</label>
-                <?=$this->formInput($forms['form_login']->get('form_login')->get('fieldset_credentials')->get('email'));?>
-                <?=$this->formElementErrors($forms['form_login']->get('form_login')->get('fieldset_credentials')->get('email'));?>
-                <label for="inputPassword" class="sr-only">Password</label>
-                <?=$this->formInput($forms['form_login']->get('form_login')->get('fieldset_credentials')->get('password'));?>
-                <?=$this->formElementErrors($forms['form_login']->get('form_login')->get('fieldset_credentials')->get('password'));?>
-                <div class="checkbox mt-2 d-none">
-                    <?=$this->formCheckbox($forms['form_login']->get('form_login')->get('fieldset_rememberme')->get('remember_me'));?>
-                    <?=$this->formLabel($forms['form_login']->get('form_login')->get('fieldset_rememberme')->get('remember_me'));?>
+
+            <div class="form-container ">
+                <?=$this->formElementErrors($forms['form_login']->get('security'));?>
+                <div class="container pt-2">
+                    <div class="row">
+                        <div class="col-12 py-2 px-0">
+                            <label for="form_create[fieldset_credentials_password][password]"><?=$this->translate('Registered email');?></label>
+                            <?=$this->formInput($forms['form_login']->get('form_login')->get('fieldset_credentials')->get('email'));?>
+                            <?=$this->formElementErrors($forms['form_login']->get('form_login')->get('fieldset_credentials')->get('email'));?>
+                        </div>
+                        <div class="col-12 py-2 px-0">
+                            <label for="form_create[fieldset_credentials_password][password_confirm]"><?=$this->translate('Password');?></label>
+                            <?=$this->formInput($forms['form_login']->get('form_login')->get('fieldset_credentials')->get('password'));?>
+                            <?=$this->formElementErrors($forms['form_login']->get('form_login')->get('fieldset_credentials')->get('password'));?>
+                        </div>
+                        <div class="checkbox mt-2 d-none">
+                            <?=$this->formCheckbox($forms['form_login']->get('form_login')->get('fieldset_rememberme')->get('remember_me'));?>
+                            <?=$this->formLabel($forms['form_login']->get('form_login')->get('fieldset_rememberme')->get('remember_me'));?>
+                        </div>
+                    </div>
                 </div>
-            <?=$this->formElement($forms['form_login']->get('security'));?>
-            <?=$this->formElementErrors($forms['form_login']->get('security'));?>
-            <?=$this->formSubmit($forms['form_login']->get('send'));?>
+
+                <hr>
+
+                <div class="py-2 px-0 mb-2">
+                    <?=$this->formSubmit($forms['form_login']->get('send'));?>
+                </div>
+
+                <div class="hidden">
+                    <input name="application_id" value="" type="hidden">
+                    <?=$this->formElement($forms['form_login']->get('security'));?>
+                </div>
+            </div>
+
             <?=$this->form()->closeTag();?>
-        </div>
-        <div class="col-2 offset-4 mt-1">
-            <a href="<?=$this->url('spa.auth.request');?>">Forgotten password</a>
-        </div>
-        <div class="col-2 text-right mt-1">
-            <a href="<?=$this->url('spa.auth.reset');?>">I have the code</a>
+
         </div>
     </div>
+</div>

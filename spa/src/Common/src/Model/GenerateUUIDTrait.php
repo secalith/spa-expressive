@@ -7,7 +7,7 @@ namespace Common\Model;
 use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 use Ramsey\Uuid\Uuid;
 
-trait GerenateUUIDTrait
+trait GenerateUUIDTrait
 {
     private function generateUUID()
     {

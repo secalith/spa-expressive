@@ -40,6 +40,36 @@ class PageFieldset extends Fieldset implements InputFilterProviderInterface
         ));
 
         $this->add(array(
+            'type' => 'Zend\Form\Element\Select',
+            'name' => 'page_type',
+            'options' => array(
+                'label' => _("Page Type"),
+                'value_options' => [
+                    'event' => _("Event"),
+                    'petition' => _("Petition"),
+                    'links' => _("Links"),
+                ],
+            ),
+            'attributes' => [
+                'class' => 'form-control toggle-aware-trigger d-inline-flex w-auto',
+                'data-toggle' => '{"event":{"show":["page_type_event"]},"petition":{"show":["page_type_petition"]},"links":{"show":["page_type_links"]}}',
+                'onChange' => 'javascript:spaForm.toggleFieldset($(this));return false;',
+            ],
+        ));
+
+        $this->add(array(
+            'type' => 'Zend\Form\Element\Select',
+            'name' => 'language',
+            'options' => array(
+                'label' => _("Country"),
+                'value_options' => $this->get_eu_countries(),
+            ),
+            'attributes' => [
+                'class' => 'form-control d-inline-flex w-auto bt-multiselect',
+            ],
+        ));
+
+        $this->add(array(
             'type' => 'text',
             'name' => 'name',
             'options' => array(
@@ -80,7 +110,7 @@ class PageFieldset extends Fieldset implements InputFilterProviderInterface
                 ],
             ),
             'attributes' => [
-                'class' => 'form-control d-inline-flex w-auto',
+                'class' => 'form-control d-inline-flex w-auto bt-multiselect',
             ],
         ));
 
@@ -184,6 +214,41 @@ class PageFieldset extends Fieldset implements InputFilterProviderInterface
                 'required' => true,
             ),
         );
+    }
+
+    public function get_eu_countries() {
+        $countries = [];
+        $countries['en_en'] = 'Global';
+        $countries['AT'] = 'Austria';
+        $countries['BE'] = 'Belgium';
+        $countries['BG'] = 'Bulgaria';
+        $countries['CY'] = 'Cyprus';
+        $countries['CZ'] = 'Czech Republic';
+        $countries['DE'] = 'Germany';
+        $countries['DK'] = 'Denmark';
+        $countries['EE'] = 'Estonia';
+        $countries['ES'] = 'Spain';
+        $countries['FI'] = 'Finland';
+        $countries['FR'] = 'France';
+        $countries['GB'] = 'United Kingdom';
+        $countries['GR'] = 'Greece';
+        $countries['HU'] = 'Hungary';
+        $countries['HR'] = 'Croatia';
+        $countries['IE'] = 'Ireland, Republic of (EIRE)';
+        $countries['IT'] = 'Italy';
+        $countries['LT'] = 'Lithuania';
+        $countries['LU'] = 'Luxembourg';
+        $countries['LV'] = 'Latvia';
+        $countries['MT'] = 'Malta';
+        $countries['NL'] = 'Netherlands';
+        $countries['PL'] = 'Poland';
+        $countries['PT'] = 'Portugal';
+        $countries['RO'] = 'Romania';
+        $countries['SE'] = 'Sweden';
+        $countries['SI'] = 'Slovenia';
+        $countries['SK'] = 'Slovakia';
+
+        return $countries;
     }
 
 }

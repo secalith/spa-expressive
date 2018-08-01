@@ -11,7 +11,9 @@ use Zend\InputFilter\InputFilter;
 
 class PageWriteForm extends Form
 {
-    public function __construct($name = 'form_create', $options = array())
+    private $petitions;
+
+    public function __construct($name = 'form_create', $options = array(),$petitions=null)
     {
         parent::__construct($name,$options);
 
@@ -21,6 +23,8 @@ class PageWriteForm extends Form
             ->setHydrator(new ClassMethods(true))
 //            ->setInputFilter($this->addInputFilter())
         ;
+
+        $this->petitions = $petitions;
 
         $this->addElements($options);
 
@@ -40,9 +44,18 @@ class PageWriteForm extends Form
             'name' => 'form_create',
             'type' => \Page\Form\Fieldset\WriteFieldset::class,
             'options' => array(
-                'use_as_base_fieldset' => false
+                'use_as_base_fieldset' => true
             )
         ));
+
+        // apply petitions
+        $this->get('form_create')
+            ->get('fieldset_area')
+            ->get('page_type_petition')
+            ->get('page_type_petition_areas')
+            ->get('area_main')
+            ->setValueOptions($this->petitions)
+        ;
 
         $this->add([
             'type' => 'Zend\Form\Element\Csrf',

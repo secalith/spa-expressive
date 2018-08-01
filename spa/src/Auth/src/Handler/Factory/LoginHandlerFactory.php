@@ -11,6 +11,7 @@ use Zend\Expressive\Router\RouterInterface;
 use	Zend\Authentication\AuthenticationService;
 use	Zend\Expressive\Template\TemplateRendererInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Zend\Expressive\Template;
 
 class LoginHandlerFactory
 {
@@ -20,6 +21,7 @@ class LoginHandlerFactory
         $template = $container->has(TemplateRendererInterface::class)
             ? $container->get(TemplateRendererInterface::class)
             : null;
+        $template->addDefaultParam(Template\TemplateRendererInterface::TEMPLATE_ALL,'bodyClass','action-login');
 
         $authManager = $container->get(\Auth\Service\AuthenticationManager::class);
 

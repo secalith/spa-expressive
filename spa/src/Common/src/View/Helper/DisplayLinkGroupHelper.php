@@ -89,7 +89,6 @@ class DisplayLinkGroupHelper extends AbstractHelper
                         }
 
                         if( ! empty($argss)) {
-//                            var_dump($argss);die();
                             if(count($argss)==1) {
                                 $pff = $this->getView()->plugin($attributeValue['name'])($argss[0]);
                             } elseif(count($argss)==2) {
@@ -110,7 +109,9 @@ class DisplayLinkGroupHelper extends AbstractHelper
                 $attributes = null;
             }
 
-            $output .= sprintf('<%1$s%2$s>%3$s</%1$s>',$link['html_tag'],$attributes,$link['text']);
+            $textTranslated = $this->getView()->plugin('translate')($link['text']);
+
+            $output .= sprintf('<%1$s%2$s>%3$s</%1$s>',$link['html_tag'],$attributes,$textTranslated);
         }
 
         return $output;

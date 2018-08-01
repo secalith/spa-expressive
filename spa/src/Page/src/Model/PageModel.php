@@ -12,8 +12,10 @@ class PageModel
     public $template_uid;
     public $name;
     public $route_url;
+    public $page_type;
     public $page_cache;
     public $page_layout;
+    public $language;
     public $site_name;
     public $site_uid;
 
@@ -42,8 +44,10 @@ class PageModel
         $this->template_uid = ( array_key_exists('template_uid',$data)) ? $data['template_uid'] : null;
         $this->name = ( array_key_exists('name',$data)) ? $data['name'] : null;
         $this->route_url = ( array_key_exists('route_url',$data)) ? $data['route_url'] : null;
+        $this->page_type = ( array_key_exists('page_type',$data)) ? $data['page_type'] : null;
         $this->page_cache = ( array_key_exists('page_cache',$data)) ? $data['page_cache'] : null;
         $this->page_layout = ( array_key_exists('page_layout',$data)) ? $data['page_layout'] : null;
+        $this->language = ( array_key_exists('language',$data)) ? $data['language'] : null;
         $this->site_name = ( array_key_exists('site_name',$data)) ? $data['site_name'] : null;
         $this->site_uid = ( array_key_exists('site_uid',$data)) ? $data['site_uid'] : null;
 
@@ -66,7 +70,9 @@ class PageModel
         $data['template_uid'] = $this->template_uid;
         $data['name'] = $this->name;
         $data['route_url'] = $this->route_url;
+        $data['page_type'] = $this->page_type;
         $data['page_cache'] = $this->page_cache;
+        $data['language'] = $this->language;
         $data['page_layout'] = $this->page_layout;
         $data['site_name'] = $this->site_name;
         $data['site_uid'] = $this->site_uid;
@@ -318,6 +324,42 @@ class PageModel
     public function setSiteUid($site_uid)
     {
         $this->site_uid = $site_uid;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+
+    /**
+     * @param mixed $language
+     * @return PageModel
+     */
+    public function setLanguage($language)
+    {
+        $this->language = $language;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPageType()
+    {
+        return $this->page_type;
+    }
+
+    /**
+     * @param mixed $page_type
+     * @return PageModel
+     */
+    public function setPageType($page_type)
+    {
+        $this->page_type = $page_type;
         return $this;
     }
 

@@ -117,4 +117,49 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     $app->post('/popieram[/]', [
         SpaPetition\Handler\SignatureHandler::class,
     ], 'spa.petition.support.post');
+
+    // manager.register
+    $app->get('/register[/]', [
+        'Common\Handler\Create',
+    ], 'manager.register');
+    $app->post('/register[/]', [
+        'Common\Handler\Create',
+    ], 'manager.register.post');
+
+
+    $app->get('/admin/event/list[/[{page:\d+}]]', [
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\List',
+    ], 'manager.event.list');
+    $app->get('/admin/event/details[/[{page:\d+}]]', [
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\List',
+    ], 'manager.event.read');
+    $app->get('/admin/event/create[/]', [
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\Create',
+    ], 'manager.event.create');
+    $app->post('/admin/event/create[/]', [
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\Create',
+    ], 'manager.event.create.post');
+
+    $app->get('/admin/event-group/list[/[{page:\d+}]]', [
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\List',
+    ], 'manager.event-group.list');
+    $app->get('/admin/event-group/create[/]', [
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\Create',
+    ], 'manager.event-group.create');
+    $app->post('/admin/event-group/create[/]', [
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\Create',
+    ], 'manager.event-group.create.post');
+    $app->get('/admin/event-group/details[/[{page:\d+}]]', [
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\List',
+    ], 'manager.event-group.read');
+
+
 };

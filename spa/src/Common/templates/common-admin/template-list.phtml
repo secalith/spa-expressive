@@ -32,7 +32,7 @@
             <thead class="thead-light">
             <tr>
                 <?php foreach($table['headers'] as $tableHeaderText):?>
-                    <th><?=$this->escapeHtml($tableHeaderText);?></th>
+                    <th><?=$this->escapeHtml($this->translate($tableHeaderText));?></th>
                 <?php endforeach;?>
             </tr>
             </thead>

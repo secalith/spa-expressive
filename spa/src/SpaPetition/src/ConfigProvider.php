@@ -65,11 +65,6 @@ class ConfigProvider
                         'name' => 'SpaPetition\Data\Text\TableGateway',
                     ],
                 ],
-                'SpaPetition\Signature\TableService' => [
-                    'gateway' => [
-                        'name' => 'SpaPetition\Signature\TableGateway',
-                    ],
-                ],
                 'SpaPetition\Date\TableService' => [
                     'gateway' => [
                         'name' => 'SpaPetition\Date\TableGateway',

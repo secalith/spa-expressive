@@ -3,7 +3,7 @@
 
 namespace ArticleExternal\Model;
 
-use Common\Model\GerenateUUIDTrait;
+use Common\Model\GenerateUUIDTrait;
 use ArticleExternal\Model\ArticleExternalModel;
 use Zend\Db\Sql\Select;
 use Zend\Db\TableGateway\TableGateway;
@@ -11,7 +11,7 @@ use Zend\Db\TableGateway\TableGateway;
 class ArticleExternalTable
 {
 
-    use GerenateUUIDTrait;
+    use GenerateUUIDTrait;
 
     protected $tableGateway;
 

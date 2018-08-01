@@ -17,18 +17,20 @@ class BlockHelper extends AbstractHelper
 
         $output = $this->getView()->plugin('openTag')($item);
 
-        if( ! empty($item->getBlock())){
-            /* @var $block \Block\Model\BlockModel*/
-            foreach($item->getBlock() as $block) {
-                switch ($block->getType()):
-                    case 'carousel':
-                        $output .= $this->getView()->plugin('displayBlockCarousel')($block);
-                        break;
-                    default:
+
+        switch($item->getData()->getType()) {
+            case 'block-event':
+
+                $output .= $this->getView()->plugin('displayEventsListBlock')($item);
+
+                break;
+            default:
+                if( ! empty($item->getBlock())) {
+                    foreach($item->getBlock() as $block) {
                         $output .= $this->getView()->plugin('displayBlock')($block);
-                        break;
-                endswitch;
-            }
+                    }
+                }
+
         }
 
         if( ! empty($item->getContent())){

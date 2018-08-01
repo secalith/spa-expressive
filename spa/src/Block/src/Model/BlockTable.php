@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Block\Model;
 
-use Common\Model\GerenateUUIDTrait;
+use Common\Model\GenerateUUIDTrait;
 use Block\Model\BlockModel;
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Sql\Select;
 
 class BlockTable
 {
-    use GerenateUUIDTrait;
+    use GenerateUUIDTrait;
 
     /**
      * @var TableGateway
@@ -85,7 +86,12 @@ class BlockTable
     public function fetchAllBy($value, $name = "uid")
     {
         if(is_array($value)) {
-            $rowset = $this->tableGateway->select($value);
+            $select = new Select('block');
+            $select->order('order ASC');
+            $select->where($value);
+
+            $rowset = $this->tableGateway->selectWith($select);
+
         } else {
             $rowset = $this->tableGateway->select([$name => $value]);
         }

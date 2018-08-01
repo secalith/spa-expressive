@@ -73,6 +73,6 @@ class LoginHandler implements RequestHandlerInterface, PageViewAwareInterface, A
 
         }
 
-        return	new	HtmlResponse($this->template->render('auth::login',['forms'=>['form_login'=>$loginForm]]));
+        return	new	HtmlResponse($this->template->render('auth::login',['forms'=>['form_login'=>$loginForm],'layout'=>'layout::manager','bodyClass'=>'action-login']));
     }
 }

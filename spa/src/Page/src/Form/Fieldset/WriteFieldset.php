@@ -57,20 +57,16 @@ class WriteFieldset extends Fieldset implements InputFilterProviderInterface
                 'use_as_base_fieldset' => false
             )
         ));
-
         $this->add(array(
-            'type' => 'Zend\Form\Element\Collection',
-            'name' => 'collection_area',
+            'name' => 'fieldset_area',
+            'type' => \Page\Form\Fieldset\PageAreaFieldset::class,
             'options' => array(
                 'label' => _("Area"),
-                'count' => 2,
-                'should_create_template' => true,
-                'template_placeholder' => '__placeholder__',
-                'target_element' => array(
-                    'type' => '\Area\Form\Fieldset\AreaFieldset',
-                ),
+                'use_as_base_fieldset' => false
             )
         ));
+
+
 
 
     }

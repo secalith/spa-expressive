@@ -20,6 +20,8 @@ class PageViewServiceFactory
         $serviceBlock = $container->get(\Block\Service\BlockService::class);
         $serviceContent = $container->get(\Content\Service\ContentService::class);
 
-        return new PageViewService($tablePage,$tableTemplate,$tableArea,$serviceBlock,$serviceContent);
+        $currentLanguage = $container->get(\I18n\Service\I18n::class)->getCurrentLanguage();
+
+        return new PageViewService($tablePage,$tableTemplate,$tableArea,$serviceBlock,$serviceContent,$currentLanguage);
     }
 }

@@ -40,6 +40,7 @@ class ApplicationFieldsetSaveServiceAwareDelegator
             $formsAppConfig = $config['app']['handler'][$name]['route'][$currentRouteName][$requestMethod]['forms'];
             if( ! empty($formsAppConfig)) {
                 foreach($formsAppConfig as $formAppConfig) {
+
                     // form may be singleton or factory (from service NOT form_manager)
                     if( array_key_exists('object',$formAppConfig)) {
                         /* @var \Zend\Form\Form $form */
@@ -48,12 +49,16 @@ class ApplicationFieldsetSaveServiceAwareDelegator
                     } elseif(array_key_exists('form_factory',$formAppConfig)) {
                         if($container->has($formAppConfig['form_factory'])) {
                             $form = $container->get($formAppConfig['form_factory']);
+                        } else {
+                            echo 'dupa';
                         }
                     }
-
+//var_dump($_POST);
                     $formIndexName = (array_key_exists('name',$formAppConfig))
                         ? $formAppConfig['name']
                         : $form->getName();
+
+
 
                     if(array_key_exists('pre_save',$formAppConfig))
                     {
@@ -84,6 +89,9 @@ class ApplicationFieldsetSaveServiceAwareDelegator
                                         }
                                     }
                                 } elseif(array_key_exists('fieldset_name',$fieldsetConfig)) {
+
+
+
                                     foreach($fieldsetConfig['service'] as $serviceConfig) {
                                         if($container->has($serviceConfig['name'])) {
                                             $requestedCallback->setFieldsetService($container->get($serviceConfig['name']),$fieldsetConfig['fieldset_name']);

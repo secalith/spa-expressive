@@ -1,0 +1,126 @@
+<?php
+$this->headLink()
+    ->prependStylesheet('https://use.fontawesome.com/releases/v5.0.6/css/all.css')
+    ->prependStylesheet('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css')
+    ->appendStylesheet('/assets/css/theme-art13-1.css')
+    ->appendStylesheet('/assets/css/bootstrap-multiselect.css')
+;
+$this->inlineScript()
+    ->prependFile('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js')
+    ->prependFile('https://code.jquery.com/jquery-3.3.1.min.js')
+//    ->prependFile('/assets/js/popper.js')
+    ->appendFile('/assets/js/bootstrap-multiselect.js')
+;
+
+if($this->hasIdentity()):
+
+    $this->inlineScript()
+        ->appendFile('/assets/js/spa-editor.js')
+        ->appendFile('/assets/js/secalith-zf-core.js')
+        ->appendFile('/assets/js/secalith-zf-form.js')
+        ->appendFile('/assets/js/spa-form.js')
+        ->appendFile('/assets/js/spa-init.js')
+    ;
+
+endif;
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="shortcut icon" href="https://framework.zend.com/ico/favicon.ico" />
+    <?=$this->headTitle('11/13')->setSeparator(' - ')->setAutoEscape(false)?>
+    <?=$this->headMeta()?>
+    <?=$this->headLink()?>
+    <style>
+        body { padding-top: 70px; }
+        .app { min-height: 100vh; }
+        .app-footer { padding-bottom: 1em; }
+    </style>
+</head>
+<body class="app app-theme-art13 <?=(isset($bodyClass))?$bodyClass:null;?>">
+    <header class="app-header">
+        <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="#navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <!-- Brand -->
+                    <a class="navbar-brand" href="<?=$this->url('home')?>">
+                        <img src="/assets/img/1113.png" alt="Zend Expressive" height="28" />
+                    </a>
+                </div>
+                <!-- Links -->
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a href="<?=$this->url('home')?>" class="nav-link"><?=$this->translate("Homepage");?></a>
+                        </li>
+                        <?php if( ! $this->hasIdentity()):?>
+                            <li class="nav-item float-right">
+                                <a href="<?=$this->url('spa.auth')?>" class="nav-link"><?=$this->translate('Events');?></a>
+                            </li>
+                        <?php else: ?>
+                            <li class="nav-item">
+                                <a href="<?=$this->url('spa.user.list')?>" class="nav-link">
+                                    Uzytkownicy
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?=$this->url('spa.user.list')?>" class="nav-link">
+                                    Protesty
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?=$this->url('spa.spa-petition.list')?>" class="nav-link">
+                                    Petycje
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?=$this->url('admin.site.list')?>" class="nav-link"><?=$this->translate('Witryny');?></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?=$this->url('admin.page.list')?>" class="nav-link"><?=$this->translate('Strony');?></a>
+                            </li>
+                        <?php endif;?>
+                    </ul>
+                    <ul class="navbar-nav navbar-right">
+                        <?php if( ! $this->hasIdentity()):?>
+                            <li class="nav-item mr-2">
+                                <a href="<?=$this->url('manager.register')?>" class="nav-link btn btn-sm btn-secondary text-light"><?=$this->translate('Sign Up');?></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?=$this->url('spa.auth')?>" class="nav-link btn btn-sm btn-secondary text-light"><?=$this->translate('Sign In');?></a>
+                            </li>
+                        <?php else: ?>
+                            <li class="nav-item">
+                                <a href="<?=$this->url('spa.auth.logout')?>" class="nav-link btn btn-sm btn-secondary text-light"><?=$this->translate("Sign Out");?></a>
+                            </li>
+                        <?php endif;?>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="app-content">
+        <main class="container">
+            <div class="row">
+                <div class="col-12 m-auto" role="main">
+                    <?=($this->content);?>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="app-footer">
+        <div class="container"></div>
+    </footer>
+
+    <?=$this->inlineScript()?>
+</body>
+</html>

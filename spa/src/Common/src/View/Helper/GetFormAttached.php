@@ -8,7 +8,7 @@ use Zend\View\Helper\AbstractHelper;
 
 class GetFormAttached extends AbstractHelper
 {
-    public function __invoke($forms=null, $itemId=null, $index, $render=true, $template=null)
+    public function __invoke($forms=null, $itemId=null, $index, $render=true, $template=null,$routeConfig=null)
     {
         $output = null;
         $template = ($template!==null)?$template:'common::form-attached';

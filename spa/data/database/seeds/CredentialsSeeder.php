@@ -14,6 +14,12 @@ class CredentialsSeeder extends AbstractSeed
                 'status'    => 1,
                 'created'    => date('Y-m-d H:i:s'),
             ],
+            [
+                'uid'    => 'stopacta-grzegorz',
+                'password'    => '$2y$10$tYS7tevL/JlbOUhUdADRC.ogsKHwdG2zLEYrzWHq9vOel/4p3cnme',
+                'status'    => 1,
+                'created'    => date('Y-m-d H:i:s'),
+            ],
         ];
 
         $table = $this->table('credentials');

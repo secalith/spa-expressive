@@ -158,6 +158,8 @@ class ConfigProvider
                 'common' => [__DIR__ . '/../templates/common'],
                 'common-admin' => [__DIR__ . '/../templates/common-admin'],
                 'common-admin-partial' => [__DIR__ . '/../templates/common-admin/common-admin-partial'],
+                'common-manager' => [__DIR__ . '/../templates/common-manager'],
+                'common-manager-partial' => [__DIR__ . '/../templates/common-manager/common-manager-partial'],
             ],
         ];
     }

@@ -98,6 +98,7 @@ class PageTable
             'name' => $item->getName(),
             'route_url' => $item->getRouteUrl(),
             'page_cache' => $item->getPageCache(),
+            'language' => $item->getLanguage(),
             'page_layout' => $item->getPageLayout(),
             'site_uid' => $item->getSiteUid(),
             'status' => 1,

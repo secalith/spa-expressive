@@ -2,7 +2,7 @@
 
 namespace Auth\Model;
 
-use Common\Model\GerenateUUIDTrait;
+use Common\Model\GenerateUUIDTrait;
 use Common\Model\CommonTableGateway as CommonTable;
 use Authentication\Entity\UserEntity as Entity;
 use Authentication\Model\UserModel as Model;
@@ -11,7 +11,7 @@ use Zend\Db\TableGateway\TableGateway;
 
 class CredentialsResetTable
 {
-    use GerenateUUIDTrait;
+    use GenerateUUIDTrait;
 
     protected $tableGateway;
 

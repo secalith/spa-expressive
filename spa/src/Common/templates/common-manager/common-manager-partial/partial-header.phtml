@@ -1,0 +1,16 @@
+<?php foreach($heading as $header): ?>
+    <div class="<?=$header['wrapper_class'];?>">
+        <?php if(array_key_exists('html_tag',$header) && array_key_exists('text',$header)): ?>
+            <?=sprintf(
+                '<%1$s class="%2$s">%3$s%4$s</%1$s>',
+                $header['html_tag'],
+                ($header['html_tag_class'])??null,
+                $this->translate($header['text']),
+                (array_key_exists('buttons',$header))?$this->displayLinkGroup($header['buttons'],$data):null
+            );?>
+        <?php elseif(array_key_exists('buttons',$header)):?>
+            <?=$this->displayLinkGroup($header['buttons'],$data);?>
+        <?php endif; ?>
+
+    </div>
+<?php endforeach; ?>

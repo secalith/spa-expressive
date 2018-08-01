@@ -22,6 +22,7 @@ class CreateContentTable extends AbstractMigration
             ->addColumn('attributes', 'string',['default' => '{}'])
             ->addColumn('parameters', 'string',['default' => '{}'])
             ->addColumn('options', 'string',['default' => '{}'])
+            ->addColumn('language', 'string', ['limit' => 8,'default' => 'en_en'])
             ->addColumn('status', 'integer', ['limit' => 8,'default' => 0])
             ->addColumn('order', 'string', ['limit' => 8])
             ->addColumn('created', 'datetime')

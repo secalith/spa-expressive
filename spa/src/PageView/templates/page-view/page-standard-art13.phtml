@@ -1,0 +1,18 @@
+<?=(isset($pageView)&&null!==$pageView->getVariable('area'))
+    ?$this->displayArea($pageView->getVariable('area')->getArea('content_head'))
+    :null;
+?>
+
+<div class="app-container-content">
+    <?=(isset($pageView)&&null!==$pageView->getVariable('area'))
+        ?$this->displayArea($pageView->getVariable('area')->getArea('content_main'))
+        :null;
+    ?>
+</div>
+
+
+
+<?=(isset($pageView)&&null!==$pageView->getVariable('area'))
+    ?$this->displayArea($pageView->getVariable('area')->getArea('content_footer'))
+    :null;
+?>

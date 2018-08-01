@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Common\Handler\Factory;
 
+use ArrayDigger\Service\ArrayDigger;
 use Common\Handler\DataAwareInterface;
 use Common\Handler\CreateHandler;
 use Common\Helper\CurrentRouteNameHelper;
@@ -14,6 +15,8 @@ use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 use Zend\ServiceManager\AbstractFactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+
+use Zend\Expressive\Template;
 
 class CreateHandlerAbstractFactory implements AbstractFactoryInterface
 {
@@ -60,16 +63,25 @@ class CreateHandlerAbstractFactory implements AbstractFactoryInterface
             $template = $serviceLocator->has(TemplateRendererInterface::class)
                 ? $serviceLocator->get(TemplateRendererInterface::class)
                 : null;
+            // set LAYOUT and TEMPLATE
+            if(array_key_exists('view_template_model',$this->routeConfig)) {
+                // determine html body class
+                if (array_key_exists('body_class', $this->routeConfig['view_template_model'])) {
+                    $template->addDefaultParam(Template\TemplateRendererInterface::TEMPLATE_ALL, 'bodyClass', $this->routeConfig['view_template_model']['body_class']);
+                }
+            }
 
             $urlHelper = $serviceLocator->get(UrlHelper::class);
 
+            $arrayDigger = new ArrayDigger();
 
             $targetClass = new CreateHandler(
                 $router,
                 $template,
                 get_class($serviceLocator),
                 $urlHelper,
-                $this->routeConfig
+                $this->routeConfig,
+                $arrayDigger
             );
 
             // set LAYOUT and TEMPLATE
@@ -81,12 +93,15 @@ class CreateHandlerAbstractFactory implements AbstractFactoryInterface
                 if(array_key_exists('template',$this->routeConfig['view_template_model'])) {
                     $targetClass->addData($this->routeConfig['view_template_model']['template'],'template');
                 }
+
+                if(array_key_exists('body_class',$this->routeConfig['view_template_model'])) {
+                    $targetClass->addData($this->routeConfig['view_template_model']['template'],'template');
+                }
             }
             // set DATA-TABLE
-            if(array_key_exists('data_template_model',$this->routeConfig) && $targetClass instanceof DataAwareInterface) {
-//                            if(array_key_exists('table',$routeConfig['data_template_model'])) {
-                    $targetClass->addData($this->routeConfig['data_template_model'],'data_template_model');
-//                            }
+            if(array_key_exists('data_template_model',$this->routeConfig) && $targetClass instanceof DataAwareInterface)
+            {
+                $targetClass->addData($this->routeConfig['data_template_model'],'data_template_model');
             }
 
             return $targetClass;

@@ -11,6 +11,7 @@ class UserProfileModel
     public $uid;
     public $name_first;
     public $name_last;
+    public $organization;
     public $created;
     public $updated;
 
@@ -24,6 +25,7 @@ class UserProfileModel
         $this->uid     = (!empty($data['uid'])) ? $data['uid'] : null;
         $this->name_first = (!empty($data['name_first'])) ? $data['name_first'] : null;
         $this->name_last = (!empty($data['name_last'])) ? $data['name_last'] : null;
+        $this->organization = (!empty($data['organization'])) ? $data['organization'] : null;
         $this->created = (!empty($data['created'])) ? $data['created'] : null;
         $this->updated = (!empty($data['updated'])) ? $data['updated'] : null;
     }
@@ -35,6 +37,7 @@ class UserProfileModel
         $data['uid'] = $this->uid;
         $data['name_first'] = $this->name_first;
         $data['name_last'] = $this->name_last;
+        $data['organization'] = $this->organization;
         $data['created'] = $this->created;
         $data['updated'] = $this->updated;
 
@@ -136,6 +139,24 @@ class UserProfileModel
     public function setUpdated($updated)
     {
         $this->updated = $updated;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOrganization()
+    {
+        return $this->organization;
+    }
+
+    /**
+     * @param mixed $organization
+     * @return UserProfileModel
+     */
+    public function setOrganization($organization)
+    {
+        $this->organization = $organization;
         return $this;
     }
 

@@ -10,7 +10,7 @@ class WriteFieldsetModel
     public $fieldset_route;
     public $fieldset_router;
     public $fieldset_template;
-    public $collection_area;
+    public $fieldset_area;
 
 
     public function __construct($data = [])
@@ -24,7 +24,7 @@ class WriteFieldsetModel
         $this->fieldset_route     = (!empty($data['fieldset_route'])) ?? null;
         $this->fieldset_router     = (!empty($data['fieldset_router'])) ?? null;
         $this->fieldset_template     = (!empty($data['fieldset_template'])) ?? null;
-        $this->collection_area     = (!empty($data['collection_area'])) ?? null;
+        $this->fieldset_area     = (!empty($data['fieldset_area'])) ?? null;
    }
 
     public function toArray()
@@ -35,7 +35,7 @@ class WriteFieldsetModel
         $data['fieldset_route'] = $this->fieldset_route;
         $data['fieldset_router'] = $this->fieldset_router;
         $data['fieldset_template'] = $this->fieldset_template;
-        $data['collection_area'] = $this->collection_area;
+        $data['fieldset_area'] = $this->fieldset_area;
 
         return $data;
     }
@@ -123,18 +123,18 @@ class WriteFieldsetModel
     /**
      * @return mixed
      */
-    public function getCollectionArea()
+    public function getFieldsetArea()
     {
-        return $this->collection_area;
+        return $this->fieldset_area;
     }
 
     /**
-     * @param mixed $collection_area
+     * @param mixed $fieldset_area
      * @return WriteFieldsetModel
      */
-    public function setCollectionArea($collection_area)
+    public function setFieldsetArea($fieldset_area)
     {
-        $this->collection_area = $collection_area;
+        $this->fieldset_area = $fieldset_area;
         return $this;
     }
 
