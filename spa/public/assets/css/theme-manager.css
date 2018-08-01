@@ -14,13 +14,13 @@ body.app-theme-default.action-register {
     background-repeat: no-repeat;
     background-position: left top;
     background-attachment: fixed;
-    padding-top:120px;
+    padding-top:80px;
 
     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
 }
 .action-login .navbar-light,
 .action-register .navbar-light {
-    height:120px;
+    height:80px;
 }
 .action-login .navbar-light,
 .action-register .navbar-light {
