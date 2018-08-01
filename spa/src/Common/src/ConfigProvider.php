@@ -23,9 +23,11 @@ use Common\Middleware\HandlerCacheMiddleware;
 use Common\Middleware\StaticPageHandlerCacheMiddleware;
 use Common\View\Helper\CurrentUrlHelper;
 use Common\View\Helper\Factory\CurrentUrlHelperFactory;
+use Common\View\Helper\Factory\MarkdownViewHelperFactory;
 use Common\View\Helper\FlashMessage;
 use Common\View\Helper\GetFormAttached;
 use Common\View\Helper\IsFormSet;
+use Michelf\Markdown;
 use Whoops\Handler\Handler;
 use Zend\Session\Storage\SessionArrayStorage;
 use Zend\Session\Validator\HttpUserAgent;
@@ -52,6 +54,7 @@ class ConfigProvider
                     'currentRoute' => CurrentUrlHelperFactory::class,
                     'displayLinkGroup' => DisplayLinkGroupHelperFactory::class,
                     'openTag' => View\Helper\OpenTagHelperFactory::class,
+                    'markdown' => \Common\View\Helper\Factory\MarkdownViewHelperFactory::class,
                 ],
 
             ],
@@ -84,10 +87,12 @@ class ConfigProvider
         return [
             'invokables' => [
                 CurrentUrlHelper::class => CurrentUrlHelper::class,
+                Markdown::class => Markdown::class,
 
             ],
             'factories' => [
 //                \Common\Handler\ResourceHandler::class => \Common\Handler\Factory\ResourceHandlerFactory::class,
+                \Common\Service\MarkdownService::class => \Common\Service\Factory\MarkdownServiceFactory::class,
                 CurrentUrlMiddleware::class => CurrentUrlMiddlewareFactory::class,
 
                 CurrentHandlerNameMiddleware::class => CurrentHandlerNameMiddlewareFactory::class,

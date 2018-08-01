@@ -53,19 +53,25 @@ class ContentHelper extends AbstractHelper
                     $c = str_replace($contentPlaceholder,$renderedContent,$item->getData()->getContent());
                     $item->getData()->setContent($c);
                 }
-//                $viewHelperPlaceholder = sprintf("[::viewHelper:%s::]",$childData->getData()->getUid());
-                //viewHelper
             }
         }
 
         $helperName = $this->get_string_between($item->getData()->getContent(),'[::viewHelper:','::]');
+
         if($helperName) {
             $contentPlaceholder = sprintf("[::viewHelper:%s::]",$helperName);
             $renderedContent = $this->getView()->plugin($helperName)();
-//echo $attrName;
             $c = str_replace($contentPlaceholder,$renderedContent,$item->getData()->getContent());
             $item->getData()->setContent($c);
         }
+
+        $helperName = $this->get_string_between($item->getData()->getType(),'[::viewHelper:','::]');
+        if($helperName) {
+            $contentPlaceholder = sprintf("[::viewHelper:%s::]",$helperName);
+            $renderedContent = $this->getView()->plugin($helperName)($item->getData()->getContent());
+            $item->getData()->setContent($renderedContent);
+        }
+
 
         $output .= $item->getData()->getContent();
 

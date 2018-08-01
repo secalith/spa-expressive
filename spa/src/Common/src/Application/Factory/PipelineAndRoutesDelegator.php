@@ -53,6 +53,7 @@ class PipelineAndRoutesDelegator
         $hostname = ($_SERVER['HTTP_HOST'])?$_SERVER['HTTP_HOST']:php_uname('n');
         /* @var \Instance\Model\InstanceModel $instance */
         $instance = $container->get("Instance\\TableService")->fetchBy(['hostname'=>$hostname]);
+
         if( $instance !== false ) {
             // obtain Routes from database
             # TODO Use middleware for it
@@ -63,6 +64,7 @@ class PipelineAndRoutesDelegator
                     'site_uid' => $instance->getSiteUid(),
                 ]
             );
+
             if( $items !== false) {
                 /* @var $item \PageRoute\Model\RouterModel */
                 foreach($items as $item) {

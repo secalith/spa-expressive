@@ -1,6 +1,9 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+####
+#   Contains two VMs. SPA and PETITIONS
+####
 
 VAGRANTFILE_API_VERSION = '2'
 
@@ -60,7 +63,7 @@ service apache2 restart
 
 ##
 
-echo "192.168.0.87  www.petitions.local.vm petitions.local.vm" >> /etc/hosts
+echo "192.168.0.87  www.peticio.local.vm peticio.local.vm" >> /etc/hosts
 
 cd /var/www/application
 touch ./data/database/content-development.sqlite3
@@ -113,8 +116,8 @@ echo "<VirtualHost *:80>
 	DocumentRoot \"/var/www/application/public\"
 	AllowEncodedSlashes On
 
-	ServerName "petitions.local.vm";
-	ServerAlias "www.petitions.local.vm";
+	ServerName "peticio.local.vm";
+	ServerAlias "www.peticio.local.vm";
 
 	<Directory \"/var/www/application/public\">
 		Options +Indexes +FollowSymLinks
@@ -124,7 +127,7 @@ echo "<VirtualHost *:80>
 		AllowOverride All
 	</Directory>
 
-	ErrorLog /var/www/application/logs/error.log
+	ErrorLog /var/www/application/logs/error-peticio.log
 	CustomLog /var/www/application/logs/access.log combined
 
 </VirtualHost>" > /etc/apache2/sites-available/000-default.conf
@@ -137,11 +140,6 @@ service apache2 restart
 
 echo "192.168.0.84  www.manager.local.vm manager.local.vm" >> /etc/hosts
 
-cd /var/www/application
-# touch ./data/database/content-development.sqlite3
-# php ./vendor/bin/phinx migrate
-# php ./vendor/bin/phinx seed:run
-
 #############
 #   Other   #
 #############
@@ -150,7 +148,8 @@ cd ~
 
 ##
 
-echo "** Visit http://localhost:8087 or http://spa.local.vm in your browser for to view the application **"
+echo "** Visit http://localhost:8084 or http://manager.local.vm in your browser for to view the application **"
+echo "** Visit http://localhost:8087 or http://peticio.local.vm in your browser for to view the application **"
 echo "** IP: 192.168.0.87 **"
 SCRIPT
 
@@ -172,15 +171,15 @@ Vagrant.configure("2") do |config|
         end
     end
 
-    config.vm.define "petitions" do |petitions|
-        petitions.vm.network "forwarded_port", guest: 87, host: 8087
-        petitions.vm.network :public_network, ip: "192.168.0.87"
-        petitions.vm.synced_folder './spa', '/var/www/application', id:"application-root",owner:"vagrant",group:"www-data",mount_options:["dmode=775,fmode=664"]
-        petitions.vm.provision 'shell', inline: @script_petitions
-        petitions.vm.hostname = 'petitions.local.vm'
-        petitions.vm.provider :virtualbox do |v|
+    config.vm.define "peticio" do |peticio|
+        peticio.vm.network "forwarded_port", guest: 87, host: 8087
+        peticio.vm.network :public_network, ip: "192.168.0.87"
+        peticio.vm.synced_folder './spa', '/var/www/application', id:"application-root",owner:"vagrant",group:"www-data",mount_options:["dmode=775,fmode=664"]
+        peticio.vm.provision 'shell', inline: @script_petitions
+        peticio.vm.hostname = 'peticio.local.vm'
+        peticio.vm.provider :virtualbox do |v|
           v.customize ["modifyvm", :id, "--memory", 512]
-          v.customize ["modifyvm", :id, "--name", "SPA :: petitions"]
+          v.customize ["modifyvm", :id, "--name", "SPA :: Peticio"]
         end
     end
 
