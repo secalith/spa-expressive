@@ -15,8 +15,6 @@ class FooHandler implements RequestHandlerInterface
 {
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
-//        $user = $request->getAttribute(AuthHandler::class);
-
-        return new RedirectResponse('/import/page');
+        return new RedirectResponse('/');
     }
 }
