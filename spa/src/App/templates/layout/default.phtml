@@ -85,14 +85,14 @@ endif;
                     <ul class="navbar-nav navbar-right">
                         <?php if( ! $this->hasIdentity()):?>
                             <li class="nav-item mr-2">
-                                <a href="<?=$this->url('manager.register')?>" class="nav-link btn btn-sm btn-secondary text-light"><?=$this->translate('Zarejestruj');?></a>
+                                <a href="<?=$this->url('manager.register')?>" class="nav-link btn btn-sm btn-secondary text-light"><?=$this->translate('Sign Up');?></a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?=$this->url('spa.auth')?>" class="nav-link btn btn-sm btn-secondary text-light"><?=$this->translate('Zaloguj');?></a>
+                                <a href="<?=$this->url('spa.auth')?>" class="nav-link btn btn-sm btn-secondary text-light"><?=$this->translate('Sign In');?></a>
                             </li>
                         <?php else: ?>
                             <li class="nav-item">
-                                <a href="<?=$this->url('spa.auth.logout')?>" class="nav-link btn btn-sm btn-secondary text-light"><?=$this->translate("Wyloguj");?></a>
+                                <a href="<?=$this->url('spa.auth.logout')?>" class="nav-link btn btn-sm btn-secondary text-light"><?=$this->translate("Sign Out");?></a>
                             </li>
                         <?php endif;?>
                     </ul>
