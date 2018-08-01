@@ -85,6 +85,10 @@ class ConfigProvider
 //                                'fr_fr' => _('French'),
                                 'sv_sv' => _('Swedish'),
                                 'pl_pl' => _('Polish'),
+                                'de_de' => _('German'),
+                            ],
+                            'language_alias' => [
+                                'sv_fi' => 'sv_sv',
                             ],
                         ],
                     ],

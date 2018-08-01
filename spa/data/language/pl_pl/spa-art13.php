@@ -7,7 +7,7 @@ return [
     'Homepage' => 'Strona Domowa',
     'Events' => 'Wydarzenia',
     'See the Event on Facebook' => 'Zobacz wydarzenie na Facebooku',
-    'Find on Map' => 'Znajdz na mapie',
+    'Find on Map' => 'Znajdź na mapie',
 
 
 ];

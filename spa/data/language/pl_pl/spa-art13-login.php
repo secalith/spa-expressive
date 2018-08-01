@@ -1,7 +1,7 @@
 <?php
 return [
-    'Sign in to Art13.eu' => 'Zaloguj sie do Art13.eu',
+    'Sign in to Art13.eu' => 'Zaloguj się do Art13.eu',
     'Registered email' => 'Zarejestrowany adres Email',
     'Email' => 'Adres Email',
-    'Password' => 'Haslo',
+    'Password' => 'Hasło',
 ];

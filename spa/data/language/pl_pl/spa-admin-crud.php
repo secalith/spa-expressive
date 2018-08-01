@@ -1,6 +1,6 @@
 <?php
 return [
-    'Create' => 'Utworz',
+    'Create' => 'Utwórz',
     'Read' => 'Wczytaj',
     'Update' => 'Aktualizacja',
     'Delete' => 'Usun',
