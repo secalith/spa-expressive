@@ -22,7 +22,7 @@ class I18nFactory
 //        echo $translator->getLocale();die;
 //          die();
 
-        $language = 'pl_pl';
+       echo $language = 'en_en';die();
 
         return new I18n(
             $router,

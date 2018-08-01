@@ -41,7 +41,7 @@ class I18n implements MiddlewareInterface
 //            $session->set('i18n_current',$this->getUserLanguage());
 //            $this->translator->setLocale($this->getUserLanguage());
 //        }
-//        $this->translator->setLocale('pl_pl');
+        $this->translator->setLocale('en_en');
 //        return	$handler->handle($request->withAttribute(self::class,	$this->translator->getLocale()));
 
         $this->translator->setLocale($this->language );

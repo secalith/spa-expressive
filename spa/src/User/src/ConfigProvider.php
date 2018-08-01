@@ -786,7 +786,7 @@ class ConfigProvider
                                     ],
                                 ],
                                 'view_template_model' => [
-                                    'layout' => 'layout::manager',
+                                    'layout' => 'layout::art13-1',
                                     'template' => 'user-auth::register',
                                     'body_class' => 'action-register',
                                     'forms' => [
@@ -821,7 +821,7 @@ class ConfigProvider
                                     ],
                                 ],
                                 'view_template_model' => [
-                                    'layout' => 'layout::manager',
+                                    'layout' => 'layout::art13-1',
                                     'template' => 'user-auth::register',
                                     'body_class' => 'action-register',
                                     'forms' => [
