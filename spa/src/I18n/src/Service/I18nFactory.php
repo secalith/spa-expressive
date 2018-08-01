@@ -26,7 +26,7 @@ class I18nFactory
 
         $availableLanguages = $config['app']['service']['i18n']['config']['options']['languages'];
 
-        if( ! in_array($defaultLanguage,$availableLanguages)) {
+        if( ! isset($availableLanguages[$currentLanguage])) {
             $currentLanguage = $defaultLanguage;
         }
 
