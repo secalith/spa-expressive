@@ -18,6 +18,7 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
 
     ## SPA-REGISTER
     $app->get('/register[/]', [
+        I18n\Handler\I18n::class,
         'Common\Handler\Create',
     ], 'manager.register');
     $app->post('/register[/]', [

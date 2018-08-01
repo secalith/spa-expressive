@@ -73,7 +73,7 @@ class ConfigProvider
                         'object' => \User\Model\UserTable::class,
                     ],
                     'adapter' => [
-                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                        'name' => 'Application\Db\CredentialsAdapter',
                     ],
                     'model' => [
                         "object" => \User\Model\UserModel::class,
@@ -89,7 +89,7 @@ class ConfigProvider
                         'object' => \Auth\Model\CredentialsTable::class,
                     ],
                     'adapter' => [
-                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                        'name' => 'Application\Db\CredentialsAdapter',
                     ],
                     'model' => [
                         "object" => \Auth\Model\CredentialsTableModel::class,
@@ -105,7 +105,7 @@ class ConfigProvider
                         'object' => \User\Model\UserProfileTable::class,
                     ],
                     'adapter' => [
-                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                        'name' => 'Application\Db\CredentialsAdapter',
                     ],
                     'model' => [
                         "object" => \User\Model\UserProfileModel::class,
@@ -121,7 +121,7 @@ class ConfigProvider
                         'object' => \User\Model\UserOptInTable::class,
                     ],
                     'adapter' => [
-                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                        'name' => 'Application\Db\CredentialsAdapter',
                     ],
                     'model' => [
                         "object" => \User\Model\UserOptIn::class,

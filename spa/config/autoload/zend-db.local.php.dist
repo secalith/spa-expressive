@@ -9,7 +9,7 @@ return [
             ],
             'Application\Db\CredentialsAdapter' => [
                 'driver' => 'Pdo_Sqlite',
-                'dsn'    => 'sqlite:./data/database/content-development.sqlite3',
+                'dsn'    => 'sqlite:./data/database/credentials-production.sqlite3',
             ],
         ],
     ],

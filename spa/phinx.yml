@@ -4,7 +4,7 @@ paths:
 
 environments:
     default_migration_table: phinxlog
-    default_database: development
+    default_database: credentials
     production:
         adapter: mysql
         host: localhost
@@ -20,7 +20,7 @@ environments:
         charset: utf8
     credentials:
         adapter: sqlite
-        name: ./data/database/credentials-development.sqlite3
+        name: ./data/database/credentials-production.sqlite3
         charset: utf8
 
     testing:

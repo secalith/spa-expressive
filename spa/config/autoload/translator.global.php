@@ -4,7 +4,7 @@ return [
     'dependencies' => (new \Zend\I18n\ConfigProvider())->getDependencyConfig(),
 
     'translator' => [
-        'locale' => 'en_en',
+        'locale' => 'pl_pl',
         'translation_file_patterns' => [
             [
                 'type' => 'phparray',
