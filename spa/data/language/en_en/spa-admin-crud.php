@@ -1,6 +1,6 @@
 <?php
 return [
-    'Create' => 'Creayte',
+    'Create' => 'Create',
     'List' => 'List',
     'Details' => 'Details',
     'Update' => 'Update',
