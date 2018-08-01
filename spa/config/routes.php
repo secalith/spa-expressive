@@ -22,6 +22,7 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
         'Common\Handler\Create',
     ], 'manager.register');
     $app->post('/register[/]', [
+        I18n\Handler\I18n::class,
         'Common\Handler\Create',
     ], 'manager.register.post');
 
@@ -38,15 +39,18 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     ## MANAGER-SPA-SITE
 
     $app->get('/admin/site/list[/[{page:\d+}]]', [
+        I18n\Handler\I18n::class,
         Auth\Handler\AuthHandler::class,
         'Common\Handler\List',
     ], 'admin.site.list');
     $app->get('/admin/site/create[/[{page:\d+}]]', [
+        I18n\Handler\I18n::class,
         Auth\Handler\AuthHandler::class,
         Permission\Handler\AuthorizationHandler::class,
         'Common\Handler\List',
     ], 'admin.site.create');
     $app->get('/admin/site/details[/[{page:\d+}]]', [
+        I18n\Handler\I18n::class,
         Auth\Handler\AuthHandler::class,
         'Common\Handler\List',
     ], 'admin.site.read');
@@ -74,18 +78,22 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     ## MANAGER-EVENT
 
     $app->get('/admin/event/list[/[{page:\d+}]]', [
+        I18n\Handler\I18n::class,
         Auth\Handler\AuthHandler::class,
         'Common\Handler\List',
     ], 'manager.event.list');
     $app->get('/admin/event/details[/[{page:\d+}]]', [
+        I18n\Handler\I18n::class,
         Auth\Handler\AuthHandler::class,
         'Common\Handler\List',
     ], 'manager.event.read');
     $app->get('/admin/event/create[/]', [
+        I18n\Handler\I18n::class,
         Auth\Handler\AuthHandler::class,
         'Common\Handler\Create',
     ], 'manager.event.create');
     $app->post('/admin/event/create[/]', [
+        I18n\Handler\I18n::class,
         Auth\Handler\AuthHandler::class,
         'Common\Handler\Create',
     ], 'manager.event.create.post');
