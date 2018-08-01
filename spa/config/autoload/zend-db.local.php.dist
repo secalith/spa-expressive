@@ -1,0 +1,12 @@
+<?php
+
+return [
+    'db' => [
+        'adapters' => [
+            'Application\Db\LocalSQLiteAdapter' => [
+                'driver' => 'Pdo_Sqlite',
+                'dsn'    => 'sqlite:./data/database/content-development.sqlite3',
+            ],
+        ],
+    ],
+];

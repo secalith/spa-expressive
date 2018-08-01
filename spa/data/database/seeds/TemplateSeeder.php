@@ -19,7 +19,7 @@ class TemplateSeeder extends AbstractSeed
                 'created'    => date('Y-m-d H:i:s'),
             ],
             [
-                'uid'    => 'template-001',
+                'uid'    => 'template-002',
                 'route_uid'    => 'route-002',
                 'type'    => 'filesystem',
                 'location'    => 'page-view',
@@ -29,7 +29,7 @@ class TemplateSeeder extends AbstractSeed
                 'created'    => date('Y-m-d H:i:s'),
             ],
             [
-                'uid'    => 'template-001',
+                'uid'    => 'template-003',
                 'route_uid'    => 'route-003',
                 'type'    => 'filesystem',
                 'location'    => 'page-view',
@@ -39,7 +39,7 @@ class TemplateSeeder extends AbstractSeed
                 'created'    => date('Y-m-d H:i:s'),
             ],
             [
-                'uid'    => 'template-001',
+                'uid'    => 'template-004',
                 'route_uid'    => 'route-004',
                 'type'    => 'filesystem',
                 'location'    => 'page-view',
