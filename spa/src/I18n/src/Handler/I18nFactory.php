@@ -17,12 +17,10 @@ class I18nFactory
             : null;
 
         $translator = $container->get(\Zend\I18n\Translator\TranslatorInterface::class);
-//        $translator->setLocale('fr_FR');
-//        $translator->setLocale('pl_pl');
-//        echo $translator->getLocale();die;
-//          die();
 
-       echo $language = 'en_en';die();
+        $currentLanguage = $container->get(\I18n\Service\I18n::class)->getCurrentLanguage();
+
+       $language = $currentLanguage;
 
         return new I18n(
             $router,

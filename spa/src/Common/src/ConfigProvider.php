@@ -73,16 +73,6 @@ class ConfigProvider
                 'path' => 'data/cache/',
                 'lifetime' => 3600
             ],
-            'translator' => [
-                'locale' => 'id',
-                'translation_file_patterns' => [
-                    [
-                        'type' => 'phparray',
-                        'base_dir' => 'data/translate',
-                        'pattern' => '%s/*.php'
-                    ],
-                ],
-            ],
         ];
     }
 
