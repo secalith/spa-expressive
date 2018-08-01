@@ -67,7 +67,7 @@ class PipelineAndRoutesDelegator
                     switch($item->getController()){
                         default:
                         case '\Page\Handler\PageHandler':
-                            $app->get($item->getRouteUrl(), \Page\Handler\PageHandler::class, $item->getRouteName());
+                            $app->get($item->getRouteUrl(), [\I18n\Handler\I18n::class,\Page\Handler\PageHandler::class], $item->getRouteName());
                             break;
                     }
                 }
