@@ -7,8 +7,7 @@ $this->headLink()
     ->appendStylesheet('/assets/js/flipcountdown/jquery.flipcountdown.css')
 ;
 $this->inlineScript()
-    ->prependFile('https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js')
-    ->prependFile('https://code.jquery.com/jquery-3.3.1.slim.min.js')
+
     ->appendFile('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js')
     ->appendFile('/assets/js/bootstrap-multiselect.js')
     ->appendFile('/assets/js/flipcountdown/jquery.flipcountdown.js')
@@ -86,13 +85,13 @@ endif;
                     </button>
                     <!-- Brand -->
                     <a class="navbar-brand" href="<?=$this->url('home')?>">
-                        <img src="/assets/img/1113.png" alt="art13.eu" height="28" />
+                        <img src="https://art13.eu/assets/img/1113.png" alt="art13.eu" height="28" />
                     </a>
                 </div>
                 <!-- Links -->
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav mr-auto">
-                        <li class="">
+                        <li class="nav-item">
                             <a href="<?=$this->url('home')?>" class="nav-link"><?=$this->translate("Homepage");?></a>
                         </li>
                         <?php if( ! $this->hasIdentity()):?>
@@ -102,6 +101,11 @@ endif;
                                 <a href="<?=$this->url('manager.event.list')?>" class="nav-link"><?=$this->translate("Events");?></a>
                             </li>
                         <?php endif;?>
+
+                        <li class="nav-item">
+                            <a href="http://peticio.art13.eu" class="nav-link"><?=$this->translate("Petition");?></a>
+                        </li>
+
                     </ul>
 
                     <ul class="navbar-nav navbar-right align-middle">
