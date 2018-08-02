@@ -1,14 +1,14 @@
 <?php
 $this->headLink()
     ->prependStylesheet('https://use.fontawesome.com/releases/v5.0.6/css/all.css')
-    ->prependStylesheet('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css')
+    ->prependStylesheet('https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css')
     ->appendStylesheet('/assets/css/theme-art13-1.css')
     ->appendStylesheet('/assets/css/bootstrap-multiselect.css')
 ;
 $this->inlineScript()
-    ->prependFile('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js')
-    ->prependFile('https://code.jquery.com/jquery-3.3.1.min.js')
-//    ->prependFile('/assets/js/popper.js')
+    ->prependFile('https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js')
+    ->prependFile('https://code.jquery.com/jquery-3.3.1.slim.min.js')
+    ->appendFile('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js')
     ->appendFile('/assets/js/bootstrap-multiselect.js')
 ;
 
@@ -31,6 +31,10 @@ endif;
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <meta property="og:image" content="http://art13/assets/img/1113.png"/>
+    <meta property="og:image:secure_url" content="https://art13.eu/assets/img/1113.png" />
+
     <link rel="shortcut icon" href="https://framework.zend.com/ico/favicon.ico" />
     <?=$this->headTitle('11/13')->setSeparator(' - ')->setAutoEscape(false)?>
     <?=$this->headMeta()?>
@@ -43,27 +47,33 @@ endif;
 </head>
 <body class="app app-theme-art13 <?=(isset($bodyClass))?$bodyClass:null;?>">
 
-    <script>
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId      : '2199972683623007',
-                cookie     : true,
-                xfbml      : true,
-                version    : '{api-version}'
-            });
+<div id="fb-root"></div>
 
-            FB.AppEvents.logPageView();
-
-        };
-
-        (function(d, s, id){
+    <script>(function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
+            if (d.getElementById(id)) return;
             js = d.createElement(s); js.id = id;
-            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            js.src = 'https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v3.1&appId=2199972683623007&autoLogAppEvents=1';
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     </script>
+    <script>window.twttr = (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0],
+            t = window.twttr || {};
+        if (d.getElementById(id)) return t;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+
+        t._e = [];
+        t.ready = function(f) {
+            t._e.push(f);
+        };
+
+        return t;
+    }(document, "script", "twitter-wjs"));
+</script>
 
     <header class="app-header">
         <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top" role="navigation">
@@ -80,7 +90,7 @@ endif;
                 <!-- Links -->
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
+                        <li class="">
                             <a href="<?=$this->url('home')?>" class="nav-link"><?=$this->translate("Homepage");?></a>
                         </li>
                         <?php if( ! $this->hasIdentity()):?>
@@ -91,7 +101,16 @@ endif;
                             </li>
                         <?php endif;?>
                     </ul>
-                    <ul class="navbar-nav navbar-right">
+                    <ul class="navbar-nav navbar-right align-middle">
+                            <li class="nav-item mr-3 mt-1 align-top">
+                                <a class="twitter-share-button"
+                                   href="https://twitter.com/intent/tweet?text=#Stopacta2 #deleteart13 #antyart13 #saveyourinternet"
+                                   data-size="default">
+                                    Tweet</a>
+                            </li>
+                            <li class="nav-item mr-3 mt-0">
+                                <div class="fb-share-button align-middle" data-href="https://art13.eu" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fart13.eu%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Udostępnij</a></div>
+                            </li>
                         <?php if( ! $this->hasIdentity()):?>
                             <li class="nav-item mr-2">
                                 <a href="<?=$this->url('manager.register')?>" class="nav-link btn btn-sm btn-secondary text-light"><?=$this->translate('Sign Up');?></a>

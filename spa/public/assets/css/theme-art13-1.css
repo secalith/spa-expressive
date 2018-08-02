@@ -85,3 +85,7 @@ body.app-theme-art13 div[role="main"] .app-container-content,
 hr {
     border-bottom: 1px solid white;
 }
+
+.navbar-item .share-button {
+    height:20px;
+}
