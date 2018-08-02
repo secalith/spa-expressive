@@ -4,12 +4,14 @@ $this->headLink()
     ->prependStylesheet('https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css')
     ->appendStylesheet('/assets/css/theme-art13-1.css')
     ->appendStylesheet('/assets/css/bootstrap-multiselect.css')
+    ->appendStylesheet('/assets/js/flipcountdown/jquery.flipcountdown.css')
 ;
 $this->inlineScript()
     ->prependFile('https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js')
     ->prependFile('https://code.jquery.com/jquery-3.3.1.slim.min.js')
     ->appendFile('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js')
     ->appendFile('/assets/js/bootstrap-multiselect.js')
+    ->appendFile('/assets/js/flipcountdown/jquery.flipcountdown.js')
 ;
 
 if($this->hasIdentity()):
@@ -101,16 +103,22 @@ endif;
                             </li>
                         <?php endif;?>
                     </ul>
+
                     <ul class="navbar-nav navbar-right align-middle">
-                            <li class="nav-item mr-3 mt-1 align-top">
-                                <a class="twitter-share-button"
-                                   href="https://twitter.com/intent/tweet?text=#Stopacta2 #deleteart13 #antyart13 #saveyourinternet"
-                                   data-size="default">
-                                    Tweet</a>
-                            </li>
-                            <li class="nav-item mr-3 mt-0">
-                                <div class="fb-share-button align-middle" data-href="https://art13.eu" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fart13.eu%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Udostępnij</a></div>
-                            </li>
+                        <?php if( ! $this->hasIdentity()):?>
+
+                        <?php else: ?>
+
+                        <?php endif;?>
+                        <li class="nav-item">
+                            <p class="mt-3 mr-3"><?=$this->translate('Protests starts in ');?></p>
+                        </li>
+                        <li class="nav-item mt-2">
+                            <span class="float-md-right mt-1 mr-5" id="time_counter-first" data-countdown="2018/08/26 19:00"></span>
+                        </li>
+
+                    </ul>
+                    <ul class="navbar-nav navbar-right align-middle">
                         <?php if( ! $this->hasIdentity()):?>
                             <li class="nav-item mr-2">
                                 <a href="<?=$this->url('manager.register')?>" class="nav-link btn btn-sm btn-secondary text-light"><?=$this->translate('Sign Up');?></a>
@@ -134,49 +142,24 @@ endif;
             <div class="row">
                 <div class="col-12 m-auto" role="main">
                     <?=($this->content);?>
-                    <?php
-if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
-            // break up string into pieces (languages and q factors)
-            preg_match_all(
-                '/([a-z]{1,8}(-[a-z]{1,8})?)\s*(;\s*q\s*=\s*(1|0\.[0-9]+))?/i',
-                $_SERVER['HTTP_ACCEPT_LANGUAGE'],
-                $lang_parse
-            );
-
-            if (count($lang_parse[1])) {
-                // create a list like 'en' => 0.8
-                $langs = array_combine($lang_parse[1], $lang_parse[4]);
-
-                // set default to 1 for any without q factor
-                foreach ($langs as $lang => $val) {
-                    if ($val === '') {
-                        $langs[$lang] = 1;
-                    }
-                }
-                // sort list based on value
-                arsort($langs, SORT_NUMERIC);
-            }
-        }
-        //extract most important (first)
-        reset($langs);
-        $lang = key($langs);
-
-        //if complex language simplify it
-        if (stristr($lang, '-')) {
-            list($lang) = explode('-', $lang);
-        }
-
-        echo $lang . "_" . $lang;
-
-?>
-                    ?>
                 </div>
             </div>
         </main>
     </div>
 
-    <footer class="app-footer">
-        <div class="container"></div>
+    <footer class="app-footer footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <ul class="list-unstyled text-small mb-0">
+                        <li class="d-inline mr-4"><a class="text-muted" href="#"><?=$this->translate('About');?></a></li>
+                        <li class="d-inline mr-4"><a class="text-muted" href="/privacy-policy"><?=$this->translate('Privacy Policy');?></a></li>
+                        <li class="d-inline mr-4"><a class="text-muted" href="#"><?=$this->translate('Terms and Conditions');?></a></li>
+                        <li class="d-inline mr-4"><a class="text-muted" href="#"><?=$this->translate('List Petitions');?></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </footer>
 
     <?=$this->inlineScript()?>
