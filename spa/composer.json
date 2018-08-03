@@ -100,7 +100,8 @@
             "PageLayout\\": "src/PageLayout/src/",
             "Event\\": "src/Event/src/",
             "PageResource\\": "src/PageResource/src/",
-            "I18n\\": "src/I18n/src/"
+            "I18n\\": "src/I18n/src/",
+            "Shrt\\": "src/Shrt/src/"
         }
     },
     "autoload-dev": {

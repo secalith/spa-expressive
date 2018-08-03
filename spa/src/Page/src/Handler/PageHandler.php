@@ -14,10 +14,17 @@ use Zend\Expressive\Template;
 use Zend\Expressive\ZendView\ZendViewRenderer;
 use PageView\Handler\PageViewAwareInterface;
 use PageView\Handler\PageViewAwareTrait;
+use Common\Delegator\PageResourceAwareInterface;
+use Common\Delegator\PageResourceAwareTrait;
 
-class PageHandler implements RequestHandlerInterface, PageViewAwareInterface
+class PageHandler
+    implements RequestHandlerInterface,
+        PageViewAwareInterface,
+        PageResourceAwareInterface
 {
+
     use PageViewAwareTrait;
+    use PageResourceAwareTrait;
 
     private $containerName;
 
@@ -45,6 +52,11 @@ class PageHandler implements RequestHandlerInterface, PageViewAwareInterface
             $data['pageView']->getVariable('template')->getLocation(),
             $data['pageView']->getVariable('template')->getName()
         );
+
+        if( null !== $this->getPageResources() )
+        {
+            $data['pageView']->setVariable('page_resource',$this->getPageResources());
+        }
 
         $data['pageView']->setVariable('layout',$data['pageView']->getVariable('page')->getPageLayout());
 

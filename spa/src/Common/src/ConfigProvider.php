@@ -56,7 +56,6 @@ class ConfigProvider
                     'openTag' => View\Helper\OpenTagHelperFactory::class,
                     'markdown' => \Common\View\Helper\Factory\MarkdownViewHelperFactory::class,
                 ],
-
             ],
             'session_config' => [
                 'cookie_lifetime' => 60*60*100,

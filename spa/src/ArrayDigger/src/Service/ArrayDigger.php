@@ -33,8 +33,8 @@ class ArrayDigger
      * @param null $delimiter
      * @return array|mixed|null
      */
-    public function extractData(array $resourceData, $path, $delimiter = null) {
-
+    public function extractData(array $resourceData, $path, $delimiter = null)
+    {
         $delimiter = ($delimiter)?$delimiter:($this->getDelimiter())?$this->getDelimiter():self::DEFAULT_DELIMITER;
 
         $pathExploded = explode($delimiter,$path);

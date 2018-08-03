@@ -1,6 +1,6 @@
 <?php
 return [
-    'Sign In' => 'Sign In',
+    'Sign In' => 'Log In',
     'Sign Up' => 'Sign Up',
     'Sign Out' => 'Sign Out',
     'Continue' => 'Continue',

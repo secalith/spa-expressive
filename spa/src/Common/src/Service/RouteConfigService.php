@@ -26,10 +26,16 @@ class RouteConfigService
         $requestMethod = ($requestMethod)?$requestMethod:strtolower($_SERVER['REQUEST_METHOD']);
         $arrayDigger = new ArrayDigger("^");
         $configPath = sprintf('%s^route^%s^%s',$handlerName,$routeName,$requestMethod);
+
         $config = $arrayDigger->extractData($this->handlersConfig,$configPath);
 
         if( null !== $config) {
             return $config;
+        } elseif( array_key_exists($handlerName,$this->handlersConfig)) {
+            $requestedHandlerConfig = $this->handlersConfig[$handlerName];
+
+//            var_dump($requestedHandlerConfig);
+
         }
 
         return null;

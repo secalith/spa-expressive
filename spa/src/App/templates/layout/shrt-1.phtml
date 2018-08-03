@@ -2,13 +2,12 @@
 $this->headLink()
     ->prependStylesheet('https://use.fontawesome.com/releases/v5.0.6/css/all.css')
     ->prependStylesheet('https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css')
-    ->appendStylesheet('/assets/css/theme-art13-1.css')
+    ->appendStylesheet('/assets/css/theme-shrt-1.css')
     ->appendStylesheet('/assets/css/bootstrap-multiselect.css')
     ->appendStylesheet('/assets/js/flipcountdown/jquery.flipcountdown.css')
 ;
 $this->inlineScript()
-    ->prependFile('https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js')
-    ->prependFile('https://code.jquery.com/jquery-3.3.1.min.js')
+
     ->appendFile('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js')
     ->appendFile('/assets/js/bootstrap-multiselect.js')
     ->appendFile('/assets/js/flipcountdown/jquery.flipcountdown.js')
@@ -34,20 +33,20 @@ endif;
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <meta property="og:image" content="http://art13.eu/assets/img/1113.png"/>
-    <meta property="og:image:secure_url" content="https://art13.eu/assets/img/1113.png" />
+    <meta property="og:image" content="http://shrt.ovh/assets/img/1113.png"/>
+    <meta property="og:image:secure_url" content="https://shrt.ovh/assets/img/1113.png" />
 
     <link rel="shortcut icon" href="https://framework.zend.com/ico/favicon.ico" />
-    <?=$this->headTitle('Art. 11')->setSeparator(' - ')->setAutoEscape(false)?>
+    <?=$this->headTitle('Shrt.ovh')->setSeparator(' - ')->setAutoEscape(false)?>
     <?=$this->headMeta()?>
     <?=$this->headLink()?>
     <style>
-        body { padding-top: 70px; }
-        .app { min-height: 100vh; }
-        .app-footer { padding-bottom: 1em; }
+        /*body { padding-top: 70px; }*/
+        /*.app { min-height: 100vh; }*/
+        /*.app-footer { padding-bottom: 1em; }*/
     </style>
 </head>
-<body class="app app-theme-art13 <?=(isset($bodyClass))?$bodyClass:null;?>">
+<body class="app app-theme-shrt <?=(isset($bodyClass))?$bodyClass:null;?>">
 
 <div id="fb-root"></div>
 
@@ -85,50 +84,16 @@ endif;
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <!-- Brand -->
-                    <a class="navbar-brand" href="<?=$this->url('home')?>">
-                        <img src="https://art13.eu/assets/img/1113.png" alt="art13.eu" height="28" />
+                    <a class="navbar-brand" href="<?=$this->url('shrt.home')?>">
+                        <img src="https://shrt.ovh/assets/img/1113.png" alt="shrt.ovh" height="28" />
                     </a>
                 </div>
                 <!-- Links -->
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a href="<?=$this->url('home')?>" class="nav-link"><?=$this->translate("Homepage");?></a>
+                            <a href="<?=$this->url('shrt.home')?>" class="nav-link"><?=$this->translate("Shorten");?></a>
                         </li>
-                        <?php if( ! $this->hasIdentity()):?>
-
-                        <?php else: ?>
-                            <li class="nav-item">
-                                <a href="<?=$this->url('manager.event.list')?>" class="nav-link"><?=$this->translate("Events");?></a>
-                            </li>
-                        <?php endif;?>
-
-                        <li class="nav-item">
-                            <a href="http://peticio.art13.eu" class="nav-link"><?=$this->translate("Petition");?></a>
-                        </li>
-
-                    </ul>
-
-                    <ul class="navbar-nav navbar-right align-middle">
-                        <?php if( ! $this->hasIdentity()):?>
-
-                        <?php else: ?>
-
-                        <?php endif;?>
-                        <li class="nav-item">
-                            <p class="mt-3 mr-3"><?=$this->translate('Protests starts in ');?></p>
-                        </li>
-                        <li class="nav-item mt-2">
-                            <span class="float-md-right mt-1 mr-0" id="time_counter-first" data-countdown="2018/08/26 19:00"></span>
-                        </li>
-
-                    </ul>
-                    <ul class="navbar-nav navbar-right align-middle">
-                        <?php if( $this->hasIdentity()):?>
-                            <li class="nav-item">
-                                <a href="<?=$this->url('spa.auth.logout')?>" class="nav-link btn btn-sm btn-secondary text-light"><?=$this->translate("Sign Out");?></a>
-                            </li>
-                        <?php endif;?>
                     </ul>
                 </div>
             </div>
@@ -150,16 +115,15 @@ endif;
             <div class="row">
                 <div class="col-12">
                     <ul class="d-flex justify-content-between list-unstyled text-small mb-0">
-                        <li class="d-inline mr-4"><a class="text-muted" href="#"><a href="<?=$this->url('home')?>" class="text-muted"><?=$this->translate("Homepage");?></a></a></li>
+                        <li class="d-inline mr-4"><a class="text-muted" href="#"><a href="<?=$this->url('shrt.home')?>" class="text-muted"><?=$this->translate("Homepage");?></a></a></li>
                         <li class="d-inline mr-4"><a class="text-muted" href="#"><?=$this->translate('About');?></a></li>
-                        <li class="d-inline mr-4"><a class="text-muted" href="/privacy-policy"><?=$this->translate('Privacy Policy');?></a></li>
+                        <li class="d-inline mr-4"><a class="text-muted" href="#"><?=$this->translate('Privacy Policy');?></a></li>
                         <li class="d-inline mr-4"><a class="text-muted" href="#"><?=$this->translate('Terms and Conditions');?></a></li>
-                        <li class="d-inline mr-4"><a class="text-muted" href="#"><?=$this->translate('List Petitions');?></a></li>
                         <?php if( ! $this->hasIdentity()):?>
-                            <li class="d-inline mr-4"><a class="text-muted" href="<?=$this->url('manager.register')?>"><?=$this->translate('Sign Up');?></a></li>
-                            <li class="d-inline mr-4"><a class="text-muted" href="<?=$this->url('spa.auth')?>"><?=$this->translate('Sign In');?></a></li>
+                            <li class="d-inline mr-4"><a class="text-muted" href="#"><?=$this->translate('Sign Up');?></a></li>
+                            <li class="d-inline mr-4"><a class="text-muted" href="#"><?=$this->translate('Sign In');?></a></li>
                         <?php else: ?>
-                            <li class="d-inline mr-4"><a class="text-muted" href="<?=$this->url('spa.auth.logout')?>"><?=$this->translate("Sign Out");?></a></li>
+                            <li class="d-inline mr-4"><a class="text-muted" href="#"><?=$this->translate("Sign Out");?></a></li>
                         <?php endif;?>
                 </div>
             </div>

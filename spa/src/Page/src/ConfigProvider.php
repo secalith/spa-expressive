@@ -36,6 +36,7 @@ class ConfigProvider
             'delegators' => [
                 \Page\Handler\PageHandler::class => [
                     \Common\Delegator\RouteResourceAwareDelegator::class,
+                    \Common\Delegator\PageResourceAwareDelegator::class,
                     \PageView\Handler\Delegator\PageViewDelegatorFactory::class,
                 ],
             ],

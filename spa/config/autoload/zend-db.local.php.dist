@@ -11,6 +11,10 @@ return [
                 'driver' => 'Pdo_Sqlite',
                 'dsn'    => 'sqlite:./data/database/credentials-production.sqlite3',
             ],
+            'Application\Shrt\Db\CredentialsAdapter' => [
+                'driver' => 'Pdo_Sqlite',
+                'dsn'    => 'sqlite:./data/database/shrt-production.sqlite3',
+            ],
         ],
     ],
 ];

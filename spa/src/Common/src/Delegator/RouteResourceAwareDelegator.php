@@ -27,12 +27,12 @@ class RouteResourceAwareDelegator
         /* @var \Instance\Model\InstanceModel $instance */
         $instance = $container->get("Instance\\TableService")->fetchBy(['hostname'=>$hostname]);
 
-        if( ! empty($routeConfig) && array_key_exists('page_resource',$routeConfig))
+        if( ! empty($routeConfig) && array_key_exists('page_resodurce',$routeConfig))
         {
             #TODO: move to service
 
             // load Resources from Config
-            foreach($routeConfig['page_resource'] as $specResource) {
+            foreach($routeConfig['route_resource'] as $specResource) {
                 if( array_key_exists('spec',$specResource)
                     && array_key_exists('service',$specResource['spec'])
                     && $specResource['spec']['type'] == 'page-resource'
