@@ -34,7 +34,7 @@ class BlockHelper extends AbstractHelper
 
         if( ! empty($item->getContent())){
             /* @var $block \Block\Model\BlockModel*/
-            foreach($item->getContent() as $content) {var_dump($content);
+            foreach($item->getContent() as $content) {
                 $output .= $this->getView()->plugin('displayContent')($content);
             }
         }
