@@ -11,7 +11,7 @@ class GetFormAttached extends AbstractHelper
     public function __invoke($forms=null, $itemId=null, $index, $render=true, $template=null,$routeConfig=null)
     {
         $output = null;
-        $template = ($template!==null)??'common::form-attached';
+        $template = ($template!==null)?$template:'common::form-attached';
 
         if( $itemId !== null && is_string($itemId)) {
             $itemIdentifier = sprintf("id_%s",$itemId);
