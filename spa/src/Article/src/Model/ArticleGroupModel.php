@@ -2,11 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Event\Model;
+namespace Article\Model;
 
-class EventGroupModel
+class ArticleGroupModel
 {
     public $uid;
+    public $application_uid;
+    public $site_uid;
     public $name;
 
     public $status;
@@ -29,6 +31,8 @@ class EventGroupModel
     public function exchangeArray($data = [])
     {
         $this->uid = ( array_key_exists('uid',$data)) ? $data['uid'] : null;
+        $this->application_uid = ( array_key_exists('application_uid',$data)) ? $data['application_uid'] : null;
+        $this->site_uid = ( array_key_exists('site_uid',$data)) ? $data['site_uid'] : null;
         $this->name = ( array_key_exists('name',$data)) ? $data['name'] : null;
 
         $this->status = ( array_key_exists('status',$data)) ? $data['status'] : null;
@@ -45,6 +49,8 @@ class EventGroupModel
         $data = [];
 
         $data['uid'] = $this->uid;
+        $data['application_uid'] = $this->application_uid;
+        $data['site_uid'] = $this->site_uid;
         $data['name'] = $this->name;
 
         $data['status'] = $this->status;
@@ -73,11 +79,47 @@ class EventGroupModel
 
     /**
      * @param mixed $uid
-     * @return EventModel
+     * @return ArticleGroupModel
      */
     public function setUid($uid)
     {
         $this->uid = $uid;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getApplicationUid()
+    {
+        return $this->application_uid;
+    }
+
+    /**
+     * @param mixed $application_uid
+     * @return ArticleGroupModel
+     */
+    public function setApplicationUid($application_uid)
+    {
+        $this->application_uid = $application_uid;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSiteUid()
+    {
+        return $this->site_uid;
+    }
+
+    /**
+     * @param mixed $site_uid
+     * @return ArticleGroupModel
+     */
+    public function setSiteUid($site_uid)
+    {
+        $this->site_uid = $site_uid;
         return $this;
     }
 
@@ -91,7 +133,7 @@ class EventGroupModel
 
     /**
      * @param mixed $name
-     * @return EventModel
+     * @return ArticleGroupModel
      */
     public function setName($name)
     {
@@ -109,7 +151,7 @@ class EventGroupModel
 
     /**
      * @param mixed $status
-     * @return EventModel
+     * @return ArticleGroupModel
      */
     public function setStatus($status)
     {
@@ -127,7 +169,7 @@ class EventGroupModel
 
     /**
      * @param mixed $created
-     * @return EventModel
+     * @return ArticleGroupModel
      */
     public function setCreated($created)
     {
@@ -145,7 +187,7 @@ class EventGroupModel
 
     /**
      * @param mixed $updated
-     * @return EventModel
+     * @return ArticleGroupModel
      */
     public function setUpdated($updated)
     {

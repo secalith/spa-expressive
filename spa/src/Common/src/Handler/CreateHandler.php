@@ -320,8 +320,9 @@ class CreateHandler implements RequestHandlerInterface,
         }
 
 
-
         $this->addData($messages,'messages');
+
+
 
         return new HtmlResponse($this->template->render($this->getData('template'), $this->getData()));
     }

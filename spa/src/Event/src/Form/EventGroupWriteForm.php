@@ -9,7 +9,7 @@ use Zend\Form\Form;
 use Zend\Hydrator\ClassMethods;
 use Zend\InputFilter\InputFilter;
 
-class EventWriteForm extends Form
+class EventGroupWriteForm extends Form
 {
     private $formGroups;
 
@@ -24,9 +24,9 @@ class EventWriteForm extends Form
 //            ->setInputFilter($this->addInputFilter())
         ;
 
-        $this->formGroups = $formGroups;
-
         $this->addElements($options);
+
+        $this->formGroups = $formGroups;
 
         $this->addInputFilter();
 
@@ -42,16 +42,11 @@ class EventWriteForm extends Form
 
         $this->add(array(
             'name' => 'form_create',
-            'type' => \Event\Form\Fieldset\EventWriteFieldset::class,
+            'type' => \Event\Form\Fieldset\EventGroupWriteFieldset::class,
             'options' => array(
                 'use_as_base_fieldset' => true
             )
         ));
-
-        $this->get('form_create')
-            ->get('fieldset_event')
-            ->get('event_group')
-            ->setValueOptions($this->formGroups);
 
         $this->add([
             'type' => 'Zend\Form\Element\Csrf',

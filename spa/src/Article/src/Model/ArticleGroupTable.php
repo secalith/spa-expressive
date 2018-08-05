@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Event\Model;
+namespace Article\Model;
 
-use Event\Model\EventGroupModel;
+use Article\Model\ArticleGroupModel;
 use Zend\Db\TableGateway\TableGateway;
 
-class EventGroupTable
+class ArticleGroupTable
 {
     /**
      * @var TableGateway
@@ -26,15 +26,15 @@ class EventGroupTable
     /**
      * @return \Zend\Db\ResultSet\ResultSet
      */
-    public function fetchAll($selector=null)
+    public function fetchAll()
     {
-        $resultSet = $this->tableGateway->select($selector);
+        $resultSet = $this->tableGateway->select();
 
         $resultSet->buffer();
-//        $resultSet->next();
+        $resultSet->next();
 
         foreach($resultSet as $r){
-//            var_dump($r);
+            var_dump($r);
         }
 
         return $resultSet;
@@ -44,7 +44,7 @@ class EventGroupTable
      * @param string $uid
      * @return \Page\Model\PageModel
      */
-    public function getItem(string $uid) : EventGroupModel
+    public function getItem(string $uid) : ArticleGroupModel
     {
         $rowset = $this->tableGateway->select(['uid' => $uid]);
 
@@ -86,7 +86,7 @@ class EventGroupTable
         return $rowset->current();
     }
 
-    public function saveItem(EventGroupModel $item)
+    public function saveItem(ArticleGroupModel $item)
     {
         if( null === $item->getUid() || empty($item->getUid())) {
             $item->setUid($this->generateUUID());
@@ -96,8 +96,10 @@ class EventGroupTable
 
         $data = array(
             'uid' => $item->getUid(),
+            'application_uid' => $item->getApplicationUid(),
+            'site_uid' => $item->getSiteUid(),
             'name' => $item->getName(),
-            'status' => $item->getStatus(),
+            'status' => 1,
             'created' => $dateTime->format('Y-m-d H:i:s'),
         );
 

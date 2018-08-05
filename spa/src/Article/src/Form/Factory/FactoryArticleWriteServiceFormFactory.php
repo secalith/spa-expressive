@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Event\Form\Factory;
+namespace Article\Form\Factory;
 
-use Event\Form\EventWriteForm;
+use Article\Form\ArticleWriteForm;
 use Psr\Container\ContainerInterface;
 
-class FactoryEventWriteServiceFormFactory
+class FactoryArticleWriteServiceFormFactory
 {
     public function __invoke(ContainerInterface $container, $requestedName = null)
     {
         // get list of petitions
-        $petitionsTable = $container->get("Event\Group\TableService");
+        $petitionsTable = $container->get("Article\Group\TableService");
 
         $groups = $petitionsTable->fetchAll(['status'=>1]);
 
@@ -25,7 +25,7 @@ class FactoryEventWriteServiceFormFactory
         }
 
 
-        return new EventWriteForm('form_create',[],$formGroups);
+        return new ArticleWriteForm('form_create',[],$formGroups);
 
     }
 }

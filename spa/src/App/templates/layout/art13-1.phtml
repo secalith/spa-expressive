@@ -47,6 +47,7 @@ endif;
         .app-footer { padding-bottom: 1em; }
     </style>
 </head>
+<script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
 <body class="app app-theme-art13 <?=(isset($bodyClass))?$bodyClass:null;?>">
 
 <div id="fb-root"></div>
@@ -125,7 +126,7 @@ endif;
                     </ul>
                     <ul class="navbar-nav navbar-right align-middle">
                         <?php if( $this->hasIdentity()):?>
-                            <li class="nav-item">
+                            <li class="nav-item ml-3">
                                 <a href="<?=$this->url('spa.auth.logout')?>" class="nav-link btn btn-sm btn-secondary text-light"><?=$this->translate("Sign Out");?></a>
                             </li>
                         <?php endif;?>

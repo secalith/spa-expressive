@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Event\Form;
+namespace Article\Form;
 
-use \Event\Model\EventCreateModel;
+use \Article\Model\ArticleCreateModel;
 use Zend\Form\Form;
 use Zend\Hydrator\ClassMethods;
 use Zend\InputFilter\InputFilter;
 
-class EventWriteForm extends Form
+class ArticleWriteForm extends Form
 {
     private $formGroups;
 
@@ -19,7 +19,7 @@ class EventWriteForm extends Form
 
         $this
             ->setAttribute('method', 'post')
-            ->setObject(new EventCreateModel())
+            ->setObject(new ArticleCreateModel())
             ->setHydrator(new ClassMethods(true))
 //            ->setInputFilter($this->addInputFilter())
         ;
@@ -42,16 +42,16 @@ class EventWriteForm extends Form
 
         $this->add(array(
             'name' => 'form_create',
-            'type' => \Event\Form\Fieldset\EventWriteFieldset::class,
+            'type' => \Article\Form\Fieldset\ArticleWriteFieldset::class,
             'options' => array(
                 'use_as_base_fieldset' => true
             )
         ));
 
-        $this->get('form_create')
-            ->get('fieldset_event')
-            ->get('event_group')
-            ->setValueOptions($this->formGroups);
+//        $this->get('form_create')
+//            ->get('fieldset_event')
+//            ->get('event_group')
+//            ->setValueOptions($this->formGroups);
 
         $this->add([
             'type' => 'Zend\Form\Element\Csrf',

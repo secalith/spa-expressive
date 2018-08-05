@@ -2,12 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Event;
+namespace Article;
 
+/**
+ * The configuration provider for the Article module
+ *
+ * @see https://docs.zendframework.com/zend-component-installer/
+ */
 class ConfigProvider
 {
-
-    public function __invoke()
+    /**
+     * Returns the configuration array
+     *
+     * To add a bit of a structure, each section is defined in a separate
+     * method which returns an array with its configuration.
+     */
+    public function __invoke() : array
     {
         return [
             'dependencies' => $this->getDependencies(),
@@ -15,30 +25,35 @@ class ConfigProvider
             'app' => $this->getApplicationConfig(),
             'view_helpers' => [
                 'factories' => [
-                    'displayEventsListBlock' => \Event\View\Helper\Factory\BlockListHelperFactory::class,
+//                    'displayArticlesListBlock' => \Article\View\Helper\Factory\BlockListHelperFactory::class,
                 ],
             ],
         ];
     }
 
-    public function getTemplates()
+    /**
+     * Returns the container dependencies
+     */
+    public function getDependencies() : array
     {
         return [
-            'paths' => [
-                'event' => [__DIR__ . '/../templates/event'],
-                'event-admin' => [__DIR__ . '/../templates/event-admin'],
+            'invokables' => [
+            ],
+            'factories'  => [
+                \Article\Form\ArticleWriteForm::class => \Article\Form\Factory\FactoryArticleWriteServiceFormFactory::class,
             ],
         ];
     }
 
-    public function getDependencies()
+    /**
+     * Returns the templates configuration
+     */
+    public function getTemplates() : array
     {
         return [
-            'factories'  => [
-                \Event\Form\EventWriteForm::class => \Event\Form\Factory\FactoryEventWriteServiceFormFactory::class,
-            ],
-            'delegators' => [
-
+            'paths' => [
+                'article'    => [__DIR__ . '/../templates/article'],
+                'article-admin' => [__DIR__ . '/../templates/article-admin'],
             ],
         ];
     }
@@ -47,69 +62,47 @@ class ConfigProvider
     {
         return [
             'table_service' => [
-                'Event\TableService' => [
-                    'identifier' => 'Event\TableService',
+                'Article\TableService' => [
+                    'identifier' => 'Article\TableService',
                     'gateway' => [
-                        'name' => 'Event\TableGateway',
+                        'name' => 'Article\TableGateway',
                     ],
                 ],
-                'Event\Group\TableService' => [
-                    'identifier' => 'Event\Group\TableService',
+                'Article\Group\TableService' => [
+                    'identifier' => 'Article\Group\TableService',
                     'gateway' => [
-                        'name' => 'Event\Group\TableGateway',
-                    ],
-                ],
-                'Event\Details\TableService' => [
-                    'identifier' => 'Event\Details\TableService',
-                    'gateway' => [
-                        'name' => 'Event\Details\TableGateway',
+                        'name' => 'Article\Group\TableGateway',
                     ],
                 ],
             ],
             'gateway' => [
-                'Event\TableGateway' => [
-                    'name' => 'Event\TableGateway',
+                'Article\TableGateway' => [
+                    'name' => 'Article\TableGateway',
                     'table' => [
-                        'name' => 'event',
-                        'object' => \Event\Model\EventTable::class,
+                        'name' => 'article',
+                        'object' => \Article\Model\ArticleTable::class,
                     ],
                     'adapter' => [
                         'name' => 'Application\Db\LocalSQLiteAdapter',
                     ],
                     'model' => [
-                        "object" => \Event\Model\EventModel::class,
+                        "object" => \Article\Model\ArticleModel::class,
                     ],
                     'hydrator' => [
                         "object" => \Zend\Hydrator\ObjectProperty::class,
                     ],
                 ],
-                'Event\Group\TableGateway' => [
-                    'name' => 'Event\Group\TableGateway',
+                'Article\Group\TableGateway' => [
+                    'name' => 'Article\Group\TableGateway',
                     'table' => [
-                        'name' => 'event_group',
-                        'object' => \Event\Model\EventGroupTable::class,
+                        'name' => 'article_group',
+                        'object' => \Article\Model\ArticleGroupTable::class,
                     ],
                     'adapter' => [
                         'name' => 'Application\Db\LocalSQLiteAdapter',
                     ],
                     'model' => [
-                        "object" => \Event\Model\EventGroupModel::class,
-                    ],
-                    'hydrator' => [
-                        "object" => \Zend\Hydrator\ObjectProperty::class,
-                    ],
-                ],
-                'Event\Details\TableGateway' => [
-                    'name' => 'Event\Details\TableGateway',
-                    'table' => [
-                        'name' => 'event_details',
-                        'object' => \Event\Model\EventDetailsTable::class,
-                    ],
-                    'adapter' => [
-                        'name' => 'Application\Db\LocalSQLiteAdapter',
-                    ],
-                    'model' => [
-                        "object" => \Event\Model\EventDetailsModel::class,
+                        "object" => \Article\Model\ArticleGroupModel::class,
                     ],
                     'hydrator' => [
                         "object" => \Zend\Hydrator\ObjectProperty::class,
@@ -119,184 +112,90 @@ class ConfigProvider
             'handler' => [
                 'Common\Handler\Create' => [
                     'route' => [
-                        'manager.event.create' => [
+                        'manager.article.create' => [
                             'get' => [
                                 'method' => 'GET',
                                 'scenario' => 'create',
                                 'data_template_model' => [
-                                    'route_name' => 'manager.event.create',
+                                    'route_name' => 'manager.article.create',
                                     'heading' => [
                                         [
                                             'html_tag' => 'h1',
-                                            'text' => _("Create Event"),
+                                            'text' => _("Create Article"),
                                             'buttons' => [
                                                 [
                                                     'html_tag' => 'a',
-                                                    'text' => _("Events List"),
+                                                    'text' => _("Articles List"),
                                                     'attributes' => [
                                                         'class' => 'btn btn-sm btn-info ml-5',
-                                                        'href' => 'helper::url:manager.event.list'
-                                                    ],
-                                                ],
-                                                [
-                                                    'html_tag' => 'a',
-                                                    'text' => _("Create Event Group"),
-                                                    'attributes' => [
-                                                        'class' => 'btn btn-sm btn-info ml-5',
-                                                        'href' => 'helper::url:manager.event-group.create'
+                                                        'href' => 'helper::url:manager.article.list'
                                                     ],
                                                 ],
                                             ],
                                         ],
                                     ], // heading
+                                    'main' => [
+
+                                        #TODO
+
+
+                                        'view' => [
+                                            [
+                                                'type' => 'form-element',
+                                                'form' => 'form_create',
+                                                'form_element_path' => 'form_create.fieldset_article.uid',
+                                                'form_element_path_delimiter' => '.',
+                                            ],
+                                        ],
+
+
+                                    ],
                                 ],
                                 'view_template_model' => [
                                     'layout' => 'layout::manager',
                                     'template' => 'event-admin::template-create',
                                     'forms' => [
-                                        'form_create' => 'event-admin::template-create-form',
+                                        'form_create' => 'article-admin::template-create-form',
                                     ],
                                 ],
                                 'forms' => [
                                     [
                                         'action' => [
-                                            'route' => 'manager.event.create.post',
+                                            'route' => 'manager.article.create.post',
                                         ],
                                         'name' => 'form_create',
-//                                        'object' => \Event\Form\EventWriteForm::class,
-                                        'form_factory' => \Event\Form\EventWriteForm::class,
+                                        'object' => \Article\Form\ArticleWriteForm::class,
+//                                        'form_factory' => \Article\Form\ArticleWriteForm::class,
                                         'template' => 'common-admin::template-create',
                                     ]
                                 ],
                             ],
-                        ], // manager.event.create
-                        'manager.event.create.post' => [
-                            'post' => [
-                                'method' => 'POST',
-                                'scenario' => 'process',
-                                'data_template_model' => [
-                                    'route_name' => 'manager.event.create.post',
-                                    'heading' => [
-                                        [
-                                            'html_tag' => 'h1',
-                                            'text' => _("Create Event"),
-                                            'wrapper_class' => '',
-                                            'buttons' => [
-                                                [
-                                                    'html_tag' => 'a',
-                                                    'text' => 'Events List',
-                                                    'attributes' => [
-                                                        'class' => 'btn btn-sm btn-info ml-5',
-                                                        'href' => 'helper::url:manager.event.list'
-                                                    ],
-                                                ],
-                                            ],
-                                        ],
-                                    ],
-                                ],
-                                'view_template_model' => [
-                                    'layout' => 'layout::manager',
-                                    'template' => 'event-admin::template-create',
-                                    'forms' => [
-                                        'form_create' => 'event-admin::template-create-form',
-                                    ],
-                                ],
-                                'forms' => [
-                                    [
-                                        'name' => 'form_create',
-                                        'action' => [
-                                            'route' => 'manager.event.create.post',
-                                        ],
-                                        'form_factory' => \Event\Form\EventWriteForm::class,
-//                                        'object' => \Event\Form\EventWriteForm::class,
-                                        'pre_validate' => [
-                                            'data' => [
-                                                'fieldset_event_details' => [
-                                                    'form_name' => 'form_create',
-                                                    'fieldset_name' => 'fieldset_event_details',
-                                                    'change_value' => [
-                                                        [
-                                                            'field_name' => 'event_uid',
-                                                            'source' => [
-                                                                'type' => 'post-request',
-                                                                'source_name' => 'fieldset_event',
-                                                                'source_field_name' => 'uid',
-                                                            ],
-                                                        ],
-                                                        [
-                                                            'field_name' => 'site_uid',
-                                                            'source' => [
-                                                                'type' => 'post-request',
-                                                                'source_name' => 'fieldset_event',
-                                                                'source_field_name' => 'site_uid',
-                                                            ],
-                                                        ],
-                                                        [
-                                                            'field_name' => 'application_uid',
-                                                            'source' => [
-                                                                'type' => 'post-request',
-                                                                'source_name' => 'fieldset_event',
-                                                                'source_field_name' => 'application_uid',
-                                                            ],
-                                                        ],
-                                                    ],
-                                                ], // fieldset_event_details
-                                            ],
-                                        ], // pre_validate
-                                        'save' => [
-                                            'data' => [
-                                                'fieldset_event' => [
-                                                    'fieldset_name' => 'fieldset_event',
-                                                    'service' => [
-                                                        [
-                                                            'name'=>'Event\TableService',
-                                                            'object' => \Event\Model\EventModel::class,
-                                                            'method' => 'saveItem'
-                                                        ],
-
-                                                    ],
-                                                ], // fieldset_event
-                                                'fieldset_event_details' => [
-                                                    'fieldset_name' => 'fieldset_event_details',
-                                                    'service' => [
-                                                        [
-                                                            'name'=>'Event\Details\TableService',
-                                                            'object' => \Event\Model\EventDetailsModel::class,
-                                                            'method' => 'saveItem'
-                                                        ],
-                                                    ],
-                                                ], // fieldset_event_details
-                                            ],
-                                        ],
-                                    ],
-                                ],
-                            ],
-                        ], // manager.event.create.post
-                        'manager.event-group.create' => [
+                        ],
+                        'manager.article-group.create' => [
                             'get' => [
                                 'method' => 'GET',
                                 'scenario' => 'create',
                                 'data_template_model' => [
-                                    'route_name' => 'manager.event-group.create',
+                                    'route_name' => 'manager.article-group.create',
                                     'heading' => [
                                         [
                                             'html_tag' => 'h1',
-                                            'text' => _("Event Group"),
+                                            'text' => _("Crete Article Group"),
                                             'buttons' => [
                                                 [
                                                     'html_tag' => 'a',
-                                                    'text' => _("Groups List"),
+                                                    'text' => _("Articles Groups List"),
                                                     'attributes' => [
                                                         'class' => 'btn btn-sm btn-info ml-5',
-                                                        'href' => 'helper::url:manager.event-group.list'
+                                                        'href' => 'helper::url:manager.article-group.list'
                                                     ],
                                                 ],
                                                 [
                                                     'html_tag' => 'a',
-                                                    'text' => _("Events List"),
+                                                    'text' => _("Articles List"),
                                                     'attributes' => [
                                                         'class' => 'btn btn-sm btn-info ml-5',
-                                                        'href' => 'helper::url:manager.event.list'
+                                                        'href' => 'helper::url:manager.article.list'
                                                     ],
                                                 ],
                                             ],
@@ -313,76 +212,20 @@ class ConfigProvider
                                 'forms' => [
                                     [
                                         'action' => [
-                                            'route' => 'manager.event-group.create.post',
+                                            'route' => 'manager.article-group.create.post',
                                         ],
                                         'name' => 'form_create',
-                                        'object' => \Event\Form\EventGroupWriteForm::class,
-                                        'template' => 'event-admin::template-create',
+                                        'object' => \Article\Form\ArticleGroupWriteForm::class,
+                                        'template' => 'article-admin::template-create',
                                     ]
                                 ],
                             ],
                         ], // admin.event-group.create
-                        'manager.event-group.create.post' => [
-                            'post' => [
-                                'method' => 'POST',
-                                'scenario' => 'process',
-                                'data_template_model' => [
-                                    'route_name' => 'manager.event.create.post',
-                                    'heading' => [
-                                        [
-                                            'html_tag' => 'h1',
-                                            'text' => _("Create"),
-                                            'wrapper_class' => 'w-100',
-                                            'buttons' => [
-                                                [
-                                                    'html_tag' => 'a',
-                                                    'text' => 'List',
-                                                    'attributes' => [
-                                                        'class' => 'btn btn-sm btn-info ml-5',
-                                                        'href' => 'helper::url:manager.event.list'
-                                                    ],
-                                                ],
-                                            ],
-                                        ],
-                                    ],
-                                ],
-                                'view_template_model' => [
-                                    'layout' => 'layout::manager',
-                                    'template' => 'event-admin::template-create',
-                                    'forms' => [
-                                        'form_create' => 'event-admin::template-event_group-create-form',
-                                    ],
-                                ],
-                                'forms' => [
-                                    [
-                                        'name' => 'form_create',
-                                        'action' => [
-                                            'route' => 'manager.event-group.create.post',
-                                        ],
-                                        'object' => \Event\Form\EventGroupWriteForm::class,
-                                        'save' => [
-                                            'data' => [
-                                                'fieldset_event_group' => [
-                                                    'fieldset_name' => 'fieldset_event_group',
-                                                    'service' => [
-                                                        [
-                                                            'name'=>'Event\Group\TableService',
-                                                            'object' => \Event\Model\EventGroupModel::class,
-                                                            'method' => 'saveItem'
-                                                        ],
-                                                    ],
-                                                ], // fieldset_event_group
-                                            ],
-                                        ],
-                                    ],
-                                ],
-                            ],
-                        ], // manager.event-group.create.post
                     ],
-                ], // Common\Handler\Create
+                ],
                 'Common\Handler\List'=> [
                     'route' => [
-                        'manager.event.list' => [
+                        'manager.article.list' => [
                             'get' => [
                                 'method' => 'GET',
                                 'scenario' => 'list',
@@ -391,38 +234,38 @@ class ConfigProvider
                                     'adapter' => [
                                         'object' => \Zend\Paginator\Adapter\DbSelect::class,
                                     ],
-                                    'gateway' => 'Event\TableGateway',
+                                    'gateway' => 'Article\TableGateway',
                                     'db_select' => [
                                         'columns' => ['uid','name','status','created','country'],
                                         'join' => [
                                             [
-                                                'on' => 'event_group',
-                                                'where' => 'event_group.uid = event.event_group',
+                                                'on' => 'article_group',
+                                                'where' => 'article_group.uid = article.article_group',
                                                 'columns' => ['group_name'=>'name'],
                                                 'union' => 'left',
                                             ],
-                                            [
-                                                'on' => 'event_details',
-                                                'where' => 'event_details.event_uid = event.uid',
-                                                'columns' => ['city','city_global','details_name'=>'name','date_start','date_finish','timezone'],
-                                                'union' => 'left',
-                                            ],
+//                                            [
+//                                                'on' => 'event_details',
+//                                                'where' => 'event_details.event_uid = event.uid',
+//                                                'columns' => ['city','city_global','details_name'=>'name','date_start','date_finish','timezone'],
+//                                                'union' => 'left',
+//                                            ],
                                         ],
                                     ],
                                 ],
                                 'data_template_model' => [
-                                    'route_name' => 'manager.event.list',
+                                    'route_name' => 'manager.article.list',
                                     'heading' => [
                                         [
                                             'html_tag' => 'h1',
-                                            'text' => _("Events"),
+                                            'text' => _("Articles"),
                                             'buttons' => [
                                                 [
                                                     'html_tag' => 'a',
-                                                    'text' => _("Create Event"),
+                                                    'text' => _("Create Article"),
                                                     'attributes' => [
                                                         'class' => 'btn btn-sm btn-info ml-5',
-                                                        'href' => 'helper::url:manager.event.create'
+                                                        'href' => 'helper::url:manager.article.create'
                                                     ],
                                                 ],
                                                 [
@@ -430,7 +273,7 @@ class ConfigProvider
                                                     'text' => _("Create Group"),
                                                     'attributes' => [
                                                         'class' => 'btn btn-sm btn-info ml-5',
-                                                        'href' => 'helper::url:manager.event-group.create'
+                                                        'href' => 'helper::url:manager.article-group.create'
                                                     ],
                                                 ],
                                                 [
@@ -438,7 +281,7 @@ class ConfigProvider
                                                     'text' => _("List Groups"),
                                                     'attributes' => [
                                                         'class' => 'btn btn-sm btn-info ml-5',
-                                                        'href' => 'helper::url:manager.event-group.list'
+                                                        'href' => 'helper::url:manager.article-group.list'
                                                     ],
                                                 ],
                                             ],
@@ -450,8 +293,8 @@ class ConfigProvider
                                                 'name' => 'main',
                                                 'headers'=> [
                                                     'name'=>_("Name"),
-                                                    'city_global'=>_("City"),
-                                                    'date_start'=>_("Start"),
+//                                                    'city_global'=>_("City"),
+//                                                    'date_start'=>_("Start"),
                                                     'group_name'=>_("Group"),
                                                     'status'=>'Status',
                                                     'created'=>'Created',
@@ -459,8 +302,8 @@ class ConfigProvider
                                                 ],
                                                 'rows' => [
                                                     ['column'=>'name'],
-                                                    ['column'=>'city_global'],
-                                                    ['column'=>'date_start'],
+//                                                    ['column'=>'city_global'],
+//                                                    ['column'=>'date_start'],
                                                     ['column'=>'group_name'],
                                                     ['column'=>'status'],
                                                     ['column'=>'created'],
@@ -497,7 +340,7 @@ class ConfigProvider
                                 ],
                             ], // get
                         ], // manager.event.list
-                        'manager.event-group.list' => [
+                        'manager.article-group.list' => [
                             'get' => [
                                 'method' => 'GET',
                                 'scenario' => 'list',
@@ -506,40 +349,40 @@ class ConfigProvider
                                     'adapter' => [
                                         'object' => \Zend\Paginator\Adapter\DbSelect::class,
                                     ],
-                                    'gateway' => 'Event\Group\TableGateway',
+                                    'gateway' => 'Article\Group\TableGateway',
                                     'db_select' => [
                                         'columns' => ['uid','name','status','created'],
                                     ],
                                 ],
                                 'data_template_model' => [
-                                    'route_name' => 'manager.event.list',
+                                    'route_name' => 'manager.article.list',
                                     'heading' => [
                                         [
                                             'html_tag' => 'h1',
-                                            'text' => _("Event Groups"),
+                                            'text' => _("Article Groups"),
                                             'buttons' => [
                                                 [
                                                     'html_tag' => 'a',
                                                     'text' => _("Create Group"),
                                                     'attributes' => [
                                                         'class' => 'btn btn-sm btn-info ml-5',
-                                                        'href' => 'helper::url:manager.event-group.create'
+                                                        'href' => 'helper::url:manager.article-group.create'
                                                     ],
                                                 ],
                                                 [
                                                     'html_tag' => 'a',
-                                                    'text' => _("Create Event"),
+                                                    'text' => _("Create Article"),
                                                     'attributes' => [
                                                         'class' => 'btn btn-sm btn-info ml-5',
-                                                        'href' => 'helper::url:manager.event.create'
+                                                        'href' => 'helper::url:manager.article.create'
                                                     ],
                                                 ],
                                                 [
                                                     'html_tag' => 'a',
-                                                    'text' => _("List Events"),
+                                                    'text' => _("List Articles"),
                                                     'attributes' => [
                                                         'class' => 'btn btn-sm btn-info ml-5',
-                                                        'href' => 'helper::url:manager.event.list'
+                                                        'href' => 'helper::url:manager.article.list'
                                                     ],
                                                 ],
                                             ],
@@ -594,7 +437,7 @@ class ConfigProvider
                         ], // manager.event-group.list
                     ], // route
                 ], // Common\Handler\List
-            ], // handler
+            ],
         ];
     }
 

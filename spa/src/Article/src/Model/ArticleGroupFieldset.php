@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Event\Form\Fieldset;
+namespace Article\Form\Fieldset;
 
 use Zend\InputFilter\InputFilterProviderInterface;
-use Event\Model\EventGroupModel;
+use Article\Model\ArticleGroupModel;
 use Zend\Form\Fieldset;
 use Zend\Hydrator\ClassMethods;
 use Zend\InputFilter\InputFilter;
 
-class EventGroupFieldset extends Fieldset implements InputFilterProviderInterface
+class ArticleGroupFieldset extends Fieldset implements InputFilterProviderInterface
 {
     public function __construct($name = null, $options = array())
     {
         parent::__construct($name,$options);
 
         $this->setHydrator(new ClassMethods(true));
-        $this->setObject(new EventGroupModel());
+//        $this->setObject(new ArticleGroupModel());
 
         $this->addElements();
     }
@@ -32,7 +32,7 @@ class EventGroupFieldset extends Fieldset implements InputFilterProviderInterfac
                 'label' => _("UID")
             ),
             'attributes' => [
-                'class' => 'form-control d-inline-flex w-auto',
+                'class' => 'form-control d-block',
                 'value' => microtime(),
             ],
         ));
@@ -45,7 +45,7 @@ class EventGroupFieldset extends Fieldset implements InputFilterProviderInterfac
             ),
             'attributes' => [
                 'class' => 'form-control d-block',
-                'placeholder' => 'i.e. #stopACTA2.Poland',
+                'placeholder' => 'i.e. external links',
             ],
         ));
 

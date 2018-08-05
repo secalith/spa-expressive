@@ -1,12 +1,12 @@
 <?php
 $this->headLink()
     ->prependStylesheet('https://use.fontawesome.com/releases/v5.0.6/css/all.css')
-    ->prependStylesheet('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css')
+    ->prependStylesheet('https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css')
     ->appendStylesheet('/assets/css/theme-manager.css')
     ->appendStylesheet('/assets/css/bootstrap-multiselect.css')
 ;
 $this->inlineScript()
-    ->prependFile('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js')
+    ->prependFile('https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js')
     ->prependFile('https://code.jquery.com/jquery-3.3.1.min.js')
 //    ->prependFile('/assets/js/popper.js')
     ->appendFile('/assets/js/bootstrap-multgm
@@ -42,7 +42,7 @@ endif;
         .app-footer { padding-bottom: 1em; }
     </style>
 </head>
-<body class="app app-theme-default <?=(isset($bodyClass))?$bodyClass:null;?>">ss
+<body class="app app-theme-manager <?=(isset($bodyClass))?$bodyClass:null;?>">ss
     <header class="app-header">
         <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top" role="navigation">
             <div class="container">
@@ -70,6 +70,9 @@ endif;
                             <li class="nav-item">
                                 <a href="<?=$this->url('spa.spa-petition.list')?>" class="nav-link"><?=$this->translate("Petitions");?></a>
                             </li>
+                            <li class="nav-item">
+                                <a href="<?=$this->url('manager.article.list')?>" class="nav-link"><?=$this->translate("Articles");?></a>
+                            </li>
                         <?php endif;?>
                     </ul>
                     <ul class="navbar-nav navbar-right">
@@ -92,18 +95,35 @@ endif;
     </header>
 
     <div class="app-content">
-        <main class="container-fluid">
+        <main class="container">
             <div class="row">
-                <div class="col-12 m-auto col-lg-8 px-4" role="main">
+                <div class="col-12 m-auto px-4" role="main">
                     <?=($this->content);?>
                 </div>
             </div>
         </main>
     </div>
 
-    <footer class="app-footer">
-        <div class="container"></div>
-    </footer>
+<footer class="app-footer footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="d-flex justify-content-between list-unstyled text-small mb-0">
+                    <li class="d-inline mr-4"><a class="text-muted" href="#"><a href="<?=$this->url('home')?>" class="text-muted"><?=$this->translate("Homepage");?></a></a></li>
+                    <li class="d-inline mr-4"><a class="text-muted" href="#"><?=$this->translate('About');?></a></li>
+                    <li class="d-inline mr-4"><a class="text-muted" href="/privacy-policy"><?=$this->translate('Privacy Policy');?></a></li>
+                    <li class="d-inline mr-4"><a class="text-muted" href="#"><?=$this->translate('Terms and Conditions');?></a></li>
+                    <li class="d-inline mr-4"><a class="text-muted" href="#"><?=$this->translate('List Petitions');?></a></li>
+                    <?php if( ! $this->hasIdentity()):?>
+                        <li class="d-inline mr-4"><a class="text-muted" href="<?=$this->url('manager.register')?>"><?=$this->translate('Sign Up');?></a></li>
+                        <li class="d-inline mr-4"><a class="text-muted" href="<?=$this->url('spa.auth')?>"><?=$this->translate('Sign In');?></a></li>
+                    <?php else: ?>
+                        <li class="d-inline mr-4"><a class="text-muted" href="<?=$this->url('spa.auth.logout')?>"><?=$this->translate("Sign Out");?></a></li>
+                    <?php endif;?>
+            </div>
+        </div>
+    </div>
+</footer>
 
     <?=$this->inlineScript()?>
 </body>

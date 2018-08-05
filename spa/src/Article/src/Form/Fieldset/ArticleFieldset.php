@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Event\Form\Fieldset;
+namespace Article\Form\Fieldset;
 
 use Zend\InputFilter\InputFilterProviderInterface;
-use Event\Model\EventModel;
+use Article\Model\ArticleModel;
 use Zend\Form\Fieldset;
 use Zend\Hydrator\ClassMethods;
 use Zend\InputFilter\InputFilter;
 
-class EventFieldset extends Fieldset implements InputFilterProviderInterface
+class ArticleFieldset extends Fieldset implements InputFilterProviderInterface
 {
 
     private $event_groups;
@@ -20,7 +20,7 @@ class EventFieldset extends Fieldset implements InputFilterProviderInterface
         parent::__construct($name,$options);
 
         $this->setHydrator(new ClassMethods(true));
-        $this->setObject(new EventModel());
+        $this->setObject(new ArticleModel());
 
         $this->event_groups = $event_groups;
 
@@ -39,7 +39,7 @@ class EventFieldset extends Fieldset implements InputFilterProviderInterface
                 'label' => _("UID")
             ),
             'attributes' => [
-                'class' => 'form-control d-inline-flex w-auto',
+                'class' => 'form-control d-block',
                 'value' => microtime(),
             ],
         ));
@@ -69,11 +69,11 @@ class EventFieldset extends Fieldset implements InputFilterProviderInterface
         ));
         $this->add(array(
             'type' => 'Zend\Form\Element\Select',
-            'name' => 'event_group',
+            'name' => 'article_group',
             'options' => array(
                 'label' => _("Group"),
                 'value_options' => [
-                    'event-group-001' => 'Group 2018-07-29'
+                    'article-group-001' => 'External Links'
                 ],
             ),
             'attributes' => [
@@ -85,7 +85,7 @@ class EventFieldset extends Fieldset implements InputFilterProviderInterface
             'type' => 'Zend\Form\Element\hidden',
             'name' => 'application_uid',
             'options' => array(
-                'label' => _("Aplikacja"),
+                'label' => _("App UID"),
                 'value_options' => [
                     'app-001' => _("app-001"),
                 ],
@@ -100,7 +100,7 @@ class EventFieldset extends Fieldset implements InputFilterProviderInterface
             'type' => 'Zend\Form\Element\hidden',
             'name' => 'site_uid',
             'options' => array(
-                'label' => _("Site"),
+                'label' => _("Site UID"),
                 'value_options' => [
                     'site-001' => _("site-001"),
                 ],
@@ -148,7 +148,7 @@ class EventFieldset extends Fieldset implements InputFilterProviderInterface
             'site_uid' => array(
                 'required' => true,
             ),
-            'event_group' => array(
+            'article_group' => array(
                 'required' => true,
             ),
             'status' => array(

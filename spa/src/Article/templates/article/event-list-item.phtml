@@ -1,0 +1,21 @@
+<div class="row px-1 px-sm-5 mb-0">
+    <div class="col-12  d-none d-md-inline-block block-desktop">
+        <h2 class="mb-2 displajy-4"><?=$details->getCityGlobal();?></h2>
+    </div>
+    <div class="col-12  d-none d-md-inline-block block-desktop">
+        <h2 class="mb-2 display-4"><?=$details->getName();?></h2>
+        <h3 class="mt-2"><?=$details->getDateStart();?></h3>
+        <a class="btn btn-success mt-4" href="<?=$details->getEventLinkExternal();?>" target="_blank"><?=$this->translate("See the Event on Facebook");?></a>
+        <a class="btn btn-info mt-4" href="<?=$details->getEventMapExternal();?>" target="_blank"><?=$this->translate("Find on Map");?></a>
+    </div>
+    <div class="col-12 d-inline-block d-md-none">
+        <h2 class="mb-2 display-4"><?=$details->getCityGlobal();?></h2>
+    </div>
+    <div class="col-12 d-inline-block d-md-none">
+        <h2 style="font-weight:600" class="mb-2 display-4"><?=$details->getCityGlobal();?></h2>
+        <h3 class="mt-2"><?=$details->getDateStart();?></h3>
+        <a class="btn btn-success mt-4" href="<?=$details->getEventLinkExternal();?>" target="_blank"><?=$this->translate("See the Event on Facebook");?></a>
+        <a class="btn btn-info mt-4" href="<?=$details->getEventMapExternal();?>" target="_blank"><?=$this->translate("Find on Map");?></a>
+    </div>
+</div>
+<hr />

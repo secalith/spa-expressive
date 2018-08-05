@@ -75,6 +75,50 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
 
 
 
+    ## MANAGER-ARTICLE
+
+    $app->get('/admin/article/list[/[{page:\d+}]]', [
+        I18n\Handler\I18n::class,
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\List',
+    ], 'manager.article.list');
+    $app->get('/admin/article/details[/[{page:\d+}]]', [
+        I18n\Handler\I18n::class,
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\List',
+    ], 'manager.article.read');
+    $app->get('/admin/article/create[/]', [
+        I18n\Handler\I18n::class,
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\Create',
+    ], 'manager.article.create');
+    $app->post('/admin/article/create[/]', [
+        I18n\Handler\I18n::class,
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\Create',
+    ], 'manager.article.create.post');
+
+    ## MANAGER-ARTICLE-GROUP
+
+    $app->get('/admin/article-group/list[/[{page:\d+}]]', [
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\List',
+    ], 'manager.article-group.list');
+    $app->get('/admin/article-group/create[/]', [
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\Create',
+    ], 'manager.article-group.create');
+    $app->post('/admin/article-group/create[/]', [
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\Create',
+    ], 'manager.article-group.create.post');
+
+    $app->get('/admin/article-group/details[/[{page:\d+}]]', [
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\List',
+    ], 'manager.article-group.read');
+
+
     ## MANAGER-EVENT
 
     $app->get('/admin/event/list[/[{page:\d+}]]', [

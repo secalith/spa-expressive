@@ -2,13 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Event\Model;
+namespace Article\Model;
 
-use Event\Model\EventGroupModel;
+use Article\Model\ArticleModel;
 use Zend\Db\TableGateway\TableGateway;
+use Common\Model\GenerateUUIDTrait;
 
-class EventGroupTable
+class ArticleTable
 {
+    use GenerateUUIDTrait;
+
     /**
      * @var TableGateway
      */
@@ -26,16 +29,24 @@ class EventGroupTable
     /**
      * @return \Zend\Db\ResultSet\ResultSet
      */
-    public function fetchAll($selector=null)
+    public function fetchAll()
     {
-        $resultSet = $this->tableGateway->select($selector);
+        $resultSet = $this->tableGateway->select();
 
         $resultSet->buffer();
-//        $resultSet->next();
+        $resultSet->next();
 
-        foreach($resultSet as $r){
-//            var_dump($r);
-        }
+        return $resultSet;
+    }
+    /**
+     * @return \Zend\Db\ResultSet\ResultSet
+     */
+    public function fetchAllBy($where=[])
+    {
+        $resultSet = $this->tableGateway->select($where);
+
+        $resultSet->buffer();
+        $resultSet->next();
 
         return $resultSet;
     }
@@ -44,7 +55,7 @@ class EventGroupTable
      * @param string $uid
      * @return \Page\Model\PageModel
      */
-    public function getItem(string $uid) : EventGroupModel
+    public function getItem(string $uid) : ArticleModel
     {
         $rowset = $this->tableGateway->select(['uid' => $uid]);
 
@@ -86,7 +97,7 @@ class EventGroupTable
         return $rowset->current();
     }
 
-    public function saveItem(EventGroupModel $item)
+    public function saveItem(ArticleModel $item)
     {
         if( null === $item->getUid() || empty($item->getUid())) {
             $item->setUid($this->generateUUID());
@@ -96,8 +107,12 @@ class EventGroupTable
 
         $data = array(
             'uid' => $item->getUid(),
+            'application_uid' => $item->getApplicationUid(),
+            'site_uid' => $item->getSiteUid(),
+            'article_group' => $item->getArticleGroup(),
             'name' => $item->getName(),
-            'status' => $item->getStatus(),
+            'country' => $item->getCountry(),
+            'status' => 1,
             'created' => $dateTime->format('Y-m-d H:i:s'),
         );
 
