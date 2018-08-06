@@ -1,0 +1,47 @@
+<?php
+
+$form->prepare();
+
+?>
+
+<?=$this->form()->openTag($form);?>
+
+<?=$this->formElementErrors($form->get('csrf'));?>
+
+<div>
+    <div class="container-fluid pt-2">
+
+        <?=$this->formInput($form->get('form_create')->get('fieldset_shorten')->get('uid'));?>
+
+        <?=$this->formElementErrors($form->get('form_create')->get('fieldset_shorten')->get('uid'));?>
+
+        <div class="row">
+            <div class="col-12">
+                <?=$this->formLabel($form->get('form_create')->get('fieldset_shorten')->get('link_url'));?>
+            </div>
+            <div class="col-12 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_shorten')->get('link_url'))))?'has-errors':'';?>">
+                <?=$this->formInput($form->get('form_create')->get('fieldset_shorten')->get('link_url'));?>
+                <?=$this->formElementErrors($form->get('form_create')->get('fieldset_shorten')->get('link_url'));?>
+            </div>
+            <div class="col-12">
+                <small><?=$this->translate('This name will be visible only by you and other registered users.');?></small>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="form-container <?=($form->getMessages())?'form-has-errors':null;?>">
+
+    <div class="col-12">
+        <?=$this->formSubmit($form->get('submit'));?>
+    </div>
+
+    <div class="hidden">
+        <?=$this->formElement($form->get('csrf'));?>
+    </div>
+
+</div>
+
+<?=$this->form()->closeTag();?>
+

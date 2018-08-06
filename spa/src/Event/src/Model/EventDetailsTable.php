@@ -35,11 +35,6 @@ class EventDetailsTable
         $resultSet = $this->tableGateway->select();
 
         $resultSet->buffer();
-        $resultSet->next();
-
-        foreach($resultSet as $r){
-            var_dump($r);
-        }
 
         return $resultSet;
     }
@@ -122,12 +117,11 @@ class EventDetailsTable
             'timezone' => $item->getTimezone(),
             'event_link_external' => $item->getEventLinkExternal(),
             'event_map_external' => $item->getEventMapExternal(),
-            'status' => 1,
+            'status' => $item->getStatus(),
             'created' => $dateTime->format('Y-m-d H:i:s'),
         );
 
         $rowsAffected = $this->tableGateway->insert($data);
-
 
         return [
             'affected' => $rowsAffected,

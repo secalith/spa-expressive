@@ -1,0 +1,78 @@
+<?php
+
+$form->prepare();
+
+//  fieldset_event
+//  fieldset_event_details
+
+?>
+
+<?=$this->form()->openTag($form);?>
+
+<?=$this->formElementErrors($form->get('application_id'));?>
+<?=$this->formElementErrors($form->get('csrf'));?>
+
+<div>
+    <div class="container pt-2">
+
+        <div class="row">
+            <div class="col-12 col-md-10 py-2 px-0 text-justify">
+                <p>Create Event`s Group for to ease Event Management process.</p>
+            </div>
+            <div class="col-12 col-md-2 py-2 px-0 text-right">
+                <?=$this->formSubmit($form->get('submit'));?>
+            </div>
+        </div>
+
+        <hr />
+            <?=$this->formInput($form->get('form_create')->get('fieldset_article_group')->get('uid'));?>
+
+            <?=$this->formElementErrors($form->get('form_create')->get('fieldset_article_group')->get('uid'));?>
+
+
+        <div class="row">
+            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+                <?=$this->formLabel($form->get('form_create')->get('fieldset_article_group')->get('name'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_article_group')->get('name'))))?'has-errors':'';?>">
+                <?=$this->formInput($form->get('form_create')->get('fieldset_article_group')->get('name'));?>
+                <?=$this->formElementErrors($form->get('form_create')->get('fieldset_article_group')->get('name'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+                <small><?=$this->translate('This name will be visible only by you and other registered users.');?></small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+                <?=$this->formLabel($form->get('form_create')->get('fieldset_article_group')->get('status'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_article_group')->get('status'))))?'has-errors':'';?>">
+                <?=$this->formSelect($form->get('form_create')->get('fieldset_article_group')->get('status'));?>
+                <?=$this->formElementErrors($form->get('form_create')->get('fieldset_article_group')->get('status'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+                <small><?=$this->translate('Should the new Event Group be available for new Articles?');?></small>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<hr />
+
+<div class="form-container <?=($form->getMessages())?'form-has-errors':null;?>">
+
+    <div class="py-2 px-3 mb-2">
+        <?=$this->formSubmit($form->get('submit'));?>
+    </div>
+
+    <div class="hidden">
+        <?=$this->formElement($form->get('application_id'));?>
+        <?=$this->formElement($form->get('csrf'));?>
+    </div>
+
+</div>
+
+<?=$this->form()->closeTag();?>
+

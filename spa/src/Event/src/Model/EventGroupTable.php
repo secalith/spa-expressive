@@ -31,11 +31,6 @@ class EventGroupTable
         $resultSet = $this->tableGateway->select($selector);
 
         $resultSet->buffer();
-//        $resultSet->next();
-
-        foreach($resultSet as $r){
-//            var_dump($r);
-        }
 
         return $resultSet;
     }

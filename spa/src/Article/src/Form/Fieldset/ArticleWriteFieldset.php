@@ -32,6 +32,23 @@ class ArticleWriteFieldset extends Fieldset implements InputFilterProviderInterf
                 'use_as_base_fieldset' => false
             )
         ));
+        $this->add(array(
+            'name' => 'fieldset_article_external',
+            'type' => \Article\Form\Fieldset\ArticleExternalFieldset::class,
+            'options' => array(
+                'label' => _("External Article"),
+                'use_as_base_fieldset' => false
+            )
+        ));
+        $this->add(array(
+            'name' => 'fieldset_article_internal',
+            'type' => \Article\Form\Fieldset\ArticlePostFieldset::class,
+            'options' => array(
+                'label' => _("External Article"),
+                'use_as_base_fieldset' => false
+            )
+        ));
+
 //        $this->add(array(
 //            'name' => 'fieldset_event_details',
 //            'type' => \Article\Form\Fieldset\ArticleDetailsFieldset::class,

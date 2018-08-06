@@ -204,9 +204,9 @@ class ConfigProvider
                                 ],
                                 'view_template_model' => [
                                     'layout' => 'layout::manager',
-                                    'template' => 'event-admin::template-create',
+                                    'template' => 'article-admin::template-create',
                                     'forms' => [
-                                        'form_create' => 'event-admin::template-event_group-create-form',
+                                        'form_create' => 'article-admin::template-article_group-create-form',
                                     ],
                                 ],
                                 'forms' => [
@@ -335,7 +335,7 @@ class ConfigProvider
                                     ],
                                 ],
                                 'view_template_model' => [
-                                    'layout' => 'layout::default',
+                                    'layout' => 'layout::manager',
                                     'template' => 'common-admin::template-list',
                                 ],
                             ], // get
@@ -430,7 +430,7 @@ class ConfigProvider
                                     ],
                                 ],
                                 'view_template_model' => [
-                                    'layout' => 'layout::default',
+                                    'layout' => 'layout::manager',
                                     'template' => 'common-admin::template-list',
                                 ],
                             ], // get

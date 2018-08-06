@@ -96,13 +96,13 @@
             "Site\\": "src/Site/src/",
             "ArrayDigger\\": "src/ArrayDigger/src/",
             "RoleEditor\\": "src/RoleEditor/src/",
-            "SpaPetition\\": "src/SpaPetition/src/",
             "PageLayout\\": "src/PageLayout/src/",
             "Event\\": "src/Event/src/",
             "PageResource\\": "src/PageResource/src/",
             "I18n\\": "src/I18n/src/",
             "Shrt\\": "src/Shrt/src/",
-            "Article\\": "src/Article/src/"
+            "Article\\": "src/Article/src/",
+            "Petition\\": "src/Petition/src/"
         }
     },
     "autoload-dev": {

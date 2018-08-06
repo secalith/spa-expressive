@@ -421,7 +421,7 @@ class ConfigProvider
                                                     'html_tag' => 'a',
                                                     'text' => _("Create Event"),
                                                     'attributes' => [
-                                                        'class' => 'btn btn-sm btn-info ml-5',
+                                                        'class' => 'btn btn-sm btn-info ml-5 float-right',
                                                         'href' => 'helper::url:manager.event.create'
                                                     ],
                                                 ],
@@ -429,7 +429,7 @@ class ConfigProvider
                                                     'html_tag' => 'a',
                                                     'text' => _("Create Group"),
                                                     'attributes' => [
-                                                        'class' => 'btn btn-sm btn-info ml-5',
+                                                        'class' => 'btn btn-sm btn-info ml-5 float-right',
                                                         'href' => 'helper::url:manager.event-group.create'
                                                     ],
                                                 ],
@@ -437,7 +437,7 @@ class ConfigProvider
                                                     'html_tag' => 'a',
                                                     'text' => _("List Groups"),
                                                     'attributes' => [
-                                                        'class' => 'btn btn-sm btn-info ml-5',
+                                                        'class' => 'btn btn-sm btn-info ml-5 float-right',
                                                         'href' => 'helper::url:manager.event-group.list'
                                                     ],
                                                 ],
@@ -453,9 +453,9 @@ class ConfigProvider
                                                     'city_global'=>_("City"),
                                                     'date_start'=>_("Start"),
                                                     'group_name'=>_("Group"),
-                                                    'status'=>'Status',
-                                                    'created'=>'Created',
-//                                                    100=>'Details',
+                                                    'status'=>_('Status'),
+                                                    'created'=>_('Created'),
+                                                    100=>'Action',
                                                 ],
                                                 'rows' => [
                                                     ['column'=>'name'],
@@ -464,35 +464,35 @@ class ConfigProvider
                                                     ['column'=>'group_name'],
                                                     ['column'=>'status'],
                                                     ['column'=>'created'],
-//                                                    ['buttons' => [
-//                                                        [
-//                                                            'html_tag' => 'a',
-//                                                            'text' => _("Details"),
-//                                                            'attributes' => [
-//                                                                'class' => 'btn btn-sm btn-info ml-5',
-//                                                                'href' => [
-//                                                                    'type' => 'plugin',
-//                                                                    'name' => 'url',
-//                                                                    'arguments' => [
-//                                                                        'manager.event.read',
-//                                                                        [
-//                                                                            'uid'=> [
-//                                                                                'source' => 'row-item',
-//                                                                                'property' => 'uid',
-//                                                                            ],
-//                                                                        ]
-//                                                                    ],
-//                                                                ],
-//                                                            ],
-//                                                        ],
-//                                                    ],],
+                                                    ['buttons' => [
+                                                        [
+                                                            'html_tag' => 'a',
+                                                            'text' => _("Details"),
+                                                            'attributes' => [
+                                                                'class' => 'btn btn-sm btn-info ml-5',
+                                                                'href' => [
+                                                                    'type' => 'plugin',
+                                                                    'name' => 'url',
+                                                                    'arguments' => [
+                                                                        'manager.event.read',
+                                                                        [
+                                                                            'uid'=> [
+                                                                                'source' => 'row-item',
+                                                                                'property' => 'uid',
+                                                                            ],
+                                                                        ]
+                                                                    ],
+                                                                ],
+                                                            ],
+                                                        ],
+                                                    ],],
                                                 ],
                                             ],
                                         ],
                                     ],
                                 ],
                                 'view_template_model' => [
-                                    'layout' => 'layout::default',
+                                    'layout' => 'layout::manager',
                                     'template' => 'common-admin::template-list',
                                 ],
                             ], // get
@@ -522,7 +522,7 @@ class ConfigProvider
                                                     'html_tag' => 'a',
                                                     'text' => _("Create Group"),
                                                     'attributes' => [
-                                                        'class' => 'btn btn-sm btn-info ml-5',
+                                                        'class' => 'btn btn-sm btn-info ml-5 float-right',
                                                         'href' => 'helper::url:manager.event-group.create'
                                                     ],
                                                 ],
@@ -530,7 +530,7 @@ class ConfigProvider
                                                     'html_tag' => 'a',
                                                     'text' => _("Create Event"),
                                                     'attributes' => [
-                                                        'class' => 'btn btn-sm btn-info ml-5',
+                                                        'class' => 'btn btn-sm btn-info ml-5 float-right',
                                                         'href' => 'helper::url:manager.event.create'
                                                     ],
                                                 ],
@@ -538,7 +538,7 @@ class ConfigProvider
                                                     'html_tag' => 'a',
                                                     'text' => _("List Events"),
                                                     'attributes' => [
-                                                        'class' => 'btn btn-sm btn-info ml-5',
+                                                        'class' => 'btn btn-sm btn-info ml-5 float-right',
                                                         'href' => 'helper::url:manager.event.list'
                                                     ],
                                                 ],
@@ -587,7 +587,7 @@ class ConfigProvider
                                     ],
                                 ],
                                 'view_template_model' => [
-                                    'layout' => 'layout::default',
+                                    'layout' => 'layout::manager',
                                     'template' => 'common-admin::template-list',
                                 ],
                             ], // get

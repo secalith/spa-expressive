@@ -124,7 +124,7 @@ class ConfigProvider
                                                     'text' => _("Lista Petycji"),
                                                     'attributes' => [
                                                         'class' => 'btn btn-sm btn-info ml-5',
-                                                        'href' => 'helper::url:spa.spa-petition.list'
+                                                        'href' => 'helper::url:manager.petition.list'
                                                     ],
                                                 ],
                                             ],
@@ -166,7 +166,7 @@ class ConfigProvider
                                                     'text' => 'Lista Petycji',
                                                     'attributes' => [
                                                         'class' => 'btn btn-sm btn-info ml-5',
-                                                        'href' => 'helper::url:spa.spa-petition.list'
+                                                        'href' => 'helper::url:manager.petition.list'
                                                     ],
                                                 ],
                                             ],
@@ -269,7 +269,7 @@ class ConfigProvider
                                                     'text' => 'List',
                                                     'attributes' => [
                                                         'class' => 'btn btn-sm btn-info ml-5',
-                                                        'href' => 'helper::url:spa.spa-petition.list'
+                                                        'href' => 'helper::url:manager.petition.list'
                                                     ],
                                                 ],
                                             ],
@@ -399,7 +399,7 @@ class ConfigProvider
                 ], // Common\Handler\Create
                 'Common\Handler\List'=> [
                     'route' => [
-                        'spa.spa-petition.list' => [
+                        'manager.petition.list' => [
                             'get' => [
                                 'method' => 'GET',
                                 'scenario' => 'list',
@@ -414,7 +414,7 @@ class ConfigProvider
                                     ],
                                 ],
                                 'data_template_model' => [
-                                    'route_name' => 'spa.spa-petition.list',
+                                    'route_name' => 'manager.petition.list',
                                     'heading' => [
                                         [
                                             'html_tag' => 'h1',

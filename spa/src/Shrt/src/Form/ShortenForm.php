@@ -35,6 +35,7 @@ class ShortenForm extends Form
             'type' => 'Zend\Form\Element\Hidden',
             'name' => 'application_uid',
         ], ['priority'=>10]);
+
         $this->add([
             'type' => 'Zend\Form\Element\Hidden',
             'name' => 'site_uid',
@@ -45,7 +46,10 @@ class ShortenForm extends Form
             'type' => \Shrt\Form\Fieldset\ShortenFieldset::class,
             'options' => array(
                 'use_as_base_fieldset' => true
-            )
+            ),
+            'attributes' => [
+                'class' => 'd-block'
+            ],
         ));
 
         $this->add([
@@ -58,7 +62,7 @@ class ShortenForm extends Form
             'attributes' => [
                 'type' => 'submit',
                 'value' => _('Continue'),
-                'class' => 'btn btn-success ',
+                'class' => 'btn btn-success d-block w-100 ',
             ],
         ], ['priority'=>-100]);
     }

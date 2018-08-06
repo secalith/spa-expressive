@@ -33,10 +33,10 @@ class LinkFieldset extends Fieldset implements InputFilterProviderInterface
             'type' => 'text',
             'name' => 'link_url',
             'options' => array(
-                'label' => _("Link"),
+                'label' => _("Url"),
             ),
             'attributes' => [
-                'class' => 'form-control d-inline-flex w-auto',
+                'class' => 'form-control d-block w-100',
             ],
         ));
 

@@ -53,6 +53,19 @@ $form->prepare();
 
         <div class="row">
             <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+                <?=$this->formLabel($form->get('form_create')->get('fieldset_article')->get('article_type'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_article')->get('article_type'))))?'has-errors':'';?>">
+                <?=$this->formSelect($form->get('form_create')->get('fieldset_article')->get('article_type'));?>
+                <?=$this->formElementErrors($form->get('form_create')->get('fieldset_article')->get('article_type'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+                <small><?=$this->translate('We need to know what type of Article you are about to add. The article may be **external link** which will lead to some other site or the Article may be hosted by us.');?></small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
                 <?=$this->formLabel($form->get('form_create')->get('fieldset_article')->get('country'));?>
             </div>
             <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_article')->get('country'))))?'has-errors':'';?>">
@@ -63,18 +76,6 @@ $form->prepare();
                 <small><?=$this->translate('Tell us the country where your article is (will be) published.');?></small>
             </div>
         </div>
-
-    </div>
-</div>
-
-<hr />
-
-<div class="form-container <?=($form->getMessages())?'form-has-errors':null;?>">
-
-    <h3 class="display-5"><?=$this->translate("Your Event details");?></h3>
-
-    <div class="container pt-2">
-
 
         <div class="row">
             <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
@@ -90,31 +91,55 @@ $form->prepare();
         </div>
 
     </div>
+</div>
 
-    <hr />
+<hr />
 
-    <h3 class="display-5"><?=$this->translate("Your event external links");?></h3>
+<div class="form-container <?=($form->getMessages())?'form-has-errors':null;?>">
 
-    <div class="container pt-2">
-        <div class="row">
-            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
-                <?=$this->formLabel($form->get('form_create')->get('fieldset_article')->get('status'));?>
-            </div>
-            <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_article')->get('status'))))?'has-errors':'';?>">
-                <?=$this->formSelect($form->get('form_create')->get('fieldset_article')->get('status'));?>
-                <?=$this->formElementErrors($form->get('form_create')->get('fieldset_article')->get('status'));?>
-            </div>
-            <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
-                <small><?=$this->translate('Should you Article be visible in public?');?></small>
-            </div>
+    <h3 class="display-5"><?=$this->translate("External Article");?></h3>
+
+    <div class="row">
+        <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+            <?=$this->formLabel($form->get('form_create')->get('fieldset_article_external')->get('name'));?>
         </div>
+        <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_article_external')->get('name'))))?'has-errors':'';?>">
+            <?=$this->formInput($form->get('form_create')->get('fieldset_article_external')->get('name'));?>
+            <?=$this->formElementErrors($form->get('form_create')->get('fieldset_article_external')->get('name'));?>
+        </div>
+        <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+            <small><?=$this->translate('This name will be visible only by you and other registered users.');?></small>
+        </div>
+    </div>
 
+    <div class="row">
+        <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+            <?=$this->formLabel($form->get('form_create')->get('fieldset_article_external')->get('link'));?>
+        </div>
+        <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_article_external')->get('link'))))?'has-errors':'';?>">
+            <?=$this->formInput($form->get('form_create')->get('fieldset_article_external')->get('link'));?>
+            <?=$this->formElementErrors($form->get('form_create')->get('fieldset_article_external')->get('link'));?>
+        </div>
+        <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+            <small><?=$this->translate('This name will be visible only by you and other registered users.');?></small>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+            <?=$this->formLabel($form->get('form_create')->get('fieldset_article_external')->get('image'));?>
+        </div>
+        <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_article_external')->get('image'))))?'has-errors':'';?>">
+            <?=$this->formInput($form->get('form_create')->get('fieldset_article_external')->get('image'));?>
+            <?=$this->formElementErrors($form->get('form_create')->get('fieldset_article_external')->get('image'));?>
+        </div>
+        <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+            <small><?=$this->translate('This name will be visible only by you and other registered users.');?></small>
+        </div>
     </div>
 
     <hr />
-    <div class="py-2 px-3 mb-2">
-        <?=$this->formSubmit($form->get('submit'));?>
-    </div>
+
+
 
     <div class="hidden">
         <?=$this->formElement($form->get('application_id'));?>
@@ -123,5 +148,79 @@ $form->prepare();
 
 </div>
 
+<div class="form-container <?=($form->getMessages())?'form-has-errors':null;?>">
+
+    <h3 class="display-5"><?=$this->translate("Internal Post");?></h3>
+
+    <div class="row">
+        <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+            <?=$this->formLabel($form->get('form_create')->get('fieldset_article_internal')->get('title'));?>
+        </div>
+        <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_article_internal')->get('title'))))?'has-errors':'';?>">
+            <?=$this->formInput($form->get('form_create')->get('fieldset_article_internal')->get('title'));?>
+            <?=$this->formElementErrors($form->get('form_create')->get('fieldset_article_internal')->get('title'));?>
+        </div>
+        <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+            <small><?=$this->translate('This name will be visible only by you and other registered users.');?></small>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+            <?=$this->formLabel($form->get('form_create')->get('fieldset_article_internal')->get('title_global'));?>
+        </div>
+        <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_article_internal')->get('title_global'))))?'has-errors':'';?>">
+            <?=$this->formInput($form->get('form_create')->get('fieldset_article_internal')->get('title_global'));?>
+            <?=$this->formElementErrors($form->get('form_create')->get('fieldset_article_internal')->get('title_global'));?>
+        </div>
+        <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+            <small><?=$this->translate('This name will be visible only by you and other registered users.');?></small>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+            <?=$this->formLabel($form->get('form_create')->get('fieldset_article_internal')->get('abstract'));?>
+        </div>
+        <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_article_internal')->get('abstract'))))?'has-errors':'';?>">
+            <?=$this->formTextarea($form->get('form_create')->get('fieldset_article_internal')->get('abstract'));?>
+            <?=$this->formElementErrors($form->get('form_create')->get('fieldset_article_internal')->get('abstract'));?>
+        </div>
+        <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+            <small><?=$this->translate('This name will be visible only by you and other registered users.');?></small>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+            <?=$this->formLabel($form->get('form_create')->get('fieldset_article_internal')->get('lead'));?>
+        </div>
+        <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_article_internal')->get('lead'))))?'has-errors':'';?>">
+            <?=$this->formTextarea($form->get('form_create')->get('fieldset_article_internal')->get('lead'));?>
+            <?=$this->formElementErrors($form->get('form_create')->get('fieldset_article_internal')->get('lead'));?>
+        </div>
+        <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+            <small><?=$this->translate('This name will be visible only by you and other registered users.');?></small>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+            <?=$this->formLabel($form->get('form_create')->get('fieldset_article_internal')->get('text'));?>
+        </div>
+        <div class="col-12 col-md-10 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_article_internal')->get('text'))))?'has-errors':'';?>">
+            <?=$this->formTextarea($form->get('form_create')->get('fieldset_article_internal')->get('text'));?>
+            <?=$this->formElementErrors($form->get('form_create')->get('fieldset_article_internal')->get('text'));?>
+        </div>
+    </div>
+
+</div>
+
+<div class="form-container <?=($form->getMessages())?'form-has-errors':null;?>">
+
+    <div class="py-2 px-3 mb-2">
+        <?=$this->formSubmit($form->get('submit'));?>
+    </div>
+
+</div>
 <?=$this->form()->closeTag();?>
 

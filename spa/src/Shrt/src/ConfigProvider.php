@@ -88,7 +88,7 @@ class ConfigProvider
                         'name' => 'Application\Shrt\Db\LocalSQLiteAdapter',
                     ],
                     'model' => [
-                        "object" => \Shrt\Model\ShrtModel::class,
+                        "object" => \Shrt\Model\ShortenModel::class,
                     ],
                     'hydrator' => [
                         "object" => \Zend\Hydrator\ObjectProperty::class,
@@ -96,61 +96,145 @@ class ConfigProvider
                 ],
             ],
             'handler' => [
-                'Page\Handler\PageHandler'=> [
+
+                'Common\Handler\Create' => [
                     'route' => [
                         'shrt.home' => [
                             'get' => [
                                 'method' => 'GET',
-                                'scenario' => 'display',
-                                'view_template_model' => [
-                                    'layout' => 'layout::shrt-1',
-                                    'template' => 'shrt::home-2018-a',
-                                    'body_class' => 'app-action-home',
-                                ],
-                                'page_resource' => [
-                                    [
-                                        'type' => 'form',
-                                        'name' => 'form_create_shrt',
-                                        'spec' => [
-                                            'type' => 'form-factory-filesystem',
-                                            'service' => \Shrt\Form\ShortenForm::class,
-                                        ],
-//                                        'fieldset_user' => [
-//                                            'fieldset_name' => 'fieldset_user',
-//                                            'type' => 'fieldset',
-//                                            'partial' => 'common-admin::template-read-item',
-//                                            'service' => [
-//                                                [
-//                                                    'service_name'=>'User\TableService',
-//                                                    'object' => \User\Model\UserModel::class,
-//                                                    'method' => 'getItemByUid',
-//                                                    'arguments' => [
-//                                                        [
-//                                                            'type' => 'service',
-//                                                            'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
-//                                                            'method' => 'getMatchedParam',
-//                                                            'arg_name' => 'uid',
-//                                                        ],
-//                                                    ],
-//                                                ],
-//
-//                                            ],
-//                                        ],
-                                    ],
-                                ],
+                                'scenario' => 'create',
                                 'data_template_model' => [
                                     'route_name' => 'shrt.home',
                                     'heading' => [
                                         [
                                             'html_tag' => 'h1',
-                                            'text' => 'User Details',
+                                            'text' => _("Shorten your Link"),
+                                        ],
+                                    ], // heading
+                                ],
+                                'view_template_model' => [
+                                    'layout' => 'layout::shrt-1',
+                                    'template' => 'shrt::template-create',
+                                    'template_class' => '',
+                                    'forms' => [
+                                        'form_create' => 'shrt::template-create-form',
+                                    ],
+                                ],
+                                'forms' => [
+                                    [
+                                        'action' => [
+                                            'route' => 'manager.petition.create.post',
+                                        ],
+                                        'name' => 'form_create',
+                                        'object' => \Shrt\Form\ShortenForm::class,
+                                        'template' => 'shrt::template-create',
+                                    ]
+                                ],
+                            ],
+                        ], // shrt.home
+                        'shrt.home.post' => [
+                            'post' => [
+                                'method' => 'POST',
+                                'scenario' => 'process',
+                                'data_template_model' => [
+                                    'route_name' => 'manager.petition.create.post',
+                                    'heading' => [
+                                        [
+                                            'html_tag' => 'h1',
+                                            'text' => _("Create Petition"),
+                                            'buttons' => [
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => _('Petitions List'),
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-5 float-right',
+                                                        'href' => 'helper::url:manager.petition.list'
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                                'view_template_model' => [
+                                    'layout' => 'layout::manager',
+                                    'template' => 'petition-admin::template-create',
+                                    'forms' => [
+                                        'form_create' => 'petition-admin::template-create-form',
+                                    ],
+                                ],
+                                'forms' => [
+                                    [
+                                        'name' => 'form_create',
+                                        'action' => [
+                                            'route' => 'manager.petition.create.post',
+                                        ],
+                                        'object' => \Petition\Form\PetitionWriteForm::class,
+                                        'pre_validate' => [
+                                            'data' => [
+                                                'fieldset_petition_translation' => [
+                                                    'form_name' => 'form_create',
+                                                    'fieldset_name' => 'fieldset_petition_translation',
+                                                    'change_value' => [
+                                                        [
+                                                            'field_name' => 'petition_uid',
+                                                            'source' => [
+                                                                'type' => 'post-request',
+                                                                'source_name' => 'fieldset_petition',
+                                                                'source_field_name' => 'uid',
+                                                            ],
+                                                        ],
+                                                        [
+                                                            'field_name' => 'site_uid',
+                                                            'source' => [
+                                                                'type' => 'post-request',
+                                                                'source_name' => 'fieldset_petition',
+                                                                'source_field_name' => 'site_uid',
+                                                            ],
+                                                        ],
+                                                        [
+                                                            'field_name' => 'application_uid',
+                                                            'source' => [
+                                                                'type' => 'post-request',
+                                                                'source_name' => 'fieldset_petition',
+                                                                'source_field_name' => 'application_uid',
+                                                            ],
+                                                        ],
+                                                    ],
+                                                ], // fieldset_petition_translation
+                                            ],
+                                        ], // pre_validate
+                                        'save' => [
+                                            'data' => [
+                                                'fieldset_petition' => [
+                                                    'fieldset_name' => 'fieldset_petition',
+                                                    'service' => [
+                                                        [
+                                                            'name'=>'Petition\TableService',
+                                                            'object' => \Petition\Model\PetitionModel::class,
+                                                            'method' => 'saveItem'
+                                                        ],
+
+                                                    ],
+                                                ], // fieldset_petition
+                                                'fieldset_petition_translation' => [
+                                                    'fieldset_name' => 'fieldset_petition_translation',
+                                                    'service' => [
+                                                        [
+                                                            'name'=>'Petition\Translation\TableService',
+                                                            'object' => \Petition\Model\PetitionTranslationModel::class,
+                                                            'method' => 'saveItem'
+                                                        ],
+                                                    ],
+                                                ], // fieldset_petition_translation
+                                            ],
                                         ],
                                     ],
                                 ],
                             ],
-                        ],
+                        ], // shrt.home.post
                     ],
-                ],
+                ], // Common\Handler\Create
+
             ],
         ];
 

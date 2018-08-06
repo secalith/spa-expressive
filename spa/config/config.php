@@ -13,6 +13,7 @@ $cacheConfig = [
 ];
 
 $aggregator = new ConfigAggregator([
+    \Petition\ConfigProvider::class,
     \Article\ConfigProvider::class,
     \Shrt\ConfigProvider::class,
     \Permission\ConfigProvider::class,
@@ -52,7 +53,6 @@ $aggregator = new ConfigAggregator([
     ArticleExternal\ConfigProvider::class,
     ArrayDigger\ConfigProvider::class,
     RoleEditor\ConfigProvider::class,
-    SpaPetition\ConfigProvider::class,
     PageLayout\ConfigProvider::class,
     PageResource\ConfigProvider::class,
     Event\ConfigProvider::class,

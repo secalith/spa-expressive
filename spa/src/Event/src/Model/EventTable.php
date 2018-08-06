@@ -34,7 +34,7 @@ class EventTable
         $resultSet = $this->tableGateway->select();
 
         $resultSet->buffer();
-        $resultSet->next();
+//        $resultSet->next();
 
         return $resultSet;
     }
@@ -46,7 +46,7 @@ class EventTable
         $resultSet = $this->tableGateway->select($where);
 
         $resultSet->buffer();
-        $resultSet->next();
+//        $resultSet->next();
 
         return $resultSet;
     }
@@ -112,7 +112,7 @@ class EventTable
             'event_group' => $item->getEventGroup(),
             'name' => $item->getName(),
             'country' => $item->getCountry(),
-            'status' => 1,
+            'status' => $item->getStatus(),
             'created' => $dateTime->format('Y-m-d H:i:s'),
         );
 

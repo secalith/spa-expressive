@@ -13,24 +13,22 @@ use Zend\InputFilter\InputFilter;
 class ArticleFieldset extends Fieldset implements InputFilterProviderInterface
 {
 
-    private $event_groups;
+    private $article_groups;
 
-    public function __construct($name = null, $options = array(), $event_groups=[])
+    public function __construct($name = null, $options = array(), $article_groups=[])
     {
         parent::__construct($name,$options);
 
         $this->setHydrator(new ClassMethods(true));
         $this->setObject(new ArticleModel());
 
-        $this->event_groups = $event_groups;
+        $this->article_groups = $article_groups;
 
         $this->addElements();
     }
 
     protected function addElements()
     {
-
-        $time = time();
 
         $this->add(array(
             'type' => 'hidden',
@@ -67,6 +65,22 @@ class ArticleFieldset extends Fieldset implements InputFilterProviderInterface
                 'class' => 'form-control d-block',
             ],
         ));
+
+        $this->add(array(
+            'type' => 'Zend\Form\Element\Select',
+            'name' => 'article_type',
+            'options' => array(
+                'label' => _("Type"),
+                'value_options' => [
+                    'external' => _('External Site'),
+                    'post' => _('Post'),
+                ],
+            ),
+            'attributes' => [
+                'class' => 'form-control d-block',
+            ],
+        ));
+
         $this->add(array(
             'type' => 'Zend\Form\Element\Select',
             'name' => 'article_group',

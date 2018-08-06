@@ -57,21 +57,29 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
 
 
 
-    # MANAGER-SPA-PETITION #
+    # MANAGER-PETITION #
 
     $app->get('/admin/petition/create[/]', [
         Auth\Handler\AuthHandler::class,
         'Common\Handler\Create',
-    ], 'spa.spa-petition.create');
+    ], 'manager.petition.create');
     $app->post('/admin/petition/create[/]', [
         Auth\Handler\AuthHandler::class,
         'Common\Handler\Create',
-    ], 'spa.spa-petition.create.post');
-
+    ], 'manager.petition.create.post');
     $app->get('/admin/petition/list[/[{page:\d+}]]', [
         Auth\Handler\AuthHandler::class,
         'Common\Handler\List',
-    ], 'spa.spa-petition.list');
+    ], 'manager.petition.list');
+    # MANAGER-PETITION-TRANSLATION #
+    $app->get('/admin/petition/translation/create[/]', [
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\Create',
+    ], 'manager.petition.translation.create');
+    $app->post('/admin/petition/translation/create[/]', [
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\Create',
+    ], 'manager.petition.translation.create.post');
 
 
 
@@ -126,11 +134,13 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
         Auth\Handler\AuthHandler::class,
         'Common\Handler\List',
     ], 'manager.event.list');
-    $app->get('/admin/event/details[/[{page:\d+}]]', [
+
+    $app->get('/admin/event/details/{uid}[/]', [
         I18n\Handler\I18n::class,
         Auth\Handler\AuthHandler::class,
-        'Common\Handler\List',
+        'Common\Handler\Read',
     ], 'manager.event.read');
+
     $app->get('/admin/event/create[/]', [
         I18n\Handler\I18n::class,
         Auth\Handler\AuthHandler::class,

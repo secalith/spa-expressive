@@ -9,6 +9,7 @@ class ArticleModel
     public $uid;
     public $application_uid;
     public $site_uid;
+    public $article_type;
     public $article_group;
     public $name;
 
@@ -36,6 +37,7 @@ class ArticleModel
         $this->uid = ( array_key_exists('uid',$data)) ? $data['uid'] : null;
         $this->application_uid = ( array_key_exists('application_uid',$data)) ? $data['application_uid'] : null;
         $this->site_uid = ( array_key_exists('site_uid',$data)) ? $data['site_uid'] : null;
+        $this->article_type = ( array_key_exists('article_type',$data)) ? $data['article_type'] : null;
         $this->article_group = ( array_key_exists('article_group',$data)) ? $data['article_group'] : null;
         $this->name = ( array_key_exists('name',$data)) ? $data['name'] : null;
 
@@ -57,6 +59,7 @@ class ArticleModel
         $data['uid'] = $this->uid;
         $data['application_uid'] = $this->application_uid;
         $data['site_uid'] = $this->site_uid;
+        $data['article_type'] = $this->article_type;
         $data['article_group'] = $this->article_group;
         $data['name'] = $this->name;
 
@@ -129,6 +132,24 @@ class ArticleModel
     public function setSiteUid($site_uid)
     {
         $this->site_uid = $site_uid;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArticleType()
+    {
+        return $this->article_type;
+    }
+
+    /**
+     * @param mixed $article_type
+     * @return ArticleModel
+     */
+    public function setArticleType($article_type)
+    {
+        $this->article_type = $article_type;
         return $this;
     }
 

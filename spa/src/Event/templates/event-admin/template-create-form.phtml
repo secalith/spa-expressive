@@ -13,14 +13,17 @@ $form->prepare();
 <?=$this->formElementErrors($form->get('csrf'));?>
 
 <div>
-    <div class="container pt-2">
+    <div class="container-fluid pt-2">
 
         <div class="row">
-            <div class="col-12 col-md-10 py-2 px-0 text-justify">
+            <div class="col-12 col-md-10 py-2 text-justify">
                 <p>On this page you will be able to register your event with us. We will need the most basic information about the dates, place or languages displayed on the website.</p>
             </div>
-            <div class="col-12 col-md-2 py-2 px-0 text-right">
+            <div class="col-12 col-md-2 py-2 text-right">
                 <?=$this->formSubmit($form->get('submit'));?>
+            </div>
+            <div class="col-12 py-2">
+                <hr />
             </div>
         </div>
 
@@ -37,7 +40,7 @@ $form->prepare();
             <?=$this->formElementErrors($form->get('form_create')->get('fieldset_event_details')->get('uid'));?>
 
         <div class="row">
-            <div class="col-12 py-2 px-0">
+            <div class="col-12 py-2">
                 <h3 class="display-5"><?=$this->translate("Some basic information about your Event");?></h3>
             </div>
         </div>
@@ -137,7 +140,7 @@ $form->prepare();
 
     <h3 class="display-5"><?=$this->translate("Your Event details");?></h3>
 
-    <div class="container pt-2">
+    <div class="container-fluid pt-2">
 
         <div class="row">
             <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">

@@ -70,10 +70,13 @@ class PipelineAndRoutesDelegator
             if( $items !== false) {
                 /* @var $item \PageRoute\Model\RouterModel */
                 foreach($items as $item) {
-                    switch($item->getController()){
-                        default:
+                    switch($item->getController())
+                    {
                         case '\Page\Handler\PageHandler':
                             $app->get($item->getRouteUrl(), [\Page\Handler\PageHandler::class], $item->getRouteName());
+                            break;
+                        default:
+                            $app->get($item->getRouteUrl(), $item->getController(), $item->getRouteName());
                             break;
                     }
                 }

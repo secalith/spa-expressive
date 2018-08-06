@@ -1,9 +1,9 @@
 <?php
 
 
-namespace User\Model;
+namespace Shrt\Model;
 
-class UserModel
+class LinkModel
 {
     public $uid;
     public $link_url;

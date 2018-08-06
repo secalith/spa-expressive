@@ -1,0 +1,180 @@
+<?php
+
+$form->prepare();
+
+?>
+
+<?=$this->form()->openTag($form);?>
+
+<?=$this->formElementErrors($form->get('application_id'));?>
+<?=$this->formElementErrors($form->get('csrf'));?>
+
+<div>
+    <div class="container-fluid pt-2">
+
+        <div class="row">
+            <div class="col-12 col-md-10 py-2 px-0 text-justify">
+                <p>On this page you will be able to start your Petition with us. We will need the most basic information about the names or languages...</p>
+            </div>
+            <div class="col-12 col-md-2 py-2 px-0 text-right">
+                <?=$this->formSubmit($form->get('submit'));?>
+            </div>
+        </div>
+
+            <?=$this->formInput($form->get('form_create')->get('fieldset_petition')->get('uid'));?>
+            <?=$this->formInput($form->get('form_create')->get('fieldset_petition')->get('application_uid'));?>
+            <?=$this->formInput($form->get('form_create')->get('fieldset_petition')->get('site_uid'));?>
+            <?=$this->formInput($form->get('form_create')->get('fieldset_petition_translation')->get('uid'));?>
+            <?=$this->formInput($form->get('form_create')->get('fieldset_petition_translation')->get('petition_uid'));?>
+
+            <?=$this->formElementErrors($form->get('form_create')->get('fieldset_petition')->get('uid'));?>
+            <?=$this->formElementErrors($form->get('form_create')->get('fieldset_petition')->get('application_uid'));?>
+            <?=$this->formElementErrors($form->get('form_create')->get('fieldset_petition')->get('site_uid'));?>
+            <?=$this->formElementErrors($form->get('form_create')->get('fieldset_petition_translation')->get('uid'));?>
+            <?=$this->formElementErrors($form->get('form_create')->get('fieldset_petition_translation')->get('petition_uid'));?>
+
+        <div class="row">
+            <div class="col-12 py-2 px-0">
+                <h3 class="display-5"><?=$this->translate("Some basic information about your Petition");?></h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+                <?=$this->formLabel($form->get('form_create')->get('fieldset_petition')->get('name'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_petition')->get('name'))))?'has-errors':'';?>">
+                <?=$this->formInput($form->get('form_create')->get('fieldset_petition')->get('name'));?>
+                <?=$this->formElementErrors($form->get('form_create')->get('fieldset_petition')->get('name'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+                <small><?=$this->translate('This name will be visible only by you and other registered users.');?></small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+                <?=$this->formLabel($form->get('form_create')->get('fieldset_petition')->get('country'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_petition')->get('country'))))?'has-errors':'';?>">
+                <?=$this->formSelect($form->get('form_create')->get('fieldset_petition')->get('country'));?>
+                <?=$this->formElementErrors($form->get('form_create')->get('fieldset_petition')->get('country'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+                <small><?=$this->translate('Tell us the country where your petition will be held.');?></small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+                <?=$this->formLabel($form->get('form_create')->get('fieldset_petition')->get('group'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_petition')->get('group'))))?'has-errors':'';?>">
+                <?=$this->formSelect($form->get('form_create')->get('fieldset_petition')->get('group'));?>
+                <?=$this->formElementErrors($form->get('form_create')->get('fieldset_petition')->get('group'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+                <small><?=$this->translate('This name will be present to users from other countries than yours.');?></small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+                <?=$this->formLabel($form->get('form_create')->get('fieldset_petition')->get('status'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_petition')->get('status'))))?'has-errors':'';?>">
+                <?=$this->formSelect($form->get('form_create')->get('fieldset_petition')->get('status'));?>
+                <?=$this->formElementErrors($form->get('form_create')->get('fieldset_petition')->get('status'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+                <small><?=$this->translate('Would you like to publish your Petition straight away or review it first?');?></small>
+            </div>
+        </div>
+
+        <hr />
+
+
+        <div class="row">
+            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+                <?=$this->formLabel($form->get('form_create')->get('fieldset_petition_translation')->get('title'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_petition_translation')->get('title'))))?'has-errors':'';?>">
+                <?=$this->formInput($form->get('form_create')->get('fieldset_petition_translation')->get('title'));?>
+                <?=$this->formElementErrors($form->get('form_create')->get('fieldset_petition_translation')->get('title'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+                <small><?=$this->markdown($this->translate('Enter **translated** title.'));?></small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+                <?=$this->formLabel($form->get('form_create')->get('fieldset_petition_translation')->get('language'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_petition_translation')->get('language'))))?'has-errors':'';?>">
+                <?=$this->formSelect($form->get('form_create')->get('fieldset_petition_translation')->get('language'));?>
+                <?=$this->formElementErrors($form->get('form_create')->get('fieldset_petition_translation')->get('language'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+                <small><?=$this->translate('Select language of this translation.');?></small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+                <?=$this->formLabel($form->get('form_create')->get('fieldset_petition_translation')->get('description'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_petition_translation')->get('description'))))?'has-errors':'';?>">
+                <?=$this->formInput($form->get('form_create')->get('fieldset_petition_translation')->get('description'));?>
+                <?=$this->formElementErrors($form->get('form_create')->get('fieldset_petition_translation')->get('description'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+                <small><?=$this->translate('Would you like to publish your Petition straight away or review it first?');?></small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+                <?=$this->formLabel($form->get('form_create')->get('fieldset_petition_translation')->get('text'));?>
+            </div>
+            <div class="col-12 col-md-10 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_petition_translation')->get('text'))))?'has-errors':'';?>">
+                <?=$this->formTextarea($form->get('form_create')->get('fieldset_petition_translation')->get('text'));?>
+                <?=$this->formElementErrors($form->get('form_create')->get('fieldset_petition_translation')->get('text'));?>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+                <?=$this->formLabel($form->get('form_create')->get('fieldset_petition_translation')->get('status'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_petition_translation')->get('status'))))?'has-errors':'';?>">
+                <?=$this->formSelect($form->get('form_create')->get('fieldset_petition_translation')->get('status'));?>
+                <?=$this->formElementErrors($form->get('form_create')->get('fieldset_petition_translation')->get('status'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+                <small><?=$this->translate('Select language of this translation.');?></small>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<hr />
+
+<div class="form-container <?=($form->getMessages())?'form-has-errors':null;?>">
+
+    <div class="py-2 px-3 mb-2">
+        <?=$this->formSubmit($form->get('submit'));?>
+    </div>
+
+    <div class="hidden">
+        <?=$this->formElement($form->get('application_id'));?>
+        <?=$this->formElement($form->get('csrf'));?>
+    </div>
+
+</div>
+
+<?=$this->form()->closeTag();?>
+

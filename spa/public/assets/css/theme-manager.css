@@ -40,6 +40,10 @@ body {
     src: url('/assets/font/steelfish.ttf') format('truetype');
 }
 
+main {
+    margin-top: 40px;
+}
+
 .action-login .navbar-light,
 .action-register .navbar-light {
     height:80px;
@@ -53,7 +57,7 @@ body {
     color:#fefefe;
     font-family: 'steelfish', Arial, sans-serif;
 }
-body.app-theme-manager div[role="main"] .app-container-content
+body.app-theme-manager [role="main"] .app-container-content
 {
     border-radius: 3px;
     margin-top: 10px;
