@@ -95,7 +95,7 @@ $form->prepare();
 
 <hr />
 
-<div class="form-container <?=($form->getMessages())?'form-has-errors':null;?>">
+<div class="form-fieldset-container <?=($form->getMessages())?'form-has-errors':null;?> <?=($form->get('form_create')->get('fieldset_article_external')->hasAttribute('class'))?$form->get('form_create')->get('fieldset_article_external')->getAttribute('class'):null;?>">
 
     <h3 class="display-5"><?=$this->translate("External Article");?></h3>
 
@@ -148,7 +148,7 @@ $form->prepare();
 
 </div>
 
-<div class="form-container <?=($form->getMessages())?'form-has-errors':null;?>">
+<div class="form-fieldset-container <?=($form->getMessages())?'form-has-errors':null;?> <?=($form->get('form_create')->get('fieldset_article_internal')->hasAttribute('class'))?$form->get('form_create')->get('fieldset_article_internal')->getAttribute('class'):null;?>">
 
     <h3 class="display-5"><?=$this->translate("Internal Post");?></h3>
 

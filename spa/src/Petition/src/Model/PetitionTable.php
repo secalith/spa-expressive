@@ -97,6 +97,16 @@ class PetitionTable
         return $rowset->current();
     }
 
+    public function getItemByUid($uid)
+    {
+        $rowset = $this->tableGateway->select(array('uid' => $uid));
+        $row = $rowset->current();
+        if (!$row) {
+            throw new \Exception("Could not find row $uid");
+        }
+        return $row;
+    }
+
     public function saveItem(PetitionModel $item)
     {
         if( null === $item->getUid() || empty($item->getUid())) {

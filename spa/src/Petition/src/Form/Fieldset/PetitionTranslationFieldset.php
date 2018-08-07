@@ -48,7 +48,8 @@ class PetitionTranslationFieldset extends Fieldset implements InputFilterProvide
                 'label' => _("UID")
             ),
             'attributes' => [
-                'class' => 'form-control d-block',
+                'class' => 'form-control d-inline-flex w-auto',
+                'value' => microtime(),
             ],
         ));
 

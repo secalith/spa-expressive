@@ -380,6 +380,172 @@ class ConfigProvider
                         ], // manager.event-group.create.post
                     ],
                 ], // Common\Handler\Create
+                "Common\Handler\Read"=> [
+                    'route' => [
+                        'manager.event.read' => [
+                            'get' => [
+                                'method' => 'GET',
+                                'scenario' => 'details',
+                                'view_template_model' => [
+                                    'layout' => 'layout::manager',
+                                    'template' => 'event-admin::template-read',
+                                    'body_class' => 'app-action-read',
+                                    'forms' => [
+                                        'form_read' => 'event-admin::template-read-item',
+                                    ],
+                                ],
+                                'page_resource' => [
+                                    [
+                                        'name' => 'main',
+                                        'fieldset_event' => [
+                                            'fieldset_name' => 'fieldset_event',
+                                            'type' => 'fieldset',
+                                            'partial' => 'event-admin::template-read-item',
+                                            'service' => [
+                                                [
+                                                    'service_name'=>'Event\TableService',
+                                                    'object' => \Event\Model\EventModel::class,
+                                                    'method' => 'getItemByUid',
+                                                    'arguments' => [
+                                                        [
+                                                            'type' => 'service',
+                                                            'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
+                                                            'method' => 'getMatchedParam',
+                                                            'arg_name' => 'uid',
+                                                        ],
+                                                    ],
+                                                ],
+
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                                'data_template_model' => [
+                                    'route_name' => 'manager.event.read',
+                                    'heading' => [
+                                        [
+                                            'html_tag' => 'h1',
+                                            'text' => 'Event Details',
+                                            'buttons' => [
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => 'Update Event',
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-5',
+                                                        'href' => [
+                                                            'type' => 'plugin',
+                                                            'name' => 'url',
+                                                            'arguments' => [
+                                                                'manager.event.update',
+                                                                [
+                                                                    'uid' => [
+                                                                        'source' => 'data-resource',
+                                                                        'property_path' => 'fieldset_event.data.uid',
+                                                                        'property_path_delimiter' => '.',
+                                                                    ],
+                                                                ],
+                                                            ],
+                                                        ],
+                                                    ],
+                                                ],
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => 'Create Event',
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-secondary ml-5',
+                                                        'href' => 'helper::url:manager.event.create'
+                                                    ],
+                                                ],
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => 'List Events',
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-secondary ml-1',
+                                                        'href' => 'helper::url:manager.event.list'
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                    'main' => [
+                                        'list' => [
+                                            [
+                                                'name' => 'data_event',
+                                                'type' => 'form',
+                                                'action' => [
+                                                    'route' => 'manager.event.read',
+                                                ],
+                                                'object' => \Event\Form\EventReadForm::class,
+                                                'read' => [
+                                                    'fieldset_event' => [
+                                                        'fieldset_name' => 'fieldset_event',
+                                                        'type' => 'fieldset',
+                                                        'partial' => 'common-admin::template-read-item',
+                                                        'service' => [
+                                                            [
+                                                                'service_name'=>'Event\TableService',
+                                                                'object' => \Event\Model\EventModel::class,
+                                                                'method' => 'getItemByUid',
+                                                                'arguments' => [
+                                                                    [
+                                                                        'type' => 'service',
+                                                                        'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
+                                                                        'method' => 'getMatchedParam',
+                                                                        'arg_name' => 'uid',
+                                                                    ],
+                                                                ],
+                                                            ],
+
+                                                        ],
+                                                    ],
+                                                    'fieldset_event_details' => [
+                                                        'fieldset_name' => 'fieldset_event_details',
+                                                        'type' => 'fieldset',
+                                                        'partial' => 'common-admin::template-read-item',
+                                                        'service' => [
+                                                            [
+                                                                'service_name'=>'Event\Details\TableService',
+                                                                'object' => \Event\Model\EventDetailsModel::class,
+                                                                'method' => 'getItemByUid',
+                                                                'arguments' => [
+                                                                    [
+                                                                        'type' => 'service',
+                                                                        'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
+                                                                        'method' => 'getMatchedParam',
+                                                                        'arg_name' => 'uid',
+                                                                    ],
+                                                                ],
+                                                            ],
+
+                                                        ],
+                                                    ],
+//                                                    'collection_contact' => [
+//                                                        'fieldset_name' => 'collection_contact',
+//                                                        'service' => [
+//                                                            [
+//                                                                'service_name'=>'RestableAdmin\Contact\TableService',
+//                                                                'method' => 'getItemByClientUid',
+//                                                                'arguments' => [
+//                                                                    [
+//                                                                        'type' => 'service',
+//                                                                        'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
+//                                                                        'method' => 'getMatchedParam',
+//                                                                        'arg_name' => 'client_uid',
+//                                                                    ],
+//                                                                ],
+//                                                            ],
+//
+//                                                        ],
+//                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ], // Common\Handler\Read
                 'Common\Handler\List'=> [
                     'route' => [
                         'manager.event.list' => [
@@ -455,7 +621,7 @@ class ConfigProvider
                                                     'group_name'=>_("Group"),
                                                     'status'=>_('Status'),
                                                     'created'=>_('Created'),
-                                                    100=>'Action',
+                                                    100=>_('Action'),
                                                 ],
                                                 'rows' => [
                                                     ['column'=>'name'],

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Event\Form\Fieldset;
+namespace Petition\Form\Fieldset;
 
 use Zend\InputFilter\InputFilterProviderInterface;
-use \Event\Model\WriteFieldsetModel;
+use \Petition\Model\WriteFieldsetModel;
 use Zend\Form\Fieldset;
 use Zend\Hydrator\ClassMethods;
 use Zend\InputFilter\InputFilter;
@@ -27,16 +27,16 @@ class WriteFieldset extends Fieldset implements InputFilterProviderInterface
     {
 
         $this->add(array(
-            'name' => 'fieldset_event',
-            'type' => \Event\Form\Fieldset\EventFieldset::class,
+            'name' => 'fieldset_petition',
+            'type' => \Petition\Form\Fieldset\PetitionFieldset::class,
             'options' => array(
                 'use_as_base_fieldset' => false
             )
         ));
 
         $this->add(array(
-            'name' => 'fieldset_event_details',
-            'type' => \Event\Form\Fieldset\EventDetailsFieldset::class,
+            'name' => 'fieldset_petition_translation',
+            'type' => \Petition\Form\Fieldset\PetitionTranslationFieldset::class,
             'options' => array(
                 'use_as_base_fieldset' => false
             )

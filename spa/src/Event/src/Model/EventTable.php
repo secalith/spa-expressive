@@ -26,6 +26,16 @@ class EventTable
         $this->tableGateway = $tableGateway;
     }
 
+    public function getItemByUid($uid)
+    {
+        $rowset = $this->tableGateway->select(array('uid' => $uid));
+        $row = $rowset->current();
+        if (!$row) {
+            throw new \Exception("Could not find row $uid");
+        }
+        return $row;
+    }
+
     /**
      * @return \Zend\Db\ResultSet\ResultSet
      */

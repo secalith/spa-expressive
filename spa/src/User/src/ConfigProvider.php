@@ -1061,7 +1061,7 @@ class ConfigProvider
                                                 'form' => 'form_delete',
                                                 'form_element_path' => 'submit',
                                             ],
-                                        ],
+                                        ], // view
                                     ],
                                 ],
                                 'view_template_model' => [

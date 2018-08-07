@@ -1,6 +1,6 @@
 var objEditor = new ObjEditor('objEditor');
 
-var spaForm = new SpaForm("form","form",null);
+var spaForm = new SpaForm("formCreate","#formCreate",null);
 
 $( document ).ready(function(){
     // start the whole circus

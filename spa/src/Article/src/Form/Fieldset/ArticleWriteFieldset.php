@@ -38,7 +38,10 @@ class ArticleWriteFieldset extends Fieldset implements InputFilterProviderInterf
             'options' => array(
                 'label' => _("External Article"),
                 'use_as_base_fieldset' => false
-            )
+            ),
+            'attributes' => [
+                'class' => 'fieldset_article_external-collection hidden',
+            ],
         ));
         $this->add(array(
             'name' => 'fieldset_article_internal',
@@ -46,7 +49,10 @@ class ArticleWriteFieldset extends Fieldset implements InputFilterProviderInterf
             'options' => array(
                 'label' => _("External Article"),
                 'use_as_base_fieldset' => false
-            )
+            ),
+            'attributes' => [
+                'class' => 'fieldset_article_internal-collection hidden',
+            ],
         ));
 
 //        $this->add(array(

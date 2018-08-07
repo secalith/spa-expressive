@@ -29,6 +29,11 @@ return [
             [
                 'type' => 'phparray',
                 'base_dir' => 'data/language',
+                'pattern' => '%s/spa-admin-crud.php'
+            ],
+            [
+                'type' => 'phparray',
+                'base_dir' => 'data/language',
                 'pattern' => '%s/spa-art13-admin-events.php'
             ],
         ],

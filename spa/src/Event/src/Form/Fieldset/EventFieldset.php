@@ -30,8 +30,6 @@ class EventFieldset extends Fieldset implements InputFilterProviderInterface
     protected function addElements()
     {
 
-        $time = time();
-
         $this->add(array(
             'type' => 'hidden',
             'name' => 'uid',

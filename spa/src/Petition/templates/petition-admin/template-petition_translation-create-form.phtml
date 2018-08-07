@@ -4,6 +4,8 @@ $form->prepare();
 
 ?>
 
+<?=($form->getMessages())?var_dump($form->getMessages()):null;?>"
+
 <?=$this->form()->openTag($form);?>
 
 <?=$this->formElementErrors($form->get('application_id'));?>
@@ -38,15 +40,15 @@ $form->prepare();
         </div>
 
         <div class="row">
-            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+            <div class="col-12 col-sm-3 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
                 <?=$this->formLabel($form->get('form_create')->get('fieldset_petition_attach')->get('petition_uid'));?>
             </div>
             <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_petition_attach')->get('petition_uid'))))?'has-errors':'';?>">
                 <?=$this->formSelect($form->get('form_create')->get('fieldset_petition_attach')->get('petition_uid'));?>
                 <?=$this->formElementErrors($form->get('form_create')->get('fieldset_petition_attach')->get('petition_uid'));?>
             </div>
-            <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
-                <small><?=$this->translate('This name will be visible only by you and other registered users.');?></small>
+            <div class="col-12 col-sm-4 col-md-5 py-2 px-0 pl-md-5">
+                <small><?=$this->translate('Select the petitin you are going to attach your translation to.');?></small>
             </div>
         </div>
 

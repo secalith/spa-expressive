@@ -67,6 +67,14 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
         Auth\Handler\AuthHandler::class,
         'Common\Handler\Create',
     ], 'manager.petition.create.post');
+    $app->get('/admin/petition/details/{uid}[/]', [
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\Read',
+    ], 'manager.petition.read');
+    $app->get('/admin/petition/edit/{uid}[/]', [
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\Read',
+    ], 'manager.petition.update');
     $app->get('/admin/petition/list[/[{page:\d+}]]', [
         Auth\Handler\AuthHandler::class,
         'Common\Handler\List',
@@ -151,7 +159,10 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
         Auth\Handler\AuthHandler::class,
         'Common\Handler\Create',
     ], 'manager.event.create.post');
-
+    $app->get('/admin/event/edit/{uid}[/]', [
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\Update',
+    ], 'manager.event.update');
 
 
     ## MANAGER-EVENT-GROUP

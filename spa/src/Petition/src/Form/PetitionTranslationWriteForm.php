@@ -47,6 +47,23 @@ class PetitionTranslationWriteForm extends Form
                 'use_as_base_fieldset' => true
             )
         ));
+//
+//
+//        $this->get('form_create')
+//            ->get('fieldset_petition_attach')
+//            ->get('title')
+//            ->getInputFilter()->remove('title');
+
+//        $this->get('form_create')
+//            ->get('fieldset_petition_attach')
+//            ->get('application_uid')
+//            ->getInputFilter()->remove('application_uid');
+
+        $this->get('form_create')
+            ->get('fieldset_petition_attach')
+            ->get('petition_uid')
+            ->setValueOptions($this->formGroups);
+
 
         $this->add([
             'type' => 'Zend\Form\Element\Csrf',

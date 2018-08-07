@@ -76,14 +76,14 @@ class PetitionTranslationAttachFieldset extends Fieldset implements InputFilterP
             'type' => 'Zend\Form\Element\Select',
             'name' => 'petition_uid',
             'options' => array(
-                'label' => _("Main Petition"),
+                'label' => _("Source Petition"),
                 'value_options' => [
-                    'site-001' => _("site-001"),
+                    'petition-001' => _("petition-001"),
                 ],
             ),
             'attributes' => [
                 'class' => 'form-control d-block',
-                'value' => 'site-001',
+                'value' => 'petition-001',
             ],
         ));
 
@@ -95,25 +95,13 @@ class PetitionTranslationAttachFieldset extends Fieldset implements InputFilterP
             'uid' => array(
                 'required' => true,
             ),
+            'petition_uid' => array(
+                'required' => true,
+            ),
             'application_uid' => array(
                 'required' => true,
             ),
             'site_uid' => array(
-                'required' => true,
-            ),
-            'title' => array(
-                'required' => true,
-            ),
-            'description' => array(
-                'required' => true,
-            ),
-            'text' => array(
-                'required' => true,
-            ),
-            'language' => array(
-                'required' => true,
-            ),
-            'status' => array(
                 'required' => true,
             ),
         );

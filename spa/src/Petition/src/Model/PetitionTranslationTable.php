@@ -26,6 +26,16 @@ class PetitionTranslationTable
         $this->tableGateway = $tableGateway;
     }
 
+    public function getItemByParentUid($uid)
+    {
+        $rowset = $this->tableGateway->select(array('petition_uid' => $uid));
+        $row = $rowset->current();
+        if (!$row) {
+            throw new \Exception("Could not find row $uid");
+        }
+        return $row;
+    }
+
     /**
      * @return \Zend\Db\ResultSet\ResultSet
      */

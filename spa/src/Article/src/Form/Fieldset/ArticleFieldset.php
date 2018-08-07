@@ -43,6 +43,36 @@ class ArticleFieldset extends Fieldset implements InputFilterProviderInterface
         ));
 
         $this->add(array(
+            'type' => 'Zend\Form\Element\hidden',
+            'name' => 'application_uid',
+            'options' => array(
+                'label' => _("App UID"),
+                'value_options' => [
+                    'app-001' => _("app-001"),
+                ],
+            ),
+            'attributes' => [
+                'class' => 'form-control d-block',
+                'value' => 'app-001',
+            ],
+        ));
+
+        $this->add(array(
+            'type' => 'Zend\Form\Element\hidden',
+            'name' => 'site_uid',
+            'options' => array(
+                'label' => _("Site UID"),
+                'value_options' => [
+                    'site-001' => _("site-001"),
+                ],
+            ),
+            'attributes' => [
+                'class' => 'form-control d-block',
+                'value' => 'site-001',
+            ],
+        ));
+
+        $this->add(array(
             'type' => 'text',
             'name' => 'name',
             'options' => array(
@@ -77,7 +107,9 @@ class ArticleFieldset extends Fieldset implements InputFilterProviderInterface
                 ],
             ),
             'attributes' => [
-                'class' => 'form-control d-block',
+                'class' => 'toggle-aware-trigger form-control d-block',
+                'data-toggle' => '{"external":{"show":["fieldset_article_external"]},"post":{"show":["fieldset_article_internal"]}}',
+                'onChange' => 'javascript:spaForm.toggleFieldset($(this));return false;',
             ],
         ));
 
@@ -94,37 +126,6 @@ class ArticleFieldset extends Fieldset implements InputFilterProviderInterface
                 'class' => 'form-control d-block',
             ],
         ));
-
-        $this->add(array(
-            'type' => 'Zend\Form\Element\hidden',
-            'name' => 'application_uid',
-            'options' => array(
-                'label' => _("App UID"),
-                'value_options' => [
-                    'app-001' => _("app-001"),
-                ],
-            ),
-            'attributes' => [
-                'class' => 'form-control d-block',
-                'value' => 'app-001',
-            ],
-        ));
-
-        $this->add(array(
-            'type' => 'Zend\Form\Element\hidden',
-            'name' => 'site_uid',
-            'options' => array(
-                'label' => _("Site UID"),
-                'value_options' => [
-                    'site-001' => _("site-001"),
-                ],
-            ),
-            'attributes' => [
-                'class' => 'form-control d-block',
-                'value' => 'site-001',
-            ],
-        ));
-
 
         $this->add(array(
             'type' => 'Zend\Form\Element\Select',

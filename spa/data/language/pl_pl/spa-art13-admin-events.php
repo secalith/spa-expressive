@@ -11,5 +11,4 @@ return [
     'Group' => 'Grupa',
     'Status' => 'Status',
     'Created' => 'Utworzono',
-    'Details' => 'Szczegoly',
 ];

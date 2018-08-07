@@ -1,0 +1,30 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Petition\Form\Factory;
+
+use Petition\Form\PetitionTranslationWriteForm;
+use Psr\Container\ContainerInterface;
+
+class FactoryPetitionTranslationWriteServiceFormFactory
+{
+    public function __invoke(ContainerInterface $container, $requestedName = null)
+    {
+        // get list of petitions
+        $petitionsGroupsTable = $container->get("Petition\TableService");
+
+        $groups = $petitionsGroupsTable->fetchAll(['status'=>1]);
+
+        $formGroups =[];
+
+        if($groups->count()) {
+            foreach($groups as $group) {
+                $formGroups[$group->getUid()] = $group->getName();
+            }
+        }
+
+        return new PetitionTranslationWriteForm('form_create',[],$formGroups);
+
+    }
+}

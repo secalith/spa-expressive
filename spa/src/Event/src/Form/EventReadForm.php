@@ -2,29 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Petition\Form;
+namespace Event\Form;
 
-use \Petition\Model\PetitionCreateModel;
-use Zend\Form\Form;
+use \Event\Model\ReadEventModel;
+use Zend\Form\Form as Form;
 use Zend\Hydrator\ClassMethods;
 use Zend\InputFilter\InputFilter;
 
-class PetitionWriteForm extends Form
+class EventReadForm extends Form
 {
-    private $formGroups;
-
-    public function __construct($name = 'form_create', $options = array(), $formGroups=[])
+    public function __construct($name = 'form_read', $options = array())
     {
         parent::__construct($name,$options);
 
         $this
             ->setAttribute('method', 'post')
-            ->setObject(new PetitionCreateModel())
+            ->setObject(new ReadEventModel())
             ->setHydrator(new ClassMethods(true))
-//            ->setInputFilter($this->addInputFilter())
+            ->setInputFilter($this->addInputFilter())
         ;
-
-        $this->formGroups = $formGroups;
 
         $this->addElements($options);
 
@@ -41,19 +37,12 @@ class PetitionWriteForm extends Form
         ], ['priority'=>10]);
 
         $this->add(array(
-            'name' => 'form_create',
-            'type' => \Petition\Form\Fieldset\PetitionWriteFieldset::class,
+            'name' => 'form_read',
+            'type' => \Event\Form\Fieldset\WriteFieldset::class,
             'options' => array(
                 'use_as_base_fieldset' => true
             )
         ));
-
-//        $this->get('form_create')
-//            ->get('fieldset_petition')
-//            ->get('event_group')
-//            ->setValueOptions($this->formGroups)
-//        ;
-
 
         $this->add([
             'type' => 'Zend\Form\Element\Csrf',

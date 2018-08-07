@@ -30,7 +30,35 @@ class PetitionFieldset extends Fieldset implements InputFilterProviderInterface
     protected function addElements()
     {
 
-        $time = time();
+        $this->add(array(
+            'type' => 'Zend\Form\Element\hidden',
+            'name' => 'application_uid',
+            'options' => array(
+                'label' => _("Aplikacja"),
+                'value_options' => [
+                    'app-001' => _("app-001"),
+                ],
+            ),
+            'attributes' => [
+                'class' => 'form-control d-block',
+                'value' => 'app-001',
+            ],
+        ));
+
+        $this->add(array(
+            'type' => 'Zend\Form\Element\hidden',
+            'name' => 'site_uid',
+            'options' => array(
+                'label' => _("Site"),
+                'value_options' => [
+                    'site-001' => _("site-001"),
+                ],
+            ),
+            'attributes' => [
+                'class' => 'form-control d-block',
+                'value' => 'site-001',
+            ],
+        ));
 
         $this->add(array(
             'type' => 'hidden',
@@ -78,36 +106,6 @@ class PetitionFieldset extends Fieldset implements InputFilterProviderInterface
             ),
             'attributes' => [
                 'class' => 'form-control d-block',
-            ],
-        ));
-
-        $this->add(array(
-            'type' => 'Zend\Form\Element\hidden',
-            'name' => 'application_uid',
-            'options' => array(
-                'label' => _("Aplikacja"),
-                'value_options' => [
-                    'app-001' => _("app-001"),
-                ],
-            ),
-            'attributes' => [
-                'class' => 'form-control d-block',
-                'value' => 'app-001',
-            ],
-        ));
-
-        $this->add(array(
-            'type' => 'Zend\Form\Element\hidden',
-            'name' => 'site_uid',
-            'options' => array(
-                'label' => _("Site"),
-                'value_options' => [
-                    'site-001' => _("site-001"),
-                ],
-            ),
-            'attributes' => [
-                'class' => 'form-control d-block',
-                'value' => 'site-001',
             ],
         ));
 

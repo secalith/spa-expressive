@@ -35,6 +35,7 @@ class ConfigProvider
             'invokables' => [
             ],
             'factories'  => [
+                \Petition\Form\PetitionTranslationWriteForm::class => \Petition\Form\Factory\FactoryPetitionTranslationWriteServiceFormFactory::class,
             ],
         ];
     }
@@ -143,7 +144,7 @@ class ConfigProvider
                                         ],
                                         'name' => 'form_create',
                                         'object' => \Petition\Form\PetitionWriteForm::class,
-//                                        'form_factory' => \Event\Form\EventWriteForm::class,
+//                                        'form_factory' => \Petition\Form\PetitionWriteForm::class,
                                         'template' => 'common-admin::template-create',
                                     ]
                                 ],
@@ -249,31 +250,31 @@ class ConfigProvider
                                 ],
                             ],
                         ], // manager.petition.create.post
-                        'manager.event-group.create' => [
+                        'manager.petition-group.create' => [
                             'get' => [
                                 'method' => 'GET',
                                 'scenario' => 'create',
                                 'data_template_model' => [
-                                    'route_name' => 'manager.event-group.create',
+                                    'route_name' => 'manager.petition-group.create',
                                     'heading' => [
                                         [
                                             'html_tag' => 'h1',
-                                            'text' => _("Event Group"),
+                                            'text' => _("Petition Group"),
                                             'buttons' => [
                                                 [
                                                     'html_tag' => 'a',
                                                     'text' => _("Groups List"),
                                                     'attributes' => [
                                                         'class' => 'btn btn-sm btn-info ml-5 float-right',
-                                                        'href' => 'helper::url:manager.event-group.list'
+                                                        'href' => 'helper::url:manager.petition-group.list'
                                                     ],
                                                 ],
                                                 [
                                                     'html_tag' => 'a',
-                                                    'text' => _("Events List"),
+                                                    'text' => _("Petitions List"),
                                                     'attributes' => [
                                                         'class' => 'btn btn-sm btn-info ml-5 float-right',
-                                                        'href' => 'helper::url:manager.event.list'
+                                                        'href' => 'helper::url:manager.petition.list'
                                                     ],
                                                 ],
                                             ],
@@ -282,29 +283,29 @@ class ConfigProvider
                                 ],
                                 'view_template_model' => [
                                     'layout' => 'layout::manager',
-                                    'template' => 'event-admin::template-create',
+                                    'template' => 'petition-admin::template-create',
                                     'forms' => [
-                                        'form_create' => 'event-admin::template-event_group-create-form',
+                                        'form_create' => 'petition-admin::template-petition_group-create-form',
                                     ],
                                 ],
                                 'forms' => [
                                     [
                                         'action' => [
-                                            'route' => 'manager.event-group.create.post',
+                                            'route' => 'manager.petition-group.create.post',
                                         ],
                                         'name' => 'form_create',
-                                        'object' => \Event\Form\EventGroupWriteForm::class,
-                                        'template' => 'event-admin::template-create',
+                                        'object' => \Petition\Form\PetitionGroupWriteForm::class,
+                                        'template' => 'petition-admin::template-create',
                                     ]
                                 ],
                             ],
                         ], // admin.petition-group.create
-                        'manager.event-group.create.post' => [
+                        'manager.petition-group.create.post' => [
                             'post' => [
                                 'method' => 'POST',
                                 'scenario' => 'process',
                                 'data_template_model' => [
-                                    'route_name' => 'manager.event.create.post',
+                                    'route_name' => 'manager.petition.create.post',
                                     'heading' => [
                                         [
                                             'html_tag' => 'h1',
@@ -316,7 +317,7 @@ class ConfigProvider
                                                     'text' => 'List',
                                                     'attributes' => [
                                                         'class' => 'btn btn-sm btn-info ml-5',
-                                                        'href' => 'helper::url:manager.event.list'
+                                                        'href' => 'helper::url:manager.petition.list'
                                                     ],
                                                 ],
                                             ],
@@ -325,36 +326,36 @@ class ConfigProvider
                                 ],
                                 'view_template_model' => [
                                     'layout' => 'layout::manager',
-                                    'template' => 'event-admin::template-create',
+                                    'template' => 'petition-admin::template-create',
                                     'forms' => [
-                                        'form_create' => 'event-admin::template-event_group-create-form',
+                                        'form_create' => 'petition-admin::template-petition_group-create-form',
                                     ],
                                 ],
                                 'forms' => [
                                     [
                                         'name' => 'form_create',
                                         'action' => [
-                                            'route' => 'manager.event-group.create.post',
+                                            'route' => 'manager.petition-group.create.post',
                                         ],
-                                        'object' => \Event\Form\EventGroupWriteForm::class,
+                                        'object' => \Petition\Form\PetitionGroupWriteForm::class,
                                         'save' => [
                                             'data' => [
-                                                'fieldset_event_group' => [
-                                                    'fieldset_name' => 'fieldset_event_group',
+                                                'fieldset_petition_group' => [
+                                                    'fieldset_name' => 'fieldset_petition_group',
                                                     'service' => [
                                                         [
-                                                            'name'=>'Event\Group\TableService',
-                                                            'object' => \Event\Model\EventGroupModel::class,
+                                                            'name'=>'Petition\Group\TableService',
+                                                            'object' => \Petition\Model\PetitionGroupModel::class,
                                                             'method' => 'saveItem'
                                                         ],
                                                     ],
-                                                ], // fieldset_event_group
+                                                ], // fieldset_petition_group
                                             ],
                                         ],
                                     ],
                                 ],
                             ],
-                        ], // manager.event-group.create.post
+                        ], // manager.petition-group.create.post
                         'manager.petition.translation.create' => [
                             'get' => [
                                 'method' => 'GET',
@@ -391,8 +392,8 @@ class ConfigProvider
                                         'action' => [
                                             'route' => 'manager.petition.translation.create.post',
                                         ],
-                                        'object' => \Petition\Form\PetitionTranslationWriteForm::class,
-//                                        'form_factory' => \Petition\Form\PetitionTranslationWriteForm::class,
+//                                        'object' => \Petition\Form\PetitionTranslationWriteForm::class,
+                                        'form_factory' => \Petition\Form\PetitionTranslationWriteForm::class,
                                         'template' => 'common-admin::template-create',
                                     ]
                                 ],
@@ -434,7 +435,8 @@ class ConfigProvider
                                         'action' => [
                                             'route' => 'manager.petition.translation.create.post',
                                         ],
-                                        'object' => \Petition\Form\PetitionTranslationWriteForm::class,
+//                                        'object' => \Petition\Form\PetitionTranslationWriteForm::class,
+                                        'form_factory' => \Petition\Form\PetitionTranslationWriteForm::class,
                                         'pre_validate' => [
                                             'data' => [
                                                 'fieldset_petition_translation' => [
@@ -447,22 +449,6 @@ class ConfigProvider
                                                                 'type' => 'post-request',
                                                                 'source_name' => 'fieldset_petition_attach',
                                                                 'source_field_name' => 'uid',
-                                                            ],
-                                                        ],
-                                                        [
-                                                            'field_name' => 'site_uid',
-                                                            'source' => [
-                                                                'type' => 'post-request',
-                                                                'source_name' => 'fieldset_petition_attach',
-                                                                'source_field_name' => 'site_uid',
-                                                            ],
-                                                        ],
-                                                        [
-                                                            'field_name' => 'application_uid',
-                                                            'source' => [
-                                                                'type' => 'post-request',
-                                                                'source_name' => 'fieldset_petition_attach',
-                                                                'source_field_name' => 'application_uid',
                                                             ],
                                                         ],
                                                     ],
@@ -489,6 +475,154 @@ class ConfigProvider
                         ], // manager.petition.translation.create.post
                     ],
                 ], // Common\Handler\Create
+                "Common\Handler\Read"=> [
+                    'route' => [
+                        'manager.petition.read' => [
+                            'get' => [
+                                'method' => 'GET',
+                                'scenario' => 'details',
+                                'view_template_model' => [
+                                    'layout' => 'layout::manager',
+                                    'template' => 'petition-admin::template-read',
+                                    'body_class' => 'app-action-read',
+                                    'forms' => [
+                                        'form_read' => 'petition-admin::template-read-item',
+                                    ],
+                                ],
+                                'page_resource' => [
+                                    [
+                                        'name' => 'main',
+                                        'fieldset_petition' => [
+                                            'fieldset_name' => 'fieldset_petition',
+                                            'type' => 'fieldset',
+                                            'partial' => 'petition-admin::template-read-item',
+                                            'service' => [
+                                                [
+                                                    'service_name'=>'Petition\TableService',
+                                                    'object' => \Petition\Model\PetitionModel::class,
+                                                    'method' => 'getItemByUid',
+                                                    'arguments' => [
+                                                        [
+                                                            'type' => 'service',
+                                                            'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
+                                                            'method' => 'getMatchedParam',
+                                                            'arg_name' => 'uid',
+                                                        ],
+                                                    ],
+                                                ],
+
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                                'data_template_model' => [
+                                    'route_name' => 'manager.petition.read',
+                                    'heading' => [
+                                        [
+                                            'html_tag' => 'h1',
+                                            'text' => 'Petition Details',
+                                            'buttons' => [
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => 'Update Petition',
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-5',
+                                                        'href' => [
+                                                            'type' => 'plugin',
+                                                            'name' => 'url',
+                                                            'arguments' => [
+                                                                'manager.petition.update',
+                                                                [
+                                                                    'uid' => [
+                                                                        'source' => 'data-resource',
+                                                                        'property_path' => 'fieldset_petition.data.uid',
+                                                                        'property_path_delimiter' => '.',
+                                                                    ],
+                                                                ],
+                                                            ],
+                                                        ],
+                                                    ],
+                                                ],
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => 'Create Petition',
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-secondary ml-5',
+                                                        'href' => 'helper::url:manager.petition.create'
+                                                    ],
+                                                ],
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => 'List Petitions',
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-secondary ml-1',
+                                                        'href' => 'helper::url:manager.petition.list'
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                    'main' => [
+                                        'list' => [
+                                            [
+                                                'name' => 'fieldset_petition',
+                                                'type' => 'form',
+                                                'action' => [
+                                                    'route' => 'manager.petition.read',
+                                                ],
+                                                'object' => \Petition\Form\PetitionReadForm::class,
+                                                'read' => [
+                                                    'fieldset_petition' => [
+                                                        'fieldset_name' => 'fieldset_petition',
+                                                        'type' => 'fieldset',
+                                                        'partial' => 'petition-admin::template-read-item',
+                                                        'service' => [
+                                                            [
+                                                                'service_name'=>'Petition\TableService',
+                                                                'object' => \Petition\Model\PetitionModel::class,
+                                                                'method' => 'getItemByUid',
+                                                                'arguments' => [
+                                                                    [
+                                                                        'type' => 'service',
+                                                                        'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
+                                                                        'method' => 'getMatchedParam',
+                                                                        'arg_name' => 'uid',
+                                                                    ],
+                                                                ],
+                                                            ],
+
+                                                        ],
+                                                    ],
+                                                    'fieldset_petition_translation' => [
+                                                        'fieldset_name' => 'fieldset_petition_translation',
+                                                        'type' => 'fieldset',
+                                                        'partial' => 'common-admin::template-read-item',
+                                                        'service' => [
+                                                            [
+                                                                'service_name'=>'Petition\Translation\TableService',
+                                                                'object' => \Petition\Model\PetitionTranslationModel::class,
+                                                                'method' => 'getItemByUid',
+                                                                'arguments' => [
+                                                                    [
+                                                                        'type' => 'service',
+                                                                        'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
+                                                                        'method' => 'getMatchedParam',
+                                                                        'arg_name' => 'uid',
+                                                                    ],
+                                                                ],
+                                                            ],
+
+                                                        ],
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ], // Common\Handler\Read
                 'Common\Handler\List'=> [
                     'route' => [
                         'manager.petition.list' => [
@@ -548,13 +682,35 @@ class ConfigProvider
                                                     'country'=>_("Country"),
                                                     'status'=>'Status',
                                                     'created'=>'Created',
-//                                                    100=>'Details',
+                                                    100=>_('Action'),
                                                 ],
                                                 'rows' => [
                                                     ['column'=>'name'],
                                                     ['column'=>'country'],
                                                     ['column'=>'status'],
                                                     ['column'=>'created'],
+                                                    ['buttons' => [
+                                                        [
+                                                            'html_tag' => 'a',
+                                                            'text' => _("Details"),
+                                                            'attributes' => [
+                                                                'class' => 'btn btn-sm btn-info ml-5',
+                                                                'href' => [
+                                                                    'type' => 'plugin',
+                                                                    'name' => 'url',
+                                                                    'arguments' => [
+                                                                        'manager.petition.read',
+                                                                        [
+                                                                            'uid'=> [
+                                                                                'source' => 'row-item',
+                                                                                'property' => 'uid',
+                                                                            ],
+                                                                        ]
+                                                                    ],
+                                                                ],
+                                                            ],
+                                                        ],
+                                                    ],],
                                                 ],
                                             ],
                                         ],
