@@ -124,6 +124,19 @@ class AreaSeeder extends AbstractSeed
                 'comm' => '',
                 'created' => date('Y-m-d H:i:s'),
             ],
+            [
+                'uid' => 'area-010',
+                'template_uid' => 'template-002',
+                'machine_name' => 'content_main',
+                'scope' => 'page',
+                'attributes' => '{}',
+                'parameters' => '{"html_tag":"div"}',
+                'options' => '{}',
+                'status' => 1,
+                'order' => 1,
+                'comm' => '',
+                'created' => date('Y-m-d H:i:s'),
+            ],
         ];
 
         $table = $this->table('area');
