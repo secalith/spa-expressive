@@ -62,7 +62,7 @@ class ConfigProvider
                         'object' => \PageTemplate\Model\PageTemplateTable::class,
                     ],
                     'adapter' => [
-                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                        'name' => 'Application\Db\Content\LocalSQLiteAdapter',
                     ],
                     'model' => [
                         "object" => \PageTemplate\Model\PageTemplateModel::class,

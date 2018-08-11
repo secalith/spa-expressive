@@ -1,0 +1,46 @@
+<?php
+
+$form->prepare();
+
+?>
+<div id="petitionSignFormWrapper" class="form-container p-3 ml-4 float-right <?=($form->getMessages())?'form-has-errors ':null;?>float-right">
+
+    <?=$this->form()->openTag($form);?>
+
+    <?=$this->formElementErrors($form->get('application_id'));?>
+    <?=$this->formElementErrors($form->get('csrf'));?>
+
+    <?=$this->formInput($form->get('application_id'));?>
+    <?=$this->formInput($form->get('csrf'));?>
+
+    <div class="p-0 m-0">
+
+        <div class="row">
+            <div class="col-12">
+                <?=$this->formLabel($form->get('form')->get('name'));?>
+            </div>
+            <div class="col-12 <?=( ! empty($this->formElementErrors($form->get('form')->get('name'))))?'has-errors':'';?>">
+                <?=$this->formInput($form->get('form')->get('name'));?>
+                <?=$this->formElementErrors($form->get('form')->get('name'));?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <?=$this->formLabel($form->get('form')->get('email'));?>
+            </div>
+            <div class="col-12 <?=( ! empty($this->formElementErrors($form->get('form')->get('email'))))?'has-errors':'';?>">
+                <?=$this->formInput($form->get('form')->get('email'));?>
+                <?=$this->formElementErrors($form->get('form')->get('email'));?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 mt-4">
+                <?=$this->formInput($form->get('submit'));?>
+            </div>
+        </div>
+
+    </div>
+
+    <?=$this->form()->closeTag();?>
+
+</div>

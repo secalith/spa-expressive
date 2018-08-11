@@ -14,7 +14,7 @@
     <?php foreach($resources as $res):  ?>
 
         <?php if(array_key_exists('partial',$res['service_config'])): ?>
-            <?=$this->partial($res['service_config']['partial'],['resource'=>$res]);?>
+            <?php //$this->partial($res['service_config']['partial'],['resource'=>$res]);?>
         <?php endif;?>
 
     <?php endforeach;?>

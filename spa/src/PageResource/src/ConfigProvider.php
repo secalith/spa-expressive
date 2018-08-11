@@ -38,7 +38,7 @@ class ConfigProvider
                         'object' => Model\PageResourceTable::class,
                     ],
                     'adapter' => [
-                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                        'name' => 'Application\Db\Content\LocalSQLiteAdapter',
                     ],
                     'model' => [
                         "object" => Model\PageResourceModel::class,

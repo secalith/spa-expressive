@@ -11,8 +11,10 @@ class PetitionModel
     public $site_uid;
     public $group;
     public $name;
+    public $name_global;
 
     public $country;
+    public $comm;
     public $status;
 
     public $created;
@@ -37,8 +39,10 @@ class PetitionModel
         $this->site_uid = ( array_key_exists('site_uid',$data)) ? $data['site_uid'] : null;
         $this->group = ( array_key_exists('group',$data)) ? $data['group'] : null;
         $this->name = ( array_key_exists('name',$data)) ? $data['name'] : null;
+        $this->name_global = ( array_key_exists('name_global',$data)) ? $data['name_global'] : null;
 
         $this->country = ( array_key_exists('country',$data)) ? $data['country'] : null;
+        $this->comm = ( array_key_exists('comm',$data)) ? $data['comm'] : null;
         $this->status = ( array_key_exists('status',$data)) ? $data['status'] : null;
 
         $this->created = ( array_key_exists('created',$data)) ? $data['created'] : null;
@@ -57,8 +61,10 @@ class PetitionModel
         $data['site_uid'] = $this->site_uid;
         $data['group'] = $this->group;
         $data['name'] = $this->name;
+        $data['name_global'] = $this->name_global;
 
         $data['country'] = $this->country;
+        $data['comm'] = $this->comm;
         $data['status'] = $this->status;
 
         $data['created'] = $this->created;
@@ -168,6 +174,24 @@ class PetitionModel
     /**
      * @return mixed
      */
+    public function getNameGlobal()
+    {
+        return $this->name_global;
+    }
+
+    /**
+     * @param mixed $name_global
+     * @return PetitionModel
+     */
+    public function setNameGlobal($name_global)
+    {
+        $this->name_global = $name_global;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getCountry()
     {
         return $this->country;
@@ -180,6 +204,24 @@ class PetitionModel
     public function setCountry($country)
     {
         $this->country = $country;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getComm()
+    {
+        return $this->comm;
+    }
+
+    /**
+     * @param mixed $comm
+     * @return PetitionModel
+     */
+    public function setComm($comm)
+    {
+        $this->comm = $comm;
         return $this;
     }
 

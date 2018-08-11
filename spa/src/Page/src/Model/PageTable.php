@@ -23,6 +23,16 @@ class PageTable
         $this->tableGateway = $tableGateway;
     }
 
+    public function fetchAllBy($where=[])
+    {
+        $resultSet = $this->tableGateway->select($where);
+
+        $resultSet->buffer();
+//        $resultSet->next();
+
+        return $resultSet;
+    }
+
     /**
      * @return \Zend\Db\ResultSet\ResultSet
      */

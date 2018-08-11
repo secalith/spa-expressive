@@ -36,7 +36,7 @@ class ConfigProvider
             'delegators' => [
                 \Page\Handler\PageHandler::class => [
 //                    \Common\Delegator\RouteResourceAwareDelegator::class,
-                    \Common\Delegator\PageResourceAwareDelegator::class,
+                    \PageResource\Delegator\PageResourceAwareDelegator::class,
                     \PageView\Handler\Delegator\PageViewDelegatorFactory::class,
                 ],
             ],
@@ -71,7 +71,7 @@ class ConfigProvider
                         'object' => \Page\Model\PageTable::class,
                     ],
                     'adapter' => [
-                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                        'name' => 'Application\Db\Content\LocalSQLiteAdapter',
                     ],
                     'model' => [
                         "object" => \Page\Model\PageModel::class,
@@ -87,7 +87,7 @@ class ConfigProvider
                         'object' => \Page\Model\PageTable::class,
                     ],
                     'adapter' => [
-                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                        'name' => 'Application\Db\Content\LocalSQLiteAdapter',
                     ],
                     'model' => [
                         "object" => \Page\Model\PageCreateModel::class,
@@ -103,7 +103,7 @@ class ConfigProvider
                         'object' => \Page\Model\PageTable::class,
                     ],
                     'adapter' => [
-                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                        'name' => 'Application\Db\Content\LocalSQLiteAdapter',
                     ],
                     'model' => [
                         "object" => \Page\Model\PageCreateModel::class,

@@ -29,7 +29,6 @@ class PetitionTranslationFieldset extends Fieldset implements InputFilterProvide
 
     protected function addElements()
     {
-
         $this->add(array(
             'type' => 'hidden',
             'name' => 'uid',

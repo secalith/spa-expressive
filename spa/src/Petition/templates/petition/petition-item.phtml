@@ -1,0 +1,27 @@
+<?php if(array_key_exists($this->currentLanguage(),$petition['petition']['data']['translation']) && false!==$petition['petition']['data']['translation'][$this->currentLanguage()]): ?>
+    <?php $translation = $petition['petition']['data']['translation'][$this->currentLanguage()]; ?>
+<?php elseif(array_key_exists($this->defaultLanguage(),$petition['petition']['data']['translation'])): ?>
+    <?php $translation = $petition['petition']['data']['translation'][$this->defaultLanguage()]; ?>
+<?php else: ?>
+    <?php $translation = $petition['petition']['data']['translation'][0]; ?>
+<?php endif; ?>
+
+<h1><?=$translation->getTitle();?></h1>
+
+<div class="row">
+    <div class="col-8">
+        <?=$translation->getText();?>
+    </div>
+    <div class="col-4">
+        <?php if( array_key_exists('request',$form['form'])): ?>
+            <h3><?=$this->translate("Signature has been recorded.");?></h3>
+            <p><?=$this->translate("Thank you for your support!");?></p>
+        <?php else: ?>
+            <?=$this->getFormAttached($form['form'],null,'data',true,'petition::petition-form-sign');?>
+        <?php endif;?>
+    </div>
+</div>
+
+
+
+

@@ -1,13 +1,13 @@
 <?php
 return [
     'Events' => 'Wydarzenia',
-    'Create Event' => 'Utworz Wydarzenie',
-    'Create Group' => 'Utworz Grupe',
+    'Create Event' => 'Utwórz Wydarzenie',
+    'Create Group' => 'Utwórz Grupę',
     'List Groups' => 'Lista Grup',
 
     'Name' => 'Nazwa',
     'City' => 'Miasto',
-    'Start' => 'Rozpoczecie',
+    'Start' => 'Rozpoczęcie',
     'Group' => 'Grupa',
     'Status' => 'Status',
     'Created' => 'Utworzono',

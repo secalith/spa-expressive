@@ -12,15 +12,17 @@ class I18n
 {
     private $translator;
     private $currentLanguage;
+    private $defaultLanguage;
 
     /**
      * Constructs the service.
      */
-    public function __construct($translator,$currentLanguage)
+    public function __construct($translator,$currentLanguage,$defaultLanguage)
     {
 
         $this->translator = $translator;
         $this->currentLanguage = $currentLanguage;
+        $this->defaultLanguage = $defaultLanguage;
     }
 
     /**
@@ -56,6 +58,24 @@ class I18n
     public function setCurrentLanguage($curentLanguage)
     {
         $this->currentLanguage = $curentLanguage;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDefaultLanguage()
+    {
+        return $this->defaultLanguage;
+    }
+
+    /**
+     * @param mixed $defaultLanguage
+     * @return I18n
+     */
+    public function setDefaultLanguage($defaultLanguage)
+    {
+        $this->defaultLanguage = $defaultLanguage;
         return $this;
     }
 

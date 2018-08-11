@@ -16,6 +16,8 @@ class PetitionTranslationModel
     public $description;
     public $text;
 
+    public $image;
+
     public $language;
     public $status;
 
@@ -46,7 +48,10 @@ class PetitionTranslationModel
         $this->description = ( array_key_exists('description',$data)) ? $data['description'] : null;
         $this->text = ( array_key_exists('text',$data)) ? $data['text'] : null;
 
+        $this->image = ( array_key_exists('image',$data)) ? $data['image'] : null;
+
         $this->language = ( array_key_exists('language',$data)) ? $data['language'] : null;
+        $this->comm = ( array_key_exists('comm',$data)) ? $data['comm'] : null;
         $this->status = ( array_key_exists('status',$data)) ? $data['status'] : null;
 
         $this->created = ( array_key_exists('created',$data)) ? $data['created'] : null;
@@ -70,7 +75,10 @@ class PetitionTranslationModel
         $data['description'] = $this->description;
         $data['text'] = $this->text;
 
+        $data['image'] = $this->image;
+
         $data['language'] = $this->language;
+        $data['comm'] = $this->comm;
         $data['status'] = $this->status;
 
         $data['created'] = $this->created;
@@ -228,6 +236,24 @@ class PetitionTranslationModel
     public function setLanguage($language)
     {
         $this->language = $language;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     * @return PetitionTranslationModel
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
         return $this;
     }
 

@@ -79,7 +79,7 @@ class ConfigProvider
                         'object' => \SpaPetition\Model\PetitionTable::class,
                     ],
                     'adapter' => [
-                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                        'name' => 'Application\Db\Petition\LocalSQLiteAdapter',
                     ],
                     'model' => [
                         "object" => \SpaPetition\Model\PetitionModel::class,

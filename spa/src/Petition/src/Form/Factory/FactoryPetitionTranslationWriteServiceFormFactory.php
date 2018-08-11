@@ -14,13 +14,17 @@ class FactoryPetitionTranslationWriteServiceFormFactory
         // get list of petitions
         $petitionsGroupsTable = $container->get("Petition\TableService");
 
-        $groups = $petitionsGroupsTable->fetchAll(['status'=>1]);
+        $groups = $petitionsGroupsTable->fetchAllBy();
 
         $formGroups =[];
 
         if($groups->count()) {
             foreach($groups as $group) {
-                $formGroups[$group->getUid()] = $group->getName();
+                if( 0 !== $group->getStatus()) {
+                    $formGroups[$group->getUid()] = $group->getName();
+                } else {
+                    $formGroups[$group->getUid()] = sprintf("%s (*)",$group->getName());
+                }
             }
         }
 

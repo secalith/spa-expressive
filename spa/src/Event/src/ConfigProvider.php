@@ -74,7 +74,7 @@ class ConfigProvider
                         'object' => \Event\Model\EventTable::class,
                     ],
                     'adapter' => [
-                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                        'name' => 'Application\Db\Event\LocalSQLiteAdapter',
                     ],
                     'model' => [
                         "object" => \Event\Model\EventModel::class,
@@ -90,7 +90,7 @@ class ConfigProvider
                         'object' => \Event\Model\EventGroupTable::class,
                     ],
                     'adapter' => [
-                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                        'name' => 'Application\Db\Event\LocalSQLiteAdapter',
                     ],
                     'model' => [
                         "object" => \Event\Model\EventGroupModel::class,
@@ -106,7 +106,7 @@ class ConfigProvider
                         'object' => \Event\Model\EventDetailsTable::class,
                     ],
                     'adapter' => [
-                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                        'name' => 'Application\Db\Event\LocalSQLiteAdapter',
                     ],
                     'model' => [
                         "object" => \Event\Model\EventDetailsModel::class,
@@ -237,6 +237,14 @@ class ConfigProvider
                                                                 'type' => 'post-request',
                                                                 'source_name' => 'fieldset_event',
                                                                 'source_field_name' => 'application_uid',
+                                                            ],
+                                                        ],
+                                                        [
+                                                            'field_name' => 'status',
+                                                            'source' => [
+                                                                'type' => 'post-request',
+                                                                'source_name' => 'fieldset_event',
+                                                                'source_field_name' => 'status',
                                                             ],
                                                         ],
                                                     ],
@@ -506,7 +514,7 @@ class ConfigProvider
                                                             [
                                                                 'service_name'=>'Event\Details\TableService',
                                                                 'object' => \Event\Model\EventDetailsModel::class,
-                                                                'method' => 'getItemByUid',
+                                                                'method' => 'getItemByParentUid',
                                                                 'arguments' => [
                                                                     [
                                                                         'type' => 'service',
@@ -519,24 +527,6 @@ class ConfigProvider
 
                                                         ],
                                                     ],
-//                                                    'collection_contact' => [
-//                                                        'fieldset_name' => 'collection_contact',
-//                                                        'service' => [
-//                                                            [
-//                                                                'service_name'=>'RestableAdmin\Contact\TableService',
-//                                                                'method' => 'getItemByClientUid',
-//                                                                'arguments' => [
-//                                                                    [
-//                                                                        'type' => 'service',
-//                                                                        'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
-//                                                                        'method' => 'getMatchedParam',
-//                                                                        'arg_name' => 'client_uid',
-//                                                                    ],
-//                                                                ],
-//                                                            ],
-//
-//                                                        ],
-//                                                    ],
                                                 ],
                                             ],
                                         ],

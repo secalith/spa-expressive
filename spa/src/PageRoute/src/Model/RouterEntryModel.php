@@ -15,6 +15,7 @@ class RouterEntryModel
     public $route_url;
     public $scenario;
     public $controller;
+    public $method;
 
     public $attributes;
 
@@ -47,6 +48,7 @@ class RouterEntryModel
         $this->route_url = ( array_key_exists('route_url',$data)) ? $data['route_url'] : null;
         $this->scenario = ( array_key_exists('scenario',$data)) ? $data['scenario'] : null;
         $this->controller = ( array_key_exists('controller',$data)) ? $data['controller'] : null;
+        $this->method = ( array_key_exists('method',$data)) ? $data['method'] : null;
 
         $this->attributes = ( array_key_exists('attributes',$data)) ? $data['attributes'] : null;
 
@@ -69,6 +71,7 @@ class RouterEntryModel
         $data['route_url'] = $this->route_url;
         $data['scenario'] = $this->scenario;
         $data['controller'] = $this->controller;
+        $data['method'] = $this->method;
 
         $data['attributes'] = $this->attributes;
 
@@ -240,6 +243,24 @@ class RouterEntryModel
     public function setController($controller)
     {
         $this->controller = $controller;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMethod()
+    {
+        return $this->method;
+    }
+
+    /**
+     * @param mixed $method
+     * @return RouterEntryModel
+     */
+    public function setMethod($method)
+    {
+        $this->method = $method;
         return $this;
     }
 

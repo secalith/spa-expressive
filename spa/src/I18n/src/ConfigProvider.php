@@ -23,6 +23,12 @@ class ConfigProvider
             'dependencies' => $this->getDependencies(),
             'templates'    => $this->getTemplates(),
             'app' => $this->getApplicationConfig(),
+            'view_helpers'  => [
+                'factories' => [
+                    'currentLanguage' => \I18n\View\Helper\Factory\I18nCurrentFactory::class,
+                    'defaultLanguage' => \I18n\View\Helper\Factory\I18nDefaultFactory::class,
+                ],
+            ],
         ];
     }
 
@@ -86,6 +92,8 @@ class ConfigProvider
                                 'sv_sv' => _('Swedish'),
                                 'pl_pl' => _('Polish'),
                                 'de_de' => _('German'),
+                                'fr_fr' => _('French'),
+                                'cz_cz' => _('Czech'),
                             ],
                             'language_alias' => [
                                 'sv_fi' => 'sv_sv',

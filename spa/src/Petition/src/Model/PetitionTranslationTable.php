@@ -35,6 +35,13 @@ class PetitionTranslationTable
         }
         return $row;
     }
+    public function getItemByParentUidAndLanguage($uid,$language)
+    {
+        $rowset = $this->tableGateway->select(array('petition_uid' => $uid,'language'=>$language));
+        $row = $rowset->current();
+
+        return $row;
+    }
 
     /**
      * @return \Zend\Db\ResultSet\ResultSet

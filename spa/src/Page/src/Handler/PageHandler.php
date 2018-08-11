@@ -14,8 +14,8 @@ use Zend\Expressive\Template;
 use Zend\Expressive\ZendView\ZendViewRenderer;
 use PageView\Handler\PageViewAwareInterface;
 use PageView\Handler\PageViewAwareTrait;
-use Common\Delegator\PageResourceAwareInterface;
-use Common\Delegator\PageResourceAwareTrait;
+use PageResource\Delegator\PageResourceAwareInterface;
+use PageResource\Delegator\PageResourceAwareTrait;
 
 class PageHandler
     implements RequestHandlerInterface,
@@ -55,7 +55,44 @@ class PageHandler
 
         if( null !== $this->getPageResources() )
         {
-            $data['pageView']->setVariable('page_resource',$this->getPageResources());
+            $pageResources = $this->getPageResources();
+
+            foreach($pageResources as $pageResourceType=>$pageResource)
+            {
+                if($pageResourceType=='form')
+                {
+                    if(strtoupper($request->getMethod())==="POST")
+                    {
+                        $postData = $request->getParsedBody();
+
+                        foreach($pageResource as $pResName=>$pResource)
+                        {
+                            if(array_key_exists($pResName,$postData))
+                            {
+                                $pageResources[$pageResourceType][$pResName]['data']->setData($postData);
+                                $v = $pageResources[$pageResourceType][$pResName]['data']->isValid();
+
+                                if($v===true) {
+
+                                    // save
+
+                                    $saveService = $pResource['service'];
+                                    $saveMethod = $pResource['parameters']['save']['service']['method'];
+
+
+                                    $saveService->{$saveMethod}($pageResources[$pageResourceType][$pResName]['data']->getData());
+
+                                    $pageResources[$pageResourceType][$pResName]['request']['post']['submitted'] = true;
+                                }
+
+                            }
+                        }
+
+                    }
+                }
+            }
+
+            $data['pageView']->setVariable('page_resource',$pageResources);
         }
 
         $data['pageView']->setVariable('layout',$data['pageView']->getVariable('page')->getPageLayout());

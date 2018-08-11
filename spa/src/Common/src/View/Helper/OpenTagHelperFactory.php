@@ -22,7 +22,7 @@ class OpenTagHelperFactory extends AbstractHelper implements FactoryInterface
         $displayMode = 'display';
 
         $authService = $container->get(\Zend\Authentication\AuthenticationService::class);
-
+//
         if($authService->getIdentity()) {
             $displayMode = "edit";
         }

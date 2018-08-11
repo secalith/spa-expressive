@@ -14,7 +14,7 @@ class ArticleModel
     public $name;
 
     public $country;
-
+    public $comm;
     public $status;
 
     public $created;
@@ -42,7 +42,7 @@ class ArticleModel
         $this->name = ( array_key_exists('name',$data)) ? $data['name'] : null;
 
         $this->country = ( array_key_exists('country',$data)) ? $data['country'] : null;
-
+        $this->comm = ( array_key_exists('comm',$data)) ? $data['comm'] : null;
         $this->status = ( array_key_exists('status',$data)) ? $data['status'] : null;
 
         $this->created = ( array_key_exists('created',$data)) ? $data['created'] : null;
@@ -64,7 +64,7 @@ class ArticleModel
         $data['name'] = $this->name;
 
         $data['country'] = $this->country;
-
+        $data['comm'] = $this->comm;
         $data['status'] = $this->status;
 
         $data['created'] = $this->created;
@@ -204,6 +204,24 @@ class ArticleModel
     public function setCountry($country)
     {
         $this->country = $country;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getComm()
+    {
+        return $this->comm;
+    }
+
+    /**
+     * @param mixed $comm
+     * @return ArticleModel
+     */
+    public function setComm($comm)
+    {
+        $this->comm = $comm;
         return $this;
     }
 

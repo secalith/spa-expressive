@@ -1,10 +1,22 @@
-<div class="row px-1 px-sm-5 mb-0">
-    <div class="col-12  d-none d-md-inline-block block-desktop">
-        <h2 class="mb-2 displajy-4"><?=$details->getCityGlobal();?></h2>
+<div class="row p-0">
+    <div class="col-6  d-none d-md-inline-block block-desktop">
+        <h2 class="mb-2 displajy-4"><?=($this->currentLanguage()!==$details->getLanguage())?$details->getCityGlobal():$details->getCity();?></h2>
+    </div>
+    <div class="col-6  d-none d-md-inline-block block-desktop">
+        <span class="float-md-right mt-1 mr-0" data-countdown="2018/08/26 19:00"></span>
     </div>
     <div class="col-12  d-none d-md-inline-block block-desktop">
-        <h2 class="mb-2 display-4"><?=$details->getName();?></h2>
-        <h3 class="mt-2"><?=$details->getDateStart();?></h3>
+        <h2 class="mb-2 display-4"><?=($this->currentLanguage()!==$details->getLanguage())?$details->getNameGlobal():$details->getName();?></h2>
+
+        <div class="row p-0">
+            <div class="col-6">
+                <h3 class="mt-2"><?=$this->translate("Starts at"); ?> <?=$details->getDateStart();?></h3>
+            </div>
+            <div class="col-6">
+
+            </div>
+        </div>
+
         <a class="btn btn-success mt-4" href="<?=$details->getEventLinkExternal();?>" target="_blank"><?=$this->translate("See the Event on Facebook");?></a>
         <a class="btn btn-info mt-4" href="<?=$details->getEventMapExternal();?>" target="_blank"><?=$this->translate("Find on Map");?></a>
     </div>
@@ -18,4 +30,4 @@
         <a class="btn btn-info mt-4" href="<?=$details->getEventMapExternal();?>" target="_blank"><?=$this->translate("Find on Map");?></a>
     </div>
 </div>
-<hr />
+<hr /><?php // var_dump($details);?>

@@ -58,7 +58,7 @@ class ConfigProvider
                         'object' => \Content\Model\ContentTable::class,
                     ],
                     'adapter' => [
-                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                        'name' => 'Application\Db\Content\LocalSQLiteAdapter',
                     ],
                     'model' => [
                         "object" => \Content\Model\ContentModel::class,

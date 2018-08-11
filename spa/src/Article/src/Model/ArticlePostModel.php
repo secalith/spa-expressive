@@ -15,8 +15,12 @@ class ArticlePostModel
     public $abstract;
     public $lead;
     public $text;
+    public $language;
 
     public $file;
+
+    public $status;
+    public $comm;
 
     public $created;
     public $updated;
@@ -44,8 +48,12 @@ class ArticlePostModel
         $this->abstract = ( array_key_exists('abstract',$data)) ? $data['abstract'] : null;
         $this->lead = ( array_key_exists('lead',$data)) ? $data['lead'] : null;
         $this->text = ( array_key_exists('text',$data)) ? $data['text'] : null;
+        $this->language = ( array_key_exists('language',$data)) ? $data['language'] : null;
 
         $this->file = ( array_key_exists('file',$data)) ? $data['file'] : null;
+
+        $this->comm = ( array_key_exists('comm',$data)) ? $data['comm'] : null;
+        $this->status = ( array_key_exists('status',$data)) ? $data['status'] : null;
 
         $this->created = ( array_key_exists('created',$data)) ? $data['created'] : null;
         $this->updated = ( array_key_exists('updated',$data)) ? $data['updated'] : null;
@@ -66,8 +74,11 @@ class ArticlePostModel
         $data['abstract'] = $this->abstract;
         $data['lead'] = $this->lead;
         $data['text'] = $this->text;
+        $data['language'] = $this->language;
 
         $data['file'] = $this->file;
+        $data['comm'] = $this->comm;
+        $data['status'] = $this->status;
 
         $data['created'] = $this->created;
         $data['updated'] = $this->updated;
@@ -280,5 +291,60 @@ class ArticlePostModel
         $this->updated = $updated;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+
+    /**
+     * @param mixed $language
+     */
+    public function setLanguage($language): void
+    {
+        $this->language = $language;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param mixed $status
+     * @return ArticlePostModel
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getComm()
+    {
+        return $this->comm;
+    }
+
+    /**
+     * @param mixed $comm
+     * @return ArticlePostModel
+     */
+    public function setComm($comm)
+    {
+        $this->comm = $comm;
+        return $this;
+    }
+
+
+
 
 }

@@ -81,7 +81,7 @@ endif;
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <!-- Brand -->
-                    <a class="navbar-brand" href="<?=$this->url('home')?>">
+                    <a class="navbar-brand" href="#">
                         <img src="https://art13.eu/assets/img/1113.png" alt="art13.eu" height="28" />
                     </a>
                 </div>
@@ -182,7 +182,7 @@ endif;
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121422820-1"></script>
     <script>
 
-        var counters = $('[id^=time_counter-]');
+        var counters = $('[data-countdown]');
         for(var i=0;i<counters.length;i++) {
             var date = counters.eq(i).attr('data-countdown');
             counters.eq(i).flipcountdown({

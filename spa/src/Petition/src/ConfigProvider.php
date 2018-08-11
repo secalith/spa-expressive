@@ -36,6 +36,7 @@ class ConfigProvider
             ],
             'factories'  => [
                 \Petition\Form\PetitionTranslationWriteForm::class => \Petition\Form\Factory\FactoryPetitionTranslationWriteServiceFormFactory::class,
+                '\Petition\Form\PetitionSignatureWriteForm::class' => \Petition\Form\Factory\SignPetitionFormFactory::class,
             ],
         ];
     }
@@ -48,6 +49,7 @@ class ConfigProvider
         return [
             'paths' => [
                 'petition'    => [__DIR__ . '/../templates/petition'],
+                'petition-view'    => [__DIR__ . '/../templates/petition-view'],
                 'petition-admin'    => [__DIR__ . '/../templates/petition-admin'],
             ],
         ];
@@ -69,6 +71,12 @@ class ConfigProvider
                         'name' => 'Petition\Translation\TableGateway',
                     ],
                 ],
+                'Petition\Signature\TableService' => [
+                    'identifier' => 'Petition\Signature\TableService',
+                    'gateway' => [
+                        'name' => 'Petition\Signature\TableGateway',
+                    ],
+                ],
             ], // table_service
             'gateway' => [
                 'Petition\TableGateway' => [
@@ -78,7 +86,7 @@ class ConfigProvider
                         'object' => \Petition\Model\PetitionTable::class,
                     ],
                     'adapter' => [
-                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                        'name' => 'Application\Db\Petition\LocalSQLiteAdapter',
                     ],
                     'model' => [
                         "object" => \Petition\Model\PetitionModel::class,
@@ -94,10 +102,26 @@ class ConfigProvider
                         'object' => \Petition\Model\PetitionTranslationTable::class,
                     ],
                     'adapter' => [
-                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                        'name' => 'Application\Db\Petition\LocalSQLiteAdapter',
                     ],
                     'model' => [
                         "object" => \Petition\Model\PetitionTranslationModel::class,
+                    ],
+                    'hydrator' => [
+                        "object" => \Zend\Hydrator\ObjectProperty::class,
+                    ],
+                ],
+                'Petition\Signature\TableGateway' => [
+                    'name' => 'Petition\Signature\TableGateway',
+                    'table' => [
+                        'name' => 'petition_signature',
+                        'object' => \Petition\Model\PetitionSignatureTable::class,
+                    ],
+                    'adapter' => [
+                        'name' => 'Application\Db\Petition\LocalSQLiteAdapter',
+                    ],
+                    'model' => [
+                        "object" => \Petition\Model\PetitionSignatureModel::class,
                     ],
                     'hydrator' => [
                         "object" => \Zend\Hydrator\ObjectProperty::class,
@@ -449,6 +473,22 @@ class ConfigProvider
                                                                 'type' => 'post-request',
                                                                 'source_name' => 'fieldset_petition_attach',
                                                                 'source_field_name' => 'uid',
+                                                            ],
+                                                        ],
+                                                        [
+                                                            'field_name' => 'application_uid',
+                                                            'source' => [
+                                                                'type' => 'post-request',
+                                                                'source_name' => 'fieldset_petition_attach',
+                                                                'source_field_name' => 'application_uid',
+                                                            ],
+                                                        ],
+                                                        [
+                                                            'field_name' => 'site_uid',
+                                                            'source' => [
+                                                                'type' => 'post-request',
+                                                                'source_name' => 'fieldset_petition_attach',
+                                                                'source_field_name' => 'site_uid',
                                                             ],
                                                         ],
                                                     ],

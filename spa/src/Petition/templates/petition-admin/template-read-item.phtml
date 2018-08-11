@@ -5,7 +5,7 @@ $form->prepare();
 ?>
 
 <?=$this->form()->openTag($form);?>
-
+<?=var_dump($form->getMessages());?>
 <?=$this->formElementErrors($form->get('application_id'));?>
 <?=$this->formElementErrors($form->get('csrf'));?>
 

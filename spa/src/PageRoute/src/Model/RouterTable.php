@@ -105,6 +105,7 @@ class RouterTable
                     'route_url'=>'route_url',
                     'scenario'=>'scenario',
                     'controller'=>'controller',
+                    'method'=>'method',
                     'attributes'=>'attributes',
                     'status'=>'status'
                 ]);

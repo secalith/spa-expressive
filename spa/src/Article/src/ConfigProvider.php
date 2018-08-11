@@ -74,6 +74,18 @@ class ConfigProvider
                         'name' => 'Article\Group\TableGateway',
                     ],
                 ],
+                'Article\External\TableService' => [
+                    'identifier' => 'Article\External\TableService',
+                    'gateway' => [
+                        'name' => 'Article\External\TableGateway',
+                    ],
+                ],
+                'Article\Post\TableService' => [
+                    'identifier' => 'Article\Post\TableService',
+                    'gateway' => [
+                        'name' => 'Article\Post\TableGateway',
+                    ],
+                ],
             ],
             'gateway' => [
                 'Article\TableGateway' => [
@@ -83,7 +95,7 @@ class ConfigProvider
                         'object' => \Article\Model\ArticleTable::class,
                     ],
                     'adapter' => [
-                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                        'name' => 'Application\Db\Article\LocalSQLiteAdapter',
                     ],
                     'model' => [
                         "object" => \Article\Model\ArticleModel::class,
@@ -99,10 +111,42 @@ class ConfigProvider
                         'object' => \Article\Model\ArticleGroupTable::class,
                     ],
                     'adapter' => [
-                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                        'name' => 'Application\Db\Article\LocalSQLiteAdapter',
                     ],
                     'model' => [
                         "object" => \Article\Model\ArticleGroupModel::class,
+                    ],
+                    'hydrator' => [
+                        "object" => \Zend\Hydrator\ObjectProperty::class,
+                    ],
+                ],
+                'Article\External\TableGateway' => [
+                    'name' => 'Article\External\TableGateway',
+                    'table' => [
+                        'name' => 'article_external',
+                        'object' => \Article\Model\ArticleExternalTable::class,
+                    ],
+                    'adapter' => [
+                        'name' => 'Application\Db\Article\LocalSQLiteAdapter',
+                    ],
+                    'model' => [
+                        "object" => \Article\Model\ArticleExternalModel::class,
+                    ],
+                    'hydrator' => [
+                        "object" => \Zend\Hydrator\ObjectProperty::class,
+                    ],
+                ],
+                'Article\Post\TableGateway' => [
+                    'name' => 'Article\Group\TableGateway',
+                    'table' => [
+                        'name' => 'article_post',
+                        'object' => \Article\Model\ArticlePostTable::class,
+                    ],
+                    'adapter' => [
+                        'name' => 'Application\Db\Article\LocalSQLiteAdapter',
+                    ],
+                    'model' => [
+                        "object" => \Article\Model\ArticlePostModel::class,
                     ],
                     'hydrator' => [
                         "object" => \Zend\Hydrator\ObjectProperty::class,

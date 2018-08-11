@@ -27,6 +27,16 @@ class EventDetailsTable
         $this->tableGateway = $tableGateway;
     }
 
+    public function getItemByParentUid($uid)
+    {
+        $rowset = $this->tableGateway->select(array('event_uid' => $uid));
+        $row = $rowset->current();
+        if (!$row) {
+            throw new \Exception("Could not find row $uid");
+        }
+        return $row;
+    }
+
     /**
      * @return \Zend\Db\ResultSet\ResultSet
      */
@@ -122,6 +132,11 @@ class EventDetailsTable
         );
 
         $rowsAffected = $this->tableGateway->insert($data);
+
+//        var_dump($item);
+//        var_dump($data);
+//        var_dump($rowsAffected);
+//        die();
 
         return [
             'affected' => $rowsAffected,

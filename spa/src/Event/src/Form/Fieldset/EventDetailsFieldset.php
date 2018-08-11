@@ -137,7 +137,7 @@ class EventDetailsFieldset extends Fieldset implements InputFilterProviderInterf
                 'label' => _("Date Finish")
             ),
             'attributes' => [
-                'class' => 'form-control d-block',
+                'class' => 'form-control d-block hidden',
                 'value' => '2018-07-29 20:00:00',
             ],
         ));
@@ -166,11 +166,14 @@ class EventDetailsFieldset extends Fieldset implements InputFilterProviderInterf
             'options' => array(
                 'label' => _("Only start date"),
                 'use_hidden_element' => true,
-                'checked_value' => '1',
-                'unchecked_value' => '0'
+                'checked_value' => 'yes',
+                'unchecked_value' => 'no'
             ),
             'attributes' => [
                 'id'=>'login-remember_me',
+                'data-toggle' => '{"no":{"show":["date_finish"]},"yes":{"hide":["date_finish"]}}',
+                'data-target' => '[name^=date_finish]',
+                'onChange' => 'javascript:spaForm.toggleElement($(this));console.log(99);return false;',
             ],
         ));
 

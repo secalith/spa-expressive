@@ -8,4 +8,5 @@ return [
     'List' => 'Lista',
     'Save' => 'Zapisz',
     'Submit' => 'Zapisz',
+    'Manage' => 'Zarządzaj',
 ];

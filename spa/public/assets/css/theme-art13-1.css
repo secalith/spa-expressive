@@ -19,7 +19,7 @@ body {
 }
 
 main {
-    margin-top: 72px;
+    margin-top: 10px;
 }
 
 /* Custom page CSS
@@ -54,8 +54,8 @@ body {
 body.app-theme-art13,
 body.app-theme-default.action-login,
 body.app-theme-default.action-register {
-    background-color: #990009;
-    background-image: url('/assets/img/protest_2.jpg');
+    background-color: #212121;
+    background-image: url('/assets/img/protest.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: left top;

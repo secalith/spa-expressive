@@ -56,7 +56,7 @@ class ConfigProvider
                         'object' => \ArticleExternal\Model\ArticleExternalTable::class,
                     ],
                     'adapter' => [
-                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                        'name' => 'Application\Db\Article\LocalSQLiteAdapter',
                     ],
                     'model' => [
                         "object" => \ArticleExternal\Model\ArticleExternalModel::class,

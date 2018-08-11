@@ -69,7 +69,7 @@ class ConfigProvider
                         'object' => \Instance\Model\InstanceTable::class,
                     ],
                     'adapter' => [
-                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                        'name' => 'Application\Db\Content\LocalSQLiteAdapter',
                     ],
                     'model' => [
                         "object" => \Instance\Model\InstanceModel::class,

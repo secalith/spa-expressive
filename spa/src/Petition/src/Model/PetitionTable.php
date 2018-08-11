@@ -46,7 +46,7 @@ class PetitionTable
         $resultSet = $this->tableGateway->select($where);
 
         $resultSet->buffer();
-        $resultSet->next();
+//        $resultSet->next();
 
         return $resultSet;
     }

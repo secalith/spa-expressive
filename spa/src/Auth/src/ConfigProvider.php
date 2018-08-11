@@ -131,7 +131,7 @@ class ConfigProvider
                         'object' => \Auth\Model\CredentialsTable::class,
                     ],
                     'adapter' => [
-                        'name' => 'Application\Db\CredentialsAdapter',
+                        'name' => 'Application\Db\Credentials\LocalSQLiteAdapter',
                     ],
                     'model' => [
                         "object" => \Auth\Model\CredentialsTableModel::class,
@@ -147,7 +147,7 @@ class ConfigProvider
                         'object' => \Auth\Model\CredentialsResetTable::class,
                     ],
                     'adapter' => [
-                        'name' => 'Application\Db\CredentialsAdapter',
+                        'name' => 'Application\Db\Credentials\LocalSQLiteAdapter',
                     ],
                     'model' => [
                         "object" => \Auth\Model\CredentialsTableModel::class,

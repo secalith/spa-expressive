@@ -39,6 +39,7 @@
     },
     "require": {
         "php": "^7.1",
+        "atelierspierrot/famfamfam-flags-sprite": "^1.0",
         "michelf/php-markdown": "^1.8",
         "mockery/mockery": "^1.1",
         "ramsey/uuid": "^3.7",

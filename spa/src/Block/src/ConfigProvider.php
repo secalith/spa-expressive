@@ -48,7 +48,7 @@ class ConfigProvider
                         'object' => \Block\Model\BlockTable::class,
                     ],
                     'adapter' => [
-                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                        'name' => 'Application\Db\Content\LocalSQLiteAdapter',
                     ],
                     'model' => [
                         "object" => \Block\Model\BlockModel::class,

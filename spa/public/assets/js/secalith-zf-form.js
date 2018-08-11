@@ -19,6 +19,15 @@ SecalithZfForm.prototype.setForm = function() {
     return this.form;
 };
 
+SecalithZfForm.prototype.toggleElement = function(
+    jqButtonElement,
+    fieldsetType,
+    templatePlaceholder
+) {
+    var target = jQuery(jqButtonElement.attr("data-target"));
+    window[this.name].log("addElement '" + fieldsetType + "'",3);
+}
+
 SecalithZfForm.prototype.addFieldset = function(
     jqButtonElement,
     fieldsetType,
@@ -215,8 +224,75 @@ SecalithZfForm.prototype.countParentElements = function(jqButtonElement,fieldset
  * @param data
  */
 SecalithZfForm.prototype.toggleFieldset = function(jqElement,data) {
+
     if (typeof data === "undefined") {
         data = JSON.parse(jqElement.attr('data-toggle'));
+    }
+
+    if (undefined !== typeof jqButtonElement) {
+        var selectedValue = jqElement.val();
+        for (var type in data) {
+            // display fieldsets declared in 'data'. Fieldset class should be 'element_select-collection', 'element_checkbox-collection' etc
+            if(data[type].hasOwnProperty('show')){
+                for (var i = 0; i < data[type].show.length; i++) {
+                    var collectionSelector = '.' + data[type].show[i] + '-collection';
+                    var collection = $(collectionSelector);
+                    if(collection.length > 0) {
+                        if (selectedValue !== type) {
+                            // hide fieldset
+                            collection.slideUp( "default", function() {
+                                $(this).addClass('hidden');
+                                $(this).attr('style','');
+                            });
+
+                        } else {
+                            // display the selected fieldet
+                            collection.slideDown( "default", function() {
+                                $(this).removeClass('hidden');
+                                $(this).attr('style','');
+                            });
+                            var collectionChildren = collection.children('.container-collection');
+                            // check if there are other fieldset items which should be displayed
+                            if(collectionChildren.length>0) {
+                                // check if the Collection has any Items, if yes then those should be displayed
+                                for(var j = 0; j < collectionChildren.length; j++) {
+                                    if(collectionChildren.eq(j).children('.container-item').length>0) {
+                                        collectionChildren.eq(j).removeClass('hidden');
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // hide fieldsets declared in the data
+            if(data[type].hasOwnProperty('hide')){
+                // @todo
+            }
+
+            // empty the -item in other (not the current one) child collections, otherwise empty [and hidden] fieldsets gets submitted
+            if($('.element_'+type+'-collection').children('.container-collection').length>0){
+                if (selectedValue !== type) {
+                    var children = $('.element_'+type+'-collection').children('.container-collection');
+                    for(var k = 0; k<children.length;k++) {
+                        if(children.eq(k).children('.container-item').length>0){
+                            children.eq(k).addClass('hidden');
+                            children.eq(k).children('.container-item').remove();
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+SecalithZfForm.prototype.toggleFormRow = function(jqElement,data) {
+
+    if (typeof data === "undefined") {
+        data = JSON.parse(jqElement.attr('data-toggle'));
+        var dataTarget = JSON.parse(jqElement.attr('data-target'));
     }
 
     if (undefined !== typeof jqButtonElement) {

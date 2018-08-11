@@ -30,7 +30,7 @@ class I18nFactory
             $currentLanguage = $defaultLanguage;
         }
 
-        return new I18n($translator,$currentLanguage);
+        return new I18n($translator,$currentLanguage,$defaultLanguage);
     }
 
     function getUserLanguage() {

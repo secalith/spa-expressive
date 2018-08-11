@@ -12,6 +12,7 @@ class PageResourceModel
     public $resource_name;
     public $resource_type;
     public $resource_cache;
+    public $parameters;
     public $status;
     public $created;
     public $updated;
@@ -30,6 +31,7 @@ class PageResourceModel
         $this->resource_name = (!empty($data['resource_name'])) ? $data['resource_name'] : null;
         $this->resource_type = (!empty($data['resource_type'])) ? $data['resource_type'] : null;
         $this->resource_cache = (!empty($data['resource_cache'])) ? $data['resource_cache'] : null;
+        $this->parameters = (!empty($data['parameters'])) ? $data['parameters'] : null;
         $this->status = (!empty($data['status'])) ? $data['status'] : null;
         $this->created = (!empty($data['created'])) ? $data['created'] : null;
         $this->updated = (!empty($data['updated'])) ? $data['updated'] : null;
@@ -46,6 +48,7 @@ class PageResourceModel
         $data['resource_name'] = $this->resource_name;
         $data['resource_type'] = $this->resource_type;
         $data['resource_cache'] = $this->resource_cache;
+        $data['parameters'] = $this->parameters;
         $data['status'] = $this->status;
         $data['created'] = $this->created;
         $data['updated'] = $this->updated;
@@ -184,6 +187,24 @@ class PageResourceModel
     public function setResourceCache($resource_cache)
     {
         $this->resource_cache = $resource_cache;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getParameters()
+    {
+        return $this->parameters;
+    }
+
+    /**
+     * @param mixed $parameters
+     * @return PageResourceModel
+     */
+    public function setParameters($parameters)
+    {
+        $this->parameters = $parameters;
         return $this;
     }
 

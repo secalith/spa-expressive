@@ -193,38 +193,6 @@ $form->prepare();
                 <small><?=$this->translate('Is your Event as part of something bigger?');?></small>
             </div>
         </div>
-
-    </div>
-
-    <hr />
-
-    <h3 class="display-5"><?=$this->translate("Your event external links");?></h3>
-
-    <div class="container pt-2">
-        <div class="row">
-            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
-                <?=$this->formLabel($form->get('form_read')->get('fieldset_event_details')->get('event_map_external'));?>
-            </div>
-            <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_read')->get('fieldset_event_details')->get('event_map_external'))))?'has-errors':'';?>">
-                <?=$this->formText($form->get('form_read')->get('fieldset_event_details')->get('event_map_external'));?>
-                <?=$this->formElementErrors($form->get('form_read')->get('fieldset_event_details')->get('event_map_external'));?>
-            </div>
-            <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
-                <small><?=$this->translate('Is your Event as part of something bigger?');?></small>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
-                <?=$this->formLabel($form->get('form_read')->get('fieldset_event_details')->get('event_link_external'));?>
-            </div>
-            <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_read')->get('fieldset_event_details')->get('event_link_external'))))?'has-errors':'';?>">
-                <?=$this->formText($form->get('form_read')->get('fieldset_event_details')->get('event_link_external'));?>
-                <?=$this->formElementErrors($form->get('form_read')->get('fieldset_event_details')->get('event_link_external'));?>
-            </div>
-            <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
-                <small><?=$this->translate('Is your Event as part of something bigger?');?></small>
-            </div>
-        </div>
         <div class="row">
             <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
                 <?=$this->formLabel($form->get('form_read')->get('fieldset_event')->get('status'));?>
@@ -237,7 +205,37 @@ $form->prepare();
                 <small><?=$this->translate('Should you Event be visible in public?');?></small>
             </div>
         </div>
+    </div>
 
+    <hr />
+
+    <h3 class="display-5"><?=$this->translate("Your event external links");?></h3>
+
+    <div class="container=fluid pt-2">
+        <div class="row">
+            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+                <?=$this->formLabel($form->get('form_read')->get('fieldset_event_details')->get('event_map_external'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_read')->get('fieldset_event_details')->get('event_map_external'))))?'has-errors':'';?>">
+                <?=$this->formText($form->get('form_read')->get('fieldset_event_details')->get('event_map_external'));?>
+                <?=$this->formElementErrors($form->get('form_read')->get('fieldset_event_details')->get('event_map_external'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+                <small><?=$this->translate('Paste link to the external map service.');?></small>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+                <?=$this->formLabel($form->get('form_read')->get('fieldset_event_details')->get('event_link_external'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_read')->get('fieldset_event_details')->get('event_link_external'))))?'has-errors':'';?>">
+                <?=$this->formText($form->get('form_read')->get('fieldset_event_details')->get('event_link_external'));?>
+                <?=$this->formElementErrors($form->get('form_read')->get('fieldset_event_details')->get('event_link_external'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+                <small><?=$this->translate('This maybe Facebook Event page.');?></small>
+            </div>
+        </div>
     </div>
 
     <hr />

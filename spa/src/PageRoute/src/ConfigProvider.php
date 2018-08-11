@@ -43,7 +43,7 @@ class ConfigProvider
                         'object' => \PageRoute\Model\RouteTable::class,
                     ],
                     'adapter' => [
-                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                        'name' => 'Application\Db\Content\LocalSQLiteAdapter',
                     ],
                     'model' => [
                         "object" => \PageRoute\Model\RouteModel::class,
@@ -59,7 +59,7 @@ class ConfigProvider
                         'object' => \PageRoute\Model\RouterTable::class,
                     ],
                     'adapter' => [
-                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                        'name' => 'Application\Db\Content\LocalSQLiteAdapter',
                     ],
                     'model' => [
                         "object" => \PageRoute\Model\RouterEntryModel::class,

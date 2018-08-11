@@ -11,6 +11,7 @@ class EventDetailsModel
     public $site_uid;
     public $event_uid;
     public $name;
+    public $name_global;
     public $city;
     public $city_global;
     public $date_start;
@@ -19,6 +20,8 @@ class EventDetailsModel
 
     public $event_link_external;
     public $event_map_external;
+
+    public $addr_line;
 
     public $language;
     public $status;
@@ -45,6 +48,7 @@ class EventDetailsModel
         $this->site_uid = ( array_key_exists('site_uid',$data)) ? $data['site_uid'] : null;
         $this->event_uid = ( array_key_exists('event_uid',$data)) ? $data['event_uid'] : null;
         $this->name = ( array_key_exists('name',$data)) ? $data['name'] : null;
+        $this->name_global = ( array_key_exists('name_global',$data)) ? $data['name_global'] : null;
         $this->city = ( array_key_exists('city',$data)) ? $data['city'] : null;
         $this->city_global = ( array_key_exists('city_global',$data)) ? $data['city_global'] : null;
         $this->date_start = ( array_key_exists('date_start',$data)) ? $data['date_start'] : null;
@@ -53,6 +57,8 @@ class EventDetailsModel
 
         $this->event_link_external = ( array_key_exists('event_link_external',$data)) ? $data['event_link_external'] : null;
         $this->event_map_external = ( array_key_exists('event_map_external',$data)) ? $data['event_map_external'] : null;
+
+        $this->addr_line = ( array_key_exists('addr_line',$data)) ? $data['addr_line'] : null;
 
         $this->language = ( array_key_exists('language',$data)) ? $data['language'] : null;
         $this->status = ( array_key_exists('status',$data)) ? $data['status'] : null;
@@ -73,6 +79,7 @@ class EventDetailsModel
         $data['site_uid'] = $this->site_uid;
         $data['event_uid'] = $this->event_uid;
         $data['name'] = $this->name;
+        $data['name_global'] = $this->name_global;
         $data['city'] = $this->city;
         $data['city_global'] = $this->city_global;
 
@@ -81,6 +88,8 @@ class EventDetailsModel
 
         $data['event_link_external'] = $this->event_link_external;
         $data['event_map_external'] = $this->event_map_external;
+
+        $data['addr_line'] = $this->addr_line;
 
         $data['timezone'] = $this->timezone;
 
@@ -188,6 +197,24 @@ class EventDetailsModel
     public function setName($name)
     {
         $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNameGlobal()
+    {
+        return $this->name_global;
+    }
+
+    /**
+     * @param mixed $name_global
+     * @return EventDetailsModel
+     */
+    public function setNameGlobal($name_global)
+    {
+        $this->name_global = $name_global;
         return $this;
     }
 
@@ -373,6 +400,7 @@ class EventDetailsModel
 
     /**
      * @return mixed
+     * @return mixed
      */
     public function getEventMapExternal()
     {
@@ -386,6 +414,24 @@ class EventDetailsModel
     public function setEventMapExternal($event_map_external)
     {
         $this->event_map_external = $event_map_external;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAddrLine()
+    {
+        return $this->addr_line;
+    }
+
+    /**
+     * @param mixed $addr_line
+     * @return EventDetailsModel
+     */
+    public function setAddrLine($addr_line)
+    {
+        $this->addr_line = $addr_line;
         return $this;
     }
 

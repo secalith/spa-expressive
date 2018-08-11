@@ -53,7 +53,7 @@ endif;
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a href="<?=$this->url('home')?>" class="nav-link"><?=$this->translate("Homepage");?></a>
+                            <a href="/" class="nav-link"><?=$this->translate("Homepage");?></a>
                         </li>
                         <?php if( ! $this->hasIdentity()):?>
 
@@ -119,7 +119,7 @@ endif;
         <div class="row">
             <div class="col-12">
                 <ul class="d-flex justify-content-between list-unstyled text-small mb-0">
-                    <li class="d-inline mr-4"><a class="text-muted" href="#"><a href="<?=$this->url('home')?>" class="text-muted"><?=$this->translate("Homepage");?></a></a></li>
+                    <li class="d-inline mr-4"><a class="text-muted" href="#"><a href="/" class="text-muted"><?=$this->translate("Homepage");?></a></a></li>
                     <li class="d-inline mr-4"><a class="text-muted" href="#"><?=$this->translate('About');?></a></li>
                     <li class="d-inline mr-4"><a class="text-muted" href="/privacy-policy"><?=$this->translate('Privacy Policy');?></a></li>
                     <li class="d-inline mr-4"><a class="text-muted" href="#"><?=$this->translate('Terms and Conditions');?></a></li>

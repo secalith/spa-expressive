@@ -52,7 +52,7 @@ class ConfigProvider
                         'object' => \Area\Model\AreaTable::class,
                     ],
                     'adapter' => [
-                        'name' => 'Application\Db\LocalSQLiteAdapter',
+                        'name' => 'Application\Db\Content\LocalSQLiteAdapter',
                     ],
                     'model' => [
                         "object" => \Area\Model\AreaModel::class,

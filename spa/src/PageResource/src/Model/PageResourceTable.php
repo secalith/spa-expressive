@@ -21,6 +21,26 @@ class PageResourceTable
         $this->tableGateway = $tableGateway;
     }
 
+    public function getItemByUid($uid)
+    {
+        $rowset = $this->tableGateway->select(array('uid' => $uid));
+        $row = $rowset->current();
+        if (!$row) {
+            throw new \Exception("Could not find row $uid");
+        }
+        return $row;
+    }
+
+    public function fetchAllBy($where=[])
+    {
+        $resultSet = $this->tableGateway->select($where);
+
+        $resultSet->buffer();
+//        $resultSet->next();
+
+        return $resultSet;
+    }
+
     public function listAll()
     {
 
