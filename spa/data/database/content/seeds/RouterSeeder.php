@@ -119,6 +119,20 @@ class RouterSeeder extends AbstractSeed
                 'status' => 1,
                 'created' => date('Y-m-d H:i:s'),
             ],
+            [
+                'uid' => 'router-009',
+                'parent_uid' => '0',
+                'application_uid' => 'app-001',
+                'route_uid' => 'route-008',
+                'site_uid' => 'site-003',
+                'route_url' => '/',
+                'scenario' => 'process',
+                'controller' => '\Page\Handler\PageHandler',
+                'method' => 'post',
+                'attributes' => '{}',
+                'status' => 1,
+                'created' => date('Y-m-d H:i:s'),
+            ],
         ];
 
         $table = $this->table('router');

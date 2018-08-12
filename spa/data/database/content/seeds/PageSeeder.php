@@ -120,6 +120,20 @@ class PageSeeder extends AbstractSeed
                 'status'    => 1,
                 'created'    => date('Y-m-d H:i:s'),
             ],
+            [
+                'uid'    => 'page-009',
+                'application_uid'    => 'app-001',
+                'site_uid'    => 'site-003',
+                'route_uid'    => 'route-008',
+                'template_uid'    => 'template-008',
+                'name'    => 'peticio.home.post',
+                'route_url'    => '/',
+                'page_cache'    => 0,
+                'page_layout'    => 'layout::peticio-1',
+                'language'    => 'en_en',
+                'status'    => 1,
+                'created'    => date('Y-m-d H:i:s'),
+            ],
         ];
 
         $table = $this->table('page');

@@ -110,7 +110,7 @@ Proin egestas tristique sapien sit amet suscipit. Vivamus massa nisl, porttitor 
                 'uid' => 'petition-translation-005',
                 'application_uid' => 'app-001',
                 'site_uid' => 'site-001',
-                'petition_uid' => 'petition-002',
+                'petition_uid' => 'petition-001',
                 'title' => 'Petycja po francusku',
                 'description' => 'Petycja po francusku',
                 'text' => '
