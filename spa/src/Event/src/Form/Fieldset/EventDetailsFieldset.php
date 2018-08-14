@@ -211,13 +211,13 @@ class EventDetailsFieldset extends Fieldset implements InputFilterProviderInterf
                 'continue_if_empty' => true,
             ),
             'application_uid' => array(
-                'required' => true,
+                'required' => false,
             ),
             'name' => array(
                 'required' => true,
             ),
             'site_uid' => array(
-                'required' => true,
+                'required' => false,
             ),
             'event_uid' => array(
                 'required' => true,
@@ -232,7 +232,7 @@ class EventDetailsFieldset extends Fieldset implements InputFilterProviderInterf
                 'required' => true,
             ),
             'date_finish' => array(
-                'required' => true,
+                'required' => false,
             ),
             'timezone' => array(
                 'required' => true,

@@ -1,0 +1,141 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    line-height: 60px; /* Vertically center the text there */
+    background-color: #212121;
+}
+
+main {
+    margin-top: 10px;
+}
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+body > .container {
+    padding: 60px 15px 0;
+}
+
+.footer > .container {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+code {
+    font-size: 80%;
+}
+
+
+
+
+/* ART13 */
+
+body {
+
+}
+@font-face {
+    font-family: 'steelfish';
+    src: url('/assets/font/steelfish.ttf') format('truetype');
+}
+body.app-theme-art13,
+body.app-theme-default.action-login,
+body.app-theme-default.action-register {
+    background-color: #212121;
+    background-image: url('/assets/img/protest.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: left top;
+    background-attachment: fixed;
+    padding-top:80px;
+
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+}
+.action-login .navbar-light,
+.action-register .navbar-light {
+    height:80px;
+}
+.action-login .navbar-light,
+.action-register .navbar-light {
+    background-color: rgba(255,255,255,.8);
+}
+.action-login div[role="main"] .app-container-header,
+.action-register div[role="main"] .app-container-header {
+    color:#fefefe;
+    font-family: 'steelfish', Arial, sans-serif;
+}
+body.app-theme-art13 div[role="main"] .app-container-content,
+.action-login div[role="main"] .app-container-content,
+.action-register div[role="main"] .app-container-content {
+    border-radius: 3px;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    background-color: rgba(255,255,255,.9);
+    /*border-radius: 0px;*/
+    border: 1px solid #ffffff;
+    -webkit-box-shadow: inset 0px 0px 20px 10px rgba(0,0,0,0.08);
+    -moz-box-shadow: inset 0px 0px 20px 10px rgba(0,0,0,0.08);
+    box-shadow: inset 0px 0px 20px 10px rgba(0,0,0,0.08);
+    font-size:1.25rem;
+
+}
+.action-login .wrapper-info-next_step,
+.action-register .wrapper-info-next_step {
+    line-height:1;
+}
+.hidden{
+    display:none;
+}
+
+/* Reset */
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #EBA344;
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(255,140,0,.25);
+}
+.has-errors input {
+    border-color:#990000;
+}
+.has-errors > ul {
+    padding-left:0px;
+    color:#990000;
+    list-style-type:none;
+    margin-bottom: 0.25rem;
+}
+.form-check > ul {
+    margin-left: .5rem
+}
+
+#ha1 {
+    font-size: 5rem;
+}
+#ha1, h1, h2, h3 {
+    font-family: 'steelfish', Arial, sans-serif;
+}
+
+hr {
+    border-bottom: 1px solid white;
+}
+
+.navbar-item .share-button {
+    height:20px;
+}
+
+body.app-theme-art13 .list-group-item {
+    background-color:rgba(255,255,255,0.6);
+}

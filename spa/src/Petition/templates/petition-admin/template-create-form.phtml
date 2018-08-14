@@ -95,18 +95,6 @@ $form->prepare();
         <hr />
 
 
-        <div class="row">
-            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
-                <?=$this->formLabel($form->get('form_create')->get('fieldset_petition_translation')->get('title'));?>
-            </div>
-            <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_petition_translation')->get('title'))))?'has-errors':'';?>">
-                <?=$this->formInput($form->get('form_create')->get('fieldset_petition_translation')->get('title'));?>
-                <?=$this->formElementErrors($form->get('form_create')->get('fieldset_petition_translation')->get('title'));?>
-            </div>
-            <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
-                <small><?=$this->markdown($this->translate('Enter **translated** title.'));?></small>
-            </div>
-        </div>
 
         <div class="row">
             <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
@@ -118,6 +106,19 @@ $form->prepare();
             </div>
             <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
                 <small><?=$this->translate('Select language of this translation.');?></small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+                <?=$this->formLabel($form->get('form_create')->get('fieldset_petition_translation')->get('title'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_petition_translation')->get('title'))))?'has-errors':'';?>">
+                <?=$this->formInput($form->get('form_create')->get('fieldset_petition_translation')->get('title'));?>
+                <?=$this->formElementErrors($form->get('form_create')->get('fieldset_petition_translation')->get('title'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+                <small><?=$this->markdown($this->translate('Enter **translated** title.'));?></small>
             </div>
         </div>
 

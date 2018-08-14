@@ -1,0 +1,31 @@
+html, body {
+    height:100%;
+}
+body {
+    background-color: #212121;
+    background-image: url('/assets/img/protest.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: left top;
+    background-attachment: fixed;
+
+}
+#petition-main {
+    transition-property: height;
+    -webkit-box-shadow: inset 0 0 5px 0 rgba(0,0,0,.05);
+    -moz-box-shadow: inset 0 0 5px 0 rgba(0,0,0,.05);
+    box-shadow: inset 0 0 20px 10px rgba(0,0,0,.05);
+    background: #fff;
+    background: -moz-radial-gradient(center,ellipse cover,#fff 0,#f0f0ec 100%);
+    background: -webkit-radial-gradient(center,ellipse cover,#fff 0,#f0f0ec 100%);
+    background: radial-gradient(ellipse at center,#fff 0,#f0f0ec 100%);
+    background-color: rgba(0, 0, 0, .8);
+    border: 2px solid white;
+}
+.card-footer {
+    -webkit-box-shadow: inset 0px 0px 34px -5px rgba(0,0,0,0.15);
+    -moz-box-shadow: inset 0px 0px 34px -5px rgba(0,0,0,0.15);
+    box-shadow: inset 0px 0px 34px -5px rgba(0,0,0,0.15);
+    background: #fff;
+    background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23e8e8e8' fill-opacity='0.35' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
+}

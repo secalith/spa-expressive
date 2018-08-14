@@ -54,8 +54,8 @@ class UpdateHandler
         $form,
         UrlHelper $urlHelper = null
     ) {
-        $this->router        = $router;
-        $this->template      = $template;
+        $this->router = $router;
+        $this->template = $template;
         $this->containerName = $containerName;
         $this->addData($resources,'resources');
         $this->addData($form,'form');

@@ -137,17 +137,6 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
 
     ## MANAGER-EVENT
 
-    $app->get('/admin/event/list[/[{page:\d+}]]', [
-        I18n\Handler\I18n::class,
-        Auth\Handler\AuthHandler::class,
-        'Common\Handler\List',
-    ], 'manager.event.list');
-
-    $app->get('/admin/event/details/{uid}[/]', [
-        I18n\Handler\I18n::class,
-        Auth\Handler\AuthHandler::class,
-        'Common\Handler\Read',
-    ], 'manager.event.read');
 
     $app->get('/admin/event/create[/]', [
         I18n\Handler\I18n::class,
@@ -159,11 +148,26 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
         Auth\Handler\AuthHandler::class,
         'Common\Handler\Create',
     ], 'manager.event.create.post');
+    $app->get('/admin/event/details/{uid}[/]', [
+        I18n\Handler\I18n::class,
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\Read',
+    ], 'manager.event.read');
     $app->get('/admin/event/edit/{uid}[/]', [
+        I18n\Handler\I18n::class,
         Auth\Handler\AuthHandler::class,
         'Common\Handler\Update',
     ], 'manager.event.update');
-
+    $app->post('/admin/event/edit/{uid}[/]', [
+        I18n\Handler\I18n::class,
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\Update',
+    ], 'manager.event.update.post');
+    $app->get('/admin/event/list[/[{page:\d+}]]', [
+        I18n\Handler\I18n::class,
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\List',
+    ], 'manager.event.list');
 
     ## MANAGER-EVENT-GROUP
 

@@ -36,6 +36,7 @@ class ConfigProvider
         return [
             'factories'  => [
                 \Event\Form\EventWriteForm::class => \Event\Form\Factory\FactoryEventWriteServiceFormFactory::class,
+                \Event\Form\EventUpdateForm::class => \Event\Form\Factory\FactoryEventUpdateServiceFormFactory::class,
             ],
             'delegators' => [
 
@@ -184,7 +185,7 @@ class ConfigProvider
                                             'buttons' => [
                                                 [
                                                     'html_tag' => 'a',
-                                                    'text' => 'Events List',
+                                                    'text' => _('Events List'),
                                                     'attributes' => [
                                                         'class' => 'btn btn-sm btn-info ml-5',
                                                         'href' => 'helper::url:manager.event.list'
@@ -536,6 +537,326 @@ class ConfigProvider
                         ],
                     ],
                 ], // Common\Handler\Read
+                'Common\Handler\Update'=> [
+                    'route' => [
+                        'manager.event.update' => [
+                            'get' => [
+                                'method' => 'GET',
+                                'scenario' => 'update',
+                                'view_template_model' => [
+                                    'layout' => 'layout::manager',
+                                    'template' => 'event-admin::template-update',
+                                    'forms' => [
+                                        'form_update' => 'event-admin::template-update-form',
+                                    ],
+                                ],
+                                'forms' => [
+                                    [
+                                        'action' => [
+                                            'route' => 'manager.event.create.post',
+                                        ],
+                                        'name' => 'form_update',
+//                                        'object' => \Event\Form\EventWriteForm::class,
+                                        'form_factory' => \Event\Form\EventUpdateForm::class,
+                                        'template' => 'common-admin::template-update',
+                                    ]
+                                ],
+                                'data_template_model' => [
+                                    'route_name' => 'manager.event.update',
+                                    'heading' => [
+                                        [
+                                            'html_tag' => 'h1',
+                                            'text' => _('Event Update'),
+                                            'buttons' => [
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => 'Details',
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-5',
+                                                        'href' => [
+                                                            'type' => 'plugin',
+                                                            'name' => 'url',
+                                                            'arguments' => [
+                                                                'manager.event.read',
+                                                                [
+                                                                    'uid' => [
+                                                                        'source' => 'data-resource',
+                                                                        'property_path' => 'fieldset_event.data.uid',
+                                                                        'property_path_delimiter' => '.',
+                                                                    ],
+                                                                ],
+                                                            ],
+                                                        ],
+                                                    ],
+                                                ],
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => _('List Events'),
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-secondary ml-5',
+                                                        'href' => 'helper::url:manager.event.list'
+                                                    ],
+                                                ],
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => _('Create Event'),
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-secondary ml-1',
+                                                        'href' => 'helper::url:manager.event.create'
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                    'main' => [
+                                        'list' => [
+                                            [
+                                                'name' => 'data_event',
+                                                'type' => 'form',
+                                                'action' => [
+                                                    'route' => 'manager.event.update',
+                                                ],
+                                                'object' => \Event\Form\EventUpdateForm::class,
+                                                'read' => [
+                                                    'fieldset_event' => [
+                                                        'fieldset_name' => 'fieldset_event',
+                                                        'base_fieldset_name' => 'form_update',
+                                                        'type' => 'fieldset',
+                                                        'partial' => 'common-admin::template-update-item',
+                                                        'source' => [
+                                                            'service' => [
+                                                                [
+                                                                    'service_name'=>'Event\TableService',
+                                                                    'object' => \Event\Model\EventModel::class,
+                                                                    'method' => 'getItemByUid',
+                                                                    'arguments' => [
+                                                                        [
+                                                                            'type' => 'service',
+                                                                            'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
+                                                                            'method' => 'getMatchedParam',
+                                                                            'arg_name' => 'uid',
+                                                                        ],
+                                                                    ],
+                                                                ],
+
+                                                            ],
+                                                        ],
+                                                    ],
+                                                    'fieldset_event_details' => [
+                                                        'fieldset_name' => 'fieldset_event_details',
+                                                        'base_fieldset_name' => 'form_update',
+                                                        'type' => 'fieldset',
+                                                        'partial' => 'common-admin::template-update-item',
+                                                        'source' => [
+                                                            'service' => [
+                                                                [
+                                                                    'service_name'=>'Event\Details\TableService',
+                                                                    'object' => \Event\Model\EventDetailsModel::class,
+                                                                    'method' => 'getItemByParentUid',
+                                                                    'arguments' => [
+                                                                        [
+                                                                            'type' => 'service',
+                                                                            'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
+                                                                            'method' => 'getMatchedParam',
+                                                                            'arg_name' => 'uid',
+                                                                        ],
+                                                                    ],
+                                                                ],
+
+                                                            ],
+                                                        ],
+                                                    ],
+                                                ], // read
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ], // get
+                        ],
+                        'manager.event.update.post' => [
+                            'post' => [
+                                'method' => 'POST',
+                                'scenario' => 'update',
+                                'view_template_model' => [
+                                    'layout' => 'layout::manager',
+                                    'template' => 'event-admin::template-update',
+                                    'forms' => [
+                                        'form_update' => 'event-admin::template-update-form',
+                                    ],
+                                ],
+                                'forms' => [
+                                    [
+                                        'action' => [
+                                            'route' => 'manager.event.create.post',
+                                        ],
+                                        'name' => 'form_update',
+//                                        'object' => \Event\Form\EventWriteForm::class,
+                                        'form_factory' => \Event\Form\EventUpdateForm::class,
+                                        'template' => 'common-admin::template-update',
+                                    ]
+                                ],
+                                'data_template_model' => [
+                                    'route_name' => 'manager.event.update',
+                                    'heading' => [
+                                        [
+                                            'html_tag' => 'h1',
+                                            'text' => _('Event Update'),
+                                            'buttons' => [
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => 'Details',
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-5',
+                                                        'href' => [
+                                                            'type' => 'plugin',
+                                                            'name' => 'url',
+                                                            'arguments' => [
+                                                                'manager.event.read',
+                                                                [
+                                                                    'uid' => [
+                                                                        'source' => 'data-resource',
+                                                                        'property_path' => 'fieldset_event.data.uid',
+                                                                        'property_path_delimiter' => '.',
+                                                                    ],
+                                                                ],
+                                                            ],
+                                                        ],
+                                                    ],
+                                                ],
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => _('List Events'),
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-secondary ml-5',
+                                                        'href' => 'helper::url:manager.event.list'
+                                                    ],
+                                                ],
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => _('Create Event'),
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-secondary ml-1',
+                                                        'href' => 'helper::url:manager.event.create'
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                    'main' => [
+                                        'list' => [
+                                            [
+                                                'name' => 'data_event',
+                                                'type' => 'form',
+                                                'action' => [
+                                                    'route' => 'manager.event.update',
+                                                ],
+                                                'object' => \Event\Form\EventUpdateForm::class,
+                                                'read' => [
+                                                    'fieldset_event' => [
+                                                        'fieldset_name' => 'fieldset_event',
+                                                        'base_fieldset_name' => 'form_update',
+                                                        'type' => 'fieldset',
+                                                        'partial' => 'common-admin::template-update-item',
+                                                        'source' => [
+                                                            'service' => [
+                                                                [
+                                                                    'service_name'=>'Event\TableService',
+                                                                    'object' => \Event\Model\EventModel::class,
+                                                                    'method' => 'getItemByUid',
+                                                                    'arguments' => [
+                                                                        [
+                                                                            'type' => 'service',
+                                                                            'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
+                                                                            'method' => 'getMatchedParam',
+                                                                            'arg_name' => 'uid',
+                                                                            'arg_name_target' => 'uid',
+                                                                        ],
+                                                                    ],
+                                                                ],
+
+                                                            ],
+                                                        ],
+                                                    ],
+                                                    'fieldset_event_details' => [
+                                                        'fieldset_name' => 'fieldset_event_details',
+                                                        'base_fieldset_name' => 'form_update',
+                                                        'type' => 'fieldset',
+                                                        'partial' => 'common-admin::template-update-item',
+                                                        'source' => [
+                                                            'service' => [
+                                                                [
+                                                                    'service_name'=>'Event\Details\TableService',
+                                                                    'object' => \Event\Model\EventDetailsModel::class,
+                                                                    'method' => 'getItemByParentUid',
+                                                                    'arguments' => [
+                                                                        [
+                                                                            'type' => 'service',
+                                                                            'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
+                                                                            'method' => 'getMatchedParam',
+                                                                            'arg_name' => 'uid',
+                                                                            'arg_name_target' => 'event_uid',
+                                                                        ],
+                                                                    ],
+                                                                ],
+
+                                                            ],
+                                                        ],
+                                                    ],
+                                                ], // read
+                                                'update' => [
+                                                    'form_name' => 'form_update',
+                                                    'data' => [
+                                                        'fieldset_event' => [
+                                                            'fieldset_name' => 'fieldset_event',
+                                                            'service' => [
+                                                                [
+                                                                    'service_name'=>'Event\TableService',
+                                                                    'object' => \Event\Model\EventModel::class,
+                                                                    'method' => 'updateItem',
+                                                                    'arg_name_target' => 'uid',
+                                                                    'arguments' => [
+                                                                        [
+                                                                            'type' => 'service',
+                                                                            'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
+                                                                            'method' => 'getMatchedParam',
+                                                                            'arg_name' => 'uid',
+                                                                            'arg_name_target' => 'uid',
+                                                                        ],
+                                                                    ],
+                                                                ],
+
+                                                            ],
+                                                        ], // fieldset_event
+                                                        'fieldset_event_details' => [
+                                                            'fieldset_name' => 'fieldset_event_details',
+                                                            'service' => [
+                                                                [
+                                                                    'service_name'=>'Event\Details\TableService',
+                                                                    'object' => \Event\Model\EventDetailsModel::class,
+                                                                    'method' => 'updateItem',
+                                                                    'arg_name_target' => 'event_uid',
+                                                                    'arguments' => [
+                                                                        [
+                                                                            'type' => 'service',
+                                                                            'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
+                                                                            'method' => 'getMatchedParam',
+                                                                            'arg_name' => 'uid',
+                                                                            'arg_name_target' => 'event_uid',
+                                                                        ],
+                                                                    ],
+                                                                ],
+                                                            ],
+                                                        ], // fieldset_event_details
+                                                    ],
+                                                ], // update
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ], // post
+                        ],
+                    ],
+                ], // Common\Handler\Update
                 'Common\Handler\List'=> [
                     'route' => [
                         'manager.event.list' => [
@@ -631,6 +952,26 @@ class ConfigProvider
                                                                     'name' => 'url',
                                                                     'arguments' => [
                                                                         'manager.event.read',
+                                                                        [
+                                                                            'uid'=> [
+                                                                                'source' => 'row-item',
+                                                                                'property' => 'uid',
+                                                                            ],
+                                                                        ]
+                                                                    ],
+                                                                ],
+                                                            ],
+                                                        ],
+                                                        [
+                                                            'html_tag' => 'a',
+                                                            'text' => _("Update"),
+                                                            'attributes' => [
+                                                                'class' => 'btn btn-sm btn-default btn-outline-primary ml-5',
+                                                                'href' => [
+                                                                    'type' => 'plugin',
+                                                                    'name' => 'url',
+                                                                    'arguments' => [
+                                                                        'manager.event.update',
                                                                         [
                                                                             'uid'=> [
                                                                                 'source' => 'row-item',

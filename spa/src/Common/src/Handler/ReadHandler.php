@@ -64,6 +64,8 @@ class ReadHandler
 
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
+        $this->template->addDefaultParam(Template\TemplateRendererInterface::TEMPLATE_ALL,'bodyClass','app-action-read');
+
         return new HtmlResponse($this->template->render($this->getData('template'), $this->getData()));
     }
 }

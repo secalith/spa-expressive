@@ -67,7 +67,7 @@ class UpdateHandlerAbstractFactory implements AbstractFactoryInterface
             $resources = null;
             $config = $serviceLocator->get(RouteConfigService::class);
             $routeConfig = $config->getRouteConfig($name);
-//            $configPath = "data_template_model^";
+            $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
 
             $router   = $serviceLocator->get(RouterInterface::class);
             $template = $serviceLocator->has(TemplateRendererInterface::class)
@@ -78,10 +78,16 @@ class UpdateHandlerAbstractFactory implements AbstractFactoryInterface
 
             $urlHelper = $serviceLocator->get(UrlHelper::class);
 
+
+
+            // get specification from CONFIG file
             $dataList = $this->arrayDigger->extractData($routeConfig,'data_template_model.main.list');
 
             foreach($dataList as $mainContentDeclaration)
             {
+
+                $changed = [];
+
                 foreach($mainContentDeclaration['read'] as $fieldsetConfig)
                 {
                     if(array_key_exists('source',$fieldsetConfig))
@@ -93,6 +99,7 @@ class UpdateHandlerAbstractFactory implements AbstractFactoryInterface
                                 $requestedService = $serviceLocator->get($serviceConfig['service_name']);
                                 if(method_exists($requestedService,$serviceConfig['method']))
                                 {
+                                    $argVal = [];
                                     if(array('arguments',$serviceConfig))
                                     {
                                         foreach($serviceConfig['arguments'] as $arg)
@@ -121,17 +128,94 @@ class UpdateHandlerAbstractFactory implements AbstractFactoryInterface
                     // load form
                     $form = new $mainContentDeclaration['object']();
 
+
                     $formData =[];
-                    $form->setData($resources);
+//                    $form->setData($resources);
+
                     foreach($resources as $resource) {
                         $formData[$form->getName()][$resource['service_config']['fieldset_name']] = $resource['data']->toArray();
                     }
 
-                    if($form->get('form_read')->get($resource['service_config']['fieldset_name'])) {
+                    if($form->get($resource['service_config']['base_fieldset_name'])
+                        ->get($resource['service_config']['fieldset_name'])) {
+
                         $form->setData($formData);
+//var_dump($formData);
+                    }
+                }
+
+                if(array_key_exists('update',$mainContentDeclaration))
+                {
+                    $formName = $mainContentDeclaration['update']['form_name'];
+                    if($requestMethod=='post') {
+
+                        $form->setData($_POST);
+
+                        if($form->isValid()) {
+
+                            $formData = $form->getData();
+
+                            $declaredFieldsets = $mainContentDeclaration['update']['data'];
+
+                            foreach($declaredFieldsets as $fieldsetName=>$fieldsetDataDeclared)
+                            {
+
+                                if(property_exists($formData,$fieldsetName))
+                                {
+                                    $pData = $formData->{$fieldsetName};
+                                    foreach($pData as $pDataName => $pDataValue)
+                                    {
+                                        if($pDataName=='created'||$pDataName=='updated') {
+                                            continue;
+                                        }
+                                        if(null!==$resources[$fieldsetName]['data']->{$pDataName} && null!==$pDataValue) {
+                                            if(strcmp($resources[$fieldsetName]['data']->{$pDataName},$pDataValue)) {
+                                                $changed[$fieldsetName][$pDataName] = $pDataValue;
+                                            }
+                                        }elseif(null===$resources[$fieldsetName]['data']->{$pDataName} xor null===$pDataValue) {
+                                         //   $changed[$fieldsetName][$pDataName] = $pDataValue;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if( ! empty($changed))
+                {
+                    foreach($mainContentDeclaration['update']['data'] as $fieldsetConfigName => $fieldsetConfig)
+                    {
+                        if(array_key_exists($fieldsetConfigName,$changed))
+                        {
+                            if(array_key_exists('service',$fieldsetConfig)) {
+                                foreach($fieldsetConfig['service'] as $updateService) {
+                                    foreach($updateService['arguments'] as $arg)
+                                    {
+                                        $argVal = [];
+
+                                        if($arg['type'] == 'service')
+                                        {
+                                            if($serviceLocator->has($arg['service_name']))
+                                            {
+                                                $argService = $serviceLocator->get($arg['service_name']);
+                                                $argVal[$arg['arg_name_target']] = $argService->{$arg['method']}($arg['arg_name']);
+                                            }
+                                        }
+                                    }
+
+                                    $requestedService = $serviceLocator->get($updateService['service_name']);
+
+                                    $requestedService->{$updateService['method']}($argVal,$changed[$fieldsetConfigName]);
+
+
+                                }
+                            }
+                        }
                     }
                 }
             }
+
 
                 $targetClass = new UpdateHandler(
                     $router,

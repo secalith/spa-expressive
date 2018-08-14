@@ -144,4 +144,14 @@ class EventDetailsTable
         ];
 
     }
+
+    public function updateItem($selector,$data)
+    {
+        $rowsAffected = $this->tableGateway->update($data, $selector);
+
+        return [
+            'affected' => $rowsAffected,
+            'data' => $data,
+        ];
+    }
 }

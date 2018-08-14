@@ -663,6 +663,128 @@ class ConfigProvider
                         ],
                     ],
                 ], // Common\Handler\Read
+                'Common\Handler\Update'=> [
+                    'route' => [
+                        'manager.petition.update' => [
+                            'get' => [
+                                'method' => 'GET',
+                                'scenario' => 'update',
+                                'view_template_model' => [
+                                    'layout' => 'layout::manager',
+                                    'template' => 'petition-admin::template-update',
+                                ],
+                                'data_template_model' => [
+                                    'route_name' => 'manager.petition.update',
+                                    'heading' => [
+                                        [
+                                            'html_tag' => 'h1',
+                                            'text' => 'Petition Update',
+                                            'buttons' => [
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => 'Details',
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-5',
+                                                        'href' => [
+                                                            'type' => 'plugin',
+                                                            'name' => 'url',
+                                                            'arguments' => [
+                                                                'manager.petition.read',
+                                                                [
+                                                                    'uid' => [
+                                                                        'source' => 'data-resource',
+                                                                        'property_path' => 'fieldset_user.data.uid',
+                                                                        'property_path_delimiter' => '.',
+                                                                    ],
+                                                                ],
+                                                            ],
+                                                        ],
+                                                    ],
+                                                ],
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => 'List Petitions',
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-secondary ml-5',
+                                                        'href' => 'helper::url:manager.petition.list'
+                                                    ],
+                                                ],
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => 'Create User',
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-secondary ml-1',
+                                                        'href' => 'helper::url:manager.petition.create'
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                    'main' => [
+                                        'list' => [
+                                            [
+                                                'name' => 'data_petition',
+                                                'type' => 'form',
+                                                'action' => [
+                                                    'route' => 'manager.petition.read',
+                                                ],
+                                                'object' => \User\Form\UserReadForm::class,
+                                                'read' => [
+                                                    'fieldset_user' => [
+                                                        'fieldset_name' => 'fieldset_petition',
+                                                        'type' => 'fieldset',
+                                                        'partial' => 'common-admin::template-read-item',
+                                                        'source' => [
+                                                            'service' => [
+                                                                [
+                                                                    'service_name'=>'User\TableService',
+                                                                    'object' => \User\Model\UserModel::class,
+                                                                    'method' => 'getItemByUid',
+                                                                    'arguments' => [
+                                                                        [
+                                                                            'type' => 'service',
+                                                                            'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
+                                                                            'method' => 'getMatchedParam',
+                                                                            'arg_name' => 'uid',
+                                                                        ],
+                                                                    ],
+                                                                ],
+
+                                                            ],
+                                                        ],
+                                                    ],
+                                                    'fieldset_user_profile' => [
+                                                        'fieldset_name' => 'fieldset_user_profile',
+                                                        'type' => 'fieldset',
+                                                        'partial' => 'common-admin::template-read-item',
+                                                        'source' => [
+                                                            'service' => [
+                                                                [
+                                                                    'service_name'=>'User\Profile\TableService',
+                                                                    'object' => \User\Model\UserProfileModel::class,
+                                                                    'method' => 'getItemByUid',
+                                                                    'arguments' => [
+                                                                        [
+                                                                            'type' => 'service',
+                                                                            'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
+                                                                            'method' => 'getMatchedParam',
+                                                                            'arg_name' => 'uid',
+                                                                        ],
+                                                                    ],
+                                                                ],
+
+                                                            ],
+                                                        ],
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ], // Common\Handler\Update
                 'Common\Handler\List'=> [
                     'route' => [
                         'manager.petition.list' => [

@@ -93,21 +93,45 @@ $form->prepare();
         </div>
 
         <hr />
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#currentPreferences">Current Preferences</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#alternative"> Alternative </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#">Link</a>
+            </li>
+        </ul>
 
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="messages-tab" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false">Messages</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">Settings</a>
+            </li>
+        </ul>
 
-        <div class="row">
-            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
-                <?=$this->formLabel($form->get('form_read')->get('fieldset_petition_translation')->get('title'));?>
-            </div>
-            <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_read')->get('fieldset_petition_translation')->get('title'))))?'has-errors':'';?>">
-                <?=$this->formInput($form->get('form_read')->get('fieldset_petition_translation')->get('title'));?>
-                <?=$this->formElementErrors($form->get('form_read')->get('fieldset_petition_translation')->get('title'));?>
-            </div>
-            <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
-                <small><?=$this->markdown($this->translate('Enter **translated** title.'));?></small>
-            </div>
+        <div class="tab-content">
+            <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
+            <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+            <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">...</div>
+            <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">...</div>
         </div>
 
+        <script>
+            $(function () {
+                $('#myTab li:last-child a').tab('show')
+            })
+        </script>
         <div class="row">
             <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
                 <?=$this->formLabel($form->get('form_read')->get('fieldset_petition_translation')->get('language'));?>
@@ -118,6 +142,18 @@ $form->prepare();
             </div>
             <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
                 <small><?=$this->translate('Select language of this translation.');?></small>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+                <?=$this->formLabel($form->get('form_read')->get('fieldset_petition_translation')->get('title'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_read')->get('fieldset_petition_translation')->get('title'))))?'has-errors':'';?>">
+                <?=$this->formInput($form->get('form_read')->get('fieldset_petition_translation')->get('title'));?>
+                <?=$this->formElementErrors($form->get('form_read')->get('fieldset_petition_translation')->get('title'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+                <small><?=$this->markdown($this->translate('Enter **translated** title.'));?></small>
             </div>
         </div>
 

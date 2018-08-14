@@ -49,6 +49,7 @@ class ApplicationFieldsetSaveServiceAwareDelegator
                     } elseif(array_key_exists('form_factory',$formAppConfig)) {
                         if($container->has($formAppConfig['form_factory'])) {
                             $form = $container->get($formAppConfig['form_factory']);
+                            $form->setData($_POST);
                         } else {
                             echo 'dupa';
                         }
@@ -78,6 +79,7 @@ class ApplicationFieldsetSaveServiceAwareDelegator
                     }
                     // check if the save index is defined in the route config
                     if(array_key_exists('save',$formAppConfig)) {
+
                         foreach($formAppConfig['save']['data'] as $fieldsetConfig) {
                             if(array_key_exists('service',$fieldsetConfig)) {
                                 if( ! array_key_exists('is_collection',$fieldsetConfig)
