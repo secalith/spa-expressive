@@ -133,11 +133,6 @@ class EventDetailsTable
 
         $rowsAffected = $this->tableGateway->insert($data);
 
-//        var_dump($item);
-//        var_dump($data);
-//        var_dump($rowsAffected);
-//        die();
-
         return [
             'affected' => $rowsAffected,
             'data' => $data,
