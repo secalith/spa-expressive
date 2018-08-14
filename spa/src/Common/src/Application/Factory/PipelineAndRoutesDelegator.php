@@ -51,7 +51,11 @@ class PipelineAndRoutesDelegator
         // obtain licence number?
         #TODO: use middleware for it
         $hostname = (array_key_exists('HTTP_HOST',$_SERVER) && $_SERVER['HTTP_HOST'])?$_SERVER['HTTP_HOST']:php_uname('n');
-        $hostname = preg_replace('/^www./', '', $hostname);
+        if($hostname==='www.art13.eu'){
+            header("Location: https://art13.eu");
+            die();
+        }
+
         /* @var \Instance\Model\InstanceModel $instance */
         $instance = $container->get("Instance\\TableService")->fetchBy(['hostname'=>$hostname]);
 
