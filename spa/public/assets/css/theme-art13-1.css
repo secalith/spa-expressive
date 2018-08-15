@@ -192,7 +192,7 @@ body.app-theme-art13 .list-group-item {
 .scroll-top-trigger-wrapper {
     position: fixed;
     right: 20px;
-    bottom: 20px;
+    bottom: 40px;
     font-size: 4em;
     padding: 5px;
     background-color: rgba(255,255,255,.875);
