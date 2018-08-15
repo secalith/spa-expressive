@@ -8,14 +8,19 @@ body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
 }
+nav.navbar {
+    border-bottom: 2px solid #bb9457;
+    border-color: rgba(187, 148, 87, .5);
+}
 .footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-    /* Set the fixed height of the footer here */
-    height: 60px;
-    line-height: 60px; /* Vertically center the text there */
+    height: 62px;
+    line-height: 62px;
     background-color: #212121;
+    border-top: 2px solid #bb9457;
+    border-color: rgba(187, 148, 87, .25);
 }
 
 main {
@@ -39,7 +44,50 @@ code {
     font-size: 80%;
 }
 
+.navbar-toggler,
+.navbar-toggler.collapsed {
+    background: #212121;
+    transition: background-color .2s;
+}
+.navbar-toggler[aria-expanded="true"] {
+    background-color:#990000;
+    transition: background-color .2s;
+}
+.navbar-toggler .navbar-toggler-icon {
+    background-image:url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E")
+}
+.navbar-collapse.collapse.show .nav-item {
+    background-color:transparent;
+    color:#212121;
+    -webkit-transition: background-color .2s;
+    transition: background-color .2s;
+}
+.navbar-collapse.collapse.show .nav-item:hover {
+    background-color:#212121;
+    color:#fefefe;
+    -webkit-transition: all .2s;
+    transition: all .2s;
+}
+.navbar-collapse.collapse.show .nav-item a {
+    padding-left:15px;
+    -webkit-transition: all .1s;
+    opacity:1;
+    transition: all .1s;
+}
+.navbar-collapse.collapse.show .nav-item a:hover {
+    padding-left:25px;
+    transition: all .3s;
+}
+.navbar-collapse .nav-item a {
+    padding-left:0px;
+    -webkit-transition: all .1s;
+    opacity:0;
+    transition: all .1s;
+}
 
+.navbar-collapse.collapse.show .nav-item:hover a {
+    color:#efefef;
+}
 
 
 /* ART13 */
@@ -138,4 +186,37 @@ hr {
 
 body.app-theme-art13 .list-group-item {
     background-color:rgba(255,255,255,0.6);
+}
+
+
+.scroll-top-trigger-wrapper {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    font-size: 4em;
+    padding: 5px;
+    background-color: rgba(255,255,255,.875);
+    line-height: 59px;
+    border: 2px solid #999;
+    z-index: 100;
+    cursor:pointer;
+    display:none;
+    border-radius:40px;
+}
+.scroll-top-trigger-wrapper img {
+    margin:0px;
+    padding:0px;
+    display:block;
+}
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+    .scroll-top-trigger-wrapper {
+        right: 15px;
+    }
+}
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+    .scroll-top-trigger-wrapper {
+        right: 15px;
+    }
 }

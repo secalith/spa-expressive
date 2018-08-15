@@ -37,7 +37,7 @@ class CredentialsPasswordFieldset extends Fieldset implements InputFilterProvide
                 'label' => _('Choose a new password?'),
             ),
             'attributes' => [
-                'class' => 'form-control d-inline-flex w-auto',
+                'class' => 'form-control d-block',
             ],
         ));
 
@@ -48,7 +48,7 @@ class CredentialsPasswordFieldset extends Fieldset implements InputFilterProvide
                 'label' => _('and enter it again'),
             ),
             'attributes' => [
-                'class' => 'form-control d-inline-flex w-auto',
+                'class' => 'form-control d-block',
             ],
         ));
     }

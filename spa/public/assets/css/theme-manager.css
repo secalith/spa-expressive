@@ -1,11 +1,14 @@
 body {
     margin-bottom: 60px;
 }
+nav.navbar {
+    border-bottom: 2px solid #bb9457;
+}
 .footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 60px;
+    height: 62px;
     line-height: 60px;
     background-color: #212121;
     border-top: 2px solid #bb9457;
@@ -21,18 +24,7 @@ html {
     min-height: 100%;
 }
 body {
-    /* Margin bottom by footer height */
-    margin-bottom: 60px;
-}
-.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 60px;
-    line-height: 60px;
-    background-color: #212121;
-    border-top: 2px solid #bb9457;
-    border-color: rgba(187, 148, 87, .25);
+    margin-bottom: 62px;
 }
 
 @font-face {

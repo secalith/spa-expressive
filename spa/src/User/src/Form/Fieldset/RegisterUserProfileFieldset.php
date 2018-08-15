@@ -37,7 +37,7 @@ class RegisterUserProfileFieldset extends Fieldset implements InputFilterProvide
                 'label' => _("What's Your First Name?"),
             ),
             'attributes' => [
-                'class' => 'form-control d-inline-flex w-auto',
+                'class' => 'form-control d-block',
             ],
         ));
 
@@ -48,7 +48,7 @@ class RegisterUserProfileFieldset extends Fieldset implements InputFilterProvide
                 'label' => _("What's Your Last Name?"),
             ),
             'attributes' => [
-                'class' => 'form-control d-inline-flex w-auto',
+                'class' => 'form-control d-block',
             ],
         ));
 
@@ -59,7 +59,7 @@ class RegisterUserProfileFieldset extends Fieldset implements InputFilterProvide
                 'label' => _("What’s your company / organization called?"),
             ),
             'attributes' => [
-                'class' => 'form-control d-inline-flex w-auto',
+                'class' => 'form-control d-block',
             ],
         ));
     }

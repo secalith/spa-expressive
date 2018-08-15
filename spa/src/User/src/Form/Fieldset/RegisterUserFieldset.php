@@ -37,7 +37,7 @@ class RegisterUserFieldset extends Fieldset implements InputFilterProviderInterf
                 'label' => _("Enter your email address below to get started!"),
             ),
             'attributes' => [
-                'class' => 'form-control d-inline-flex w-auto',
+                'class' => 'form-control d-block',
             ],
         ));
     }
