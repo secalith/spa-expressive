@@ -36,6 +36,7 @@ class ConfigProvider
             ],
             'factories'  => [
                 \Petition\Form\PetitionTranslationWriteForm::class => \Petition\Form\Factory\FactoryPetitionTranslationWriteServiceFormFactory::class,
+                \Petition\Form\PetitionUpdateForm::class => \Petition\Form\Factory\FactoryPetitionTranslationUpdateServiceFormFactory::class,
                 '\Petition\Form\PetitionSignatureWriteForm::class' => \Petition\Form\Factory\SignPetitionFormFactory::class,
             ],
         ];
@@ -672,6 +673,19 @@ class ConfigProvider
                                 'view_template_model' => [
                                     'layout' => 'layout::manager',
                                     'template' => 'petition-admin::template-update',
+                                    'forms' => [
+                                        'form_update' => 'petition-admin::template-update-form',
+                                    ],
+                                ],
+                                'forms' => [
+                                    [
+                                        'action' => [
+                                            'route' => 'manager.petition.update.post',
+                                        ],
+                                        'name' => 'form_update',
+                                        'form_factory' => \Petition\Form\PetitionUpdateForm::class,
+                                        'template' => 'petition-admin::template-update',
+                                    ]
                                 ],
                                 'data_template_model' => [
                                     'route_name' => 'manager.petition.update',
@@ -693,7 +707,7 @@ class ConfigProvider
                                                                 [
                                                                     'uid' => [
                                                                         'source' => 'data-resource',
-                                                                        'property_path' => 'fieldset_user.data.uid',
+                                                                        'property_path' => 'fieldset_petition.data.uid',
                                                                         'property_path_delimiter' => '.',
                                                                     ],
                                                                 ],
@@ -726,19 +740,20 @@ class ConfigProvider
                                                 'name' => 'data_petition',
                                                 'type' => 'form',
                                                 'action' => [
-                                                    'route' => 'manager.petition.read',
+                                                    'route' => 'manager.petition.update',
                                                 ],
-                                                'object' => \User\Form\UserReadForm::class,
+                                                'object' => \Petition\Form\PetitionUpdateForm::class,
                                                 'read' => [
-                                                    'fieldset_user' => [
+                                                    'fieldset_petition' => [
                                                         'fieldset_name' => 'fieldset_petition',
+                                                        'base_fieldset_name' => 'form_update',
                                                         'type' => 'fieldset',
-                                                        'partial' => 'common-admin::template-read-item',
+                                                        'partial' => 'common-admin::template-update-item',
                                                         'source' => [
                                                             'service' => [
                                                                 [
-                                                                    'service_name'=>'User\TableService',
-                                                                    'object' => \User\Model\UserModel::class,
+                                                                    'service_name'=>'Petition\TableService',
+                                                                    'object' => \Petition\Model\PetitionModel::class,
                                                                     'method' => 'getItemByUid',
                                                                     'arguments' => [
                                                                         [
@@ -746,6 +761,7 @@ class ConfigProvider
                                                                             'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
                                                                             'method' => 'getMatchedParam',
                                                                             'arg_name' => 'uid',
+                                                                            'arg_name_target' => 'uid',
                                                                         ],
                                                                     ],
                                                                 ],
@@ -753,22 +769,24 @@ class ConfigProvider
                                                             ],
                                                         ],
                                                     ],
-                                                    'fieldset_user_profile' => [
-                                                        'fieldset_name' => 'fieldset_user_profile',
+                                                    'fieldset_petition_translation' => [
+                                                        'fieldset_name' => 'fieldset_petition_translation',
+                                                        'base_fieldset_name' => 'form_update',
                                                         'type' => 'fieldset',
-                                                        'partial' => 'common-admin::template-read-item',
+                                                        'partial' => 'common-admin::template-update-item',
                                                         'source' => [
                                                             'service' => [
                                                                 [
-                                                                    'service_name'=>'User\Profile\TableService',
-                                                                    'object' => \User\Model\UserProfileModel::class,
-                                                                    'method' => 'getItemByUid',
+                                                                    'service_name'=>'Petition\Translation\TableService',
+                                                                    'object' => \Petition\Model\PetitionTranslationModel::class,
+                                                                    'method' => 'getItemByParentUid',
                                                                     'arguments' => [
                                                                         [
                                                                             'type' => 'service',
                                                                             'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
                                                                             'method' => 'getMatchedParam',
                                                                             'arg_name' => 'uid',
+                                                                            'arg_name_target' => 'petition_uid',
                                                                         ],
                                                                     ],
                                                                 ],
@@ -776,7 +794,52 @@ class ConfigProvider
                                                             ],
                                                         ],
                                                     ],
-                                                ],
+                                                ], // read
+                                                'update' => [
+                                                    'form_name' => 'form_update',
+                                                    'data' => [
+                                                        'fieldset_petition' => [
+                                                            'fieldset_name' => 'fieldset_petition',
+                                                            'service' => [
+                                                                [
+                                                                    'service_name'=>'Petition\TableService',
+                                                                    'object' => \Petition\Model\PetitionModel::class,
+                                                                    'method' => 'updateItem',
+                                                                    'arg_name_target' => 'uid',
+                                                                    'arguments' => [
+                                                                        [
+                                                                            'type' => 'service',
+                                                                            'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
+                                                                            'method' => 'getMatchedParam',
+                                                                            'arg_name' => 'uid',
+                                                                            'arg_name_target' => 'uid',
+                                                                        ],
+                                                                    ],
+                                                                ],
+                                                            ],
+                                                        ], // fieldset_event
+                                                        'fieldset_petition_translation' => [
+                                                            'fieldset_name' => 'fieldset_petition_translation',
+                                                            'service' => [
+                                                                [
+                                                                    'service_name'=>'Petition\Translation\TableService',
+                                                                    'object' => \Petition\Model\PetitionTranslationModel::class,
+                                                                    'method' => 'updateItem',
+                                                                    'arg_name_target' => 'petition_uid',
+                                                                    'arguments' => [
+                                                                        [
+                                                                            'type' => 'service',
+                                                                            'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
+                                                                            'method' => 'getMatchedParam',
+                                                                            'arg_name' => 'uid',
+                                                                            'arg_name_target' => 'petition_uid',
+                                                                        ],
+                                                                    ],
+                                                                ],
+                                                            ],
+                                                        ], // fieldset_event_details
+                                                    ],
+                                                ], // updates
                                             ],
                                         ],
                                     ],

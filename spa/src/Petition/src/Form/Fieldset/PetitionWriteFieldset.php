@@ -40,6 +40,23 @@ class PetitionWriteFieldset extends Fieldset implements InputFilterProviderInter
                 'use_as_base_fieldset' => false
             )
         ));
+        /*
+         *
+         $this->add(array(
+            'name' => 'fieldset_petition_translation',
+            'type' => \Zend\Form\Element\Collection::class,
+            'options' => array(
+                'label' => _("Petition Translation"),
+                'count' => 1,
+                'should_create_template' => true,
+                'allow_add' => true,
+                'target_element' => array(
+                    'type' => \Petition\Form\Fieldset\PetitionTranslationFieldset::class,
+                ),
+            )
+        ));
+
+         */
     }
 
     public function getInputFilterSpecification()

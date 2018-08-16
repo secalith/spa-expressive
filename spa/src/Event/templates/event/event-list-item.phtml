@@ -21,7 +21,7 @@
         <a class="btn btn-info mt-4" href="<?=$details->getEventMapExternal();?>" target="_blank"><?=$this->translate("Find on Map");?></a>
     </div>
     <div class="col-12 d-inline-block d-md-none">
-        <h2 class="mb-2 display-4"><?=($this->currentLanguage()!==$details->getLanguage())?$details->getNameGlobal():$details->getName();?></h2>
+        <h2 class="mb-2 display-5"><?=($this->currentLanguage()!==$details->getLanguage())?$details->getNameGlobal():$details->getName();?></h2>
     </div>
     <div class="col-12 d-inline-block d-md-none">
         <h2 style="font-weight:600" class="mb-2 display-4"><?=($this->currentLanguage()!==$details->getLanguage())?$details->getCityGlobal():$details->getCity();?></h2>

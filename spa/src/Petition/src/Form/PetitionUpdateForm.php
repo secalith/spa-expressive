@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace Petition\Form;
 
-use \Petition\Model\PetitionCreateModel;
+use \Petition\Model\UpdatePetitionModel;
 use Zend\Form\Form;
 use Zend\Hydrator\ClassMethods;
 use Zend\InputFilter\InputFilter;
 
-class PetitionWriteForm extends Form
+class PetitionUpdateForm extends Form
 {
     private $formGroups;
 
-    public function __construct($name = 'form_create', $options = array(), $formGroups=[])
+    public function __construct($name = 'form_update', $options = array(), $formGroups=[])
     {
         parent::__construct($name,$options);
 
         $this
             ->setAttribute('method', 'post')
-            ->setObject(new PetitionCreateModel())
+            ->setObject(new UpdatePetitionModel())
             ->setHydrator(new ClassMethods(true))
 //            ->setInputFilter($this->addInputFilter())
         ;
@@ -41,18 +41,12 @@ class PetitionWriteForm extends Form
         ], ['priority'=>10]);
 
         $this->add(array(
-            'name' => 'form_create',
+            'name' => 'form_update',
             'type' => \Petition\Form\Fieldset\PetitionWriteFieldset::class,
             'options' => array(
                 'use_as_base_fieldset' => true
             )
         ));
-
-//        $this->get('form_create')
-//            ->get('fieldset_petition')
-//            ->get('event_group')
-//            ->setValueOptions($this->formGroups)
-//        ;
 
         $this->add([
             'type' => 'Zend\Form\Element\Csrf',

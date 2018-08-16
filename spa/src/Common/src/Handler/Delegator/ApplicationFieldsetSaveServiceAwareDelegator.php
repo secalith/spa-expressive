@@ -51,6 +51,8 @@ class ApplicationFieldsetSaveServiceAwareDelegator
                             $form = $container->get($formAppConfig['form_factory']);
                             $form->setData($_POST);
                         } else {
+                            var_dump($formAppConfig);
+                            die();
                             echo 'dupa';
                         }
                     }

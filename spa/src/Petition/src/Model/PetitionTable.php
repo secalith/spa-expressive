@@ -121,6 +121,7 @@ class PetitionTable
             'site_uid' => $item->getSiteUid(),
             'group' => $item->getGroup(),
             'name' => $item->getName(),
+            'name_global' => $item->getNameGlobal(),
             'country' => $item->getCountry(),
             'status' => $item->getStatus(),
             'created' => $dateTime->format('Y-m-d H:i:s'),

@@ -55,6 +55,19 @@ $form->prepare();
 
         <div class="row">
             <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+                <?=$this->formLabel($form->get('form_read')->get('fieldset_petition')->get('name_global'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_read')->get('fieldset_petition')->get('name_global'))))?'has-errors':'';?>">
+                <?=$this->formInput($form->get('form_read')->get('fieldset_petition')->get('name_global'));?>
+                <?=$this->formElementErrors($form->get('form_read')->get('fieldset_petition')->get('name_global'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+                <small><?=$this->translate('This name will be visible on global listings.');?></small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
                 <?=$this->formLabel($form->get('form_read')->get('fieldset_petition')->get('country'));?>
             </div>
             <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_read')->get('fieldset_petition')->get('country'))))?'has-errors':'';?>">

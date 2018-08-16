@@ -67,18 +67,28 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
         Auth\Handler\AuthHandler::class,
         'Common\Handler\Create',
     ], 'manager.petition.create.post');
+
     $app->get('/admin/petition/details/{uid}[/]', [
         Auth\Handler\AuthHandler::class,
         'Common\Handler\Read',
     ], 'manager.petition.read');
+
     $app->get('/admin/petition/edit/{uid}[/]', [
+        I18n\Handler\I18n::class,
         Auth\Handler\AuthHandler::class,
-        'Common\Handler\Read',
+        'Common\Handler\Update',
     ], 'manager.petition.update');
+    $app->post('/admin/petition/edit/{uid}[/]', [
+        I18n\Handler\I18n::class,
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\Update',
+    ], 'manager.petition.update.post');
+
     $app->get('/admin/petition/list[/[{page:\d+}]]', [
         Auth\Handler\AuthHandler::class,
         'Common\Handler\List',
     ], 'manager.petition.list');
+
     # MANAGER-PETITION-TRANSLATION #
     $app->get('/admin/petition/translation/create[/]', [
         Auth\Handler\AuthHandler::class,

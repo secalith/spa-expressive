@@ -80,7 +80,19 @@ class PetitionFieldset extends Fieldset implements InputFilterProviderInterface
             ),
             'attributes' => [
                 'class' => 'form-control d-block',
-                'placeholder' => _("eg. Event in Warsaw in 26/08 (optional)"),
+                'placeholder' => _("eg. Event in Warsaw on 26th :: 2nd wave (optional)"),
+            ],
+        ));
+
+        $this->add(array(
+            'type' => 'text',
+            'name' => 'name_global',
+            'options' => array(
+                'label' => _("Global name")
+            ),
+            'attributes' => [
+                'class' => 'form-control d-block',
+                'placeholder' => _("eg. Event in Warsaw on 26/08 (optional)"),
             ],
         ));
 
@@ -95,6 +107,7 @@ class PetitionFieldset extends Fieldset implements InputFilterProviderInterface
                 'class' => 'form-control d-block',
             ],
         ));
+
         $this->add(array(
             'type' => 'Zend\Form\Element\Select',
             'name' => 'group',
@@ -108,7 +121,6 @@ class PetitionFieldset extends Fieldset implements InputFilterProviderInterface
                 'class' => 'form-control d-block',
             ],
         ));
-
 
         $this->add(array(
             'type' => 'Zend\Form\Element\Select',
