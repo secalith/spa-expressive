@@ -12,7 +12,7 @@ class ConfigProvider
             'templates'    => $this->getTemplates(),
             'rbac' => [
                 'roles' => [
-                    'contributor' => ['editor'],
+                    'guest' => ['editor'],
                     'editor' => ['administrator'],
                     'administrator' => [],
                 ],

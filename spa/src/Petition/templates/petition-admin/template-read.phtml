@@ -6,17 +6,22 @@
             </div>
             <hr />
             <?=$this->getFormAttached(['form_read'=>$form],null,'form_read',true,$view_template_model['forms']['form_read']);?>
+
+
+
+            <?php if($resources): ?>
+<?=var_dump($resources);;?>
+                <?php foreach($resources as $res):  ?>
+                    <?php
+                    var_dump($res);
+                    ?>
+                    <?php if(array_key_exists('partial',$res)): ?>
+                        <?php //$this->partial($res['service_config']['partial'],['resource'=>$res]);?>
+                    <?php endif;?>
+
+                <?php endforeach;?>
+
+            <?php endif; ?>
+
         </div>
     </div>
-
-<?php if($resources): ?>
-
-    <?php foreach($resources as $res):  ?>
-
-        <?php if(array_key_exists('partial',$res['service_config'])): ?>
-            <?php //$this->partial($res['service_config']['partial'],['resource'=>$res]);?>
-        <?php endif;?>
-
-    <?php endforeach;?>
-
-<?php endif; ?>

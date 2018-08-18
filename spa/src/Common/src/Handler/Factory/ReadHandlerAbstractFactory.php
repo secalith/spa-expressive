@@ -80,16 +80,17 @@ class ReadHandlerAbstractFactory implements AbstractFactoryInterface
 
             $dataList = $this->arrayDigger->extractData($routeConfig,'data_template_model.main.list');
 
-            foreach($dataList as $mainContentDeclaration) {
-                foreach($mainContentDeclaration['read'] as $fieldsetConfig)
-                {
-                    if(array_key_exists('service',$fieldsetConfig))
-                    {
-                        foreach($fieldsetConfig['service'] as $serviceConfig)
+            $dataList2 = $this->arrayDigger->extractData($routeConfig,'data_template_model.main.table');
+
+            if(null!==$dataList2) {
+                foreach($dataList2 as $mainContentDeclaration){
+                    if(array_key_exists('service',$mainContentDeclaration)) {
+                        foreach($mainContentDeclaration['service'] as $serviceConfig)
                         {
                             if($serviceLocator->has($serviceConfig['service_name']))
                             {
                                 $requestedService = $serviceLocator->get($serviceConfig['service_name']);
+                                $iRes=0;
                                 if(method_exists($requestedService,$serviceConfig['method']))
                                 {
                                     if(array('arguments',$serviceConfig))
@@ -107,30 +108,85 @@ class ReadHandlerAbstractFactory implements AbstractFactoryInterface
                                         }
                                     }
 
-                                    $resources[$fieldsetConfig['fieldset_name']]['data'] = $requestedService->{$serviceConfig['method']}($argVal[0]);
-                                    $resources[$fieldsetConfig['fieldset_name']]['service_config'] = $fieldsetConfig;
+                                    $resources[$mainContentDeclaration['name']][$iRes]['data'] = $requestedService->{$serviceConfig['method']}($argVal[0]);
+                                    $resources[$mainContentDeclaration['name']][$iRes]['service_config'] = $serviceConfig;
 
+                                    $tableResources[$mainContentDeclaration['name']][$iRes]['data'] = $requestedService->{$serviceConfig['method']}($argVal[0]);
+                                    $tableResources[$mainContentDeclaration['name']][$iRes]['service_config'] = $serviceConfig;
+
+                                    $iRes++;
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+
+
+            foreach($dataList as $mainContentDeclaration) {
+                if(array_key_exists('read',$mainContentDeclaration)) {
+                    foreach($mainContentDeclaration['read'] as $fieldsetConfig)
+                    {
+                        if(array_key_exists('service',$fieldsetConfig))
+                        {
+                            foreach($fieldsetConfig['service'] as $serviceConfig)
+                            {
+                                if($serviceLocator->has($serviceConfig['service_name']))
+                                {
+                                    $requestedService = $serviceLocator->get($serviceConfig['service_name']);
+                                    if(method_exists($requestedService,$serviceConfig['method']))
+                                    {
+                                        if(array('arguments',$serviceConfig))
+                                        {
+                                            foreach($serviceConfig['arguments'] as $arg)
+                                            {
+                                                if($arg['type'] == 'service')
+                                                {
+                                                    if($serviceLocator->has($arg['service_name']))
+                                                    {
+                                                        $argService = $serviceLocator->get($arg['service_name']);
+                                                        $argVal[] = $argService->{$arg['method']}($arg['arg_name']);
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        $resources[$fieldsetConfig['fieldset_name']]['data'] = $requestedService->{$serviceConfig['method']}($argVal[0]);
+                                        $resources[$fieldsetConfig['fieldset_name']]['service_config'] = $fieldsetConfig;
+
+                                        $formResources[$fieldsetConfig['fieldset_name']]['data'] = $requestedService->{$serviceConfig['method']}($argVal[0]);
+                                        $formResources[$fieldsetConfig['fieldset_name']]['service_config'] = $fieldsetConfig;
+
+                                    }
                                 }
                             }
                         }
                     }
                 }
+
             }
 
-            if( $mainContentDeclaration['type'] === 'form' && $resources !== null ) {
+            if( $mainContentDeclaration['type'] === 'form' && $formResources !== null ) {
                 // load form
                 $form = new $mainContentDeclaration['object']();
 
                 $formData =[];
-                $form->setData($resources);
+                $form->setData($formResources);
 
-                foreach($resources as $resource) {
+                foreach($formResources as $resource) {
                     $formData[$form->getName()][$resource['service_config']['fieldset_name']] = $resource['data']->toArray();
                 }
 
-                if($form->get('form_read')->get($resource['service_config']['fieldset_name'])) {
-                    $form->setData($formData);
+                foreach($formResources as $resource) {
+//                    if($form->get('form_read')->get($resource['service_config']['fieldset_name'])) {
+                        $form->setData($formData[$form->getName()]);
+//                    }
                 }
+
+//                if($form->get('form_read')->get($formResources['service_config']['fieldset_name'])) {
+//                    $form->setData($formData);
+//                }
             }
 
             $targetClass = new ReadHandler(

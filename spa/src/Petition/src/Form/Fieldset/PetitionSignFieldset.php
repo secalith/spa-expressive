@@ -28,7 +28,7 @@ class PetitionSignFieldset extends Fieldset implements InputFilterProviderInterf
             'type' => 'text',
             'name' => 'name',
             'options' => array(
-                'label' => _("Name")
+                'label' => _("Name and Surname")
             ),
             'attributes' => [
                 'class' => 'form-control d-block',

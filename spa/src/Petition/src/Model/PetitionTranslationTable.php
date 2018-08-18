@@ -35,6 +35,15 @@ class PetitionTranslationTable
         }
         return $row;
     }
+    public function getItemsByParentUid($uid)
+    {
+        $resultSet = $this->tableGateway->select(array('petition_uid' => $uid));
+
+        //$resultSet->buffer();
+        $resultSet->buffer();
+
+        return $resultSet;
+    }
     public function getItemByParentUidAndLanguage($uid,$language)
     {
         $rowset = $this->tableGateway->select(array('petition_uid' => $uid,'language'=>$language));

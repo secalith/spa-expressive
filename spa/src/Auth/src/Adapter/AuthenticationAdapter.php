@@ -59,10 +59,17 @@ class AuthenticationAdapter implements AdapterInterface
     public function authenticate()
     {
         $user = $this->userTable->select(['email'=>$this->email])->current();
-//        $user = $user->current();
+
+        if( $user==null ) {
+            return new Result(
+                Result::FAILURE_IDENTITY_NOT_FOUND,
+                null,
+                ['Invalid credentials..']);
+        }
+
         $credentials = $this->credentialsTable->select(['uid'=>$user->getUid()])->current();
 
-        if( $user==null || $credentials==null ) {
+        if( $credentials==null ) {
             return new Result(
                 Result::FAILURE_IDENTITY_NOT_FOUND,
                 null,

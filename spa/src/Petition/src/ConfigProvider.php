@@ -36,7 +36,7 @@ class ConfigProvider
             ],
             'factories'  => [
                 \Petition\Form\PetitionTranslationWriteForm::class => \Petition\Form\Factory\FactoryPetitionTranslationWriteServiceFormFactory::class,
-                \Petition\Form\PetitionUpdateForm::class => \Petition\Form\Factory\FactoryPetitionTranslationUpdateServiceFormFactory::class,
+                \Petition\Form\PetitionUpdateForm::class => \Petition\Form\Factory\FactoryPetitionUpdateServiceFormFactory::class,
                 '\Petition\Form\PetitionSignatureWriteForm::class' => \Petition\Form\Factory\SignPetitionFormFactory::class,
             ],
         ];
@@ -657,6 +657,64 @@ class ConfigProvider
                                                     ],
                                                 ],
                                             ],
+                                        ], // list
+                                        'table' => [
+                                            [
+                                                'name' => 'petition_translations',
+                                                'type' => 'table',
+                                                'partial' => 'common-admin::template-read-table-item',
+                                                'headers'=> [
+                                                    'name'=>_("Name"),
+                                                    'country'=>_("Country"),
+                                                    'status'=>'Status',
+                                                    'created'=>'Created',
+                                                    100=>_('Action'),
+                                                ],
+                                                'service' => [
+                                                    [
+                                                        'service_name'=>'Petition\Translation\TableService',
+                                                        'object' => \Petition\Model\PetitionTranslationModel::class,
+                                                        'method' => 'getItemsByParentUid',
+                                                        'arguments' => [
+                                                            [
+                                                                'type' => 'service',
+                                                                'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
+                                                                'method' => 'getMatchedParam',
+                                                                'arg_name' => 'uid',
+                                                            ],
+                                                        ],
+                                                    ],
+
+                                                ],
+                                                'rows' => [
+                                                    ['column'=>'name'],
+                                                    ['column'=>'country'],
+                                                    ['column'=>'status'],
+                                                    ['column'=>'created'],
+                                                    ['buttons' => [
+                                                        [
+                                                            'html_tag' => 'a',
+                                                            'text' => _("Details"),
+                                                            'attributes' => [
+                                                                'class' => 'btn btn-sm btn-info ml-5',
+                                                                'href' => [
+                                                                    'type' => 'plugin',
+                                                                    'name' => 'url',
+                                                                    'arguments' => [
+                                                                        'manager.petition.read',
+                                                                        [
+                                                                            'uid'=> [
+                                                                                'source' => 'row-item',
+                                                                                'property' => 'uid',
+                                                                            ],
+                                                                        ]
+                                                                    ],
+                                                                ],
+                                                            ],
+                                                        ],
+                                                    ],],
+                                                ],
+                                            ],
                                         ],
                                     ],
                                 ],
@@ -769,31 +827,6 @@ class ConfigProvider
                                                             ],
                                                         ],
                                                     ],
-                                                    'fieldset_petition_translation' => [
-                                                        'fieldset_name' => 'fieldset_petition_translation',
-                                                        'base_fieldset_name' => 'form_update',
-                                                        'type' => 'fieldset',
-                                                        'partial' => 'common-admin::template-update-item',
-                                                        'source' => [
-                                                            'service' => [
-                                                                [
-                                                                    'service_name'=>'Petition\Translation\TableService',
-                                                                    'object' => \Petition\Model\PetitionTranslationModel::class,
-                                                                    'method' => 'getItemByParentUid',
-                                                                    'arguments' => [
-                                                                        [
-                                                                            'type' => 'service',
-                                                                            'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
-                                                                            'method' => 'getMatchedParam',
-                                                                            'arg_name' => 'uid',
-                                                                            'arg_name_target' => 'petition_uid',
-                                                                        ],
-                                                                    ],
-                                                                ],
-
-                                                            ],
-                                                        ],
-                                                    ],
                                                 ], // read
                                                 'update' => [
                                                     'form_name' => 'form_update',
@@ -840,6 +873,64 @@ class ConfigProvider
                                                         ], // fieldset_event_details
                                                     ],
                                                 ], // updates
+                                            ],
+                                        ],
+                                        'table' => [
+                                            [
+                                                'name' => 'petition_translations',
+                                                'type' => 'table',
+                                                'partial' => 'common-admin::template-read-table-item',
+                                                'headers'=> [
+                                                    'name'=>_("Name"),
+                                                    'country'=>_("Country"),
+                                                    'status'=>'Status',
+                                                    'created'=>'Created',
+                                                    100=>_('Action'),
+                                                ],
+                                                'service' => [
+                                                    [
+                                                        'service_name'=>'Petition\Translation\TableService',
+                                                        'object' => \Petition\Model\PetitionTranslationModel::class,
+                                                        'method' => 'getItemsByParentUid',
+                                                        'arguments' => [
+                                                            [
+                                                                'type' => 'service',
+                                                                'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
+                                                                'method' => 'getMatchedParam',
+                                                                'arg_name' => 'uid',
+                                                            ],
+                                                        ],
+                                                    ],
+
+                                                ],
+                                                'rows' => [
+                                                    ['column'=>'name'],
+                                                    ['column'=>'country'],
+                                                    ['column'=>'status'],
+                                                    ['column'=>'created'],
+                                                    ['buttons' => [
+                                                        [
+                                                            'html_tag' => 'a',
+                                                            'text' => _("Details"),
+                                                            'attributes' => [
+                                                                'class' => 'btn btn-sm btn-info ml-5',
+                                                                'href' => [
+                                                                    'type' => 'plugin',
+                                                                    'name' => 'url',
+                                                                    'arguments' => [
+                                                                        'manager.petition.read',
+                                                                        [
+                                                                            'uid'=> [
+                                                                                'source' => 'row-item',
+                                                                                'property' => 'uid',
+                                                                            ],
+                                                                        ]
+                                                                    ],
+                                                                ],
+                                                            ],
+                                                        ],
+                                                    ],],
+                                                ],
                                             ],
                                         ],
                                     ],

@@ -40,6 +40,7 @@ class PetitionTranslationWriteFieldset extends Fieldset implements InputFilterPr
                 'use_as_base_fieldset' => false
             )
         ));
+
     }
 
     public function getInputFilterSpecification()

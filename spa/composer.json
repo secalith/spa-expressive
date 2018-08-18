@@ -42,6 +42,7 @@
         "atelierspierrot/famfamfam-flags-sprite": "^1.0",
         "michelf/php-markdown": "^1.8",
         "mockery/mockery": "^1.1",
+        "ovh/ovh": "^2.0",
         "ramsey/uuid": "^3.7",
         "roave/security-advisories": "dev-master",
         "robmorgan/phinx": "^0.9.2",
