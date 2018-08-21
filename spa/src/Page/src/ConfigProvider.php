@@ -493,7 +493,7 @@ class ConfigProvider
                                     ],
                                 ],
                                 'view_template_model' => [
-                                    'layout' => 'layout::default',
+                                    'layout' => 'layout::manager',
                                     'template' => 'common-admin::template-list',
                                 ],
                             ], // get

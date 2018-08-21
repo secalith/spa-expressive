@@ -1,0 +1,22 @@
+
+    <div class="app-container app-template-read border-3">
+        <div class="app-container-content p-4 p-md-5">
+            <div class="app-container-header">
+                <?=$this->partial("common-admin-partial::partial-header",['heading'=>$data_template_model['heading'],'data'=>$resources]);?>
+            </div>
+            <hr />
+            <?=$this->getFormAttached(['form_read'=>$form],null,'form_read',true,$view_template_model['forms']['form_read']);?>
+        </div>
+    </div>
+
+<?php if($resources): ?>
+
+    <?php foreach($resources as $res):  ?>
+
+        <?php if(array_key_exists('partial',$res['service_config'])): ?>
+            <?=$this->partial($res['service_config']['partial'],['resource'=>$res]);?>
+        <?php endif;?>
+
+    <?php endforeach;?>
+
+<?php endif; ?>

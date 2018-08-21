@@ -47,6 +47,9 @@ class OpenTagHelper extends AbstractHelper
                     $attr['data-uid'] = $item->getData()->getUid();
                     $attr['data-wrapper'] = 'outer';
                     $attr['data-type'] = $item->getType();
+                    if($item->getType()==='content') {
+                        $attributes['data-content-type'] = $item->getData()->getType();
+                    }
                 }
 
                 $output .= sprintf('<%s',$param['html_tag']);
@@ -80,6 +83,9 @@ class OpenTagHelper extends AbstractHelper
                 $attributes['data-uid'] = $item->getData()->getUid();
                 $attributes['data-wrapper'] = 'main';
                 $attributes['data-type'] = $item->getType();
+                if($item->getType()==='content') {
+                    $attributes['data-content-type'] = $item->getData()->getType();
+                }
             }
             if( ! empty($attributes) && is_array($attributes)) {
                 foreach($attributes as $attrName=>$attrValue) {
@@ -121,6 +127,9 @@ class OpenTagHelper extends AbstractHelper
                     $attr['data-uid'] = $item->getData()->getUid();
                     $attr['data-wrapper'] = 'inner';
                     $attr['data-type'] = $item->getType();
+                    if($item->getType()==='content') {
+                        $attributes['data-content-type'] = $item->getData()->getType();
+                    }
                 }
                 $output .= sprintf('<%s',$param['html_tag']);
                 if( ! empty($attr)) {

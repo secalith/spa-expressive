@@ -33,6 +33,7 @@ $( document ).ready(function(){
         evt.preventDefault();
         window.location.href = "/auth";
     });
+
 });
 
 function scrollToByName(element) {

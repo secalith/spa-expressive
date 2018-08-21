@@ -13,6 +13,7 @@ $cacheConfig = [
 ];
 
 $aggregator = new ConfigAggregator([
+    \Application\ConfigProvider::class,
     \Petition\ConfigProvider::class,
     \Article\ConfigProvider::class,
     \Shrt\ConfigProvider::class,

@@ -7,6 +7,10 @@
         this.callback_name = sCallbackName;
         this.url_block = "/singlepageapplication/block/create/token/ajax";
         this.data_area_identifier_attr_name = "data-area-identifier";
+
+        this.plugins = {};
+        this.plugins.html = new Html();
+
     }
 
     ObjEditor.prototype.getCallbackName = function(){
@@ -24,6 +28,9 @@
         $('.tooltip').animate({ opacity: 0 }, 0);
         // console.log("ObjEditor.setup");
         this.setEventAttribute('.menu-item-add-block','click','toggleBlockMenu',0);
+
+
+
         this.setEventAttribute('body','load','addAdminClass',0);
     }
 

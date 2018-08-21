@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Common\Handler\Factory;
+namespace Common\Handler\Api\Factory;
 
 use ArrayDigger\Service\ArrayDigger;
 use Common\Service\RouteConfigService;
@@ -17,7 +17,7 @@ use Zend\ServiceManager\AbstractFactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Expressive\Template;
 
-class ReadHandlerAbstractFactory implements AbstractFactoryInterface
+class ApiReadHandlerAbstractFactory implements AbstractFactoryInterface
 {
     /**
      * @var array
@@ -43,7 +43,7 @@ class ReadHandlerAbstractFactory implements AbstractFactoryInterface
         ServiceLocatorInterface $serviceLocator, $name, $requestedName
     )
     {
-        if (fnmatch("*\Read", $requestedName) && ! class_exists($requestedName)) {
+        if (fnmatch("*\ApiRead", $requestedName) && ! class_exists($requestedName)) {
             $config = $serviceLocator->get(RouteConfigService::class);
             $routeConfig = $config->getRouteConfig($name);
             if( null !== $routeConfig)

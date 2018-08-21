@@ -11,6 +11,9 @@ $( document ).ready(function(){
         return false;
     });
 
+
+    objEditor.setup();
+
 });
 
 function scrollToByName(element) {

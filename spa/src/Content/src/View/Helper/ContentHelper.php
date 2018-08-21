@@ -73,7 +73,11 @@ class ContentHelper extends AbstractHelper
         }
 
 
-        $output .= $item->getData()->getContent();
+        if($item->getData()->getType()=='markdown') {
+            $output .= $this->getView()->plugin('markdown')($item->getData()->getContent());
+        } else {
+            $output .= $item->getData()->getContent();
+        }
 
         $output .= $this->getView()->plugin('closeTag')($item);
 

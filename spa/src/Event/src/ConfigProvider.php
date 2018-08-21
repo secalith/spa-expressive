@@ -986,11 +986,12 @@ class ConfigProvider
                                                 ],
                                             ],
                                         ],
-                                    ],
+                                    ], // main
                                 ],
                                 'view_template_model' => [
                                     'layout' => 'layout::manager',
                                     'template' => 'common-admin::template-list',
+                                    'body_class' => 'app-action-list',
                                 ],
                             ], // get
                         ], // manager.event.list

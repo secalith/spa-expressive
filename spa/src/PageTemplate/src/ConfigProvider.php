@@ -72,6 +72,117 @@ class ConfigProvider
                     ],
                 ],
             ], // gateway
+            'handler' => [
+                'Common\Handler\List'=> [
+                    'route' => [
+                        'admin.page-template.list' => [
+                            'get' => [
+                                'method' => 'GET',
+                                'scenario' => 'list',
+                                'paginator' => [
+                                    'object' => \Zend\Paginator\Paginator::class,
+                                    'adapter' => [
+                                        'object' => \Zend\Paginator\Adapter\DbSelect::class,
+                                    ],
+                                    'gateway' => 'PageTemplate\TableGateway',
+                                    'db_select' => [
+                                        'columns' => [
+                                            'uid',
+                                            'route_uid',
+                                            'type',
+                                            'location',
+                                            'name',
+                                            'label',
+                                            'comm',
+                                            'status',
+                                            'created',
+                                        ],
+//                                        'join' => [
+//                                            [
+//                                                'on' => 'site',
+//                                                'where' => 'site.uid = page.site_uid',
+//                                                'columns' => ['site_name','site_status'=>'status'],
+//                                                'union' => 'left',
+//                                            ],
+//                                        ],
+                                    ],
+                                ],
+                                'view_template_model' => [
+                                    'layout' => 'layout::manager',
+                                    'template' => 'common-admin::template-list',
+                                ],
+                                'data_template_model' => [
+                                    'route_name' => 'admin.page-template.list',
+                                    'heading' => [
+                                        [
+                                            'html_tag' => 'h1',
+                                            'text' => _("Templatki"),
+                                            'buttons' => [
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => _("Utworz Templatke"),
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-5',
+                                                        'href' => 'helper::url:admin.page-template.create'
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                    'main' => [
+                                        'table' => [
+                                            [
+                                                'name' => 'main',
+                                                'headers'=> [
+                                                    'name'=>_("Nazwa"),
+                                                    'route_uid'=>_("Route UID"),
+                                                    'type'=>_("Type"),
+                                                    'location'=>_("Location"),
+                                                    'label'=>_("Label"),
+                                                    'status'=>'Status',
+                                                    'created'=>'Created',
+                                                    100=>'Details',
+                                                ],
+                                                'rows' => [
+                                                    ['column'=>'name'],
+                                                    ['column'=>'route_uid'],
+                                                    ['column'=>'type'],
+                                                    ['column'=>'location'],
+                                                    ['column'=>'label'],
+                                                    ['column'=>'status'],
+                                                    ['column'=>'created'],
+                                                    ['buttons' => [
+                                                        [
+                                                            'html_tag' => 'a',
+                                                            'text' => _("Szczegoly"),
+                                                            'attributes' => [
+                                                                'class' => 'btn btn-sm btn-info ml-5',
+                                                                'href' => [
+                                                                    'type' => 'plugin',
+                                                                    'name' => 'url',
+                                                                    'arguments' => [
+                                                                        'admin.page-template.read',
+                                                                        [
+                                                                            'uid'=> [
+                                                                                'source' => 'row-item',
+                                                                                'property' => 'uid',
+                                                                            ],
+                                                                        ]
+                                                                    ],
+                                                                ],
+                                                            ],
+                                                        ],
+                                                    ],],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ], // data_template_model
+                            ],
+                        ],
+                    ],
+                ],
+            ], // handler
         ];
     }
 }

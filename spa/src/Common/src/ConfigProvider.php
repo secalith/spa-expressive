@@ -111,6 +111,7 @@ class ConfigProvider
                 Service\TableServiceAbstractFactory::class,
                 \Common\Handler\Factory\CreateHandlerAbstractFactory::class,
                 \Common\Handler\Factory\ReadHandlerAbstractFactory::class,
+                \Common\Handler\Api\Factory\ApiReadHandlerAbstractFactory::class,
                 \Common\Handler\Factory\UpdateHandlerAbstractFactory::class,
                 \Common\Handler\Factory\DeleteHandlerAbstractFactory::class,
                 \Common\Handler\Factory\ListHandlerAbstractFactory::class,

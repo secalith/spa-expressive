@@ -1,0 +1,135 @@
+<?php
+
+$form->prepare();
+
+//  fieldset_event
+//  fieldset_event_details
+
+?>
+
+<?=$this->form()->openTag($form);?>
+
+<?=$this->formElementErrors($form->get('form_read')->get('fieldset_content')->get('uid'));?>
+<?=$this->formElementErrors($form->get('application_id'));?>
+<?=$this->formElementErrors($form->get('csrf'));?>
+
+<div>
+    <div class="container-fluid pt-2">
+
+        <div class="row">
+            <div class="col-12 col-md-2 py-2 text-right">
+                <?=$this->formSubmit($form->get('submit'));?>
+            </div>
+            <div class="col-12 py-2">
+                <hr />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+                <?=$this->formLabel($form->get('form_read')->get('fieldset_content')->get('parent_uid'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_read')->get('fieldset_content')->get('parent_uid'))))?'has-errors':'';?>">
+                <?=$this->formInput($form->get('form_read')->get('fieldset_content')->get('parent_uid'));?>
+                <?=$this->formElementErrors($form->get('form_read')->get('fieldset_content')->get('parent_uid'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+                <small><?=$this->translate('Choose the parent container for new content.');?></small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+                <?=$this->formLabel($form->get('form_read')->get('fieldset_content')->get('block_uid'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_read')->get('fieldset_content')->get('block_uid'))))?'has-errors':'';?>">
+                <?=$this->formInput($form->get('form_read')->get('fieldset_content')->get('block_uid'));?>
+                <?=$this->formElementErrors($form->get('form_read')->get('fieldset_content')->get('block_uid'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+                <small><?=$this->translate('Block Parent for new content.');?></small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+                <?=$this->formLabel($form->get('form_read')->get('fieldset_content')->get('template_uid'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_read')->get('fieldset_content')->get('template_uid'))))?'has-errors':'';?>">
+                <?=$this->formInput($form->get('form_read')->get('fieldset_content')->get('template_uid'));?>
+                <?=$this->formElementErrors($form->get('form_read')->get('fieldset_content')->get('template_uid'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+                <small><?=$this->translate('In which template the content should be displayed?');?></small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+                <?=$this->formLabel($form->get('form_read')->get('fieldset_content')->get('type'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_read')->get('fieldset_content')->get('type'))))?'has-errors':'';?>">
+                <?=$this->formInput($form->get('form_read')->get('fieldset_content')->get('type'));?>
+                <?=$this->formElementErrors($form->get('form_read')->get('fieldset_content')->get('type'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+                <small><?=$this->translate('Type of new content.');?></small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+                <?=$this->formLabel($form->get('form_read')->get('fieldset_content')->get('content'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_read')->get('fieldset_content')->get('content'))))?'has-errors':'';?>">
+                <?=$this->formTextArea($form->get('form_read')->get('fieldset_content')->get('content'));?>
+                <?=$this->formElementErrors($form->get('form_read')->get('fieldset_content')->get('content'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+                <small><?=$this->translate('Place new content here.');?></small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+                <?=$this->formLabel($form->get('form_read')->get('fieldset_content')->get('order'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_read')->get('fieldset_content')->get('order'))))?'has-errors':'';?>">
+                <?=$this->formInput($form->get('form_read')->get('fieldset_content')->get('order'));?>
+                <?=$this->formElementErrors($form->get('form_read')->get('fieldset_content')->get('order'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+                <small><?=$this->translate('Determine order related to other COntent items in selected block.');?></small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+                <?=$this->formLabel($form->get('form_read')->get('fieldset_content')->get('status'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_read')->get('fieldset_content')->get('status'))))?'has-errors':'';?>">
+                <?=$this->formSelect($form->get('form_read')->get('fieldset_content')->get('status'));?>
+                <?=$this->formElementErrors($form->get('form_read')->get('fieldset_content')->get('status'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+                <small><?=$this->translate('Should you Event be visible in public?');?></small>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="hidden">
+            <?=$this->formElement($form->get('form_read')->get('fieldset_content')->get('uid'));?>
+            <?=$this->formElement($form->get('application_id'));?>
+            <?=$this->formElement($form->get('csrf'));?>
+        </div>
+
+        <div class="py-2 px-3 mb-2">
+            <?=$this->formSubmit($form->get('submit'));?>
+        </div>
+
+    </div>
+</div>
+
+<?=$this->form()->closeTag();?>
+

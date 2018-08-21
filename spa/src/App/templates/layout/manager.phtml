@@ -69,8 +69,9 @@ endif;
                             </li>
                         <?php endif;?>
                     </ul>
+                    <?php if( $this->hasIdentity()):?>
                     <ul class="navbar-nav navbar-right align-right">
-                        <?php if( $this->hasIdentity()):?>
+
                             <li class="nav-item ml-3">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-info"><?=$this->translate("Manage");?></button>
@@ -82,18 +83,45 @@ endif;
                                         <a class="dropdown-item" href="<?=$this->url('manager.petition.list')?>"><?=$this->translate("Petitions");?></a>
                                         <a class="dropdown-item" href="<?=$this->url('manager.article.list')?>"><?=$this->translate("Articles");?></a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#"><?=$this->translate("Resources");?></a>
+                                        <a class="dropdown-item" href="<?=$this->url('manager.content.list')?>"><?=$this->translate("Content");?></a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#"><?=$this->translate("Show Content Paths");?></a>
+                                        <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="#"><?=$this->translate("Page SEO");?></a>
                                         <a class="dropdown-item" href="#"><?=$this->translate("Settings");?></a>
                                         <a class="dropdown-item" href="#"><?=$this->translate("Your Account");?></a>
                                     </div>
                                 </div>
                             </li>
+
+                            <li class="nav-item ml-3">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-info"><?=$this->translate("Administer");?></button>
+                                    <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <h6 class="dropdown-header"><?=$this->translate('SPA');?></h6>
+                                        <a class="dropdown-item" href="<?=$this->url('admin.application.list')?>"><?=$this->translate("Applications");?></a>
+                                        <a class="dropdown-item" href="<?=$this->url('admin.site.list')?>"><?=$this->translate("Sites");?></a>
+                                        <a class="dropdown-item" href="<?=$this->url('admin.page.list')?>"><?=$this->translate("Pages");?></a>
+                                        <a class="dropdown-item" href="<?=$this->url('admin.router.list')?>"><?=$this->translate("Routers");?></a>
+                                        <a class="dropdown-item" href="<?=$this->url('admin.page-template.list')?>"><?=$this->translate("Templates");?></a>
+                                        <a class="dropdown-item" href="<?=$this->url('admin.page-resource.list')?>"><?=$this->translate("Page Resource");?></a>
+                                        <a class="dropdown-item" href="<?=$this->url('admin.instance.list')?>"><?=$this->translate("Instances");?></a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="<?=$this->url('manager.content.list')?>"><?=$this->translate("Content");?></a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#"><?=$this->translate("Settings");?></a>
+                                    </div>
+                                </div>
+                            </li>
                             <li class="nav-item ml-3">
                                 <a href="<?=$this->url('spa.auth.logout')?>" class="nav-link btn btn-sm btn-secondary text-light"><?=$this->translate("Sign Out");?></a>
                             </li>
-                        <?php endif;?>
-                    </ul>
+                        </ul>
+                    <?php endif;?>
+
                 </div>
             </div>
         </nav>
@@ -113,6 +141,7 @@ endif;
             </div>
         </main>
     </div>
+
 
 <footer class="app-footer footer">
     <div class="container">

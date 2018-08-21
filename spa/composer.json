@@ -104,7 +104,8 @@
             "I18n\\": "src/I18n/src/",
             "Shrt\\": "src/Shrt/src/",
             "Article\\": "src/Article/src/",
-            "Petition\\": "src/Petition/src/"
+            "Petition\\": "src/Petition/src/",
+            "Application\\": "src/Application/src/"
         }
     },
     "autoload-dev": {
