@@ -6,7 +6,8 @@ return [
     'Continue' => 'Ausloggen',
 
     'Homepage' => 'Startseite',
-//    'Events' => 'Startseite',
+    'Events' => 'Veranstaltungen',
+    'Information' => 'Information',
     'See on Facebook' => 'See on Facebook',
     'Find on Map' => 'Finde auf der Karte',
 
