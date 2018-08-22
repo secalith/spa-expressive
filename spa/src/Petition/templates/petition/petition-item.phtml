@@ -9,16 +9,18 @@
 <h1><?=$this->markdown($translation->getTitle());?></h1>
 
 <div class="row">
-    <div class="col-8">
+    <div class="col-12 col-md-8 order-4 order-md-0">
+        <hr class="d-block d-md-none" />
         <?=$this->markdown($translation->getText());?>
     </div>
-    <div class="col-4">
+    <div class="col-12 col-md-4">
         <?php if( array_key_exists('request',$form['form'])): ?>
             <h3><?=$this->markdown($this->translate("Signature has been recorded."));?></h3>
             <p><?=$this->markdown($this->translate("Thank you for your support!"));?></p>
         <?php else: ?>
             <?=$this->getFormAttached($form['form'],null,'data',true,'petition::petition-form-sign');?>
         <?php endif;?>
+        <hr class="d-block d-md-none" />
     </div>
 </div>
 
