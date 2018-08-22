@@ -37,7 +37,16 @@ endif;
     <meta property="og:image" content="http://art13.eu/assets/img/1113.png"/>
     <meta property="og:image:secure_url" content="https://art13.eu/assets/img/1113.png" />
 
-    <link rel="shortcut icon" href="https://framework.zend.com/ico/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="https://art13.eu/assets/favicons/1113/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://art13.eu/assets/favicons/1113/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://art13.eu/assets/favicons/1113/favicon-16x16.png">
+    <link rel="manifest" href="https://art13.eu/assets/favicons/1113/site.webmanifest">
+    <link rel="mask-icon" href="https://art13.eu/assets/favicons/1113/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="https://art13.eu/assets/favicons/1113/favicon.ico">
+    <meta name="msapplication-TileColor" content="#efefef">
+    <meta name="msapplication-config" content="https://art13.eu/assets/favicons/1113/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="shortcut icon" href="https://art13.eu/assets/favicons/1113/favicon-32x32.png" />
     <?=$this->headTitle('Art. 11')->setSeparator(' - ')->setAutoEscape(false)?>
     <?=$this->headMeta()?>
     <?=$this->headLink()?>
@@ -74,74 +83,61 @@ endif;
 </script>
 
     <header class="app-header">
-        <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top" role="navigation">
+
+        <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top" role="navigation">
             <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="#navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <!-- Brand -->
-                    <a class="navbar-brand" href="#">
+
+                <div class="navbar-header w-100 d-flex justify-content-between">
+                    <a id="site-logo" class="navbar-brand d-inline-block mt-1 float-left" href="/">
                         <img src="https://art13.eu/assets/img/1113.png" alt="art13.eu" height="28" />
                     </a>
+
+                    <ul class="navbar-nav d-none d-md-inline-block">
+                        <li class="nav-item d-none d-lg-inline-block mt-2 p-0">
+                            <a href="https://art13.eu" class="nav-link scroll-trigger"><?=$this->translate("Homepage");?></a>
+                        </li>
+                        <li class="nav-item d-inline-block mt-2 p-0">
+                            <a href="https://art13.eu#events" class="nav-link scroll-trigger"><?=$this->translate("Events");?></a>
+                        </li>
+                        <li class="nav-item d-inline-block mt-2 p-0">
+                            <a href="https://peticio.art13.eu" class="nav-link _scroll-trigger" target="_blank"><?=$this->translate("Petition");?></a>
+                        </li>
+                        <li class="nav-item d-inline-block mt-2 p-0">
+                            <a href="https://art13.eu#information" class="nav-link scroll-trigger"><?=$this->translate("Information");?></a>
+                        </li>
+                    </ul>
+
+                    <div class="d-inline-block m-0 mt-2 p-0">
+                        <span class="float-md-right mt-1 mr-0" id="time_counter-first" data-countdown="2018/08/26 18:00"></span>
+                    </div>
+
+                    <button type="button" class="navbar-toggler float-right " data-toggle="collapse" data-target="#navbarCollapse" aria-controls="#navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
                 </div>
-                <!-- Links -->
+
                 <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav mr-auto">
+
+                    <ul class="navbar-nav mr-auto mt-2 d-md-none border-top">
                         <li class="nav-item">
-                            <a href="https://art13.eu" class="nav-link"><?=$this->translate("Homepage");?></a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="https://art13.eu#events" class="nav-link"><?=$this->translate("Events");?></a>
+                            <a href="https://art13.eu#events" class="nav-link scroll-trigger"><?=$this->translate("Events");?></a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="https://peticio.art13.eu" class="nav-link"><?=$this->translate("Petition");?></a>
+                            <a href="#petition" class="nav-link scroll-trigger"><?=$this->translate("Petition");?></a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="https://art13.eu#information" class="nav-link"><?=$this->translate("Information");?></a>
+                            <a href="https://art13.eu#information" class="nav-link scroll-trigger"><?=$this->translate("Information");?></a>
                         </li>
-
+                        <li class="nav-item d-block d-md-none border-top">
+                            <a href="<?=$this->url('spa.auth.logout')?>" class="nav-link"><?=$this->translate("Sign Out");?></a>
+                        </li>
                     </ul>
 
-                    <ul class="navbar-nav navbar-right align-middle">
-                        <?php if( ! $this->hasIdentity()):?>
-
-                        <?php else: ?>
-
-                        <?php endif;?>
-                        <li class="nav-item">
-                            <p class="mt-3 mr-3"><?=$this->translate('Protests starts in ');?></p>
-                        </li>
-                        <li class="nav-item mt-2">
-                            <span class="float-md-right mt-1 mr-0" id="time_counter-first" data-countdown="2018/08/26 19:00"></span>
-                        </li>
-
-                    </ul>
-                    <ul class="navbar-nav navbar-right align-right">
-                        <?php if( $this->hasIdentity()):?>
-                            <li class="nav-item ml-3">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-info"><?=$this->translate("Manage");?></button>
-                                    <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <span class="sr-only">Toggle Dropdown</span>
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="<?=$this->url('manager.event.list')?>"><?=$this->translate("Events");?></a>
-                                        <a class="dropdown-item" href="<?=$this->url('manager.petition.list')?>"><?=$this->translate("Petitions");?></a>
-                                        <a class="dropdown-item" href="<?=$this->url('manager.article.list')?>"><?=$this->translate("Articles");?></a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#"><?=$this->translate("Your Account");?></a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="nav-item ml-3">
-                                <a href="<?=$this->url('spa.auth.logout')?>" class="nav-link btn btn-sm btn-secondary text-light"><?=$this->translate("Sign Out");?></a>
-                            </li>
-                        <?php endif;?>
-                    </ul>
                 </div>
+
             </div>
         </nav>
     </header>
@@ -165,13 +161,7 @@ endif;
                         <li class="d-inline mr-4"><a class="text-muted" href="#"><?=$this->translate('About');?></a></li>
                         <li class="d-inline mr-4"><a class="text-muted" href="/privacy-policy"><?=$this->translate('Privacy Policy');?></a></li>
                         <li class="d-inline mr-4"><a class="text-muted" href="#"><?=$this->translate('Terms and Conditions');?></a></li>
-                        <li class="d-inline mr-4"><a class="text-muted" href="#"><?=$this->translate('List Petitions');?></a></li>
-                        <?php if( ! $this->hasIdentity()):?>
-                            <li class="d-inline mr-4"><a class="text-muted" href="<?=$this->url('manager.register')?>"><?=$this->translate('Sign Up');?></a></li>
-                            <li class="d-inline mr-4"><a class="text-muted" href="<?=$this->url('spa.auth')?>"><?=$this->translate('Sign In');?></a></li>
-                        <?php else: ?>
-                            <li class="d-inline mr-4"><a class="text-muted" href="<?=$this->url('spa.auth.logout')?>"><?=$this->translate("Sign Out");?></a></li>
-                        <?php endif;?>
+
                 </div>
             </div>
         </div>
