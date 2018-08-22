@@ -8,11 +8,7 @@ use Zend\Expressive\MiddlewareFactory;
 
 return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container) : void {
 
-    var_dump(mail("jan@secalith.co.uk",'test','body'));
-    var_dump(mail("jan@kowalski.name",'test','body'));
-    die();
-
-    $app->get('/api/ping', App\Handler\PingHandler::class, 'api.ping');
+        $app->get('/api/ping', App\Handler\PingHandler::class, 'api.ping');
     $app->any('/login', Auth\Handler\LoginHandler::class, 'spa.auth.login');
     $app->any('/logout', Auth\Handler\LogoutHandler::class, 'spa.auth.logout');
 //    $app->any('/request-reset', Auth\Handler\RequestHandler::class, 'spa.auth.request');
