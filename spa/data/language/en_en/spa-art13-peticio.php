@@ -4,4 +4,6 @@ return [
     'Signature has been recorded.' => 'Signature has been recorded.',
     'Thank you for your support!' => 'Thank you for your support!',
     'Sign the Petition' => 'Sign the Petition',
+    'Events' => 'Events',
+    'Information' => 'Information',
 ];
