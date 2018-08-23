@@ -8,7 +8,7 @@ use Zend\Expressive\MiddlewareFactory;
 
 return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container) : void {
 
-        $app->get('/api/ping', App\Handler\PingHandler::class, 'api.ping');
+    $app->get('/api/ping', App\Handler\PingHandler::class, 'api.ping');
     $app->any('/login', Auth\Handler\LoginHandler::class, 'spa.auth.login');
     $app->any('/logout', Auth\Handler\LogoutHandler::class, 'spa.auth.logout');
 //    $app->any('/request-reset', Auth\Handler\RequestHandler::class, 'spa.auth.request');
@@ -202,6 +202,19 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
         'Common\Handler\Create',
     ], 'manager.petition.translation.create.post');
 
+    # MANAGER-PETITION-RECIPIENTS #
+    $app->get('/admin/petition-recipients/list[/[{page:\d+}]]', [
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\List',
+    ], 'manager.petition-recipients.list');
+    $app->get('/admin/petition-recipients-groups/list[/[{page:\d+}]]', [
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\List',
+    ], 'manager.petition-recipients-groups.list');
+    $app->get('/admin/petition-recipients-groups-assign/list[/[{page:\d+}]]', [
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\List',
+    ], 'manager.petition-recipients-groups-assign.list');
 
 
     ## MANAGER-ARTICLE

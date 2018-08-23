@@ -43,6 +43,13 @@ class SitesSeeder extends AbstractSeed
                 'status' => 1,
                 'created' => date('Y-m-d H:i:s'),
             ],
+            [
+                'uid' => 'site-006',
+                'site_name' => 'peticio.art13.eu',
+                'application_uid'    => 'app-001',
+                'status' => 1,
+                'created' => date('Y-m-d H:i:s'),
+            ],
         ];
 
         $table = $this->table('site');

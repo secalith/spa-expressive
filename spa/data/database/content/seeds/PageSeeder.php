@@ -134,6 +134,35 @@ class PageSeeder extends AbstractSeed
                 'status'    => 1,
                 'created'    => date('Y-m-d H:i:s'),
             ],
+
+            [
+                'uid'    => 'page-010',
+                'application_uid'    => 'app-001',
+                'site_uid'    => 'site-006',
+                'route_uid'    => 'route-010',
+                'template_uid'    => 'template-003',
+                'name'    => 'petycja.home',
+                'route_url'    => '/',
+                'page_cache'    => 0,
+                'page_layout'    => 'layout::peticio-1',
+                'language'    => 'pl_pl',
+                'status'    => 1,
+                'created'    => date('Y-m-d H:i:s'),
+            ],
+            [
+                'uid'    => 'page-011',
+                'application_uid'    => 'app-001',
+                'site_uid'    => 'site-006',
+                'route_uid'    => 'route-011',
+                'template_uid'    => 'template-008',
+                'name'    => 'peticio.home.post',
+                'route_url'    => '/',
+                'page_cache'    => 0,
+                'page_layout'    => 'layout::peticio-1',
+                'language'    => 'en_en',
+                'status'    => 1,
+                'created'    => date('Y-m-d H:i:s'),
+            ],
         ];
 
         $table = $this->table('page');

@@ -53,6 +53,15 @@ class InstanceSeeder extends AbstractSeed
                 'status'    => 1,
                 'created'    => date('Y-m-d H:i:s'),
             ],
+            [
+                'uid'    => 'instance-006',
+                'application_uid'    => 'app-001',
+                'site_uid'    => 'site-006',
+                'client_uid'    => 'ponad-podzialami-client',
+                'hostname'    => 'petycja.art13.eu',
+                'status'    => 1,
+                'created'    => date('Y-m-d H:i:s'),
+            ],
         ];
 
         $table = $this->table('instances');

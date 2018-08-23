@@ -58,6 +58,20 @@ class RouteSeeder extends AbstractSeed
                 'status'    => 1,
                 'created'    => date('Y-m-d H:i:s'),
             ],
+            [
+                'uid'    => 'route-009',
+                'route_name'    => 'petycja.home',
+                'comm' => 'homepage for petycja.art13.eu',
+                'status'    => 1,
+                'created'    => date('Y-m-d H:i:s'),
+            ],
+            [
+                'uid'    => 'route-010',
+                'route_name'    => 'petycja.home.post',
+                'comm'    => 'homepage for petycja.art13.eu',
+                'status'    => 1,
+                'created'    => date('Y-m-d H:i:s'),
+            ],
         ];
 
         $table = $this->table('route');

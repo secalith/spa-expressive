@@ -452,6 +452,7 @@ class ConfigProvider
                                             [
                                                 'name' => 'main',
                                                 'headers'=> [
+                                                    'uid'=>_("Uid"),
                                                     'name'=>_("Nazwa"),
                                                     'site_name'=>_("Witryna"),
                                                     'route_url'=>_("Url"),
@@ -460,6 +461,7 @@ class ConfigProvider
                                                     100=>'Details',
                                                 ],
                                                 'rows' => [
+                                                    ['column'=>'uid'],
                                                     ['column'=>'name'],
                                                     ['column'=>'site_name'],
                                                     ['column'=>'route_url'],

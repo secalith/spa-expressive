@@ -78,6 +78,30 @@ class ConfigProvider
                         'name' => 'Petition\Signature\TableGateway',
                     ],
                 ],
+                'Petition\RecipientsGroup\TableService' => [
+                    'identifier' => 'Petition\RecipientsGroup\TableService',
+                    'gateway' => [
+                        'name' => 'Petition\RecipientsGroup\TableGateway',
+                    ],
+                ],
+                'Petition\GroupAssign\TableService' => [
+                    'identifier' => 'Petition\GroupAssign\TableService',
+                    'gateway' => [
+                        'name' => 'Petition\GroupAssign\TableGateway',
+                    ],
+                ],
+                'Petition\Recipients\Group\TableService' => [
+                    'identifier' => 'Petition\Recipients\Group\TableService',
+                    'gateway' => [
+                        'name' => 'Petition\Recipients\Group\TableGateway',
+                    ],
+                ],
+                'Petition\Recipients\TableService' => [
+                    'identifier' => 'Petition\Recipients\TableService',
+                    'gateway' => [
+                        'name' => 'Petition\Recipients\TableGateway',
+                    ],
+                ],
             ], // table_service
             'gateway' => [
                 'Petition\TableGateway' => [
@@ -116,6 +140,71 @@ class ConfigProvider
                     'name' => 'Petition\Signature\TableGateway',
                     'table' => [
                         'name' => 'petition_signature',
+                        'object' => \Petition\Model\PetitionSignatureTable::class,
+                    ],
+                    'adapter' => [
+                        'name' => 'Application\Db\Petition\LocalSQLiteAdapter',
+                    ],
+                    'model' => [
+                        "object" => \Petition\Model\PetitionSignatureModel::class,
+                    ],
+                    'hydrator' => [
+                        "object" => \Zend\Hydrator\ObjectProperty::class,
+                    ],
+                ],
+                'Petition\RecipientsGroup\TableGateway' => [
+                    'name' => 'Petition\RecipientsGroup\TableGateway',
+                    'table' => [
+                        'name' => 'recipients_group',
+                        'object' => \Petition\Model\RecipientsGroupTable::class,
+                    ],
+                    'adapter' => [
+                        'name' => 'Application\Db\Petition\LocalSQLiteAdapter',
+                    ],
+                    'model' => [
+                        "object" => \Petition\Model\RecipientsGroupModel::class,
+                    ],
+                    'hydrator' => [
+                        "object" => \Zend\Hydrator\ObjectProperty::class,
+                    ],
+                ],
+                'Petition\GroupAssign\TableGateway' => [
+                    'name' => 'Petition\GroupAssign\TableGateway',
+                    'table' => [
+                        'name' => 'recipients_group_assign',
+                        'object' => \Petition\Model\RecipientsGroupAssignTable::class,
+                    ],
+                    'adapter' => [
+                        'name' => 'Application\Db\Petition\LocalSQLiteAdapter',
+                    ],
+                    'model' => [
+                        "object" => \Petition\Model\RecipientsGroupAssignModel::class,
+                    ],
+                    'hydrator' => [
+                        "object" => \Zend\Hydrator\ObjectProperty::class,
+                    ],
+                ],
+
+                'Petition\Recipients\Group\TableGateway' => [
+                    'name' => 'Petition\Recipients\Group\TableGateway',
+                    'table' => [
+                        'name' => 'petition_recipients_group',
+                        'object' => \Petition\Model\PetitionSignatureTable::class,
+                    ],
+                    'adapter' => [
+                        'name' => 'Application\Db\Petition\LocalSQLiteAdapter',
+                    ],
+                    'model' => [
+                        "object" => \Petition\Model\PetitionSignatureModel::class,
+                    ],
+                    'hydrator' => [
+                        "object" => \Zend\Hydrator\ObjectProperty::class,
+                    ],
+                ],
+                'Petition\Recipients\TableGateway' => [
+                    'name' => 'Petition\Recipients\TableGateway',
+                    'table' => [
+                        'name' => 'recipients',
                         'object' => \Petition\Model\PetitionSignatureTable::class,
                     ],
                     'adapter' => [
@@ -974,7 +1063,7 @@ class ConfigProvider
                                                     'html_tag' => 'a',
                                                     'text' => _("Create Translation"),
                                                     'attributes' => [
-                                                        'class' => 'btn btn-sm btn-info ml-5 float-right',
+                                                        'class' => 'btn btn-sm btn-info ml-1 float-right',
                                                         'href' => 'helper::url:manager.petition.translation.create'
                                                     ],
                                                 ],
@@ -982,8 +1071,16 @@ class ConfigProvider
                                                     'html_tag' => 'a',
                                                     'text' => _("Create Petition"),
                                                     'attributes' => [
-                                                        'class' => 'btn btn-sm btn-info ml-5 float-right',
+                                                        'class' => 'btn btn-sm btn-info ml-1 float-right',
                                                         'href' => 'helper::url:manager.petition.create'
+                                                    ],
+                                                ],
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => _("List Recipients"),
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-1 float-right',
+                                                        'href' => 'helper::url:manager.petition-recipients.list'
                                                     ],
                                                 ],
                                             ],
@@ -1038,6 +1135,254 @@ class ConfigProvider
                                 ],
                             ], // get
                         ], // manager.petition.list
+                        'manager.petition-recipients.list' => [
+                            'get' => [
+                                'method' => 'GET',
+                                'scenario' => 'list',
+                                'paginator' => [
+                                    'object' => \Zend\Paginator\Paginator::class,
+                                    'adapter' => [
+                                        'object' => \Zend\Paginator\Adapter\DbSelect::class,
+                                    ],
+                                    'gateway' => 'Petition\Recipients\TableGateway',
+                                    'db_select' => [
+                                        'columns' => ['uid','name','status','created','email'],
+//                                        'join' => [
+//                                            [
+//                                                'on' => 'petition_group',
+//                                                'where' => 'petition_group.uid = petition.group',
+//                                                'columns' => ['group_name'=>'name'],
+//                                                'union' => 'left',
+//                                            ],
+//                                        ],
+                                    ],
+                                ],
+                                'data_template_model' => [
+                                    'route_name' => 'manager.petition-recipients.list',
+                                    'heading' => [
+                                        [
+                                            'html_tag' => 'h1',
+                                            'text' => _("Petition Recipients"),
+                                            'buttons' => [
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => _("Create Translation"),
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-1 float-right',
+                                                        'href' => 'helper::url:manager.petition.translation.create'
+                                                    ],
+                                                ],
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => _("Create Petition"),
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-1 float-right',
+                                                        'href' => 'helper::url:manager.petition.create'
+                                                    ],
+                                                ],
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => _("List Petitions"),
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-1 float-right',
+                                                        'href' => 'helper::url:manager.petition.list'
+                                                    ],
+                                                ],
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => _("List Recipients Group"),
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-1 float-right',
+                                                        'href' => 'helper::url:manager.petition-recipients-groups.list'
+                                                    ],
+                                                ],
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => _("List Petition Assignments"),
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-1 float-right',
+                                                        'href' => 'helper::url:manager.petition-recipients-groups-assign.list'
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                    'main' => [
+                                        'table' => [
+                                            [
+                                                'name' => 'main',
+                                                'headers'=> [
+                                                    'name'=>_("Name"),
+                                                    'email'=>_("Email"),
+                                                    'status'=>'Status',
+                                                    'created'=>'Created',
+                                                ],
+                                                'rows' => [
+                                                    ['column'=>'name'],
+                                                    ['column'=>'email'],
+                                                    ['column'=>'status'],
+                                                    ['column'=>'created'],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                                'view_template_model' => [
+                                    'layout' => 'layout::manager',
+                                    'template' => 'common-admin::template-list',
+                                ],
+                            ], // get
+                        ], // manager.petition-recipients.list
+                        'manager.petition-recipients-groups.list' => [
+                            'get' => [
+                                'method' => 'GET',
+                                'scenario' => 'list',
+                                'paginator' => [
+                                    'object' => \Zend\Paginator\Paginator::class,
+                                    'adapter' => [
+                                        'object' => \Zend\Paginator\Adapter\DbSelect::class,
+                                    ],
+                                    'gateway' => 'Petition\Recipients\Group\TableGateway',
+                                    'db_select' => [
+                                        'columns' => ['petition_uid','petition_translation_uid','recipient_group_uid','status','created'],
+//                                        'join' => [
+//                                            [
+//                                                'on' => 'petition_group',
+//                                                'where' => 'petition_group.uid = petition.group',
+//                                                'columns' => ['group_name'=>'name'],
+//                                                'union' => 'left',
+//                                            ],
+//                                        ],
+                                    ],
+                                ],
+                                'data_template_model' => [
+                                    'route_name' => 'manager.petition-recipients-groups.list',
+                                    'heading' => [
+                                        [
+                                            'html_tag' => 'h1',
+                                            'text' => _("Petition Recipients Groups"),
+                                            'buttons' => [
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => _("List Recipients"),
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-15 float-right',
+                                                        'href' => 'helper::url:manager.petition-recipients.list'
+                                                    ],
+                                                ],
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => _("List Petitions"),
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-1 float-right',
+                                                        'href' => 'helper::url:manager.petition.list'
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                    'main' => [
+                                        'table' => [
+                                            [
+                                                'name' => 'main',
+                                                'headers'=> [
+                                                    'petition_uid'=>_("petition_uid"),
+                                                    'petition_translation_uid'=>_("i18n UID"),
+                                                    'recipient_group_uid'=>'Group',
+                                                    'status'=>'Status',
+                                                    'created'=>'Created',
+                                                ],
+                                                'rows' => [
+                                                    ['column'=>'petition_uid'],
+                                                    ['column'=>'petition_translation_uid'],
+                                                    ['column'=>'recipient_group_uid'],
+                                                    ['column'=>'status'],
+                                                    ['column'=>'created'],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                                'view_template_model' => [
+                                    'layout' => 'layout::manager',
+                                    'template' => 'common-admin::template-list',
+                                ],
+                            ], // get
+                        ], // manager.petition-recipients-groups.list
+                        'manager.petition-recipients-groups-assign.list' => [
+                            'get' => [
+                                'method' => 'GET',
+                                'scenario' => 'list',
+                                'paginator' => [
+                                    'object' => \Zend\Paginator\Paginator::class,
+                                    'adapter' => [
+                                        'object' => \Zend\Paginator\Adapter\DbSelect::class,
+                                    ],
+                                    'gateway' => 'Petition\GroupAssign\TableGateway',
+                                    'db_select' => [
+                                        'columns' => ['group_uid','recipient_uid','status','created'],
+//                                        'join' => [
+//                                            [
+//                                                'on' => 'petition_group',
+//                                                'where' => 'petition_group.uid = petition.group',
+//                                                'columns' => ['group_name'=>'name'],
+//                                                'union' => 'left',
+//                                            ],
+//                                        ],
+                                    ],
+                                ],
+                                'data_template_model' => [
+                                    'route_name' => 'manager.petition-recipients-groups.list',
+                                    'heading' => [
+                                        [
+                                            'html_tag' => 'h1',
+                                            'text' => _("Petition Recipients Groups"),
+                                            'buttons' => [
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => _("List Recipients"),
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-1 float-right',
+                                                        'href' => 'helper::url:manager.petition-recipients.list'
+                                                    ],
+                                                ],
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => _("List Petitions"),
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-1 float-right',
+                                                        'href' => 'helper::url:manager.petition.list'
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                    'main' => [
+                                        'table' => [
+                                            [
+                                                'name' => 'main',
+                                                'headers'=> [
+                                                    'group_uid'=>_("group_uid"),
+                                                    'recipient_uid'=>_("recipient_uid"),
+                                                    'status'=>'Status',
+                                                    'created'=>'Created',
+                                                ],
+                                                'rows' => [
+                                                    ['column'=>'group_uid'],
+                                                    ['column'=>'recipient_uid'],
+                                                    ['column'=>'status'],
+                                                    ['column'=>'created'],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                                'view_template_model' => [
+                                    'layout' => 'layout::manager',
+                                    'template' => 'common-admin::template-list',
+                                ],
+                            ], // get
+                        ], // manager.petition-recipients-groups-assign.list
                     ], // route
                 ], // Common\Handler\List
             ],

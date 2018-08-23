@@ -127,6 +127,7 @@ class ConfigProvider
                                             [
                                                 'name' => 'main',
                                                 'headers'=> [
+                                                    'uid'=>'UID',
                                                     'site_name'=>'Name',
                                                     'status'=>'Status',
                                                     'type'=>'Type',
@@ -134,6 +135,7 @@ class ConfigProvider
                                                     100=>'Details',
                                                 ],
                                                 'rows' => [
+                                                    ['column'=>'uid'],
                                                     ['column'=>'site_name'],
                                                     ['column'=>'status'],
                                                     ['column'=>'type'],

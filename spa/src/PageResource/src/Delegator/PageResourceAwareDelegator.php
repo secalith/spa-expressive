@@ -93,22 +93,43 @@ class PageResourceAwareDelegator
                             $requestedForm = new $rname();
                         }
 
+                        $resource[$pageResource->getResourceType()]['service'] = null;
                         $resource[$pageResource->getResourceType()]['parameters'] = json_decode($pageResource->getParameters(),true);
                         $resource[$pageResource->getResourceType()]['data'] = $requestedForm;
-//var_dump($pageResource->getParameters());
-                        if(array_key_exists('parameters',$resource[$pageResource->getResourceType()])) {
-                            if(null!==$resource[$pageResource->getResourceType()]['parameters']) {
-                                if(array_key_exists('save',$resource[$pageResource->getResourceType()]['parameters'])) {
-                                    if(array_key_exists('service',$resource[$pageResource->getResourceType()]['parameters']['save'])) {
-                                        $serviceName = $resource[$pageResource->getResourceType()]['parameters']['save']['service'];
-                                        if($container->has($serviceName['name'])) {
-                                            $service = $container->get($serviceName['name']);
-                                            $resource[$pageResource->getResourceType()]['service'] = $service;
+
+                        if(null!==$resource[$pageResource->getResourceType()]['parameters']) {
+                            if(array_key_exists('save',$resource[$pageResource->getResourceType()]['parameters'])) {
+                                foreach($resource[$pageResource->getResourceType()]['parameters']['save'] as $saveService) {
+                                    if(array_key_exists('service',$saveService)) {
+                                        $serviceName = $saveService['service']['service_name'];
+                                        $serviceMethodName = $saveService['service']['method_name'];
+                                        if($container->has($serviceName)) {
+                                            $service = $container->get($serviceName);
+//                                            if(property_exists($service,$serviceMethodName)) {var_dump($service);die();
+                                                $resource[$pageResource->getResourceType()]['service'][$serviceName]['service'] = $service;
+                                                $resource[$pageResource->getResourceType()]['service'][$serviceName]['service_name'] = $serviceName;
+                                                $resource[$pageResource->getResourceType()]['service'][$serviceName]['method_name'] = $serviceMethodName;
+//                                            }
                                         }
                                     }
                                 }
                             }
                         }
+
+                        // OLD
+//                        if(array_key_exists('parameters',$resource[$pageResource->getResourceType()])) {
+//                            if(null!==$resource[$pageResource->getResourceType()]['parameters']) {
+//                                if(array_key_exists('save',$resource[$pageResource->getResourceType()]['parameters'])) {
+//                                    if(array_key_exists('service',$resource[$pageResource->getResourceType()]['parameters']['save'])) {
+//                                        $serviceName = $resource[$pageResource->getResourceType()]['parameters']['save']['service'];
+//                                        if($container->has($serviceName['name'])) {
+//                                            $service = $container->get($serviceName['name']);
+//                                            $resource[$pageResource->getResourceType()]['service'] = $service;
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                        }
 
                         $requestedCallback->addPageResource($resource,$pageResource->getResourceType());
 

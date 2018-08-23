@@ -6,4 +6,5 @@ return [
     'Sign the Petition' => 'Sign the Petition',
     'Events' => 'Events',
     'Information' => 'Information',
+    '(required)' => '(required)',
 ];

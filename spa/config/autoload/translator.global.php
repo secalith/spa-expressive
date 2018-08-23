@@ -36,6 +36,11 @@ return [
                 'base_dir' => 'data/language',
                 'pattern' => '%s/spa-art13-admin-events.php'
             ],
+            [
+                'type' => 'phparray',
+                'base_dir' => 'data/language',
+                'pattern' => '%s/spa-art13-peticio.php'
+            ],
         ],
     ],
 ];

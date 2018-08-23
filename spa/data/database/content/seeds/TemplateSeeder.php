@@ -96,6 +96,28 @@ class TemplateSeeder extends AbstractSeed
                 'status' => 1,
                 'created' => date('Y-m-d H:i:s'),
             ],
+            [
+                'uid' => 'template-009',
+                'route_uid' => 'route-009',
+                'type' => 'filesystem',
+                'location' => 'petition-view',
+                'name' => 'petition-standard',
+                'label' => 'peticio.art13.eu',
+                'comm' => '',
+                'status' => 1,
+                'created' => date('Y-m-d H:i:s'),
+            ],
+            [
+                'uid' => 'template-010',
+                'route_uid' => 'route-010',
+                'type' => 'filesystem',
+                'location' => 'petition-view',
+                'name' => 'petition-standard',
+                'label' => 'peticio.local.vm',
+                'comm' => '',
+                'status' => 1,
+                'created' => date('Y-m-d H:i:s'),
+            ],
         ];
 
         $table = $this->table('template');

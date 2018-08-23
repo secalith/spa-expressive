@@ -69,22 +69,22 @@ class PageHandler
                         {
                             if(array_key_exists($pResName,$postData))
                             {
+                                // validate posted form.
                                 $pageResources[$pageResourceType][$pResName]['data']->setData($postData);
-                                $v = $pageResources[$pageResourceType][$pResName]['data']->isValid();
+                                $formValidationResult = $pageResources[$pageResourceType][$pResName]['data']->isValid();
 
-                                if($v===true) {
+                                if($formValidationResult===true)
+                                {
+                                    $saveServices = $pageResources[$pageResourceType][$pResName]['service'];
 
-                                    // save
+                                    foreach($saveServices as $saveServiceSpec) {
+                                        $saveService = $saveServiceSpec['service'];
+                                        $saveMethod = $saveServiceSpec['method_name'];
+                                        $saveService->{$saveMethod}($pageResources[$pageResourceType][$pResName]['data']->getData());
 
-                                    $saveService = $pResource['service'];
-                                    $saveMethod = $pResource['parameters']['save']['service']['method'];
-
-
-                                    $saveService->{$saveMethod}($pageResources[$pageResourceType][$pResName]['data']->getData());
-
-                                    $pageResources[$pageResourceType][$pResName]['request']['post']['submitted'] = true;
+                                        $pageResources[$pageResourceType][$pResName]['request']['post']['submitted'] = true;
+                                    }
                                 }
-
                             }
                         }
 
