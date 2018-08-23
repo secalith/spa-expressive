@@ -12,7 +12,7 @@ class EventGroupSeeder extends AbstractSeed
                 'uid' => 'event-group-001',
                 'application_uid' => 'app-001',
                 'site_uid' => 'site-001',
-                'name' => 'Group 2018-07-29',
+                'name' => 'Second Wave',
                 'status'=> 1,
                 'created' => date('Y-m-d H:i:s'),
             ],

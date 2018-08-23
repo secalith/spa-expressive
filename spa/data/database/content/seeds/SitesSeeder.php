@@ -45,7 +45,7 @@ class SitesSeeder extends AbstractSeed
             ],
             [
                 'uid' => 'site-006',
-                'site_name' => 'peticio.art13.eu',
+                'site_name' => 'petycja.art13.eu',
                 'application_uid'    => 'app-001',
                 'status' => 1,
                 'created' => date('Y-m-d H:i:s'),

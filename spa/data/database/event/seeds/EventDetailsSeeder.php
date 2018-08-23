@@ -128,6 +128,31 @@ class EventDetailsSeeder extends AbstractSeed
                 'status'=> 1,
                 'created' => date('Y-m-d H:i:s'),
             ],
+
+            [
+                'uid' => 'event-004',
+                'application_uid' => 'app-001',
+                'site_uid' => 'site-001',
+                'event_uid' => 'event-004',
+                'name' => 'Protest w obronie Internetu - Bielsko-Biala 26.08 #StopACTA2',
+                'name_global' => 'Protest in defence of the Internet - Bielsko-Biala 26.08 #StopACTA2',
+                'city' => 'Wrocław',
+                'city_global' => 'Wroclaw',
+                'org_global' => '',
+                'org_link' => '',
+                'org_link_global' => '',
+                'addr_line' => '',
+                'date_start' => '2018-08-26 18:00:00',
+                'date_finish' => '',
+                'timezone' => 'utc_2',
+                'image' => 'pl_pl',
+                'event_link_external' => 'https://www.facebook.com/events/208686879796389/',
+                'event_map_external' => '',
+                'comm' => '',
+                'language' => 'pl_pl',
+                'status'=> 1,
+                'created' => date('Y-m-d H:i:s'),
+            ],
         ];
 
         $table = $this->table('event_details');
