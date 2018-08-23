@@ -17,7 +17,7 @@
         <?php if( isset($form) && array_key_exists('request',$form['form'])): ?>
             <h3><?=$this->markdown($this->translate("Signature has been recorded."));?></h3>
             <p><?=$this->markdown($this->translate("Thank you for your support!"));?></p>
-        <?php else: ?>
+        <?php elseif(isset($form)): ?>
             <?=$this->getFormAttached($form['form'],null,'data',true,'petition::petition-form-sign');?>
         <?php endif;?>
         <hr class="d-block d-md-none" />
