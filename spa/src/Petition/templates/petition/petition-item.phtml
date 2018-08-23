@@ -14,7 +14,7 @@
         <?=$this->markdown($translation->getText());?>
     </div>
     <div class="col-12 col-md-4">
-        <?php if( array_key_exists('request',$form['form'])): ?>
+        <?php if( isset($form) && array_key_exists('request',$form['form'])): ?>
             <h3><?=$this->markdown($this->translate("Signature has been recorded."));?></h3>
             <p><?=$this->markdown($this->translate("Thank you for your support!"));?></p>
         <?php else: ?>
