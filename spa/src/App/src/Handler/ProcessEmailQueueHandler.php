@@ -77,7 +77,7 @@ class ProcessEmailQueueHandler implements RequestHandlerInterface
                 $translation = $this->tablePetitionTranslate->fetchBy(['uid'=>$emailQueueRequest->getPetitionTranslationUid()]);
 
                 $petitionText = $translation->getText();
-
+var_dump($assignedRecipients->count());
                 if($assignedRecipients->count()>0) {
                     foreach($assignedRecipients as $assignedRecipient) {
                         $r = $this->tableRecipients->fetchBy(['uid'=>$assignedRecipient->getRecipientUid()]);
@@ -91,7 +91,9 @@ class ProcessEmailQueueHandler implements RequestHandlerInterface
                     mail('jan@secalith.co.uk',sprintf("Peticio: Sent %d emails.",$assignedRecipients->count()),$petitionText,$headers);
 
                     // update queue entry
-                    $this->tableEmailQueue->updateStatus(1,['uid'=>$emailQueueRequest->getUid()]);
+                    $re = $this->tableEmailQueue->updateStatus(1,['uid'=>$emailQueueRequest->getUid()]);
+
+                    var_dump($re);
 
                 }
 
