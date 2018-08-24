@@ -88,10 +88,24 @@ endif;
             <div class="container">
 
                 <div class="navbar-header w-100 d-flex justify-content-between">
-
                     <a id="site-logo" class="navbar-brand d-inline-block mt-1 float-left" href="/">
                         <img src="https://art13.eu/assets/img/1113.png" alt="art13.eu" height="28" />
                     </a>
+
+                    <ul class="navbar-nav d-none d-md-inline-block">
+                        <li class="nav-item d-none d-lg-inline-block mt-2 p-0">
+                            <a href="https://art13.eu" class="nav-link scroll-trigger"><?=$this->translate("Homepage");?></a>
+                        </li>
+                        <li class="nav-item d-inline-block mt-2 p-0">
+                            <a href="https://art13.eu#events" class="nav-link scroll-trigger"><?=$this->translate("Events");?></a>
+                        </li>
+                        <li class="nav-item d-inline-block mt-2 p-0">
+                            <a href="https://peticio.art13.eu" class="nav-link _scroll-trigger" target="_blank"><?=$this->translate("Petition");?></a>
+                        </li>
+                        <li class="nav-item d-inline-block mt-2 p-0">
+                            <a href="https://art13.eu#information" class="nav-link scroll-trigger"><?=$this->translate("Information");?></a>
+                        </li>
+                    </ul>
 
                     <div class="d-inline-block m-0 mt-2 p-0">
                         <span class="float-md-right mt-1 mr-0" id="time_counter-first" data-countdown="2018/08/26 18:00"></span>
@@ -106,9 +120,19 @@ endif;
                 <div class="collapse navbar-collapse" id="navbarCollapse">
 
                     <ul class="navbar-nav mr-auto mt-2 d-md-none border-top">
+                        <li class="nav-item">
+                            <a href="https://art13.eu#events" class="nav-link scroll-trigger"><?=$this->translate("Events");?></a>
+                        </li>
 
                         <li class="nav-item">
-                            <a href="https://peticio.art13.eu" class="nav-link scroll-trigger"><?=$this->translate("Petition");?></a>
+                            <a href="#petition" class="nav-link scroll-trigger"><?=$this->translate("Petition");?></a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="https://art13.eu#information" class="nav-link scroll-trigger"><?=$this->translate("Information");?></a>
+                        </li>
+                        <li class="nav-item d-block d-md-none border-top">
+                            <a href="<?=$this->url('spa.auth.logout')?>" class="nav-link"><?=$this->translate("Sign Out");?></a>
                         </li>
                     </ul>
 
