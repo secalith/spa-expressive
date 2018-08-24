@@ -28,6 +28,7 @@ class BlockListHelper extends AbstractHelper
 
     public function __invoke($item,$mode = 'all')
     {
+
         $output = '';
 
         $events = $this->getEventsByCountry();

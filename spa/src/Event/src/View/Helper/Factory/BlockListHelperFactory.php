@@ -18,7 +18,6 @@ class BlockListHelperFactory
 
         // get the rest of events
 
-
         // get modules native db-gateway services
         $config = $container->get('config');
         $tableServicesConfig = $config['app']['table_service'];
