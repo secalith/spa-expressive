@@ -79,8 +79,11 @@ class ProcessEmailQueueHandler implements RequestHandlerInterface
                 if($assignedRecipients->count()>0) {
                     foreach($assignedRecipients as $assignedRecipient) {
                         $r = $this->tableRecipients->fetchBy(['uid'=>$assignedRecipient->getRecipientUid()]);
+                        $headers = 'From: info@art13.eu' . "\r\n" .
+                            'Reply-To: info@art13.eu' . "\r\n"
+                            ;
 
-                        mail('jan@secalith.co.uk',"Petition",$petitionText);
+                        mail('jan@secalith.co.uk',"Petition",$petitionText,$headers);
 //                        mail($r->getEmail(),"Petition",$petitionText);
 break;
                         var_dump($r->getEmail());

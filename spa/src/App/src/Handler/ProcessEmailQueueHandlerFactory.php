@@ -24,6 +24,7 @@ class ProcessEmailQueueHandlerFactory
         $recipients = $container->get("Petition\\Recipients\\TableService");
         $recipientsGroupAssign = $container->get("Petition\\GroupAssign\\TableService");
         $petitionTranslate = $container->get("Petition\\Translation\\TableService");
+        $petitionSignature = $container->get("Petition\\Translation\\TableService");
 
 //        $recipients->fetchBy();
 
