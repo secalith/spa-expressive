@@ -52,7 +52,8 @@ class PipelineAndRoutesDelegator
         #TODO: use middleware for it
         $hostname = (array_key_exists('HTTP_HOST',$_SERVER) && $_SERVER['HTTP_HOST'])?$_SERVER['HTTP_HOST']:php_uname('n');
         if($hostname==='www.art13.eu' || $hostname==='art13.eu'){
-            header("Location: http://stopacta2.pl");
+            header("Location: http://saveyourinternet.today/");
+//            header("Location: http://stopacta2.pl");
             die();
         }if($hostname==='www.petycja.art13.eu' || $hostname==='petycja.art13.eu'){
             header("Location: http://peticio.art13.eu");
