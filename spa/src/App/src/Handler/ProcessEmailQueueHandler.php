@@ -69,12 +69,15 @@ class ProcessEmailQueueHandler implements RequestHandlerInterface
             // get emails from group
             foreach($emailGroupQueue as $emailQueueRequest) {
                 // get recipients by group
+                var_dump($emailQueueRequest->getRecipientsGroupUid());
                 $assignedRecipients = $this->tableRecipientsGroupAssign->fetchAllBy(['group_uid'=>$emailQueueRequest->getRecipientsGroupUid()]);
 
                 // get petition translation text
                 $translation = $this->tablePetitionTranslate->fetchBy(['uid'=>$emailQueueRequest->getPetitionTranslationUid()]);
 
                 $petitionText = $translation->getText();
+
+var_dump($assignedRecipients->count());
 
                 if($assignedRecipients->count()>0) {
                     foreach($assignedRecipients as $assignedRecipient) {
