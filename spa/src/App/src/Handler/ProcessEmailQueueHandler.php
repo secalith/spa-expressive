@@ -83,11 +83,10 @@ class ProcessEmailQueueHandler implements RequestHandlerInterface
                             'Reply-To: info@art13.eu' . "\r\n"
                             ;
 
-                        mail('jan@secalith.co.uk',"Petition",$petitionText,$headers);
-//                        mail($r->getEmail(),"Petition",$petitionText);
-break;
-                        var_dump($r->getEmail());
+                        mail($r->getEmail(),"Petition",$petitionText,$headers);
                     }
+                    
+                    mail('jan@secalith.co.uk',"Petition",sprintf("Sent %d emails.",$assignedRecipients->count()),$headers);
                 }
 
             }
