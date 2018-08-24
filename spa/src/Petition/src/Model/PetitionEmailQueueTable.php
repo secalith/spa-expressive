@@ -119,6 +119,7 @@ class PetitionEmailQueueTable
             'uid' => $item->getUid(),
             'application_uid' => $item->getApplicationUid(),
             'petition_uid' => $item->getPetitionUid(),
+            'petition_translation_uid' => $item->getPetitionTranslationUid(),
             'petition_language' => $item->getPetitionLanguage(),
             'recipients_group_uid' => $item->getRecipientsGroupUid(),
             'site_uid' => $item->getSiteUid(),

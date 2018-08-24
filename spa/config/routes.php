@@ -9,6 +9,7 @@ use Zend\Expressive\MiddlewareFactory;
 return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container) : void {
 
     $app->get('/api/ping', App\Handler\PingHandler::class, 'api.ping');
+    $app->get('/api/process/email-queue', App\Handler\ProcessEmailQueueHandler::class, 'api.ping');
     $app->any('/login', Auth\Handler\LoginHandler::class, 'spa.auth.login');
     $app->any('/logout', Auth\Handler\LogoutHandler::class, 'spa.auth.logout');
 //    $app->any('/request-reset', Auth\Handler\RequestHandler::class, 'spa.auth.request');

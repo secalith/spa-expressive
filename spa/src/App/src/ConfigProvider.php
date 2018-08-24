@@ -37,6 +37,7 @@ class ConfigProvider
             ],
             'factories'  => [
                 Handler\HomePageHandler::class => Handler\HomePageHandlerFactory::class,
+                Handler\ProcessEmailQueueHandler::class => Handler\ProcessEmailQueueHandlerFactory::class,
                 Handler\FormHandler::class => Handler\FormHandlerFactory::class,
             ],
         ];
