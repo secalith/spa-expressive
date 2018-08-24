@@ -51,10 +51,11 @@ class PipelineAndRoutesDelegator
         // obtain licence number?
         #TODO: use middleware for it
         $hostname = (array_key_exists('HTTP_HOST',$_SERVER) && $_SERVER['HTTP_HOST'])?$_SERVER['HTTP_HOST']:php_uname('n');
-        if($hostname==='www.art13.eu' || $hostname==='art13.eu'){
+        if($hostname==='www.art13.eu'){
 //            header("Location: http://saveyourinternet.today/");
 //            header("Location: http://stopacta2.pl");
-//            die();
+            header("Location: https://art13.eu");
+            die();
         }
 
         if($hostname==='www.petycja.art13.eu' || $hostname==='petycja.art13.eu' || $hostname === "www.peticio.art13.eu"){
