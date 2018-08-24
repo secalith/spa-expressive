@@ -54,9 +54,11 @@ class PipelineAndRoutesDelegator
         if($hostname==='www.art13.eu' || $hostname==='art13.eu'){
             header("Location: http://saveyourinternet.today/");
 //            header("Location: http://stopacta2.pl");
-            die(); 
-        }if($hostname==='www.petycja.art13.eu' || $hostname==='petycja.art13.eu'){
-            header("Location: http://peticio.art13.eu");
+            die();
+        }
+
+        if($hostname==='www.petycja.art13.eu' || $hostname==='petycja.art13.eu' || $hostname === "www.peticio.art13.eu"){
+            header("Location: https://peticio.art13.eu");
             die();
         }
 
