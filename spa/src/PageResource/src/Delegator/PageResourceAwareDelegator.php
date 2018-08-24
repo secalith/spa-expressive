@@ -110,6 +110,8 @@ class PageResourceAwareDelegator
                                                 $resource[$pageResource->getResourceType()]['service'][$serviceName]['service_name'] = $serviceName;
                                                 $resource[$pageResource->getResourceType()]['service'][$serviceName]['method_name'] = $serviceMethodName;
 //                                            }
+                                        } else {
+                                            echo sprintf("Sevice %s does not exists in Application",$serviceName);
                                         }
                                     }
                                 }

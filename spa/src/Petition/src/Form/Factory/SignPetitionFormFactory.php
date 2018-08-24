@@ -34,6 +34,10 @@ class SignPetitionFormFactory
 //        $currentLanguage = $container->get(\I18n\Service\I18n::class)->getCurrentLanguage();
 //        $defaultLanguage = $container->get(\I18n\Service\I18n::class)->getDefaultLanguage();
 
+
+        $currentLanguage = $container->get(\I18n\Service\I18n::class)->getCurrentLanguage();
+
+
         return new PetitionSignatureWriteForm();
         var_dump($page);
 

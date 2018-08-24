@@ -77,13 +77,20 @@ class PageHandler
                                 {
                                     $saveServices = $pageResources[$pageResourceType][$pResName]['service'];
 
-                                    foreach($saveServices as $saveServiceSpec) {
-                                        $saveService = $saveServiceSpec['service'];
-                                        $saveMethod = $saveServiceSpec['method_name'];
-                                        $saveService->{$saveMethod}($pageResources[$pageResourceType][$pResName]['data']->getData());
+                                    if(null!==$saveServices) {
+                                        foreach($saveServices as $saveServiceSpec) {
+                                            $saveService = $saveServiceSpec['service'];
+                                            $saveMethod = $saveServiceSpec['method_name'];
+                                            $saveService->{$saveMethod}($pageResources[$pageResourceType][$pResName]['data']->getData());
 
-                                        $pageResources[$pageResourceType][$pResName]['request']['post']['submitted'] = true;
+                                            $pageResources[$pageResourceType][$pResName]['request']['post']['submitted'] = true;
+                                        }
+                                    } else {
+//                                        var_dump($pResName);
+//                                        var_dump($pageResources[$pageResourceType][$pResName]);die();
+//                                        var_dump($pageResources[$pageResourceType][$pResName]['service']);die();
                                     }
+
                                 }
                             }
                         }

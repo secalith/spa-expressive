@@ -281,7 +281,7 @@ class CreateHandler implements RequestHandlerInterface,
 
                                                 } else {
                                                     var_dump(sprintf('Fieldset %s is not registered. check for `hasFieldsetService()`',$fieldsetConfig['fieldset_name']));
-                                                    die();
+//                                                    die();
                                                 }
                                             }
                                         }

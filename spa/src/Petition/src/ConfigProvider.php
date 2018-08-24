@@ -37,6 +37,7 @@ class ConfigProvider
             'factories'  => [
                 \Petition\Form\PetitionTranslationWriteForm::class => \Petition\Form\Factory\FactoryPetitionTranslationWriteServiceFormFactory::class,
                 \Petition\Form\PetitionUpdateForm::class => \Petition\Form\Factory\FactoryPetitionUpdateServiceFormFactory::class,
+                '\Petition\Service\EmailQueueService' => \Petition\Service\Factory\EmailQueueFactory::class,
                 '\Petition\Form\PetitionSignatureWriteForm::class' => \Petition\Form\Factory\SignPetitionFormFactory::class,
             ],
         ];
@@ -100,6 +101,12 @@ class ConfigProvider
                     'identifier' => 'Petition\Recipients\TableService',
                     'gateway' => [
                         'name' => 'Petition\Recipients\TableGateway',
+                    ],
+                ],
+                'Petition\EmailQueue\TableService' => [
+                    'identifier' => 'Petition\EmailQueue\TableService',
+                    'gateway' => [
+                        'name' => 'Petition\EmailQueue\TableGateway',
                     ],
                 ],
             ], // table_service
@@ -189,13 +196,13 @@ class ConfigProvider
                     'name' => 'Petition\Recipients\Group\TableGateway',
                     'table' => [
                         'name' => 'petition_recipients_group',
-                        'object' => \Petition\Model\PetitionSignatureTable::class,
+                        'object' => \Petition\Model\PetitionRecipientsGroupTable::class,
                     ],
                     'adapter' => [
                         'name' => 'Application\Db\Petition\LocalSQLiteAdapter',
                     ],
                     'model' => [
-                        "object" => \Petition\Model\PetitionSignatureModel::class,
+                        "object" => \Petition\Model\PetitionRecipientsGroupModel::class,
                     ],
                     'hydrator' => [
                         "object" => \Zend\Hydrator\ObjectProperty::class,
@@ -205,13 +212,29 @@ class ConfigProvider
                     'name' => 'Petition\Recipients\TableGateway',
                     'table' => [
                         'name' => 'recipients',
-                        'object' => \Petition\Model\PetitionSignatureTable::class,
+                        'object' => \Petition\Model\RecipientsTable::class,
                     ],
                     'adapter' => [
                         'name' => 'Application\Db\Petition\LocalSQLiteAdapter',
                     ],
                     'model' => [
-                        "object" => \Petition\Model\PetitionSignatureModel::class,
+                        "object" => \Petition\Model\RecipientsModel::class,
+                    ],
+                    'hydrator' => [
+                        "object" => \Zend\Hydrator\ObjectProperty::class,
+                    ],
+                ],
+                'Petition\EmailQueue\TableGateway' => [
+                    'name' => 'Petition\EmailQueue\TableGateway',
+                    'table' => [
+                        'name' => 'petition_email_queue',
+                        'object' => \Petition\Model\PetitionEmailQueueTable::class,
+                    ],
+                    'adapter' => [
+                        'name' => 'Application\Db\Petition\LocalSQLiteAdapter',
+                    ],
+                    'model' => [
+                        "object" => \Petition\Model\PetitionEmailQueueModel::class,
                     ],
                     'hydrator' => [
                         "object" => \Zend\Hydrator\ObjectProperty::class,
