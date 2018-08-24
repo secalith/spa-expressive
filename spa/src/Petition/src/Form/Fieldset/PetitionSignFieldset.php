@@ -53,10 +53,6 @@ class PetitionSignFieldset extends Fieldset implements InputFilterProviderInterf
             'options' => array(
                 'label' => _("Email")
             ),
-            'attributes' => [
-                'class' => 'form-control d-block',
-                'placeholder' => _("(required)"),
-            ],
         ));
 
     }
