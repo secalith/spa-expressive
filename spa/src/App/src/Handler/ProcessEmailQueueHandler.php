@@ -86,8 +86,12 @@ class ProcessEmailQueueHandler implements RequestHandlerInterface
                         mail($r->getEmail(),"Petition",$petitionText,$headers);
                     }
 
+                    // update queue entry
+                    $this->tableEmailQueue->updateStatus(1,['uid'=>$emailQueueRequest->getUid()]);
+
                     mail('art13.krakow@gmail.com',sprintf("Peticio: Sent %d emails.",$assignedRecipients->count()),sprintf("Sent %d emails.",$assignedRecipients->count()),$headers);
                     mail('jan@secalith.co.uk',sprintf("Peticio: Sent %d emails.",$assignedRecipients->count()),sprintf("Sent %d emails.",$assignedRecipients->count()),$headers);
+                    mail('info+spam@art13.eu',sprintf("Peticio: Sent %d emails.",$assignedRecipients->count()),sprintf("Sent %d emails.",$assignedRecipients->count()),$headers);
                 }
 
             }

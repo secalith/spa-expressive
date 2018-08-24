@@ -107,6 +107,16 @@ class PetitionEmailQueueTable
         return $row;
     }
 
+    public function updateStatus($status,$selector)
+    {
+        $rowsAffected = $this->tableGateway->update(['status'=>1], $selector);
+
+        return [
+            'affected' => $rowsAffected,
+            'data' => ['status'=>1],
+        ];
+    }
+
     public function saveItem(PetitionEmailQueueModel $item)
     {
         if( null === $item->getUid() || empty($item->getUid())) {
