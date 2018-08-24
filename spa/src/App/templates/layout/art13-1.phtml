@@ -222,10 +222,7 @@ endif;
             <div class="row">
                 <div class="col-12">
                     <ul class="d-flex justify-content-between list-unstyled text-small mb-0">
-                        <li class="d-inline mr-4"><a href="<?=$this->url('home')?>" class="text-muted"><?=$this->translate("Homepage");?></a></li>
-                        <li class="d-inline mr-4"><a class="text-muted" href="#"><?=$this->translate('About');?></a></li>
                         <li class="d-inline mr-4"><a class="text-muted" href="/privacy-policy"><?=$this->translate('Privacy');?></a></li>
-                        <li class="d-inline mr-4"><a class="text-muted" href="#"><?=$this->translate('T&C');?></a></li>
                         <?php if( $this->hasIdentity()):?>
                             <li class="d-inline mr-4"><a class="text-muted" href="<?=$this->url('spa.auth.logout')?>"><?=$this->translate("Sign Out");?></a></li>
                         <?php endif;?>
