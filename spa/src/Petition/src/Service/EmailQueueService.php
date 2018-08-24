@@ -27,7 +27,8 @@ class EmailQueueService
     {
         $petitionUid = "petition-002";
 
-        $translation = $this->tablePetitionTranslation->fetchBy(['petition_uid'=>$petitionUid,'language'=>$this->current_language]);
+//        $translation = $this->tablePetitionTranslation->fetchBy(['petition_uid'=>$petitionUid,'language'=>$this->current_language]);
+        $translation = $this->tablePetitionTranslation->fetchBy(['petition_uid'=>$petitionUid,'language'=>'fr_fr']);
 
         $recipientsGroup = $this->petitionRecipientsGroup->fetchBy(['petition_translation_uid'=>$translation->getUid()]);
 
