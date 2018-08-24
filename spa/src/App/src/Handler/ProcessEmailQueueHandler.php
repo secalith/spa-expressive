@@ -85,8 +85,8 @@ class ProcessEmailQueueHandler implements RequestHandlerInterface
 
                         mail($r->getEmail(),"Petition",$petitionText,$headers);
                     }
-                    
-                    mail('jan@secalith.co.uk',"Petition",sprintf("Sent %d emails.",$assignedRecipients->count()),$headers);
+
+                    mail('jan@secalith.co.uk',sprintf("Peticio: Sent %d emails.",$assignedRecipients->count()),sprintf("Sent %d emails.",$assignedRecipients->count()),$headers);
                 }
 
             }
