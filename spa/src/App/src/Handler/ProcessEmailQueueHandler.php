@@ -65,8 +65,6 @@ class ProcessEmailQueueHandler implements RequestHandlerInterface
 
 //        $emailGroupQueue = $this->tablePetitionRecipientsGroup->fetchAll(['status'=>0]);
 
-        $emailsSent = 0;
-
         if($emailGroupQueue->count()>0) {
             // get emails from group
             foreach($emailGroupQueue as $emailQueueRequest) {
@@ -77,7 +75,7 @@ class ProcessEmailQueueHandler implements RequestHandlerInterface
                 $translation = $this->tablePetitionTranslate->fetchBy(['uid'=>$emailQueueRequest->getPetitionTranslationUid()]);
 
                 $petitionText = $translation->getText();
-var_dump($assignedRecipients->count());
+
                 if($assignedRecipients->count()>0) {
                     foreach($assignedRecipients as $assignedRecipient) {
                         $r = $this->tableRecipients->fetchBy(['uid'=>$assignedRecipient->getRecipientUid()]);
@@ -88,23 +86,10 @@ var_dump($assignedRecipients->count());
                         mail($r->getEmail(),"Petition",$petitionText,$headers);
                     }
 
-                    mail('jan@secalith.co.uk',sprintf("Peticio: Sent %d emails.",$assignedRecipients->count()),$petitionText,$headers);
-
-                    // update queue entry
-                    $re = $this->tableEmailQueue->updateStatus(1,['uid'=>$emailQueueRequest->getUid()]);
-
-                    var_dump($re);
-
+                    mail('jan@secalith.co.uk',sprintf("Sent %d emails.",$assignedRecipients->count()),sprintf("Sent %d emails.",$assignedRecipients->count()),$headers);
                 }
 
             }
-        }
-
-        if($emailsSent>0) {
-            mail('art13.krakow@gmail.com',sprintf("Peticio: Sent %d emails.",$assignedRecipients->count()),sprintf("Sent %d emails.",$assignedRecipients->count()),$headers);
-            mail('jan@secalith.co.uk',sprintf("Peticio: Sent %d emails.",$assignedRecipients->count()),sprintf("Sent %d emails.",$assignedRecipients->count()),$headers);
-            mail('info+spam@art13.eu',sprintf("Peticio: Sent %d emails.",$assignedRecipients->count()),sprintf("Sent %d emails.",$assignedRecipients->count()),$headers);
-
         }
 
         echo $emailGroupQueue->count();
