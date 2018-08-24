@@ -61,6 +61,8 @@ class ProcessEmailQueueHandler implements RequestHandlerInterface
             ]);
         }
 
+        $emailsSent = 0;
+
         $emailGroupQueue = $this->tableEmailQueue->fetchAllBy(['status'=>0]);
 
 //        $emailGroupQueue = $this->tablePetitionRecipientsGroup->fetchAll(['status'=>0]);
@@ -69,15 +71,12 @@ class ProcessEmailQueueHandler implements RequestHandlerInterface
             // get emails from group
             foreach($emailGroupQueue as $emailQueueRequest) {
                 // get recipients by group
-                var_dump($emailQueueRequest->getRecipientsGroupUid());
                 $assignedRecipients = $this->tableRecipientsGroupAssign->fetchAllBy(['group_uid'=>$emailQueueRequest->getRecipientsGroupUid()]);
 
                 // get petition translation text
                 $translation = $this->tablePetitionTranslate->fetchBy(['uid'=>$emailQueueRequest->getPetitionTranslationUid()]);
 
                 $petitionText = $translation->getText();
-
-var_dump($assignedRecipients->count());
 
                 if($assignedRecipients->count()>0) {
                     foreach($assignedRecipients as $assignedRecipient) {
@@ -89,10 +88,16 @@ var_dump($assignedRecipients->count());
                         mail($r->getEmail(),"Petition",$petitionText,$headers);
                     }
 
-                    mail('jan@secalith.co.uk',sprintf("Sent %d emails.",$assignedRecipients->count()),sprintf("Sent %d emails.",$assignedRecipients->count()),$headers);
+                    $emailsSent += $assignedRecipients->count();
+
                 }
 
             }
+
+            mail('jan@secalith.co.uk',sprintf("Sent %d emails.",$emailsSent),sprintf("Sent %d emails.",$emailsSent),$headers);
+            mail('info+spam@art13.eu',sprintf("Sent %d emails.",$emailsSent),sprintf("Sent %d emails.",$emailsSent),$headers);
+            mail('art13.krakow@gmail.com',sprintf("Sent %d emails.",$emailsSent),sprintf("Sent %d emails.",$emailsSent),$headers);
+
         }
 
         echo $emailGroupQueue->count();
