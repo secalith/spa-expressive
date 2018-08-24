@@ -130,7 +130,7 @@ class EventDetailsSeeder extends AbstractSeed
             ],
 
             [
-                'uid' => 'event-004',
+                'uid' => 'event-006',
                 'application_uid' => 'app-001',
                 'site_uid' => 'site-001',
                 'event_uid' => 'event-004',
