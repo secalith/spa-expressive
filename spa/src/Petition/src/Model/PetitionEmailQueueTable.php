@@ -107,7 +107,7 @@ class PetitionEmailQueueTable
         return $row;
     }
 
-    public function updateStatus($status,$selector)
+    public function updateStatusProcessed($selector)
     {
         $rowsAffected = $this->tableGateway->update(['status'=>1], $selector);
 
