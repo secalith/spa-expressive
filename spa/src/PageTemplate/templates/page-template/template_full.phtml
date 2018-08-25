@@ -1,5 +1,30 @@
 
     <?=(isset($pageView)&&null!==$pageView->getVariable('area'))?$this->displayArea($pageView->getVariable('area')->getArea('content_main_jumbotron')):null;?>
 
-    <?=(isset($pageView)&&null!==$pageView->getVariable('area'))?$this->displayArea($pageView->getVariable('area')->getArea('content_main')):null;?>
+    <div class="app-container app-template-read border-3">
+        <div class="app-container-content p-4 p-md-5">
+            <div class="app-container-header">
+                <?=(isset($pageView)&&null!==$pageView->getVariable('area'))
+                    ?$this->displayArea($pageView->getVariable('area')->getArea('content_head'))
+                    :null;
+                ?>
+            </div>
+            <div class="app-container-content1">
+                <?=(isset($pageView)&&null!==$pageView->getVariable('area'))
+                    ?$this->displayArea($pageView->getVariable('area')->getArea('content_main'))
+                    :null;
+                ?>
+                <?=$this->partial('petition::petition-item',$page_resource);?>
+            </div>
+            <div class="app-container-footer">
+
+                <?=(isset($pageView)&&null!==$pageView->getVariable('area'))
+                    ?$this->displayArea($pageView->getVariable('area')->getArea('content_footer'))
+                    :null;
+                ?>
+            </div>
+            <hr />
+            <?php // $this->getFormAttached(['form_read'=>$form],null,'form_read',true,$view_template_model['forms']['form_read']);?>
+        </div>
+    </div>
 
