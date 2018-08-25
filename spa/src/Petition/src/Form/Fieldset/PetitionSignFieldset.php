@@ -36,7 +36,7 @@ class PetitionSignFieldset extends Fieldset implements InputFilterProviderInterf
             ],
         ));
         $this->add(array(
-            'type' => 'text',
+            'type' => 'email',
             'name' => 'email',
             'options' => array(
                 'label' => _("Email")
