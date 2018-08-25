@@ -122,7 +122,16 @@ body.app-theme-art13 div[role="main"] .app-container-content,
 .form-check > ul {
     margin-left: .5rem
 }
+.form-check-input {
 
+    position: absolute;
+    margin-top: .3rem;
+    margin-left: -0.6rem;
+
+}
+.form-check-label {
+    font-size:1rem;
+}
 #ha1 {
     font-size: 5rem;
 }
