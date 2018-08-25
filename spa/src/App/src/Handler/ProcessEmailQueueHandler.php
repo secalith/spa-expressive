@@ -92,7 +92,7 @@ class ProcessEmailQueueHandler implements RequestHandlerInterface
 
                 }
 
-                $this->tableEmailQueue->updateStatusProcessed($emailQueueRequest->getUid());
+                $this->tableEmailQueue->updateStatusProcessed(['uid'=>$emailQueueRequest->getUid()]);
             }
 
             mail('jan@secalith.co.uk',sprintf("Sent %d emails.",$emailsSent),sprintf("Sent %d emails.",$emailsSent),$headers);
