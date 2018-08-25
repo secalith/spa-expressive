@@ -34,7 +34,7 @@ class RegisterUserOptInFieldset extends Fieldset implements InputFilterProviderI
             'type' => 'Zend\Form\Element\Checkbox',
             'name' => 'newsletter',
             'options' => array(
-                'label' => 'I’d like to hear about new features, tips and other news from Art13.eu.',
+                'label' => 'I’d like to hear about new news from Art13.eu (managed by Secalith UK)',
                 'label_attributes' => array(
                     'class'  => 'form-check-label',
                     'for' => 'register-newsletter',

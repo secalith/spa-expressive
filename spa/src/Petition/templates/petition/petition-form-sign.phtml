@@ -34,6 +34,22 @@ $form->prepare();
             </div>
         </div>
         <div class="row">
+            <div class="col-12 mt-2">
+                <?=$this->formLabel($form->get('form')->get('newsletter'));?>
+            </div>
+            <div class="col-12 <?=( ! empty($this->formElementErrors($form->get('form')->get('newsletter'))))?'has-errors':'';?>">
+                <?=$this->formInput($form->get('form')->get('newsletter'));?>
+                <?=$this->formElementErrors($form->get('form')->get('newsletter'));?>
+            </div>
+        </div>
+        <div class="col-12 form-check py-2 px-4 <?=( ! empty($this->formElementErrors($form->get('form')->get('terms'))))?'has-errors':'';?>">
+            <?=$this->formCheckbox($form->get('form')->get('terms'));?>
+            <span class="ml-2">
+                    <?=$this->formLabel($form->get('form')->get('terms'));?>
+                </span>
+            <?=$this->formElementErrors($form->get('form')->get('terms'));?>
+        </div>
+        <div class="row">
             <div class="col-12 mt-4">
                 <?=$this->formInput($form->get('submit'));?>
             </div>

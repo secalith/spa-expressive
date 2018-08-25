@@ -10,8 +10,12 @@ class PetitionSignatureModel
     public $application_uid;
     public $site_uid;
     public $petition_uid;
+
     public $name;
     public $email;
+
+    public $newsletter;
+    public $terms;
 
     public $ip;
 
@@ -40,6 +44,9 @@ class PetitionSignatureModel
 
         $this->email = ( array_key_exists('email',$data)) ? $data['email'] : null;
 
+        $this->newsletter = ( array_key_exists('newsletter',$data)) ? $data['newsletter'] : null;
+        $this->terms = ( array_key_exists('terms',$data)) ? $data['terms'] : null;
+
         $this->created = ( array_key_exists('created',$data)) ? $data['created'] : null;
         $this->updated = ( array_key_exists('updated',$data)) ? $data['updated'] : null;
     }
@@ -58,6 +65,9 @@ class PetitionSignatureModel
         $data['name'] = $this->name;
 
         $data['email'] = $this->email;
+
+        $data['newsletter'] = $this->newsletter;
+        $data['terms'] = $this->terms;
 
         $data['created'] = $this->created;
         $data['updated'] = $this->updated;
@@ -180,6 +190,8 @@ class PetitionSignatureModel
         $this->email = $email;
         return $this;
     }
+
+
 
     /**
      * @return mixed
