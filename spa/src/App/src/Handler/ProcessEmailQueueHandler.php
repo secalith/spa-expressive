@@ -85,7 +85,7 @@ class ProcessEmailQueueHandler implements RequestHandlerInterface
                             'Reply-To: info@art13.eu' . "\r\n"
                             ;
 
-                        mail($r->getEmail(),"Petition",$petitionText,$headers);
+//                        mail($r->getEmail(),"Petition",$petitionText,$headers);
                     }
 
                     $emailsSent += $assignedRecipients->count();
