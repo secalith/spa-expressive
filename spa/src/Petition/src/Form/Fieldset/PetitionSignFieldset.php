@@ -59,7 +59,7 @@ class PetitionSignFieldset extends Fieldset implements InputFilterProviderInterf
             'type' => 'Zend\Form\Element\Checkbox',
             'name' => 'newsletter',
             'options' => array(
-                'label' => 'I’d like to hear about new news from Art13.eu (site managed by Secalith UK)',
+                'label' => 'I’d like to hear about news from #stopACTA2 (site managed by Secalith Ltd)',
                 'label_attributes' => array(
                     'class'  => 'form-check-label',
                     'for' => 'register-newsletter',
