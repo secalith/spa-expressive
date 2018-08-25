@@ -59,9 +59,9 @@ class PetitionSignFieldset extends Fieldset implements InputFilterProviderInterf
             'type' => 'Zend\Form\Element\Checkbox',
             'name' => 'newsletter',
             'options' => array(
-                'label' => 'I’d like to hear about news from #stopACTA2 (site managed by Secalith Ltd)',
+                'label' => 'I’d like to hear about news from #stopACTA2',
                 'label_attributes' => array(
-                    'class'  => 'form-check-label',
+                    'class'  => 'form-check-label ml-3',
                     'for' => 'register-newsletter',
                 ),
                 'use_hidden_element' => true,
@@ -80,7 +80,7 @@ class PetitionSignFieldset extends Fieldset implements InputFilterProviderInterf
             'options' => array(
                 'label' => 'I agree to the terms of service and privacy policy.',
                 'label_attributes' => array(
-                    'class'  => 'form-check-label',
+                    'class'  => 'form-check-label ml-3',
                     'for' => 'register-terms',
                 ),
                 'use_hidden_element' => false,
