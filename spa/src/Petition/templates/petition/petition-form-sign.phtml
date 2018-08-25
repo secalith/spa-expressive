@@ -35,7 +35,7 @@ $form->prepare();
         </div>
 
         <div class="row">
-            <div class="col-12 form-check px-4 pt-1 <?=( ! empty($this->formElementErrors($form->get('form')->get('newsletter'))))?'has-errors':'';?>">
+            <div class="col-12 form-check px-4 pt-2 <?=( ! empty($this->formElementErrors($form->get('form')->get('newsletter'))))?'has-errors':'';?>">
                 <?=$this->formCheckbox($form->get('form')->get('newsletter'));?>
                 <?=$this->formLabel($form->get('form')->get('newsletter'));?>
                 <?=$this->formElementErrors($form->get('form')->get('newsletter'));?>
