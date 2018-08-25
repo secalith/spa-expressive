@@ -48,6 +48,11 @@ $form->prepare();
                 <?=$this->formElementErrors($form->get('form')->get('terms'));?>
             </div>
         </div>
+        <div class="row">
+            <div class="col-12 form-check px-4 pt-1 <?=( ! empty($this->formElementErrors($form->get('form')->get('terms'))))?'has-errors':'';?>">
+                <a href="/privacy-policy"><?=$this->translate("Polityka Prywatnosci");?></a>
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-12 mt-4">
