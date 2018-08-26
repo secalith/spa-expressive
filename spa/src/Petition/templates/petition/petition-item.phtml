@@ -14,22 +14,42 @@
         <?=$this->markdown($translation->getText());?>
     </div>
     <div class="col-12 col-md-4">
-        <div class="float-right mb-4">
+        <div class="text-right mb-2">
             <a class="twitter-share-button"
                href="https://twitter.com/intent/tweet?text=Hello%20world"
                data-size="large">
                 Tweet</a>
             <div class="fb-share-button" style="top:-8px;" data-href="https://peticio.art13.eu" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fpetycja.art13.eu%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a></div>
-
         </div>
-
         <?php if( isset($form) && array_key_exists('request',$form['form'])): ?>
+        <hr />
+        <div class="p-3 py-2 bg-light d-block">
             <h3><?=$this->markdown($this->translate("Signature has been recorded."));?></h3>
             <p><?=$this->markdown($this->translate("Thank you for your support!"));?></p>
+            <h3><?=$this->markdown($this->translate("How else could you help?"));?></h3>
+            <ul>
+                <li><?=$this->markdown($this->translate("Share this Petition with Friends."));?></li>
+                <li><?=$this->markdown($this->translate("Like our facebook pages, so we can reach more people."));?> </li>
+                <li><?=$this->markdown($this->translate("Increase awarness by having conversations with friends and colleagues."));?></li>
+                <li><?=$this->markdown($this->translate("Join us on our protests and rallies."));?></li>
+            </ul>
+        </div>
         <?php elseif(isset($form)): ?>
+        <div class="d-block">
             <?=$this->getFormAttached($form['form'],null,'data',true,'petition::petition-form-sign');?>
+        </div>
         <?php endif;?>
-        <hr class="d-block d-md-none" />
+        <hr />
+        <div class="p-3 pt-2 py-2 d-block">
+            <a href="https://www.facebook.com/Stopacta2.Poland/" target="_blank">
+                <img class="w-100 mt-3" src="https://peticio.art13.eu/assets/img/org/39075613.png" alt="#stopACTA2" />
+            </a>
+            <div class="d-flex justify-content-between">
+                <a class="btn btn-primary btn-sm mb-3 d-inline-block -justify-content-center mt-4" href="https://www.facebook.com/Stopacta2.Poland/" target="_blank"><?=$this->translate("Find us on Facebook");?></a>
+                <div class="fb-like d-inline-block " data-href="https://www.facebook.com/Stopacta2.Poland/" data-layout="box_count" data-action="like" data-size="large" data-show-faces="true" data-share="false"></div>
+            </div>
+            <hr />
+        </div>
     </div>
 </div>
 
