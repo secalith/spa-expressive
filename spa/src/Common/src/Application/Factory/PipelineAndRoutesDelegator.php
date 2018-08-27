@@ -45,10 +45,6 @@ class PipelineAndRoutesDelegator
         $app->pipe(DispatchMiddleware::class);
         $app->pipe(NotFoundHandler::class);
 
-        if($container->get(\I18n\Service\I18n::class)->getCurrentLanguage()==="pl_pl") {
-            header("Location: http://www.stopacta2.org/repozytorium/");
-            die();
-        }
         // Prototypying
         // obtain licence number?
         #TODO: use middleware for it
