@@ -56,7 +56,7 @@ class PipelineAndRoutesDelegator
 
         if($hostname==='www.art13.eu' || $hostname==='art13.eu') {
             if($container->get(\I18n\Service\I18n::class)->getCurrentLanguage()==="pl_pl") {
-                header("Location: http://www.stopacta2.org/repozytorium/");
+                header("Location: http://www.stopacta2.org/o_stopacta2/");
                 die();
             }
         }
