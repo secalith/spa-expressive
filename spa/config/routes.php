@@ -62,6 +62,7 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     ], 'admin.application.update');
 
 
+
     ## MANAGER-SPA-SITE
 
     $app->get('/admin/site/list[/[{page:\d+}]]', [
@@ -80,6 +81,7 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
         Auth\Handler\AuthHandler::class,
         'Common\Handler\List',
     ], 'admin.site.read');
+
 
 
     ## MANAGER-SPA-ROUTER
@@ -160,7 +162,6 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
 
 
 
-
     # MANAGER-PETITION #
 
     $app->get('/admin/petition/create[/]', [
@@ -218,6 +219,7 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     ], 'manager.petition-recipients-groups-assign.list');
 
 
+
     ## MANAGER-ARTICLE
 
     $app->get('/admin/article/list[/[{page:\d+}]]', [
@@ -240,6 +242,7 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
         Auth\Handler\AuthHandler::class,
         'Common\Handler\Create',
     ], 'manager.article.create.post');
+
 
     ## MANAGER-ARTICLE-GROUP
 
@@ -294,6 +297,7 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
         Auth\Handler\AuthHandler::class,
         'Common\Handler\List',
     ], 'manager.event.list');
+
 
     ## MANAGER-EVENT-GROUP
 
@@ -433,6 +437,7 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
         Auth\Handler\AuthHandler::class,
         'Common\Handler\List',
     ], 'manager.content.list');
+
 
     ## API-CONTENT
     $app->get('/api/content/details/{uid}/{format}[/]', [
