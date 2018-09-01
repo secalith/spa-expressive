@@ -122,6 +122,9 @@ class PetitionSignatureTable
             'petition_uid' => $item->getPetitionUid(),
             'name' => $item->getName(),
             'email' => $item->getEmail(),
+            'privacy_policy' => ($item->getPrivacyPolicy())??0,
+            'newsletter' => $item->getNewsletter(),
+            'terms' => $item->getTerms(),
             'created' => $dateTime->format('Y-m-d H:i:s'),
         );
 

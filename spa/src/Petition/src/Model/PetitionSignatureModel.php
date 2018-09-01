@@ -16,6 +16,7 @@ class PetitionSignatureModel
 
     public $newsletter;
     public $terms;
+    public $privacy_policy;
 
     public $ip;
 
@@ -46,6 +47,7 @@ class PetitionSignatureModel
 
         $this->newsletter = ( array_key_exists('newsletter',$data)) ? $data['newsletter'] : null;
         $this->terms = ( array_key_exists('terms',$data)) ? $data['terms'] : null;
+        $this->privacy_policy = ( array_key_exists('terms',$data)) ? $data['privacy_policy'] : null;
 
         $this->created = ( array_key_exists('created',$data)) ? $data['created'] : null;
         $this->updated = ( array_key_exists('updated',$data)) ? $data['updated'] : null;
@@ -68,6 +70,7 @@ class PetitionSignatureModel
 
         $data['newsletter'] = $this->newsletter;
         $data['terms'] = $this->terms;
+        $data['privacy_policy'] = $this->privacy_policy;
 
         $data['created'] = $this->created;
         $data['updated'] = $this->updated;
@@ -208,6 +211,60 @@ class PetitionSignatureModel
     public function setIp($ip)
     {
         $this->ip = $ip;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNewsletter()
+    {
+        return $this->newsletter;
+    }
+
+    /**
+     * @param mixed $newsletter
+     * @return PetitionSignatureModel
+     */
+    public function setNewsletter($newsletter)
+    {
+        $this->newsletter = $newsletter;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTerms()
+    {
+        return $this->terms;
+    }
+
+    /**
+     * @param mixed $terms
+     * @return PetitionSignatureModel
+     */
+    public function setTerms($terms)
+    {
+        $this->terms = $terms;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrivacyPolicy()
+    {
+        return $this->privacy_policy;
+    }
+
+    /**
+     * @param mixed $privacy_policy
+     * @return PetitionSignatureModel
+     */
+    public function setPrivacyPolicy($privacy_policy)
+    {
+        $this->privacy_policy = $privacy_policy;
         return $this;
     }
 

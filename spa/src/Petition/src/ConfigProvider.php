@@ -150,7 +150,7 @@ class ConfigProvider
                         'object' => \Petition\Model\PetitionSignatureTable::class,
                     ],
                     'adapter' => [
-                        'name' => 'Application\Db\Petition\LocalSQLiteAdapter',
+                        'name' => 'Application\Db\Petition\Signature\LocalSQLiteAdapter',
                     ],
                     'model' => [
                         "object" => \Petition\Model\PetitionSignatureModel::class,
