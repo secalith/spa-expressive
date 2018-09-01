@@ -14,5 +14,6 @@ return [
     'Like our facebook pages, so we can reach more people.' => 'Polub nasza strone #stopACTA2, dzieki czemu dotrzemy do wiekszej ilosci ludzi.',
     'Increase awarness by having conversations with friends and colleagues.' => 'Zwieksz swiadomosc poprzez rozmowy ze znajomymi i kolegami.',
     'Join us on our protests and rallies.' => 'Wez udzial w naszych protestach i marszach #stopACTA2.',
+    'Source Code' => 'Kod zrodlowy',
 
 ];
