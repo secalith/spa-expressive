@@ -19,6 +19,10 @@ return [
                 'driver' => 'Pdo_Sqlite',
                 'dsn'    => 'sqlite:./data/database/petition/petition-production.sqlite3',
             ],
+            'Application\Db\Petition\Signature\LocalSQLiteAdapter' => [
+                'driver' => 'Pdo_Sqlite',
+                'dsn'    => 'sqlite:./data/database/petition-signature/petition-signature-production.sqlite3',
+            ],
             'Application\Db\Rbac\LocalSQLiteAdapter' => [
                 'driver' => 'Pdo_Sqlite',
                 'dsn'    => 'sqlite:./data/database/rbac/rbac-production.sqlite3',

@@ -4,11 +4,11 @@ Meant to be used with Virtual Box and Vagrant.
 
 #### PHP Build-in Server
 For development or testing purposes may use PHP's built-in server, if on your local repository's host you have you have PHP CLI installed.
-To do so navigate to repository's root directory and run `sudo php -S 127.0.0.1:1601 ./webclient/public/index.php`
+To do so navigate to repository's root directory and run `sudo php -S 127.0.0.1:1888 ./spa/public/index.php`
 
 
 
-If you want to access webclient from your local browser use then the machine should be accessible at `192.168.56.161` and the host is set as [spa-1601.puphpet](http://spa-1601.puphpet) so you could `sudo sed -i '$ a\\n# Single Page Application 1601 for Puphpet\n192.168.56.161\tspa-1601.puphpet' /etc/hosts` in order to configure hostname and IP of VM to your local machine
+If you want to access SPA from your local browser use then the machine should be accessible at `192.168.56.161` and the host is set as [spa-1601.puphpet](http://spa-1601.puphpet) so you could `sudo sed -i '$ a\\n# Single Page Application 1601 for Puphpet\n192.168.56.161\tspa-1601.puphpet' /etc/hosts` in order to configure hostname and IP of VM to your local machine
 
 
 ### Library Dependency

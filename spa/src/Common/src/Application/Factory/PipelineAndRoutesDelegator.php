@@ -99,8 +99,6 @@ class PipelineAndRoutesDelegator
                 }
             }
 
-        } else {
-            echo 'instance not found.';
         }
 
 
