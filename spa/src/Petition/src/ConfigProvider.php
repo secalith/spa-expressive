@@ -638,9 +638,6 @@ class ConfigProvider
                                     'layout' => 'layout::manager',
                                     'template' => 'petition-admin::template-read',
                                     'body_class' => 'app-action-read',
-                                    'forms' => [
-                                        'form_read' => 'petition-admin::template-read-item',
-                                    ],
                                 ],
                                 'page_resource' => [
                                     [
@@ -648,7 +645,7 @@ class ConfigProvider
                                         'fieldset_petition' => [
                                             'fieldset_name' => 'fieldset_petition',
                                             'type' => 'fieldset',
-                                            'partial' => 'petition-admin::template-read-item',
+                                            'partial' => 'petition-admin::template-read-item-list',
                                             'service' => [
                                                 [
                                                     'service_name'=>'Petition\TableService',
@@ -688,7 +685,7 @@ class ConfigProvider
                                                                 [
                                                                     'uid' => [
                                                                         'source' => 'data-resource',
-                                                                        'property_path' => 'fieldset_petition.data.uid',
+                                                                        'property_path' => 'list.fieldset_petition.fieldset_petition.data.uid',
                                                                         'property_path_delimiter' => '.',
                                                                     ],
                                                                 ],
@@ -714,21 +711,21 @@ class ConfigProvider
                                                 ],
                                             ],
                                         ],
-                                    ],
+                                    ], // heading
                                     'main' => [
-                                        'list' => [
+                                        'list-details' => [
                                             [
                                                 'name' => 'fieldset_petition',
-                                                'type' => 'form',
+                                                'type' => 'entity',
                                                 'action' => [
                                                     'route' => 'manager.petition.read',
                                                 ],
-                                                'object' => \Petition\Form\PetitionReadForm::class,
+                                                'object' => \Petition\Model\WriteFieldsetModel::class,
                                                 'read' => [
                                                     'fieldset_petition' => [
                                                         'fieldset_name' => 'fieldset_petition',
                                                         'type' => 'fieldset',
-                                                        'partial' => 'petition-admin::template-read-item',
+                                                        'partial' => 'petition-admin::template-read-item-list',
                                                         'service' => [
                                                             [
                                                                 'service_name'=>'Petition\TableService',
@@ -746,31 +743,37 @@ class ConfigProvider
 
                                                         ],
                                                     ],
-                                                    'fieldset_petition_translation' => [
-                                                        'fieldset_name' => 'fieldset_petition_translation',
-                                                        'type' => 'fieldset',
-                                                        'partial' => 'common-admin::template-read-item',
-                                                        'service' => [
-                                                            [
-                                                                'service_name'=>'Petition\Translation\TableService',
-                                                                'object' => \Petition\Model\PetitionTranslationModel::class,
-                                                                'method' => 'getItemByUid',
-                                                                'arguments' => [
-                                                                    [
-                                                                        'type' => 'service',
-                                                                        'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
-                                                                        'method' => 'getMatchedParam',
-                                                                        'arg_name' => 'uid',
-                                                                    ],
-                                                                ],
-                                                            ],
-
-                                                        ],
-                                                    ],
+//                                                    'fieldset_petition_translation' => [
+//                                                        'fieldset_name' => 'fieldset_petition_translation',
+//                                                        'type' => 'fieldset',
+//                                                        'partial' => 'common-admin::template-read-item',
+//                                                        'service' => [
+//                                                            [
+//                                                                'service_name'=>'Petition\Translation\TableService',
+//                                                                'object' => \Petition\Model\PetitionTranslationModel::class,
+//                                                                'method' => 'getItemByParentUidAndLanguage',
+//                                                                'arguments' => [
+//                                                                    [
+//                                                                        'type' => 'service',
+//                                                                        'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
+//                                                                        'method' => 'getMatchedParam',
+//                                                                        'arg_name' => 'uid',
+//                                                                    ],
+//                                                                    [
+//                                                                        'type' => 'service',
+//                                                                        'service_name' => \I18n\Service\I18n::class,
+//                                                                        'method' => 'getCurrentLanguage',
+//
+//                                                                    ],
+//                                                                ],
+//                                                            ],
+//
+//                                                        ],
+//                                                    ],
                                                 ],
                                             ],
                                         ], // list
-                                        'table' => [
+                                        'table-assoc' => [
                                             [
                                                 'name' => 'petition_translations',
                                                 'type' => 'table',
@@ -828,7 +831,7 @@ class ConfigProvider
                                                 ],
                                             ],
                                         ],
-                                    ],
+                                    ], // main
                                 ],
                             ],
                         ],
