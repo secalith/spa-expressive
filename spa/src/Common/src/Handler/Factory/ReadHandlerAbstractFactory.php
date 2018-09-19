@@ -78,9 +78,65 @@ class ReadHandlerAbstractFactory implements AbstractFactoryInterface
 
             $urlHelper = $serviceLocator->get(UrlHelper::class);
 
-            $dataList = $this->arrayDigger->extractData($routeConfig,'data_template_model.main.list');
+            // obtain the details of requested entity
+            $dataListDetails = $this->arrayDigger->extractData($routeConfig,'data_template_model.main.list-details');
+            $listResources = [];
 
-            $dataList2 = $this->arrayDigger->extractData($routeConfig,'data_template_model.main.table');
+            foreach($dataListDetails as $mainContentDeclaration)
+            {
+                if(array_key_exists('read',$mainContentDeclaration) && $mainContentDeclaration['type']==='entity')
+                {
+                    foreach($mainContentDeclaration['read'] as $fieldsetConfig)
+                    {
+                        if(array_key_exists('service',$fieldsetConfig))
+                        {
+                            foreach($fieldsetConfig['service'] as $serviceConfig)
+                            {
+                                if($serviceLocator->has($serviceConfig['service_name']))
+                                {
+                                    $requestedService = $serviceLocator->get($serviceConfig['service_name']);
+                                    if(method_exists($requestedService,$serviceConfig['method']))
+                                    {
+                                        $argVal =null;
+                                        if(array('arguments',$serviceConfig))
+                                        {
+                                            foreach($serviceConfig['arguments'] as $arg)
+                                            {
+                                                if($arg['type'] == 'service')
+                                                {
+                                                    if($serviceLocator->has($arg['service_name']))
+                                                    {
+                                                        $argService = $serviceLocator->get($arg['service_name']);
+                                                        if(array_key_exists('arg_name',$arg)) {
+                                                            $argVal[] = $argService->{$arg['method']}($arg['arg_name']);
+                                                        } else {
+                                                            $argVal[] = $argService->{$arg['method']}();
+                                                        }
+
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        if(count($argVal)==2) {
+                                            $resources['list'][$mainContentDeclaration['name']][$fieldsetConfig['fieldset_name']]['data'] = $requestedService->{$serviceConfig['method']}($argVal[0],$argVal[1]);
+                                        } else {
+                                            $resources['list'][$mainContentDeclaration['name']][$fieldsetConfig['fieldset_name']]['data'] = $requestedService->{$serviceConfig['method']}($argVal[0]);
+                                        }
+
+                                        $resources['list'][$mainContentDeclaration['name']][$fieldsetConfig['fieldset_name']]['service_config'] = $fieldsetConfig;
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+
+
+            $dataList2 = null;//$this->arrayDigger->extractData($routeConfig,'data_template_model.main.table-assoc');
 
             if(null!==$dataList2) {
                 foreach($dataList2 as $mainContentDeclaration){
@@ -121,80 +177,6 @@ class ReadHandlerAbstractFactory implements AbstractFactoryInterface
 
                     }
                 }
-            }
-
-
-            foreach($dataList as $mainContentDeclaration) {
-                if(array_key_exists('read',$mainContentDeclaration)) {
-                    foreach($mainContentDeclaration['read'] as $fieldsetConfig)
-                    {
-                        if(array_key_exists('service',$fieldsetConfig))
-                        {
-                            foreach($fieldsetConfig['service'] as $serviceConfig)
-                            {
-                                if($serviceLocator->has($serviceConfig['service_name']))
-                                {
-                                    $requestedService = $serviceLocator->get($serviceConfig['service_name']);
-                                    if(method_exists($requestedService,$serviceConfig['method']))
-                                    {
-                                        if(array('arguments',$serviceConfig))
-                                        {
-                                            foreach($serviceConfig['arguments'] as $arg)
-                                            {
-                                                if($arg['type'] == 'service')
-                                                {
-                                                    if($serviceLocator->has($arg['service_name']))
-                                                    {
-                                                        $argService = $serviceLocator->get($arg['service_name']);
-                                                        $argVal[] = $argService->{$arg['method']}($arg['arg_name']);
-                                                    }
-                                                }
-                                            }
-                                        }
-
-                                        $resources[$fieldsetConfig['fieldset_name']]['data'] = $requestedService->{$serviceConfig['method']}($argVal[0]);
-                                        $resources[$fieldsetConfig['fieldset_name']]['service_config'] = $fieldsetConfig;
-
-                                        $formResources[$fieldsetConfig['fieldset_name']]['data'] = $requestedService->{$serviceConfig['method']}($argVal[0]);
-                                        $formResources[$fieldsetConfig['fieldset_name']]['service_config'] = $fieldsetConfig;
-
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-            }
-
-            if( $mainContentDeclaration['type'] === 'form' && $formResources !== null ) {
-
-                // load form
-                $form = new $mainContentDeclaration['object']();
-
-                $formData =[];
-                $form->setData($formResources);
-
-                foreach($formResources as $resource) {
-                    $formData[$form->getName()][$resource['service_config']['fieldset_name']] = $resource['data']->toArray();
-                }
-
-
-                foreach($formResources as $resource) {
-//                    if($form->get('form_read')->get($resource['service_config']['fieldset_name'])) {
-                        $form->setData($formData[$form->getName()]);
-//                        var_dump($formData[$form->getName()]);
-//                        die();
-//                    }
-                }
-
-//                var_dump($form->isValid());
-//                var_dump($form->getData());
-//                die();
-
-//                if($form->get('form_read')->get($formResources['service_config']['fieldset_name'])) {
-//                    $form->setData($formData);
-//                }
             }
 
             $targetClass = new ReadHandler(

@@ -942,26 +942,26 @@ class ConfigProvider
                                                     ['column'=>'status'],
                                                     ['column'=>'created'],
                                                     ['buttons' => [
-                                                        [
-                                                            'html_tag' => 'a',
-                                                            'text' => _("Details"),
-                                                            'attributes' => [
-                                                                'class' => 'btn btn-sm btn-info ml-5',
-                                                                'href' => [
-                                                                    'type' => 'plugin',
-                                                                    'name' => 'url',
-                                                                    'arguments' => [
-                                                                        'manager.event.read',
-                                                                        [
-                                                                            'uid'=> [
-                                                                                'source' => 'row-item',
-                                                                                'property' => 'uid',
-                                                                            ],
-                                                                        ]
-                                                                    ],
-                                                                ],
-                                                            ],
-                                                        ],
+//                                                        [
+//                                                            'html_tag' => 'a',
+//                                                            'text' => _("Details"),
+//                                                            'attributes' => [
+//                                                                'class' => 'btn btn-sm btn-info ml-5',
+//                                                                'href' => [
+//                                                                    'type' => 'plugin',
+//                                                                    'name' => 'url',
+//                                                                    'arguments' => [
+//                                                                        'manager.event.read',
+//                                                                        [
+//                                                                            'uid'=> [
+//                                                                                'source' => 'row-item',
+//                                                                                'property' => 'uid',
+//                                                                            ],
+//                                                                        ]
+//                                                                    ],
+//                                                                ],
+//                                                            ],
+//                                                        ],
                                                         [
                                                             'html_tag' => 'a',
                                                             'text' => _("Update"),

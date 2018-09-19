@@ -31,6 +31,7 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
 
 
 
+
     ## SPA-PETITION-SIGNATURE
 
     $app->post('/popieram[/]', [

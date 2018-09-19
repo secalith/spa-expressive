@@ -20,7 +20,7 @@ class I18nFactory
 
         $currentLanguage = $container->get(\I18n\Service\I18n::class)->getCurrentLanguage();
 
-       $language = $currentLanguage;
+        $language = $currentLanguage;
 
         return new I18n(
             $router,
