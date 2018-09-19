@@ -18,7 +18,13 @@
                 </div>
 
                 <a class="btn btn-success mt-4" href="<?=$details->getEventLinkExternal();?>" target="_blank"><?=$this->translate("See the Event on Facebook");?></a>
+                <?php
+                    if( ! empty($details->getEventMapExternal())):
+                ?>
                 <a class="btn btn-info mt-4" href="<?=$details->getEventMapExternal();?>" target="_blank"><?=$this->translate("Find on Map");?></a>
+                <?php
+                    endif;
+                ?>
             </div>
         </div>
     </div>
@@ -36,7 +42,13 @@
         <h2 style="font-weight:600" class="mb-2 display-4"><?=($this->currentLanguage()!==$details->getLanguage())?$details->getCityGlobal():$details->getCity();?></h2>
         <h3 class="mt-2"><?=$details->getDateStart();?></h3>
         <a class="btn btn-success mt-4" href="<?=$details->getEventLinkExternal();?>" target="_blank"><?=$this->translate("See the Event on Facebook");?></a>
+        <?php
+            if( ! empty($details->getEventMapExternal())):
+        ?>
         <a class="btn btn-info mt-4" href="<?=$details->getEventMapExternal();?>" target="_blank"><?=$this->translate("Find on Map");?></a>
+        <?php
+            endif;
+        ?>
     </div>
 </div>
 <hr />
