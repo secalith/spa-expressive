@@ -53,7 +53,7 @@ class BlockListHelper extends AbstractHelper
             $where['language'] = $country;
         }
 
-        $eventsList = $this->dataServices->getItem('Event\TableService')->fetchAllBy($where);
+        $eventsList = $this->dataServices->getItem('Event\TableService')->fetchAllByAndOrderByDateDesc($where);
 
         if( ! empty($eventsList)) {
             foreach($eventsList as $event) {

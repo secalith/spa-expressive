@@ -7,6 +7,7 @@ namespace Event\Model;
 use Event\Model\EventModel;
 use Zend\Db\TableGateway\TableGateway;
 use Common\Model\GenerateUUIDTrait;
+use Zend\Db\Sql\Select;
 
 class EventTable
 {
@@ -54,6 +55,36 @@ class EventTable
     public function fetchAllBy($where=[])
     {
         $resultSet = $this->tableGateway->select($where);
+
+        $resultSet->buffer();
+//        $resultSet->next();
+
+        return $resultSet;
+    }
+    /**
+     * @return \Zend\Db\ResultSet\ResultSet
+     */
+    public function fetchAllByAndOrderByDateDesc($where=[])
+    {
+        $select = new Select('event');
+        $select->columns(['uid','site_uid','event_group','name','country','status']);
+        $select->join('event_details','event_details.event_uid=event.uid','date_start','left');
+        $select->order('date_start DESC');
+
+
+        $rowset = $this->tableGateway->selectWith($select);
+
+        $rowset->buffer();
+
+        return $rowset;
+
+        $sqlSelect = $this->tableGateway->getSql()->select();
+        $sqlSelect->columns(['uid','site_uid','event_group','name','country','status'])
+            ->join('event_details','event_details.event_uid=event.uid')
+        ;
+
+        $statement = $this->tableGateway->getSql()->prepareStatementForSqlObject($sqlSelect);
+        $resultSet = $statement->execute();
 
         $resultSet->buffer();
 //        $resultSet->next();
