@@ -35,7 +35,9 @@ class ConfigProvider
     {
         return [
             'invokables' => [],
-            'factories'  => [],
+            'factories'  => [
+                \Site\Form\WriteForm::class => \Site\Form\Factory\FactoryWriteServiceFormFactory::class,
+            ],
         ];
     }
 
@@ -46,7 +48,8 @@ class ConfigProvider
     {
         return [
             'paths' => [
-                'user'    => [__DIR__ . '/../templates/'],
+                'site' => [__DIR__ . '/../templates/site'],
+                'site-admin' => [__DIR__ . '/../templates/site-admin'],
             ],
         ];
     }
@@ -115,7 +118,7 @@ class ConfigProvider
                                                     'html_tag' => 'a',
                                                     'text' => 'Create Site',
                                                     'attributes' => [
-                                                        'class' => 'btn btn-sm btn-info ml-5',
+                                                        'class' => 'btn btn-sm btn-info ml-5 float-right',
                                                         'href' => 'helper::url:admin.site.create'
                                                     ],
                                                 ],
@@ -143,15 +146,20 @@ class ConfigProvider
                                                     ['buttons' => [
                                                         [
                                                             'html_tag' => 'a',
-                                                            'text' => 'Details',
+                                                            'text' => 'Update',
                                                             'attributes' => [
-                                                                'class' => 'btn btn-sm btn-info ml-5',
+                                                                'class' => 'btn btn-sm btn-default btn-outline-primary ml-5',
                                                                 'href' => [
                                                                     'type' => 'plugin',
                                                                     'name' => 'url',
                                                                     'arguments' => [
-                                                                        'admin.site.read',
-                                                                        ['uid'=>"data::item=>uid"]
+                                                                        'admin.site.update',
+                                                                        [
+                                                                            'uid'=> [
+                                                                                'source' => 'row-item',
+                                                                                'property' => 'uid',
+                                                                            ],
+                                                                        ]
                                                                     ],
                                                                 ],
                                                             ],
@@ -171,6 +179,111 @@ class ConfigProvider
                         ], // spa.site.list
                     ], // route
                 ], // Common\Handler\List
+                'Common\Handler\Create' => [
+                    'route' => [
+                        'admin.site.create' => [
+                            'get' => [
+                                'method' => 'GET',
+                                'scenario' => 'create',
+                                'data_template_model' => [
+                                    'route_name' => 'admin.site.create',
+                                    'heading' => [
+                                        [
+                                            'html_tag' => 'h1',
+                                            'text' => _("Create Site"),
+                                            'buttons' => [
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => _("Sites List"),
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-5',
+                                                        'href' => 'helper::url:admin.site.list'
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ], // heading
+                                ],
+                                'view_template_model' => [
+                                    'layout' => 'layout::manager',
+                                    'template' => 'site-admin::template-create',
+                                    'forms' => [
+                                        'form_create' => 'site-admin::template-create-form',
+                                    ],
+                                ],
+                                'forms' => [
+                                    [
+                                        'action' => [
+                                            'route' => 'admin.site.create.post',
+                                        ],
+                                        'name' => 'form_create',
+//                                        'object' => \Application\Form\ApplicationWriteForm::class,
+                                        'form_factory' => \Site\Form\WriteForm::class,
+                                        'template' => 'common-admin::template-create',
+                                    ]
+                                ],
+                            ],
+                        ],
+                        'admin.site.create.post' => [
+                            'post' => [
+                                'method' => 'POST',
+                                'scenario' => 'process',
+                                'data_template_model' => [
+                                    'route_name' => 'admin.site.create.post',
+                                    'heading' => [
+                                        [
+                                            'html_tag' => 'h1',
+                                            'text' => _("Create Site"),
+                                            'wrapper_class' => '',
+                                            'buttons' => [
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => _('Sites List'),
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-5 float-right',
+                                                        'href' => 'helper::url:admin.site.list'
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                                'view_template_model' => [
+                                    'layout' => 'layout::manager',
+                                    'template' => 'site-admin::template-create',
+                                    'forms' => [
+                                        'form_create' => 'site-admin::template-create-form',
+                                    ],
+                                ],
+                                'forms' => [
+                                    [
+                                        'name' => 'form_create',
+                                        'action' => [
+                                            'route' => 'admin.site.create.post',
+                                        ],
+                                        'form_factory' => \Site\Form\WriteForm::class,
+//                                        'object' => \Event\Form\EventWriteForm::class,
+                                        'save' => [
+                                            'data' => [
+                                                'fieldset_site' => [
+                                                    'fieldset_name' => 'fieldset_site',
+                                                    'service' => [
+                                                        [
+                                                            'name'=>'Site\TableService',
+                                                            'object' => \Site\Model\SiteModel::class,
+                                                            'method' => 'saveItem'
+                                                        ],
+
+                                                    ],
+                                                ], // fieldset_site
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ], // manager.application.create.post
+                    ],
+                ], // Common\Handler\Create
             ], // handler
         ];
     }

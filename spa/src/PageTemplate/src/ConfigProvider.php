@@ -116,13 +116,13 @@ class ConfigProvider
                                     'heading' => [
                                         [
                                             'html_tag' => 'h1',
-                                            'text' => _("Templatki"),
+                                            'text' => _("Templates"),
                                             'buttons' => [
                                                 [
                                                     'html_tag' => 'a',
-                                                    'text' => _("Utworz Templatke"),
+                                                    'text' => _("Create Template"),
                                                     'attributes' => [
-                                                        'class' => 'btn btn-sm btn-info ml-5',
+                                                        'class' => 'btn btn-sm btn-info ml-5 float-right',
                                                         'href' => 'helper::url:admin.page-template.create'
                                                     ],
                                                 ],
@@ -154,14 +154,14 @@ class ConfigProvider
                                                     ['buttons' => [
                                                         [
                                                             'html_tag' => 'a',
-                                                            'text' => _("Szczegoly"),
+                                                            'text' => _("Update"),
                                                             'attributes' => [
-                                                                'class' => 'btn btn-sm btn-info ml-5',
+                                                                'class' => 'btn btn-sm btn-default btn-outline-primary ml-5',
                                                                 'href' => [
                                                                     'type' => 'plugin',
                                                                     'name' => 'url',
                                                                     'arguments' => [
-                                                                        'admin.page-template.read',
+                                                                        'admin.page-template.update',
                                                                         [
                                                                             'uid'=> [
                                                                                 'source' => 'row-item',

@@ -11,13 +11,37 @@ class ConfigProvider
     {
         return [
             'dependencies' => $this->getDependencies(),
+            'templates'    => $this->getTemplates(),
             'app' => $this->getApplicationConfig(),
         ];
     }
 
-    public function getDependencies()
+    /**
+     * Returns the container dependencies
+     */
+    public function getDependencies() : array
     {
-        return [];
+        return [
+            'invokables' => [
+            ],
+            'factories'  => [
+                \PageRoute\Form\RouteWriteForm::class => \PageRoute\Form\Factory\RouteWriteServiceFormFactory::class,
+                \PageRoute\Form\RouterWriteForm::class => \PageRoute\Form\Factory\FactoryRouterWriteServiceFormFactory::class,
+            ],
+        ];
+    }
+
+    /**
+     * Returns the templates configuration
+     */
+    public function getTemplates() : array
+    {
+        return [
+            'paths' => [
+                'route' => [__DIR__ . '/../templates/route'],
+                'route-admin' => [__DIR__ . '/../templates/route-admin'],
+            ],
+        ];
     }
 
     public function getApplicationConfig()
@@ -72,6 +96,94 @@ class ConfigProvider
             'handler' => [
                 'Common\Handler\List'=> [
                     'route' => [
+                        'admin.route.list' => [
+                            'get' => [
+                                'method' => 'GET',
+                                'scenario' => 'list',
+                                'paginator' => [
+                                    'object' => \Zend\Paginator\Paginator::class,
+                                    'adapter' => [
+                                        'object' => \Zend\Paginator\Adapter\DbSelect::class,
+                                    ],
+                                    'gateway' => 'PageRoute\Router\TableGateway',
+                                    'db_select' => [
+                                        'columns' => [
+                                            'uid',
+                                            'route_name',
+                                            'status',
+                                            'created',
+                                            'comment'
+                                        ],
+                                    ],
+                                ],
+                                'view_template_model' => [
+                                    'layout' => 'layout::manager',
+                                    'template' => 'common-admin::template-list',
+                                    'body_class' => 'app-action-list',
+                                ],
+                                'data_template_model' => [
+                                    'route_name' => 'admin.route.list',
+                                    'heading' => [
+                                        [
+                                            'html_tag' => 'h1',
+                                            'text' => _("Routes"),
+                                            'buttons' => [
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => _("Create Route"),
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-5 float-right',
+                                                        'href' => 'helper::url:admin.route.create'
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                    'main' => [
+                                        'table' => [
+                                            [
+                                                'name' => 'main',
+                                                'headers'=> [
+                                                    'uid'=>_("UID"),
+                                                    'route_name'=>_("Route Name"),
+                                                    'status'=>_('Status'),
+                                                    'created'=>_('Created'),
+                                                    100=>_('Action'),
+                                                ],
+                                                'rows' => [
+                                                    ['column'=>'uid'],
+                                                    ['column'=>'route_name'],
+                                                    ['column'=>'status'],
+                                                    ['column'=>'created'],
+                                                    ['buttons' => [
+                                                        [
+                                                            'html_tag' => 'a',
+                                                            'text' => _("Update"),
+                                                            'attributes' => [
+                                                                'class' => 'btn btn-sm btn-default btn-outline-primary ml-5',
+                                                                'href' => [
+                                                                    'type' => 'plugin',
+                                                                    'name' => 'url',
+                                                                    'arguments' => [
+                                                                        'admin.route.update',
+                                                                        [
+                                                                            'uid'=> [
+                                                                                'source' => 'row-item',
+                                                                                'property' => 'uid',
+                                                                            ],
+                                                                        ]
+                                                                    ],
+                                                                ],
+                                                            ],
+                                                        ],
+                                                    ],],
+                                                ],
+                                            ],
+                                        ],
+                                    ], // main
+                                ],
+                            ],
+                        ],
                         'admin.router.list' => [
                             'get' => [
                                 'method' => 'GET',
@@ -168,26 +280,6 @@ class ConfigProvider
                                                     ['buttons' => [
                                                         [
                                                             'html_tag' => 'a',
-                                                            'text' => _("Details"),
-                                                            'attributes' => [
-                                                                'class' => 'btn btn-sm btn-info ml-5',
-                                                                'href' => [
-                                                                    'type' => 'plugin',
-                                                                    'name' => 'url',
-                                                                    'arguments' => [
-                                                                        'admin.router.read',
-                                                                        [
-                                                                            'uid'=> [
-                                                                                'source' => 'row-item',
-                                                                                'property' => 'uid',
-                                                                            ],
-                                                                        ]
-                                                                    ],
-                                                                ],
-                                                            ],
-                                                        ],
-                                                        [
-                                                            'html_tag' => 'a',
                                                             'text' => _("Update"),
                                                             'attributes' => [
                                                                 'class' => 'btn btn-sm btn-default btn-outline-primary ml-5',
@@ -216,6 +308,212 @@ class ConfigProvider
                         ],
                     ],
                 ],
+                'Common\Handler\Create' => [
+                    'route' => [
+                        'admin.route.create' => [
+                            'get' => [
+                                'method' => 'GET',
+                                'scenario' => 'create',
+                                'data_template_model' => [
+                                    'route_name' => 'admin.route.create',
+                                    'heading' => [
+                                        [
+                                            'html_tag' => 'h1',
+                                            'text' => _("Create Route"),
+                                            'buttons' => [
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => _("Routes List"),
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-5',
+                                                        'href' => 'helper::url:admin.route.list'
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ], // heading
+                                ],
+                                'view_template_model' => [
+                                    'layout' => 'layout::manager',
+                                    'template' => 'route-admin::template-create',
+                                    'forms' => [
+                                        'form_create' => 'route-admin::template-create-form',
+                                    ],
+                                ],
+                                'forms' => [
+                                    [
+                                        'action' => [
+                                            'route' => 'admin.route.create.post',
+                                        ],
+                                        'name' => 'form_create',
+//                                        'object' => \Application\Form\ApplicationWriteForm::class,
+                                        'form_factory' => \PageRoute\Form\RouteWriteForm::class,
+                                        'template' => 'common-admin::template-create',
+                                    ]
+                                ],
+                            ],
+                        ],
+                        'admin.route.create.post' => [
+                            'post' => [
+                                'method' => 'POST',
+                                'scenario' => 'process',
+                                'data_template_model' => [
+                                    'route_name' => 'admin.route.create.post',
+                                    'heading' => [
+                                        [
+                                            'html_tag' => 'h1',
+                                            'text' => _("Create Route"),
+                                            'wrapper_class' => '',
+                                            'buttons' => [
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => _('Routes List'),
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-5',
+                                                        'href' => 'helper::url:admin.route.list'
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                                'view_template_model' => [
+                                    'layout' => 'layout::manager',
+                                    'template' => 'route-admin::template-create',
+                                    'forms' => [
+                                        'form_create' => 'route-admin::template-create-form',
+                                    ],
+                                ],
+                                'forms' => [
+                                    [
+                                        'name' => 'form_create',
+                                        'action' => [
+                                            'route' => 'admin.route.create.post',
+                                        ],
+                                        'form_factory' => \PageRoute\Form\RouteWriteForm::class,
+//                                        'object' => \Event\Form\EventWriteForm::class,
+                                        'save' => [
+                                            'data' => [
+                                                'fieldset_route' => [
+                                                    'fieldset_name' => 'fieldset_route',
+                                                    'service' => [
+                                                        [
+                                                            'name'=>'PageRoute\Route\TableService',
+                                                            'object' => \PageRoute\Model\RouteModel::class,
+                                                            'method' => 'saveItem'
+                                                        ],
+
+                                                    ],
+                                                ], // fieldset_application
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ], // admin.route.create.post
+                        'admin.router.create' => [
+                            'get' => [
+                                'method' => 'GET',
+                                'scenario' => 'create',
+                                'data_template_model' => [
+                                    'route_name' => 'admin.router.create',
+                                    'heading' => [
+                                        [
+                                            'html_tag' => 'h1',
+                                            'text' => _("Create Router"),
+                                            'buttons' => [
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => _("Routers List"),
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-5',
+                                                        'href' => 'helper::url:admin.router.list'
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ], // heading
+                                ],
+                                'view_template_model' => [
+                                    'layout' => 'layout::manager',
+                                    'template' => 'route-admin::template-create',
+                                    'forms' => [
+                                        'form_create' => 'route-admin::template-create-form',
+                                    ],
+                                ],
+                                'forms' => [
+                                    [
+                                        'action' => [
+                                            'route' => 'admin.router.create.post',
+                                        ],
+                                        'name' => 'form_create',
+//                                        'object' => \Application\Form\ApplicationWriteForm::class,
+                                        'form_factory' => \PageRoute\Form\RouterWriteForm::class,
+                                        'template' => 'common-admin::template-create',
+                                    ]
+                                ],
+                            ],
+                        ], // admin.router.create
+                        'admin.router.create.post' => [
+                            'post' => [
+                                'method' => 'POST',
+                                'scenario' => 'process',
+                                'data_template_model' => [
+                                    'route_name' => 'admin.router.create.post',
+                                    'heading' => [
+                                        [
+                                            'html_tag' => 'h1',
+                                            'text' => _("Create Router"),
+                                            'wrapper_class' => '',
+                                            'buttons' => [
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => _('Routers List'),
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-5',
+                                                        'href' => 'helper::url:admin.router.list'
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                                'view_template_model' => [
+                                    'layout' => 'layout::manager',
+                                    'template' => 'router-admin::template-create',
+                                    'forms' => [
+                                        'form_create' => 'router-admin::template-create-form',
+                                    ],
+                                ],
+                                'forms' => [
+                                    [
+                                        'name' => 'form_create',
+                                        'action' => [
+                                            'route' => 'admin.router.create.post',
+                                        ],
+                                        'form_factory' => \PageRoute\Form\RouterWriteForm::class,
+//                                        'object' => \Event\Form\EventWriteForm::class,
+                                        'save' => [
+                                            'data' => [
+                                                'fieldset_route' => [
+                                                    'fieldset_name' => 'fieldset_router',
+                                                    'service' => [
+                                                        [
+                                                            'name'=>'PageRoute\RouterEntry\TableService',
+                                                            'object' => \PageRoute\Model\RouteModel::class,
+                                                            'method' => 'saveItem'
+                                                        ],
+
+                                                    ],
+                                                ], // fieldset_application
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ], // admin.router.create.post
+                    ],
+                ], // Common\Handler\Create
             ], // handler
         ];
     }

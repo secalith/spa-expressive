@@ -9,7 +9,7 @@ class ApplicationModel
     public $uid;
     public $type;
 
-    public $comm;
+    public $comment;
     public $status;
 
     public $created;
@@ -32,7 +32,7 @@ class ApplicationModel
         $this->uid = ( array_key_exists('uid',$data)) ? $data['uid'] : null;
         $this->type = ( array_key_exists('type',$data)) ? $data['type'] : null;
 
-        $this->comm = ( array_key_exists('comm',$data)) ? $data['comm'] : null;
+        $this->comment = ( array_key_exists('comment',$data)) ? $data['comment'] : null;
         $this->status = ( array_key_exists('status',$data)) ? $data['status'] : null;
 
         $this->created = ( array_key_exists('created',$data)) ? $data['created'] : null;
@@ -49,7 +49,7 @@ class ApplicationModel
         $data['uid'] = $this->uid;
         $data['type'] = $this->type;
 
-        $data['comm'] = $this->comm;
+        $data['comment'] = $this->comment;
         $data['status'] = $this->status;
 
         $data['created'] = $this->created;
@@ -105,18 +105,18 @@ class ApplicationModel
     /**
      * @return mixed
      */
-    public function getComm()
+    public function getComment()
     {
-        return $this->comm;
+        return $this->comment;
     }
 
     /**
      * @param mixed $comm
      * @return ApplicationModel
      */
-    public function setComm($comm)
+    public function setComment($comment)
     {
-        $this->comm = $comm;
+        $this->comment = $comment;
         return $this;
     }
 

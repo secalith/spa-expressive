@@ -73,7 +73,7 @@ class EventGroupModel
 
     /**
      * @param mixed $uid
-     * @return EventModel
+     * @return MemeItemModel
      */
     public function setUid($uid)
     {
@@ -91,7 +91,7 @@ class EventGroupModel
 
     /**
      * @param mixed $name
-     * @return EventModel
+     * @return MemeItemModel
      */
     public function setName($name)
     {
@@ -109,7 +109,7 @@ class EventGroupModel
 
     /**
      * @param mixed $status
-     * @return EventModel
+     * @return MemeItemModel
      */
     public function setStatus($status)
     {
@@ -127,7 +127,7 @@ class EventGroupModel
 
     /**
      * @param mixed $created
-     * @return EventModel
+     * @return MemeItemModel
      */
     public function setCreated($created)
     {
@@ -145,7 +145,7 @@ class EventGroupModel
 
     /**
      * @param mixed $updated
-     * @return EventModel
+     * @return MemeItemModel
      */
     public function setUpdated($updated)
     {

@@ -119,6 +119,7 @@ class EventDetailsTable
             'site_uid' => $item->getSiteUid(),
             'event_uid' => $item->getEventUid(),
             'name' => $item->getName(),
+            'name_global' => $item->getNameGlobal(),
             'city' => $item->getCity(),
             'city_global' => $item->getCityGlobal(),
             'language' => $item->getLanguage(),

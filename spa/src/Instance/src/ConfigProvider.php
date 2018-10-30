@@ -119,7 +119,7 @@ class ConfigProvider
                                                     'html_tag' => 'a',
                                                     'text' => _("Create Instance"),
                                                     'attributes' => [
-                                                        'class' => 'btn btn-sm btn-info ml-5',
+                                                        'class' => 'btn btn-sm btn-info ml-5 float-right',
                                                         'href' => 'helper::url:admin.instance.create'
                                                     ],
                                                 ],
@@ -151,14 +151,14 @@ class ConfigProvider
                                                     ['buttons' => [
                                                         [
                                                             'html_tag' => 'a',
-                                                            'text' => _("Details"),
+                                                            'text' => _("Update"),
                                                             'attributes' => [
-                                                                'class' => 'btn btn-sm btn-info ml-5',
+                                                                'class' => 'btn btn-sm btn-default btn-outline-primary ml-5',
                                                                 'href' => [
                                                                     'type' => 'plugin',
                                                                     'name' => 'url',
                                                                     'arguments' => [
-                                                                        'admin.instance.read',
+                                                                        'admin.instance.update',
                                                                         [
                                                                             'uid'=> [
                                                                                 'source' => 'row-item',

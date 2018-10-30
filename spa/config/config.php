@@ -56,6 +56,7 @@ $aggregator = new ConfigAggregator([
     RoleEditor\ConfigProvider::class,
     PageLayout\ConfigProvider::class,
     PageResource\ConfigProvider::class,
+    GeneratorXdd\ConfigProvider::class,
     Event\ConfigProvider::class,
     I18n\ConfigProvider::class,
     // Load application config in a pre-defined order in such a way that local settings

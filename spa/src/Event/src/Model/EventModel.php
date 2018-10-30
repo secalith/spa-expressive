@@ -88,7 +88,7 @@ class EventModel
 
     /**
      * @param mixed $uid
-     * @return EventModel
+     * @return MemeItemModel
      */
     public function setUid($uid)
     {
@@ -106,7 +106,7 @@ class EventModel
 
     /**
      * @param mixed $application_uid
-     * @return EventModel
+     * @return MemeItemModel
      */
     public function setApplicationUid($application_uid)
     {
@@ -124,7 +124,7 @@ class EventModel
 
     /**
      * @param mixed $site_uid
-     * @return EventModel
+     * @return MemeItemModel
      */
     public function setSiteUid($site_uid)
     {
@@ -142,7 +142,7 @@ class EventModel
 
     /**
      * @param mixed $event_group
-     * @return EventModel
+     * @return MemeItemModel
      */
     public function setEventGroup($event_group)
     {
@@ -160,7 +160,7 @@ class EventModel
 
     /**
      * @param mixed $name
-     * @return EventModel
+     * @return MemeItemModel
      */
     public function setName($name)
     {
@@ -178,7 +178,7 @@ class EventModel
 
     /**
      * @param mixed $country
-     * @return EventModel
+     * @return MemeItemModel
      */
     public function setCountry($country)
     {
@@ -196,7 +196,7 @@ class EventModel
 
     /**
      * @param mixed $status
-     * @return EventModel
+     * @return MemeItemModel
      */
     public function setStatus($status)
     {
@@ -214,7 +214,7 @@ class EventModel
 
     /**
      * @param mixed $created
-     * @return EventModel
+     * @return MemeItemModel
      */
     public function setCreated($created)
     {
@@ -232,7 +232,7 @@ class EventModel
 
     /**
      * @param mixed $updated
-     * @return EventModel
+     * @return MemeItemModel
      */
     public function setUpdated($updated)
     {

@@ -81,7 +81,7 @@ class SiteTable
 
         $data = array(
             'uid' => $item->getUid(),
-            'email' => $item->getEmail(),
+            'site_name' => $item->getSiteName(),
             'status' => 1,
             'created' => $dateTime->format('Y-m-d\TH:i:s.u'),
         );

@@ -127,8 +127,13 @@ class UpdateHandlerAbstractFactory implements AbstractFactoryInterface
 
                 if( $mainContentDeclaration['type'] === 'form' && $resources !== null ) {
                     // load form
-                    $form = new $mainContentDeclaration['object']();
+                    if($serviceLocator->has($mainContentDeclaration['form_factory'])) {
+                        $form = $serviceLocator->get($mainContentDeclaration['form_factory']);//new $mainContentDeclaration['form_factory']();
+                    } elseif(array_key_exists('object',$mainContentDeclaration)) {
+                        $form = new $mainContentDeclaration['form_factory']();
+                    }
 
+//
                     $formData =[];
 
                     foreach($resources as $resource) {
@@ -139,7 +144,7 @@ class UpdateHandlerAbstractFactory implements AbstractFactoryInterface
                         ->get($resource['service_config']['fieldset_name'])) {
 
                         $form->setData($formData);
-//var_dump($formData);
+////var_dump($formData);
                     }
                 }
 //die();

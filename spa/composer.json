@@ -105,6 +105,7 @@
             "Shrt\\": "src/Shrt/src/",
             "Article\\": "src/Article/src/",
             "Petition\\": "src/Petition/src/",
+            "GeneratorXdd\\": "src/GeneratorXdd/src/",
             "Application\\": "src/Application/src/"
         }
     },

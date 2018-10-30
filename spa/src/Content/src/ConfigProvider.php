@@ -204,7 +204,7 @@ class ConfigProvider
                                                     'service' => [
                                                         [
                                                             'name'=>'Event\TableService',
-                                                            'object' => \Event\Model\EventModel::class,
+                                                            'object' => \Event\Model\MemeItemModel::class,
                                                             'method' => 'saveItem'
                                                         ],
 
@@ -427,14 +427,14 @@ class ConfigProvider
                                                     ['buttons' => [
                                                         [
                                                             'html_tag' => 'a',
-                                                            'text' => _("Details"),
+                                                            'text' => _("Update"),
                                                             'attributes' => [
-                                                                'class' => 'btn btn-sm btn-info ml-5',
+                                                                'class' => 'btn btn-sm btn-default btn-outline-primary ml-5',
                                                                 'href' => [
                                                                     'type' => 'plugin',
                                                                     'name' => 'url',
                                                                     'arguments' => [
-                                                                        'manager.content.read',
+                                                                        'manager.content.update',
                                                                         [
                                                                             'uid'=> [
                                                                                 'source' => 'row-item',

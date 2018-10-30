@@ -14,6 +14,7 @@ $( document ).ready(function(){
 
     objEditor.setup();
 
+    execTitleChange();
 });
 
 function scrollToByName(element) {
@@ -28,4 +29,8 @@ function scrollToByName(element) {
         // animate view to the target
         $('html,body').animate({scrollTop: jqTarget.offset().top}, sSpeed);
     }
+}
+
+function execTitleChange() {
+    document.title = "Art. 11\u26A113";
 }

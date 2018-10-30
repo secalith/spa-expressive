@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Event\Model;
 
-use Event\Model\EventModel;
+use Event\Model\MemeItemModel;
 use Zend\Db\TableGateway\TableGateway;
 use Common\Model\GenerateUUIDTrait;
 use Zend\Db\Sql\Select;
@@ -96,7 +96,7 @@ class EventTable
      * @param string $uid
      * @return \Page\Model\PageModel
      */
-    public function getItem(string $uid) : EventModel
+    public function getItem(string $uid) : MemeItemModel
     {
         $rowset = $this->tableGateway->select(['uid' => $uid]);
 
@@ -138,7 +138,7 @@ class EventTable
         return $rowset->current();
     }
 
-    public function saveItem(EventModel $item)
+    public function saveItem(MemeItemModel $item)
     {
         if( null === $item->getUid() || empty($item->getUid())) {
             $item->setUid($this->generateUUID());

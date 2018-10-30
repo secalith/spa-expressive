@@ -1,0 +1,88 @@
+{
+  "form_elements" : {
+    "spec": {
+      "create": {
+        "name": "form_create",
+        "type": "Zend\\Form\\Form",
+        "attributes": {
+          "method": "post",
+          "action":"/"
+        },
+        "options": {
+          "prefer_form_input_filter": true
+        },
+        "fieldsets": [
+          {
+            "spec": {
+              "name": "create",
+              "type": "Zend\\Form\\Fieldset",
+              "hydrator": "Zend\\Hydrator\\ClassMethods",
+              "fieldsets": [
+                {
+                  "spec": {
+                    "name": "basic",
+                    "type": "Zend\\Form\\Fieldset",
+                    "hydrator": "Zend\\Hydrator\\ClassMethods",
+                    "elements": [
+                      {
+                        "spec": {
+                          "name": "uid",
+                          "type": "Zend\\Form\\Element\\Hidden"
+                        }
+                      },
+                      {
+                        "spec": {
+                          "name": "application_type",
+                          "type": "Zend\\Form\\Element\\Select",
+                          "options": {
+                            "label": "Type",
+                            "value_options": {
+                              "spa": "SPA",
+                              "meme": "Meme Machine",
+                              "petitio": "Petition"
+                            }
+                          },
+                          "attributes": {
+                            "class": "form-control d-block"
+                          }
+                        }
+                      },
+                      {
+                        "spec": {
+                          "name": "application_comment",
+                          "type": "Zend\\Form\\Element\\Text",
+                          "options": {
+                            "label": "Comment"
+                          },
+                          "attributes": {
+                            "class": "form-control d-block"
+                          }
+                        }
+                      },
+                      {
+                        "spec": {
+                          "name": "status",
+                          "type": "Zend\\Form\\Element\\Select",
+                          "options": {
+                            "label": "Type",
+                            "value_options": {
+                              "0": "Hidden",
+                              "1": "Visible"
+                            }
+                          },
+                          "attributes": {
+                            "class": "form-control d-block"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

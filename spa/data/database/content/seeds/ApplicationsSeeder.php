@@ -23,7 +23,7 @@ class ApplicationsSeeder extends AbstractSeed
             [
                 'uid'    => 'app-003',
                 'type'    => 'spa',
-                'comm'    => 'shrt.local.vm',
+                'comment'    => 'shrt.local.vm',
                 'status'    => 1,
                 'created'    => date('Y-m-d H:i:s'),
             ],

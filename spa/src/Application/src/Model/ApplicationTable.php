@@ -1,5 +1,6 @@
 <?php
 
+
 declare(strict_types=1);
 
 namespace Application\Model;
@@ -118,11 +119,8 @@ class ApplicationTable
 
         $data = array(
             'uid' => $item->getUid(),
-            'application_uid' => $item->getApplicationUid(),
-            'site_uid' => $item->getSiteUid(),
-            'event_group' => $item->getEventGroup(),
-            'name' => $item->getName(),
-            'country' => $item->getCountry(),
+            'type' => $item->getType(),
+            'comment' => $item->getComment(),
             'status' => $item->getStatus(),
             'created' => $dateTime->format('Y-m-d H:i:s'),
         );

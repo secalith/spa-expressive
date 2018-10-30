@@ -35,6 +35,7 @@ class ConfigProvider
             'invokables' => [
             ],
             'factories'  => [
+                \Application\Form\ApplicationWriteForm::class => \Application\Form\Factory\FactoryApplicationWriteServiceFormFactory::class,
             ],
         ];
     }
@@ -46,7 +47,8 @@ class ConfigProvider
     {
         return [
             'paths' => [
-                'application'    => [__DIR__ . '/../templates/'],
+                'application' => [__DIR__ . '/../templates/application'],
+                'application-admin' => [__DIR__ . '/../templates/application-admin'],
             ],
         ];
     }
@@ -94,7 +96,7 @@ class ConfigProvider
                                     ],
                                     'gateway' => 'Application\TableGateway',
                                     'db_select' => [
-                                        'columns' => ['uid','type','status','created','comm'],
+                                        'columns' => ['uid','type','status','created','comment'],
                                     ],
                                 ],
                                 'data_template_model' => [
@@ -122,7 +124,7 @@ class ConfigProvider
                                                 'headers'=> [
                                                     'uid'=>_("UID"),
                                                     'type'=>_("Type"),
-                                                    'comm'=>_("Comment"),
+                                                    'comment'=>_("Comment"),
                                                     'status'=>_('Status'),
                                                     'created'=>_('Created'),
                                                     100=>_('Action'),
@@ -130,30 +132,10 @@ class ConfigProvider
                                                 'rows' => [
                                                     ['column'=>'uid'],
                                                     ['column'=>'type'],
-                                                    ['column'=>'comm'],
+                                                    ['column'=>'comment'],
                                                     ['column'=>'status'],
                                                     ['column'=>'created'],
                                                     ['buttons' => [
-                                                        [
-                                                            'html_tag' => 'a',
-                                                            'text' => _("Details"),
-                                                            'attributes' => [
-                                                                'class' => 'btn btn-sm btn-info ml-5',
-                                                                'href' => [
-                                                                    'type' => 'plugin',
-                                                                    'name' => 'url',
-                                                                    'arguments' => [
-                                                                        'admin.application.read',
-                                                                        [
-                                                                            'uid'=> [
-                                                                                'source' => 'row-item',
-                                                                                'property' => 'uid',
-                                                                            ],
-                                                                        ]
-                                                                    ],
-                                                                ],
-                                                            ],
-                                                        ],
                                                         [
                                                             'html_tag' => 'a',
                                                             'text' => _("Update"),
@@ -189,6 +171,322 @@ class ConfigProvider
                         ],
                     ],
                 ], // Common\Handler\List
+                'Common\Handler\Create' => [
+                    'route' => [
+                        'admin.application.create' => [
+                            'get' => [
+                                'method' => 'GET',
+                                'scenario' => 'create',
+                                'data_template_model' => [
+                                    'route_name' => 'admin.application.create',
+                                    'heading' => [
+                                        [
+                                            'html_tag' => 'h1',
+                                            'text' => _("Create Application"),
+                                            'buttons' => [
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => _("Applications List"),
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-5',
+                                                        'href' => 'helper::url:admin.application.list'
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ], // heading
+                                ],
+                                'view_template_model' => [
+                                    'layout' => 'layout::manager',
+                                    'template' => 'application-admin::template-create',
+                                    'forms' => [
+                                        'form_create' => 'application-admin::template-create-form',
+                                    ],
+                                ],
+                                'forms' => [
+                                    [
+                                        'action' => [
+                                            'route' => 'admin.application.create.post',
+                                        ],
+                                        'name' => 'form_create',
+//                                        'object' => \Application\Form\ApplicationWriteForm::class,
+                                        'form_factory' => \Application\Form\ApplicationWriteForm::class,
+                                        'template' => 'common-admin::template-create',
+                                    ]
+                                ],
+                            ],
+                        ],
+                        'admin.application.create.post' => [
+                            'post' => [
+                                'method' => 'POST',
+                                'scenario' => 'process',
+                                'data_template_model' => [
+                                    'route_name' => 'admin.application.create.post',
+                                    'heading' => [
+                                        [
+                                            'html_tag' => 'h1',
+                                            'text' => _("Create Application"),
+                                            'wrapper_class' => '',
+                                            'buttons' => [
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => _('Applications List'),
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-info ml-5',
+                                                        'href' => 'helper::url:admin.application.list'
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                                'view_template_model' => [
+                                    'layout' => 'layout::manager',
+                                    'template' => 'application-admin::template-create',
+                                    'forms' => [
+                                        'form_create' => 'application-admin::template-create-form',
+                                    ],
+                                ],
+                                'forms' => [
+                                    [
+                                        'name' => 'form_create',
+                                        'action' => [
+                                            'route' => 'admin.application.create.post',
+                                        ],
+                                        'form_factory' => \Application\Form\ApplicationWriteForm::class,
+//                                        'object' => \Event\Form\EventWriteForm::class,
+                                        'save' => [
+                                            'data' => [
+                                                'fieldset_application' => [
+                                                    'fieldset_name' => 'fieldset_application',
+                                                    'service' => [
+                                                        [
+                                                            'name'=>'Application\TableService',
+                                                            'object' => \Application\Model\ApplicationModel::class,
+                                                            'method' => 'saveItem'
+                                                        ],
+
+                                                    ],
+                                                ], // fieldset_application
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ], // manager.application.create.post
+                    ],
+                ], // Common\Handler\Create
+                'Common\Handler\Update'=> [
+                    'route' => [
+                        'admin.application.update' => [
+                            'get' => [
+                                'method' => 'GET',
+                                'scenario' => 'update',
+                                'view_template_model' => [
+                                    'layout' => 'layout::manager',
+                                    'template' => 'application-admin::template-update',
+                                    'forms' => [
+                                        'form_update' => 'application-admin::template-update-form',
+                                    ],
+                                ],
+                                'forms' => [
+                                    [
+                                        'action' => [
+                                            'route' => 'admin.application.create.post',
+                                        ],
+                                        'name' => 'form_update',
+//                                        'object' => \Event\Form\EventWriteForm::class,
+                                        'form_factory' => \Event\Form\EventUpdateForm::class,
+                                        'template' => 'common-admin::template-update',
+                                    ]
+                                ],
+                                'data_template_model' => [
+                                    'route_name' => 'admin.application.update',
+                                    'heading' => [
+                                        [
+                                            'html_tag' => 'h1',
+                                            'text' => _('Application Update'),
+                                            'buttons' => [
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => _('List Applications'),
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-secondary ml-5',
+                                                        'href' => 'helper::url:admin.application.list'
+                                                    ],
+                                                ],
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => _('Create Event'),
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-secondary ml-1',
+                                                        'href' => 'helper::url:admin.application.create'
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                    'main' => [
+                                        'list' => [
+                                            [
+                                                'name' => 'data_event',
+                                                'type' => 'form',
+                                                'action' => [
+                                                    'route' => 'admin.application.update',
+                                                ],
+//                                                'object' => \Event\Form\EventUpdateForm::class,
+                                                'form_factory' => \Application\Form\ApplicationUpdateForm::class,
+                                                'read' => [
+                                                    'fieldset_event' => [
+                                                        'fieldset_name' => 'fieldset_application',
+                                                        'base_fieldset_name' => 'form_update',
+                                                        'type' => 'fieldset',
+                                                        'partial' => 'common-admin::template-update-item',
+                                                        'source' => [
+                                                            'service' => [
+                                                                [
+                                                                    'service_name'=>'Application\TableService',
+                                                                    'object' => \Application\Model\ApplicationModel::class,
+                                                                    'method' => 'getItemByUid',
+                                                                    'arguments' => [
+                                                                        [
+                                                                            'type' => 'service',
+                                                                            'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
+                                                                            'method' => 'getMatchedParam',
+                                                                            'arg_name' => 'uid',
+                                                                        ],
+                                                                    ],
+                                                                ],
+
+                                                            ],
+                                                        ],
+                                                    ],
+                                                ], // read
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ], // get
+                        ],
+                        'admin.application.update.post' => [
+                            'post' => [
+                                'method' => 'POST',
+                                'scenario' => 'update',
+                                'view_template_model' => [
+                                    'layout' => 'layout::manager',
+                                    'template' => 'event-admin::template-update',
+                                    'forms' => [
+                                        'form_update' => 'event-admin::template-update-form',
+                                    ],
+                                ],
+                                'forms' => [
+                                    [
+                                        'action' => [
+                                            'route' => 'admin.application.create.post',
+                                        ],
+                                        'name' => 'form_update',
+//                                        'object' => \Event\Form\EventWriteForm::class,
+                                        'form_factory' => \Application\Form\ApplicationUpdateForm::class,
+                                        'template' => 'common-admin::template-update',
+                                    ]
+                                ],
+                                'data_template_model' => [
+                                    'route_name' => 'admin.application.update',
+                                    'heading' => [
+                                        [
+                                            'html_tag' => 'h1',
+                                            'text' => _('Update Application'),
+                                            'buttons' => [
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => _('List Applications'),
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-secondary ml-5',
+                                                        'href' => 'helper::url:admin.application.list'
+                                                    ],
+                                                ],
+                                                [
+                                                    'html_tag' => 'a',
+                                                    'text' => _('Create Application'),
+                                                    'attributes' => [
+                                                        'class' => 'btn btn-sm btn-secondary ml-1',
+                                                        'href' => 'helper::url:admin.application.create'
+                                                    ],
+                                                ],
+                                            ],
+                                        ],
+                                    ],
+                                    'main' => [
+                                        'list' => [
+                                            [
+                                                'name' => 'data_application',
+                                                'type' => 'form',
+                                                'action' => [
+                                                    'route' => 'admin.application.update',
+                                                ],
+//                                                'object' => \Event\Form\EventUpdateForm::class,
+                                                'form_factory' => \Application\Form\ApplicationUpdateForm::class,
+                                                'read' => [
+                                                    'fieldset_event' => [
+                                                        'fieldset_name' => 'fieldset_application',
+                                                        'base_fieldset_name' => 'form_update',
+                                                        'type' => 'fieldset',
+                                                        'partial' => 'common-admin::template-update-item',
+                                                        'source' => [
+                                                            'service' => [
+                                                                [
+                                                                    'service_name'=>'Application\TableService',
+                                                                    'object' => \Application\Model\ApplicationModel::class,
+                                                                    'method' => 'getItemByUid',
+                                                                    'arguments' => [
+                                                                        [
+                                                                            'type' => 'service',
+                                                                            'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
+                                                                            'method' => 'getMatchedParam',
+                                                                            'arg_name' => 'uid',
+                                                                            'arg_name_target' => 'uid',
+                                                                        ],
+                                                                    ],
+                                                                ],
+
+                                                            ],
+                                                        ],
+                                                    ],
+                                                ], // read
+                                                'update' => [
+                                                    'form_name' => 'form_update',
+                                                    'data' => [
+                                                        'fieldset_event' => [
+                                                            'fieldset_name' => 'fieldset_application',
+                                                            'service' => [
+                                                                [
+                                                                    'service_name'=>'Application\TableService',
+                                                                    'object' => \Application\Model\ApplicationModel::class,
+                                                                    'method' => 'updateItem',
+                                                                    'arg_name_target' => 'uid',
+                                                                    'arguments' => [
+                                                                        [
+                                                                            'type' => 'service',
+                                                                            'service_name' => \Common\Helper\CurrentRouteNameHelper::class,
+                                                                            'method' => 'getMatchedParam',
+                                                                            'arg_name' => 'uid',
+                                                                            'arg_name_target' => 'uid',
+                                                                        ],
+                                                                    ],
+                                                                ],
+
+                                                            ],
+                                                        ], // fieldset_event
+                                                    ],
+                                                ], // update
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ], // post
+                        ],
+                    ],
+                ], // Common\Handler\Update
             ], // handler
         ];
     }

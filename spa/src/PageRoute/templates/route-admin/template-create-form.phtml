@@ -1,0 +1,92 @@
+<?php
+
+$form->prepare();
+
+?>
+
+<?=$this->form()->openTag($form);?>
+
+<?=$this->formElementErrors($form->get('application_id'));?>
+<?=$this->formElementErrors($form->get('csrf'));?>
+
+<div>
+    <div class="container-fluid pt-2">
+
+        <div class="row">
+            <div class="col-12 col-md-10 py-2 text-justify">
+                <p>On this page you will be able to cerate new Route.</p>
+            </div>
+            <div class="col-12 col-md-2 py-2 text-right">
+                <?=$this->formSubmit($form->get('submit'));?>
+            </div>
+            <div class="col-12 py-2">
+                <hr />
+            </div>
+        </div>
+
+            <?=$this->formInput($form->get('form_create')->get('fieldset_route')->get('uid'));?>
+
+            <?=$this->formElementErrors($form->get('form_create')->get('fieldset_route')->get('uid'));?>
+
+        <div class="row">
+            <div class="col-12 py-2">
+                <h3 class="display-5"><?=$this->translate("Some basic information about your Route");?></h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+                <?=$this->formLabel($form->get('form_create')->get('fieldset_route')->get('route_name'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_route')->get('route_name'))))?'has-errors':'';?>">
+                <?=$this->formInput($form->get('form_create')->get('fieldset_route')->get('route_name'));?>
+                <?=$this->formElementErrors($form->get('form_create')->get('fieldset_route')->get('route_name'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+                <small><?=$this->translate('This name will be visible only by you and other registered users.');?></small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+                <?=$this->formLabel($form->get('form_create')->get('fieldset_route')->get('status'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_route')->get('status'))))?'has-errors':'';?>">
+                <?=$this->formSelect($form->get('form_create')->get('fieldset_route')->get('status'));?>
+                <?=$this->formElementErrors($form->get('form_create')->get('fieldset_route')->get('status'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+                <small><?=$this->translate('Should your Route be visible in public?');?></small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-2 py-2 px-0 pl-md-4 pr-md-5">
+                <?=$this->formLabel($form->get('form_create')->get('fieldset_route')->get('comment'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 <?=( ! empty($this->formElementErrors($form->get('form_create')->get('fieldset_route')->get('comment'))))?'has-errors':'';?>">
+                <?=$this->formTextarea($form->get('form_create')->get('fieldset_route')->get('comment'));?>
+                <?=$this->formElementErrors($form->get('form_create')->get('fieldset_route')->get('comment'));?>
+            </div>
+            <div class="col-12 col-md-5 py-2 px-0 pl-md-5">
+                <small><?=$this->translate('Your internal comment');?></small>
+            </div>
+        </div>
+
+    </div>
+
+    <hr />
+    <div class="py-2 px-3 mb-2">
+        <?=$this->formSubmit($form->get('submit'));?>
+    </div>
+
+    <div class="hidden">
+        <?=$this->formElement($form->get('application_id'));?>
+        <?=$this->formElement($form->get('csrf'));?>
+    </div>
+
+</div>
+
+
+<?=$this->form()->closeTag();?>
+

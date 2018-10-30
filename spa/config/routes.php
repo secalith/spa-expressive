@@ -47,17 +47,28 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
         Auth\Handler\AuthHandler::class,
         'Common\Handler\List',
     ], 'admin.application.list');
-    $app->get('/admin/application/create[/[{page:\d+}]]', [
+
+    $app->get('/admin/application/create[/]', [
+//        I18n\Handler\I18n::class,
+//        Auth\Handler\AuthHandler::class,
+//        Permission\Handler\AuthorizationHandler::class,
+//        'Common\Handler\List',
         I18n\Handler\I18n::class,
         Auth\Handler\AuthHandler::class,
-        Permission\Handler\AuthorizationHandler::class,
-        'Common\Handler\List',
+        'Common\Handler\Create',
     ], 'admin.application.create');
+    $app->post('/admin/application/create[/]', [
+        I18n\Handler\I18n::class,
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\Create',
+    ], 'admin.application.create.post');
+
     $app->get('/admin/application/details[/[{page:\d+}]]', [
         I18n\Handler\I18n::class,
         Auth\Handler\AuthHandler::class,
         'Common\Handler\List',
     ], 'admin.application.read');
+
     $app->get('/admin/application/edit/{uid}[/]', [
         I18n\Handler\I18n::class,
         Auth\Handler\AuthHandler::class,
@@ -73,18 +84,55 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
         Auth\Handler\AuthHandler::class,
         'Common\Handler\List',
     ], 'admin.site.list');
-    $app->get('/admin/site/create[/[{page:\d+}]]', [
+    $app->get('/admin/site/create[/]', [
         I18n\Handler\I18n::class,
         Auth\Handler\AuthHandler::class,
-        Permission\Handler\AuthorizationHandler::class,
-        'Common\Handler\List',
+        'Common\Handler\Create',
     ], 'admin.site.create');
+    $app->post('/admin/site/create[/]', [
+        I18n\Handler\I18n::class,
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\Create',
+    ], 'admin.site.create.post');
+
     $app->get('/admin/site/details[/[{page:\d+}]]', [
         I18n\Handler\I18n::class,
         Auth\Handler\AuthHandler::class,
         'Common\Handler\List',
     ], 'admin.site.read');
 
+    $app->get('/admin/site/edit/{uid}[/]', [
+        I18n\Handler\I18n::class,
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\Update',
+    ], 'admin.site.update');
+    $app->post('/admin/site/edit/{uid}[/]', [
+        I18n\Handler\I18n::class,
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\Update',
+    ], 'admin.site.update.post');
+
+    ## MANAGER-SPA-ROUTE
+    $app->get('/admin/route/create[/]', [
+        I18n\Handler\I18n::class,
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\Create',
+    ], 'admin.route.create');
+    $app->get('/admin/route/list[/[{page:\d+}]]', [
+        I18n\Handler\I18n::class,
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\List',
+    ], 'admin.route.list');
+    $app->get('/admin/route/details/{uid}[/]', [
+        I18n\Handler\I18n::class,
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\List',
+    ], 'admin.route.read');
+    $app->get('/admin/route/edit/{uid}[/]', [
+        I18n\Handler\I18n::class,
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\List',
+    ], 'admin.route.update');
 
 
     ## MANAGER-SPA-ROUTER
@@ -94,18 +142,12 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
         Auth\Handler\AuthHandler::class,
         'Common\Handler\List',
     ], 'admin.router.list');
-    $app->get('/admin/router/create[/[{page:\d+}]]', [
+    $app->get('/admin/router/create[/]', [
         I18n\Handler\I18n::class,
         Auth\Handler\AuthHandler::class,
-        Permission\Handler\AuthorizationHandler::class,
-        'Common\Handler\List',
+        'Common\Handler\Create',
     ], 'admin.router.create');
-    $app->get('/admin/router/details[/[{page:\d+}]]', [
-        I18n\Handler\I18n::class,
-        Auth\Handler\AuthHandler::class,
-        'Common\Handler\List',
-    ], 'admin.router.read');
-    $app->get('/admin/router/edit[/[{page:\d+}]]', [
+    $app->get('/admin/router/edit/{uid}[/]', [
         I18n\Handler\I18n::class,
         Auth\Handler\AuthHandler::class,
         'Common\Handler\List',
@@ -120,18 +162,17 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
         Auth\Handler\AuthHandler::class,
         'Common\Handler\List',
     ], 'admin.page-template.list');
-    $app->get('/admin/page-template/create[/[{page:\d+}]]', [
+    $app->get('/admin/page-template/create[/]', [
         I18n\Handler\I18n::class,
         Auth\Handler\AuthHandler::class,
-        Permission\Handler\AuthorizationHandler::class,
         'Common\Handler\List',
     ], 'admin.page-template.create');
-    $app->get('/admin/page-template/details[/[{page:\d+}]]', [
+    $app->get('/admin/page-template/details/{uid}[/]', [
         I18n\Handler\I18n::class,
         Auth\Handler\AuthHandler::class,
         'Common\Handler\List',
     ], 'admin.page-template.read');
-    $app->get('/admin/page-template/edit[/[{page:\d+}]]', [
+    $app->get('/admin/page-template/edit/{uid}[/]', [
         I18n\Handler\I18n::class,
         Auth\Handler\AuthHandler::class,
         'Common\Handler\List',
@@ -146,18 +187,17 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
         Auth\Handler\AuthHandler::class,
         'Common\Handler\List',
     ], 'admin.instance.list');
-    $app->get('/admin/instance/create[/[{page:\d+}]]', [
+    $app->get('/admin/instance/create[/]', [
         I18n\Handler\I18n::class,
         Auth\Handler\AuthHandler::class,
-        Permission\Handler\AuthorizationHandler::class,
         'Common\Handler\List',
     ], 'admin.instance.create');
-    $app->get('/admin/instance/details[/[{page:\d+}]]', [
+    $app->get('/admin/instance/details/{uid}[/]', [
         I18n\Handler\I18n::class,
         Auth\Handler\AuthHandler::class,
         'Common\Handler\List',
     ], 'admin.instance.read');
-    $app->get('/admin/instance/edit[/[{page:\d+}]]', [
+    $app->get('/admin/instance/edit/{uid}[/]', [
         I18n\Handler\I18n::class,
         Auth\Handler\AuthHandler::class,
         'Common\Handler\List',
@@ -382,10 +422,19 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
         Auth\Handler\AuthHandler::class,
         'Common\Handler\List',
     ], 'admin.page.read');
+    $app->get('/admin/page/edit/{uid}[/]', [
+        I18n\Handler\I18n::class,
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\Update',
+    ], 'admin.page.update');
+    $app->post('/admin/page/edit/{uid}[/]', [
+        I18n\Handler\I18n::class,
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\Update',
+    ], 'admin.page.update.post');
 
 
-
-    ## MANAGER-PAGE
+    ## MANAGER-PAGE-RESOURCE
 
     $app->get('/admin/page-resource/list[/[{page:\d+}]]', [
         Auth\Handler\AuthHandler::class,
@@ -453,5 +502,12 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
         Auth\Handler\AuthHandler::class,
         'Common\Handler\Api\ApiUpdate',
     ], 'api.content.update.post');
+
+
+    ## GENERATOR-XDD ##
+    $app->get('/admin/generator-xdd/list[/[{page:\d+}]]', [
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\List',
+    ], 'manager.generator-xdd.list');
 
 };

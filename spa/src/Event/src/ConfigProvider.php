@@ -259,7 +259,7 @@ class ConfigProvider
                                                     'service' => [
                                                         [
                                                             'name'=>'Event\TableService',
-                                                            'object' => \Event\Model\EventModel::class,
+                                                            'object' => \Event\Model\MemeItemModel::class,
                                                             'method' => 'saveItem'
                                                         ],
 
@@ -413,7 +413,7 @@ class ConfigProvider
                                             'service' => [
                                                 [
                                                     'service_name'=>'Event\TableService',
-                                                    'object' => \Event\Model\EventModel::class,
+                                                    'object' => \Event\Model\MemeItemModel::class,
                                                     'method' => 'getItemByUid',
                                                     'arguments' => [
                                                         [
@@ -493,7 +493,7 @@ class ConfigProvider
                                                         'service' => [
                                                             [
                                                                 'service_name'=>'Event\TableService',
-                                                                'object' => \Event\Model\EventModel::class,
+                                                                'object' => \Event\Model\MemeItemModel::class,
                                                                 'method' => 'getItemByUid',
                                                                 'arguments' => [
                                                                     [
@@ -570,27 +570,6 @@ class ConfigProvider
                                             'buttons' => [
                                                 [
                                                     'html_tag' => 'a',
-                                                    'text' => 'Details',
-                                                    'attributes' => [
-                                                        'class' => 'btn btn-sm btn-info ml-5',
-                                                        'href' => [
-                                                            'type' => 'plugin',
-                                                            'name' => 'url',
-                                                            'arguments' => [
-                                                                'manager.event.read',
-                                                                [
-                                                                    'uid' => [
-                                                                        'source' => 'data-resource',
-                                                                        'property_path' => 'fieldset_event.data.uid',
-                                                                        'property_path_delimiter' => '.',
-                                                                    ],
-                                                                ],
-                                                            ],
-                                                        ],
-                                                    ],
-                                                ],
-                                                [
-                                                    'html_tag' => 'a',
                                                     'text' => _('List Events'),
                                                     'attributes' => [
                                                         'class' => 'btn btn-sm btn-secondary ml-5',
@@ -616,7 +595,8 @@ class ConfigProvider
                                                 'action' => [
                                                     'route' => 'manager.event.update',
                                                 ],
-                                                'object' => \Event\Form\EventUpdateForm::class,
+//                                                'object' => \Event\Form\EventUpdateForm::class,
+                                                'form_factory' => \Event\Form\EventUpdateForm::class,
                                                 'read' => [
                                                     'fieldset_event' => [
                                                         'fieldset_name' => 'fieldset_event',
@@ -627,7 +607,7 @@ class ConfigProvider
                                                             'service' => [
                                                                 [
                                                                     'service_name'=>'Event\TableService',
-                                                                    'object' => \Event\Model\EventModel::class,
+                                                                    'object' => \Event\Model\MemeItemModel::class,
                                                                     'method' => 'getItemByUid',
                                                                     'arguments' => [
                                                                         [
@@ -704,27 +684,6 @@ class ConfigProvider
                                             'buttons' => [
                                                 [
                                                     'html_tag' => 'a',
-                                                    'text' => 'Details',
-                                                    'attributes' => [
-                                                        'class' => 'btn btn-sm btn-info ml-5',
-                                                        'href' => [
-                                                            'type' => 'plugin',
-                                                            'name' => 'url',
-                                                            'arguments' => [
-                                                                'manager.event.read',
-                                                                [
-                                                                    'uid' => [
-                                                                        'source' => 'data-resource',
-                                                                        'property_path' => 'fieldset_event.data.uid',
-                                                                        'property_path_delimiter' => '.',
-                                                                    ],
-                                                                ],
-                                                            ],
-                                                        ],
-                                                    ],
-                                                ],
-                                                [
-                                                    'html_tag' => 'a',
                                                     'text' => _('List Events'),
                                                     'attributes' => [
                                                         'class' => 'btn btn-sm btn-secondary ml-5',
@@ -750,7 +709,8 @@ class ConfigProvider
                                                 'action' => [
                                                     'route' => 'manager.event.update',
                                                 ],
-                                                'object' => \Event\Form\EventUpdateForm::class,
+//                                                'object' => \Event\Form\EventUpdateForm::class,
+                                                'form_factory' => \Event\Form\EventUpdateForm::class,
                                                 'read' => [
                                                     'fieldset_event' => [
                                                         'fieldset_name' => 'fieldset_event',
@@ -761,7 +721,7 @@ class ConfigProvider
                                                             'service' => [
                                                                 [
                                                                     'service_name'=>'Event\TableService',
-                                                                    'object' => \Event\Model\EventModel::class,
+                                                                    'object' => \Event\Model\MemeItemModel::class,
                                                                     'method' => 'getItemByUid',
                                                                     'arguments' => [
                                                                         [
@@ -811,7 +771,7 @@ class ConfigProvider
                                                             'service' => [
                                                                 [
                                                                     'service_name'=>'Event\TableService',
-                                                                    'object' => \Event\Model\EventModel::class,
+                                                                    'object' => \Event\Model\MemeItemModel::class,
                                                                     'method' => 'updateItem',
                                                                     'arg_name_target' => 'uid',
                                                                     'arguments' => [

@@ -9,6 +9,7 @@ class RouteModel
     public $uid;
     public $route_name;
 
+    public $comment;
     public $status;
 
     public $created;
@@ -31,6 +32,7 @@ class RouteModel
         $this->uid = ( array_key_exists('uid',$data)) ? $data['uid'] : null;
         $this->route_name = ( array_key_exists('route_name',$data)) ? $data['route_name'] : null;
 
+        $this->comment = ( array_key_exists('comment',$data)) ? $data['comment'] : null;
         $this->status = ( array_key_exists('status',$data)) ? $data['status'] : null;
 
         $this->created = ( array_key_exists('created',$data)) ? $data['created'] : null;
@@ -47,6 +49,7 @@ class RouteModel
         $data['uid'] = $this->uid;
         $data['route_name'] = $this->route_name;
 
+        $data['comment'] = $this->comment;
         $data['status'] = $this->status;
 
         $data['created'] = $this->created;
@@ -97,6 +100,24 @@ class RouteModel
     public function setRouteName($route_name)
     {
         $this->route_name = $route_name;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * @param mixed $comment
+     * @return RouteModel
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
         return $this;
     }
 

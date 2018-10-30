@@ -21,6 +21,7 @@ class ConfigProvider
         return [
             'paths' => [
                 'page' => [__DIR__ . '/../templates/page'],
+                'page-admin' => [__DIR__ . '/../templates/page-admin'],
             ],
         ];
     }
@@ -31,7 +32,7 @@ class ConfigProvider
             'factories'  => [
                 \Page\Handler\PageHandler::class => \Page\Handler\PageHandlerFactory::class,
                 \Page\Service\PageService::class => \Page\Service\Factory\PageServiceFactory::class,
-                \Page\Form\PageWriteForm::class => \Page\Form\Factory\FactoryPageWriteServiceFormFactory::class,
+                \Page\Form\WriteForm::class => \Page\Form\Factory\FactoryWriteServiceFormFactory::class,
             ],
             'delegators' => [
                 \Page\Handler\PageHandler::class => [
@@ -434,13 +435,13 @@ class ConfigProvider
                                     'heading' => [
                                         [
                                             'html_tag' => 'h1',
-                                            'text' => _("Strony"),
+                                            'text' => _("Pages"),
                                             'buttons' => [
                                                 [
                                                     'html_tag' => 'a',
-                                                    'text' => _("Utworz Strone"),
+                                                    'text' => _("Create Page"),
                                                     'attributes' => [
-                                                        'class' => 'btn btn-sm btn-info ml-5',
+                                                        'class' => 'btn btn-sm btn-info ml-5 float-right',
                                                         'href' => 'helper::url:admin.page.create'
                                                     ],
                                                 ],
@@ -470,14 +471,14 @@ class ConfigProvider
                                                     ['buttons' => [
                                                         [
                                                             'html_tag' => 'a',
-                                                            'text' => _("Szczegoly"),
+                                                            'text' => _("Update"),
                                                             'attributes' => [
-                                                                'class' => 'btn btn-sm btn-info ml-5',
+                                                                'class' => 'btn btn-sm btn-default btn-outline-primary ml-5',
                                                                 'href' => [
                                                                     'type' => 'plugin',
                                                                     'name' => 'url',
                                                                     'arguments' => [
-                                                                        'admin.page.read',
+                                                                        'admin.page.update',
                                                                         [
                                                                             'uid'=> [
                                                                                 'source' => 'row-item',

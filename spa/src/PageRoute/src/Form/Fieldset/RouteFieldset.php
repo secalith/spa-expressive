@@ -27,13 +27,13 @@ class RouteFieldset extends Fieldset implements InputFilterProviderInterface
     {
 
         $this->add(array(
-            'type' => 'text',
+            'type' => 'hidden',
             'name' => 'uid',
             'options' => array(
                 'label' => _("UID")
             ),
             'attributes' => [
-                'class' => 'form-control d-inline-flex w-auto',
+                'class' => 'form-control d-block',
                 'value' => 'route-' . time(),
             ],
         ));
@@ -45,8 +45,7 @@ class RouteFieldset extends Fieldset implements InputFilterProviderInterface
                 'label' => _("Nazwa")
             ),
             'attributes' => [
-                'class' => 'form-control d-inline-flex w-auto',
-                'value' => 'route-' . time(),
+                'class' => 'form-control d-block',
             ],
         ));
 
@@ -62,7 +61,18 @@ class RouteFieldset extends Fieldset implements InputFilterProviderInterface
                 ],
             ),
             'attributes' => [
-                'class' => 'form-control d-inline-flex w-auto',
+                'class' => 'form-control d-block',
+            ],
+        ));
+
+        $this->add(array(
+            'type' => 'textarea',
+            'name' => 'comment',
+            'options' => array(
+                'label' => _("Comment")
+            ),
+            'attributes' => [
+                'class' => 'form-control d-block',
             ],
         ));
 
