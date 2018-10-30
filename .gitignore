@@ -1,4 +1,4 @@
-.vagrant
+git .vagrant
 .idea
 spa/logs/
 !spa/logs/.keepme
