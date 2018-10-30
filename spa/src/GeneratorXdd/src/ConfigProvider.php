@@ -131,21 +131,22 @@ class ConfigProvider
                                     ],
                                     'gateway' => 'GeneratorXdd\TableGateway',
                                     'db_select' => [
+                                        'order' => 'created DESC',
                                         'columns' => ['uid','status','created'],
-//                                        'join' => [
-//                                            [
-//                                                'on' => 'meme_text',
-//                                                'where' => 'meme_text.item_uid = meme_item.uid',
-//                                                'columns' => ['text'=>'text'],
-//                                                'union' => 'left',
-//                                            ],
+                                        'join' => [
+                                            [
+                                                'on' => 'meme_text',
+                                                'where' => 'meme_text.item_uid = meme_item.uid',
+                                                'columns' => ['text'=>'text'],
+                                                'union' => 'left',
+                                            ],
 //                                            [
 //                                                'on' => 'meme_image',
 //                                                'where' => 'meme_image.item_uid = meme_item.uid',
 //                                                'columns' => ['image','image'],
 //                                                'union' => 'left',
 //                                            ],
-//                                        ],
+                                        ],
                                     ],
                                 ],
                                 'data_template_model' => [
@@ -165,14 +166,14 @@ class ConfigProvider
 //                                                    'image'=>_("Image"),
                                                     'status'=>_('Status'),
                                                     'created'=>_('Created'),
-                                                    100=>_('Action'),
+//                                                    100=>_('Action'),
                                                 ],
                                                 'rows' => [
                                                     ['column'=>'text'],
 //                                                    ['column'=>'image'],
                                                     ['column'=>'status'],
                                                     ['column'=>'created'],
-                                                    ['buttons' => [
+//                                                    ['buttons' => [
 //                                                        [
 //                                                            'html_tag' => 'a',
 //                                                            'text' => _("Details"),
@@ -193,27 +194,27 @@ class ConfigProvider
 //                                                                ],
 //                                                            ],
 //                                                        ],
-                                                        [
-                                                            'html_tag' => 'a',
-                                                            'text' => _("Update"),
-                                                            'attributes' => [
-                                                                'class' => 'btn btn-sm btn-default btn-outline-primary ml-5',
-                                                                'href' => [
-                                                                    'type' => 'plugin',
-                                                                    'name' => 'url',
-                                                                    'arguments' => [
-                                                                        'manager.event.update',
-                                                                        [
-                                                                            'uid'=> [
-                                                                                'source' => 'row-item',
-                                                                                'property' => 'uid',
-                                                                            ],
-                                                                        ]
-                                                                    ],
-                                                                ],
-                                                            ],
-                                                        ],
-                                                    ],],
+//                                                        [
+//                                                            'html_tag' => 'a',
+//                                                            'text' => _("Update"),
+//                                                            'attributes' => [
+//                                                                'class' => 'btn btn-sm btn-default btn-outline-primary ml-5',
+//                                                                'href' => [
+//                                                                    'type' => 'plugin',
+//                                                                    'name' => 'url',
+//                                                                    'arguments' => [
+//                                                                        'manager.event.update',
+//                                                                        [
+//                                                                            'uid'=> [
+//                                                                                'source' => 'row-item',
+//                                                                                'property' => 'uid',
+//                                                                            ],
+//                                                                        ]
+//                                                                    ],
+//                                                                ],
+//                                                            ],
+//                                                        ],
+//                                                    ],],
                                                 ],
                                             ],
                                         ],

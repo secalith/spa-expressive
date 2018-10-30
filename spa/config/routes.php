@@ -505,7 +505,7 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
 
 
     ## GENERATOR-XDD ##
-    $app->get('/admin/generator-xdd/list[/[{page:\d+}]]', [
+    $app->get('/admin/generator-xdd/list[/[page/{page:\d+}]]', [
         Auth\Handler\AuthHandler::class,
         'Common\Handler\List',
     ], 'manager.generator-xdd.list');

@@ -44,6 +44,10 @@ class PaginatorQueryService
             $sqlSelect->where($sqlSelectQuery['where']);
         }
 
+        if(array_key_exists('order',$sqlSelectQuery)) {
+            $sqlSelect->order($sqlSelectQuery['order']);
+        }
+
         $paginator = new $paginatorConfig['object'](
             new $paginatorConfig['adapter']['object'](
                 $sqlSelect,

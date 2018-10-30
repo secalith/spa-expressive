@@ -37,7 +37,7 @@ return [
             ],
             'Application\Db\GeneratorXdd\LocalSQLiteAdapter' => [
                 'driver' => 'Pdo_Sqlite',
-                'dsn'    => 'sqlite:/var/www/pasek-tvp.pl/application/data/database/generator-xdd.sqlite3',
+                'dsn'    => 'sqlite:./data/database/generator-xdd.sqlite3',
             ],
         ],
     ],
