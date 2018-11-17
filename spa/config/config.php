@@ -58,6 +58,7 @@ $aggregator = new ConfigAggregator([
     PageResource\ConfigProvider::class,
     GeneratorXdd\ConfigProvider::class,
     Event\ConfigProvider::class,
+    AggregatorPirate\ConfigProvider::class,
     I18n\ConfigProvider::class,
     // Load application config in a pre-defined order in such a way that local settings
     // overwrite global settings. (Loaded as first to last):

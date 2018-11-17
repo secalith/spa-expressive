@@ -338,8 +338,8 @@ Vagrant.configure("2") do |config|
     config.vm.synced_folder '.', '/vagrant', id:"vagrant-root"
 
     config.vm.define "manager" do |manager|
-        manager.vm.network "forwarded_port", guest: 84, host: 8084
-        manager.vm.network :public_network, ip: "192.168.0.84"
+        manager.vm.network "forwarded_port", guest: 80, host: 8084
+        manager.vm.network :private_network, :auto_network => true
         manager.vm.synced_folder './spa', '/var/www/application', id:"application-root",owner:"vagrant",group:"www-data",mount_options:["dmode=775,fmode=664"]
         manager.vm.provision 'shell', inline: @script_spa
         manager.vm.hostname = 'manager.local.vm'

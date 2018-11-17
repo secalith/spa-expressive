@@ -78,8 +78,6 @@ class UpdateHandlerAbstractFactory implements AbstractFactoryInterface
 
             $urlHelper = $serviceLocator->get(UrlHelper::class);
 
-
-
             // get specification from CONFIG file
             $dataList = $this->arrayDigger->extractData($routeConfig,'data_template_model.main.list');
 
@@ -127,10 +125,10 @@ class UpdateHandlerAbstractFactory implements AbstractFactoryInterface
 
                 if( $mainContentDeclaration['type'] === 'form' && $resources !== null ) {
                     // load form
-                    if($serviceLocator->has($mainContentDeclaration['form_factory'])) {
+                    if(array_key_exists('form_factory',$mainContentDeclaration)&&$serviceLocator->has($mainContentDeclaration['form_factory'])) {
                         $form = $serviceLocator->get($mainContentDeclaration['form_factory']);//new $mainContentDeclaration['form_factory']();
                     } elseif(array_key_exists('object',$mainContentDeclaration)) {
-                        $form = new $mainContentDeclaration['form_factory']();
+                        $form = new $mainContentDeclaration['object']();
                     }
 
 //
@@ -144,10 +142,10 @@ class UpdateHandlerAbstractFactory implements AbstractFactoryInterface
                         ->get($resource['service_config']['fieldset_name'])) {
 
                         $form->setData($formData);
-////var_dump($formData);
+
                     }
                 }
-//die();
+
                 if(array_key_exists('update',$mainContentDeclaration))
                 {
                     $formName = $mainContentDeclaration['update']['form_name'];
@@ -182,6 +180,9 @@ class UpdateHandlerAbstractFactory implements AbstractFactoryInterface
                                     }
                                 }
                             }
+                        } else {
+                            print_r($form->getMessages());
+                            die();
                         }
                     }
                 }

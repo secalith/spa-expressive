@@ -510,4 +510,20 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
         'Common\Handler\List',
     ], 'manager.generator-xdd.list');
 
+    ## aggregator-pirate-XDD ##
+    $app->get('/admin/aggregator-pirate/list[/[page/{page:\d+}]]', [
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\List',
+    ], 'manager.aggregator-pirate.list');
+    $app->get('/admin/aggregator-pirate/edit/{uid}[/]', [
+        I18n\Handler\I18n::class,
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\Update',
+    ], 'manager.aggregator-pirate.update');
+    $app->post('/admin/aggregator-pirate/edit/{uid}[/]', [
+        I18n\Handler\I18n::class,
+        Auth\Handler\AuthHandler::class,
+        'Common\Handler\Update',
+    ], 'manager.aggregator-pirate.update.post');
+
 };

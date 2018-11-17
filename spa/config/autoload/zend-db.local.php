@@ -39,6 +39,10 @@ return [
                 'driver' => 'Pdo_Sqlite',
                 'dsn'    => 'sqlite:./data/database/generator-xdd.sqlite3',
             ],
+            'Application\Db\AggregatorPirate\LocalSQLiteAdapter' => [
+                'driver' => 'Pdo_Sqlite',
+                'dsn'    => 'sqlite:./data/database/lipinski-xdd.sqlite3',
+            ],
         ],
     ],
 ];

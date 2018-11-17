@@ -106,6 +106,7 @@
             "Article\\": "src/Article/src/",
             "Petition\\": "src/Petition/src/",
             "GeneratorXdd\\": "src/GeneratorXdd/src/",
+            "AggregatorPirate\\": "src/AggregatorPirate/src/",
             "Application\\": "src/Application/src/"
         }
     },

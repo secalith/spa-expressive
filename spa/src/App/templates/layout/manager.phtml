@@ -67,6 +67,12 @@ endif;
                             <li class="nav-item">
                                 <a href="<?=$this->url('manager.article.list')?>" class="nav-link"><?=$this->translate("Articles");?></a>
                             </li>
+                            <li class="nav-item">
+                                <a href="<?=$this->url('manager.generator-xdd.list')?>" class="nav-link"><?=$this->translate("Generator XDD");?></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?=$this->url('manager.aggregator-pirate.list')?>" class="nav-link"><?=$this->translate("Pirate Material");?></a>
+                            </li>
                         <?php endif;?>
                     </ul>
                     <?php if( $this->hasIdentity()):?>
@@ -84,6 +90,8 @@ endif;
                                         <a class="dropdown-item" href="<?=$this->url('manager.article.list')?>"><?=$this->translate("Articles");?></a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="<?=$this->url('manager.content.list')?>"><?=$this->translate("Content");?></a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="<?=$this->url('manager.aggregator-pirate.list')?>"><?=$this->translate("aggregator-pirate");?></a>
                                         <a class="dropdown-item" href="<?=$this->url('manager.generator-xdd.list')?>"><?=$this->translate("Generator XDD");?></a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="#"><?=$this->translate("Show Content Paths");?></a>

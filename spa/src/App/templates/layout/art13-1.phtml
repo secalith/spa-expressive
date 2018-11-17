@@ -118,6 +118,14 @@ We are also deeply concerned that the some Members of the European Parliament ha
                         <li class="nav-item d-inline-block mt-2 p-0">
                             <a href="http://www.stopacta2.org/" class="nav-link" target="_blank"><?=$this->translate("Information");?></a>
                         </li>
+                        <?php if( $this->hasIdentity()):?>
+                            <li class="nav-item d-inline-block mt-2 p-0">
+                                <a href="<?=$this->url('manager.generator-xdd.list')?>" class="nav-link" target="_self"><?=$this->translate("Generator-XDD");?></a>
+                            </li>
+                            <li class="nav-item d-inline-block mt-2 p-0">
+                                <a href="<?=$this->url('manager.aggregator-pirate.list')?>" class="nav-link" target="_self"><?=$this->translate("Pirate-XDD");?></a>
+                            </li>
+                        <?php endif; ?>
                     </ul>
 
                     <div class="d-inline-block m-0 mt-2 p-0">
@@ -130,7 +138,7 @@ We are also deeply concerned that the some Members of the European Parliament ha
 
                     <?php if( $this->hasIdentity()):?>
                     <ul class="navbar-nav d-none d-md-inline-block">
-                        <li class="nav-item ml-3">
+                        <li class="nav-item d-inline-block ml-3">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-info"><?=$this->translate("Manage");?></button>
                                 <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -152,9 +160,7 @@ We are also deeply concerned that the some Members of the European Parliament ha
                         <li class="nav-item d-inline-block mt-2 p-0">
                             <a href="<?=$this->url('spa.auth.logout')?>" class="btn btn-secondary d-inline-block"><?=$this->translate("Sign Out");?></a>
                         </li>
-                    </ul>
-                    <ul class="navbar-nav d-none d-md-inline-block">
-                        <li class="nav-item ml-3">
+                        <li class="nav-item d-inline-block ml-3">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-info"><?=$this->translate("Edit");?></button>
                                 <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

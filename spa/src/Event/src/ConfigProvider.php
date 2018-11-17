@@ -259,7 +259,7 @@ class ConfigProvider
                                                     'service' => [
                                                         [
                                                             'name'=>'Event\TableService',
-                                                            'object' => \Event\Model\MemeItemModel::class,
+                                                            'object' => \Event\Model\EventModel::class,
                                                             'method' => 'saveItem'
                                                         ],
 
@@ -413,7 +413,7 @@ class ConfigProvider
                                             'service' => [
                                                 [
                                                     'service_name'=>'Event\TableService',
-                                                    'object' => \Event\Model\MemeItemModel::class,
+                                                    'object' => \Event\Model\EventModel::class,
                                                     'method' => 'getItemByUid',
                                                     'arguments' => [
                                                         [
@@ -493,7 +493,7 @@ class ConfigProvider
                                                         'service' => [
                                                             [
                                                                 'service_name'=>'Event\TableService',
-                                                                'object' => \Event\Model\MemeItemModel::class,
+                                                                'object' => \Event\Model\EventModel::class,
                                                                 'method' => 'getItemByUid',
                                                                 'arguments' => [
                                                                     [
@@ -607,7 +607,7 @@ class ConfigProvider
                                                             'service' => [
                                                                 [
                                                                     'service_name'=>'Event\TableService',
-                                                                    'object' => \Event\Model\MemeItemModel::class,
+                                                                    'object' => \Event\Model\EventModel::class,
                                                                     'method' => 'getItemByUid',
                                                                     'arguments' => [
                                                                         [
@@ -721,7 +721,7 @@ class ConfigProvider
                                                             'service' => [
                                                                 [
                                                                     'service_name'=>'Event\TableService',
-                                                                    'object' => \Event\Model\MemeItemModel::class,
+                                                                    'object' => \Event\Model\EventModel::class,
                                                                     'method' => 'getItemByUid',
                                                                     'arguments' => [
                                                                         [
@@ -771,7 +771,7 @@ class ConfigProvider
                                                             'service' => [
                                                                 [
                                                                     'service_name'=>'Event\TableService',
-                                                                    'object' => \Event\Model\MemeItemModel::class,
+                                                                    'object' => \Event\Model\EventModel::class,
                                                                     'method' => 'updateItem',
                                                                     'arg_name_target' => 'uid',
                                                                     'arguments' => [

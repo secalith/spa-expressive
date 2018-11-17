@@ -204,7 +204,7 @@ class ConfigProvider
                                                     'service' => [
                                                         [
                                                             'name'=>'Event\TableService',
-                                                            'object' => \Event\Model\MemeItemModel::class,
+                                                            'object' => \Event\Model\EventModel::class,
                                                             'method' => 'saveItem'
                                                         ],
 

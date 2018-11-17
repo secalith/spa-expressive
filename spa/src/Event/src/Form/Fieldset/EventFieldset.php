@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Event\Form\Fieldset;
 
 use Zend\InputFilter\InputFilterProviderInterface;
-use Event\Model\MemeItemModel;
+use Event\Model\EventModel;
 use Zend\Form\Fieldset;
 use Zend\Hydrator\ClassMethods;
 use Zend\InputFilter\InputFilter;
@@ -20,7 +20,7 @@ class EventFieldset extends Fieldset implements InputFilterProviderInterface
         parent::__construct($name,$options);
 
         $this->setHydrator(new ClassMethods(true));
-        $this->setObject(new MemeItemModel());
+        $this->setObject(new EventModel());
 
         $this->event_groups = $event_groups;
 
